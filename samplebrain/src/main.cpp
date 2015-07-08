@@ -20,9 +20,19 @@
 
 #include "jellyfish/audio.h"
 
+#include "brain_block.h"
+#include "brain.h"
+
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    audio_device *a = new audio_device("samplebrain",44100,2048);
+    cerr<<"testing brain_block"<<endl;
+    if (brain_block::unit_test()) cerr<<"passed"<<endl;
+    else cerr<<"failed"<<endl;
+    cerr<<"testing brain"<<endl;
+    if (brain::unit_test()) cerr<<"passed"<<endl;
+    else cerr<<"failed"<<endl;
+
+    //audio_device *a = new audio_device("samplebrain",44100,2048);
 }

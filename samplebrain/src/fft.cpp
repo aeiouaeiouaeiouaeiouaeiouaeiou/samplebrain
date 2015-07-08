@@ -1,5 +1,7 @@
 #include <fft.h>
 
+using namespace spiralcore;
+
 static const int MAX_FFT_LENGTH = 4096;
 
 FFT::FFT(int length) :
@@ -51,4 +53,9 @@ void FFT::impulse2freq(float *imp, float *out)
     {
         out[i] = m_spectrum[i][0];
     }
+}
+
+void FFT::raw_impulse2freq()
+{
+    fftw_execute(m_plan);
 }
