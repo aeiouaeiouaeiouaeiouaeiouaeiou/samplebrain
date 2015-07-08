@@ -1,0 +1,56 @@
+TARGET  := samplebrain
+TARGET_LIB := libsamplebrain.a
+
+SRCS :=    src/fft.cpp \
+		   src/brain.cpp \
+		   src/brain_block.cpp \
+		   src/libmfcc.cpp \
+		   src/main.cpp
+
+TARGET_SRCS    := src/main.cpp
+
+# for the minute, go out and up to link to the vision lib
+CCFLAGS = @CFLAGS@ -ffast-math -Wno-unused -Isrc
+LDFLAGS = @LDFLAGS@
+LIBS    = @LIBS@
+
+CC = @CXX@
+AR = ar
+OBJS      := ${SRCS:.cpp=.o}
+MAIN_OBJS := ${MAIN_SRCS:.cpp=.o}
+DEPS      := ${SRCS:.cpp=.dep}
+MAIN_DEPS := ${MAIN_SRCS:.cpp=.dep}
+XDEPS     := $(wildcard ${DEPS})
+.PHONY: all clean distclean
+all:: ${TARGET}
+
+ifneq (${XDEPS},)
+include ${XDEPS}
+endif
+
+${TARGET}: ${MAIN_OBJS} ${OBJS} ${COBJS}
+	${CC} ${LDFLAGS} -o $@ $^ ${LIBS}
+
+${OBJS}: %.o: %.cpp %.dep
+	${CC} ${CCFLAGS} -o $@ -c $<
+
+${DEPS}: %.dep: %.cpp Makefile
+	${CC} ${CCFLAGS} -MM $< > $@
+
+${MAIN_OBJS}: %.o: %.cpp %.dep
+	${CC} ${CCFLAGS} -o $@ -c $<
+
+${MAIN_DEPS}: %.dep: %.cpp Makefile
+	${CC} ${CCFLAGS} -MM $< > $@
+
+library: ${OBJS} ${COBJS}
+	$(AR) $(ARFLAGS) ${TARGET_LIB} ${OBJS} ${COBJS}
+
+clean:: cleandeps
+	-rm -f *~ src/*.o src/*/*.o ${TARGET}
+
+cleandeps::
+	-rm -f src/*.dep src/*/*.dep
+
+distclean:: clean
+	-rm -rf config.status autom4te.cache config.log Makefile
