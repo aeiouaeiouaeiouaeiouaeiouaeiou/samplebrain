@@ -14,24 +14,22 @@ public:
     brain();
 
     // rewrites whole brain
-    void init(u32 block_size, u32 overlap);
+    void init(u32 block_size, u32 overlap, bool ditchpcm=false);
 
     // load, chop up and add to brain
     // todo: add tags
     sample load_sound(std::string filename);
-
-    const sample &get_block_pcm(u32 index) const;
-
     // take another brain and rebuild this brain from bits of that one
     // (presumably this one is made from a single sample)
-    sample resynth(const brain &other, float ratio);
+    void resynth(const std::string &filename, const brain &other, float ratio);
 
+    const sample &get_block_pcm(u32 index) const;
     static bool unit_test();
 
 private:
 
     u32 search(const brain_block &target, float ratio) const;
-    void chop_and_add(const sample &s, u32 block_size, u32 overlap);
+    void chop_and_add(const sample &s, u32 block_size, u32 overlap, bool ditchpcm=false);
 
     vector<brain_block> m_blocks;
     vector<sample> m_samples;

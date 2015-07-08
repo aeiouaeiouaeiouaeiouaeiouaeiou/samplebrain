@@ -8,19 +8,21 @@
 
 #pragma once
 
+typedef float mfcc_real;
+
 #define PI 3.14159265358979323846264338327
 
 // Returns the specified (mth) MFCC
-double GetCoefficient(double* spectralData, unsigned int samplingRate, unsigned int NumFilters, unsigned int binSize, unsigned int m);
+mfcc_real GetCoefficient(mfcc_real* spectralData, unsigned int samplingRate, unsigned int NumFilters, unsigned int binSize, unsigned int m);
 
 // Compute the normalization factor (For internal computation only - not to be called directly)
-double NormalizationFactor(int NumFilters, int m);
+mfcc_real NormalizationFactor(int NumFilters, int m);
 
 // Compute the filter parameter for the specified frequency and filter bands (For internal computation only - not the be called directly)
-double GetFilterParameter(unsigned int samplingRate, unsigned int binSize, unsigned int frequencyBand, unsigned int filterBand);
+mfcc_real GetFilterParameter(unsigned int samplingRate, unsigned int binSize, unsigned int frequencyBand, unsigned int filterBand);
 
 // Compute the band-dependent magnitude factor for the given filter band (For internal computation only - not the be called directly)
-double GetMagnitudeFactor(unsigned int filterBand);
+mfcc_real GetMagnitudeFactor(unsigned int filterBand);
 
 // Compute the center frequency (fc) of the specified filter band (l) (For internal computation only - not the be called directly)
-double GetCenterFrequency(unsigned int filterBand);
+mfcc_real GetCenterFrequency(unsigned int filterBand);

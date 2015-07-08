@@ -11,7 +11,7 @@ namespace spiralcore {
 class brain_block {
 public:
     // runs analysis on pcm
-    brain_block(const std::string &filename, const sample &pcm, u32 rate);
+    brain_block(const std::string &filename, const sample &pcm, u32 rate, bool ditchpcm=false);
 
     // returns distance based on ratio of fft-mfcc values
     double compare(const brain_block &other, float ratio) const;

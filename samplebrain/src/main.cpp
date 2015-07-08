@@ -25,14 +25,35 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+void unit_test() {
     cerr<<"testing brain_block"<<endl;
     if (brain_block::unit_test()) cerr<<"passed"<<endl;
     else cerr<<"failed"<<endl;
     cerr<<"testing brain"<<endl;
     if (brain::unit_test()) cerr<<"passed"<<endl;
     else cerr<<"failed"<<endl;
+}
+
+int main(int argc, char *argv[])
+{
+    unit_test();
+
+    cerr<<"starting"<<endl;
+    brain source, target;
+    source.load_sound("../sound/source/shostakovich6.wav");
+//    source.load_sound("../sound/source/eagle.wav");
+
+    target.load_sound("../sound/source/sb-right.wav");
+    cerr<<"loaded sounds"<<endl;
+
+    u32 len=3000;
+    source.init(len,len-len);
+    target.init(len,len-len/8);
+    cerr<<"ready..."<<endl;
+
+    target.resynth("shosta-sb-right.wav",source,1);
+
+
 
     //audio_device *a = new audio_device("samplebrain",44100,2048);
 }

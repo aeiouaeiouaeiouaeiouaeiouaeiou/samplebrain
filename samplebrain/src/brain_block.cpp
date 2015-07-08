@@ -8,37 +8,38 @@ using namespace spiralcore;
 
 FFT *brain_block::m_fftw;
 
-brain_block::brain_block(const string &filename, const sample &pcm, u32 rate) :
+static const int MFCC_FILTERS=48;
+
+void enveloper(sample &s, u32 start, u32 end) {
+    for(u32 i=0; i<start; ++i) {
+        s[i]*=i/(float)start;
+    }
+    for(u32 i=0; i<end; ++i) {
+        s[(s.get_length()-1)-i]*=i/(float)end;
+    }
+}
+
+brain_block::brain_block(const string &filename, const sample &pcm, u32 rate, bool ditchpcm) :
     m_pcm(pcm),
     m_fft(pcm.get_length()),
-    m_mfcc(13),
+    m_mfcc(MFCC_FILTERS),
     m_block_size(pcm.get_length()),
     m_rate(rate),
     m_orig_filename(filename)
 {
     init_fft(m_pcm.get_length());
 
-    for (u32 i=0; i<m_block_size; i++) {
-        // convert from float to double
-        m_fftw->m_in[i] = m_pcm[i];
-    }
+    enveloper(m_pcm,50,50);
 
-    m_fftw->raw_impulse2freq();
+    m_fftw->impulse2freq(m_pcm.get_non_const_buffer(),
+                         m_fft.get_non_const_buffer());
 
-    double *spectrum = new double[m_block_size];
+    if (m_block_size>30) m_fft.crop_to(30);
+    if (ditchpcm) m_pcm.clear();
 
-    for (u32 i=0; i<m_block_size; i++) {
-        // convert from complex to float for storage
-        m_fft[i] = m_fftw->m_spectrum[i][0];
-        // convert from complex to double for mfcc calc
-        spectrum[i] = m_fftw->m_spectrum[i][0];
-    }
-
-    for (u32 i=0; i<13; i++) {
-        m_mfcc[i] = GetCoefficient(spectrum, rate, 48, m_block_size, i);
-    }
-
-    delete[] spectrum;
+//    for (u32 i=0; i<MFCC_FILTERS; i++) {
+//        m_mfcc[i] = GetCoefficient(m_fft.get_non_const_buffer(), rate, MFCC_FILTERS, m_block_size, i);
+//    }
 }
 
 void brain_block::init_fft(u32 block_size)
@@ -54,9 +55,13 @@ double brain_block::compare(const brain_block &other, float ratio) const {
     // just mfcc
     //if (ratio==1)
     {
-        for (u32 i=0; i<13; ++i) {
-            acc+=(m_mfcc[i]-other.m_mfcc[i]) * (m_mfcc[i]-other.m_mfcc[i]);
+        for (u32 i=0; i<m_fft.get_length(); ++i) {
+            acc+=(m_fft[i]-other.m_fft[i]) * (m_fft[i]-other.m_fft[i]);
         }
+
+        //for (u32 i=0; i<MFCC_FILTERS; ++i) {
+        //    acc+=(m_mfcc[i]-other.m_mfcc[i]) * (m_mfcc[i]-other.m_mfcc[i]);
+        //}
     }
     return acc;
 }
@@ -72,7 +77,7 @@ bool brain_block::unit_test() {
 
     assert(bb.m_pcm.get_length()==data.get_length());
     assert(bb.m_fft.get_length()==data.get_length());
-    assert(bb.m_mfcc.get_length()==13);
+    assert(bb.m_mfcc.get_length()==MFCC_FILTERS);
     assert(bb.m_orig_filename==string("test"));
     assert(bb.m_rate==44100);
     assert(bb.m_block_size==data.get_length());
@@ -88,6 +93,7 @@ bool brain_block::unit_test() {
     brain_block cpy("test",data,100);
     {
     brain_block bb3("test",data2,44100);
+    cerr<<bb.compare(bb3,1)<<endl;
     assert(bb.compare(bb3,1)!=0);
     cpy=bb3;
     }
