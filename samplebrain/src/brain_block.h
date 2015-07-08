@@ -19,6 +19,8 @@ public:
     static void init_fft(u32 block_size);
     static bool unit_test();
 
+    const sample &get_pcm() const { return m_pcm; }
+
 private:
     sample m_pcm;
     sample m_fft;

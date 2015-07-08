@@ -85,8 +85,14 @@ bool brain_block::unit_test() {
         data[i]=i;
     }
 
+    brain_block cpy("test",data,100);
+    {
     brain_block bb3("test",data2,44100);
     assert(bb.compare(bb3,1)!=0);
+    cpy=bb3;
+    }
+
+    assert(cpy.m_pcm.get_length()==20);
 
     return true;
 }
