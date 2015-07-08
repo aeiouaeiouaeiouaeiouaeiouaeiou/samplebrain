@@ -9,6 +9,11 @@ brain_block::brain_block(const sample &pcm) :
 {
     init_fft(m_pcm.get_length());
 
+    m_fft = m_fftw(impulse2freq(m_pcm.get_non_const_buffer(),
+                                m_fft.get_non_const_buffer())
+
+
+
 }
 
 void brain_block::init_fft(u32 block_size)
