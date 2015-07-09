@@ -1,0 +1,3 @@
+MelFilterBank.o: src/aquila/filter/MelFilterBank.cpp \
+ src/aquila/filter/MelFilterBank.h src/aquila/filter/../global.h \
+ src/aquila/filter/MelFilter.h

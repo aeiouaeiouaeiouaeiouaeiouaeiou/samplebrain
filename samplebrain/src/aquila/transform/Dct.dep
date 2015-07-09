@@ -1,0 +1,2 @@
+Dct.o: src/aquila/transform/Dct.cpp src/aquila/transform/Dct.h \
+ src/aquila/transform/../global.h

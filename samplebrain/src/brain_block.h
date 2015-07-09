@@ -2,6 +2,7 @@
 #include "jellyfish/fluxa/sample.h"
 #include "jellyfish/core/types.h"
 #include "fft.h"
+#include "mfcc.h"
 
 #ifndef BRAIN_BLOCK
 #define BRAIN_BLOCK
@@ -30,6 +31,7 @@ private:
     u32 m_rate;
     std::string m_orig_filename;
     static FFT *m_fftw;
+    static Aquila::Mfcc *m_mfcc_proc;
 
 };
 

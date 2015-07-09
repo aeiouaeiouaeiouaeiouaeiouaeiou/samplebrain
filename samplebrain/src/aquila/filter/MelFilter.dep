@@ -1,0 +1,2 @@
+MelFilter.o: src/aquila/filter/MelFilter.cpp \
+ src/aquila/filter/MelFilter.h src/aquila/filter/../global.h

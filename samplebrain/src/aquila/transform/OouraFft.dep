@@ -1,0 +1,3 @@
+OouraFft.o: src/aquila/transform/OouraFft.cpp \
+ src/aquila/transform/OouraFft.h src/aquila/transform/Fft.h \
+ src/aquila/transform/../global.h

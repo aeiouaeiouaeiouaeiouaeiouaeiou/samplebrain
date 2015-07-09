@@ -1,0 +1,3 @@
+FftFactory.o: src/aquila/transform/FftFactory.cpp \
+ src/aquila/transform/FftFactory.h src/aquila/transform/../global.h \
+ src/aquila/transform/Fft.h src/aquila/transform/OouraFft.h

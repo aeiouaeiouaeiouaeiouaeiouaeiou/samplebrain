@@ -40,20 +40,27 @@ int main(int argc, char *argv[])
 
     cerr<<"starting"<<endl;
     brain source, target;
-    source.load_sound("../sound/source/shostakovich6.wav");
-//    source.load_sound("../sound/source/eagle.wav");
+//    source.load_sound("../sound/source/shostakovich6.wav");
+    source.load_sound("../sound/source/amen_brother.wav");
+    source.load_sound("../sound/source/808.wav");
+    source.load_sound("../sound/source/eagle.wav");
+    source.load_sound("../sound/source/claps.wav");
+    source.load_sound("../sound/source/dream2.wav");
 
-    target.load_sound("../sound/source/sb-right.wav");
+    target.load_sound("../sound/source/camron.wav");
+//    target.load_sound("../sound/source/sb-left.wav");
     cerr<<"loaded sounds"<<endl;
 
     u32 len=3000;
-    source.init(len,len-len);
-    target.init(len,len-len/8);
+    source.init(len,len-len/4);
+    target.init(len,len-len/4);
     cerr<<"ready..."<<endl;
 
-    target.resynth("shosta-sb-right.wav",source,1);
+    audio_device *a = new audio_device("samplebrain",44100,2048);
+    //target.resynth_listen("shosta-dream-0.5.wav",source,0.5,a);
+
+    //target.resynth("shosta-dream-0.5.wav",source,0.5);
 
 
 
-    //audio_device *a = new audio_device("samplebrain",44100,2048);
 }

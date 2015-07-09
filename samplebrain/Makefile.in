@@ -5,12 +5,16 @@ SRCS :=    src/fft.cpp \
 		   src/brain.cpp \
 		   src/brain_block.cpp \
 		   src/libmfcc.cpp \
-		   src/main.cpp
+		   src/main.cpp \
+	    src/mfcc.cpp \
+		src/aquila/filter/MelFilterBank.cpp \
+		src/aquila/filter/MelFilter.cpp \
+		src/aquila/transform/Dct.cpp
 
 TARGET_SRCS    := src/main.cpp
 
 # for the minute, go out and up to link to the vision lib
-CCFLAGS = @CFLAGS@ -ffast-math -Wno-unused -Isrc
+CCFLAGS = @CFLAGS@ -std=c++11 -ffast-math -Wno-unused -Isrc
 LDFLAGS = @LDFLAGS@
 LIBS    = @LIBS@
 

@@ -50,7 +50,8 @@ void brain::init(u32 block_size, u32 overlap, bool ditchpcm) {
 void brain::chop_and_add(const sample &s, u32 block_size, u32 overlap, bool ditchpcm) {
     u32 pos=0;
     while (pos+block_size-1<s.get_length()) {
-        cerr<<pos/(float)s.get_length()*100<<endl;
+        cerr<<'\r';
+        cerr<<"adding: "<<pos/(float)s.get_length()*100;
         sample region;
         s.get_region(region,pos,pos+block_size-1);
         m_blocks.push_back(brain_block("",region,44100,ditchpcm));
@@ -62,6 +63,9 @@ const sample &brain::get_block_pcm(u32 index) const {
     return m_blocks[index].get_pcm();
 }
 
+const brain_block &brain::get_block(u32 index) const {
+    return m_blocks[index];
+}
 
 // returns index to block
 u32 brain::search(const brain_block &target, float ratio) const {
@@ -86,11 +90,14 @@ void brain::resynth(const string &filename, const brain &other, float ratio){
     out.zero();
     u32 pos = 0;
     u32 count = 0;
+    cerr<<other.m_blocks.size()<<" brain blocks..."<<endl;
+
     for (vector<brain_block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
-        cerr<<count/float(m_blocks.size())*100<<endl;
+        cerr<<'\r';
+        cerr<<"searching: "<<count/float(m_blocks.size())*100;
         u32 index = other.search(*i,ratio);
-        cerr<<index<<endl;
-        out.mix(other.get_block_pcm(index),pos);
+        //cerr<<index<<endl;
+        out.mul_mix(other.get_block_pcm(index),pos,0.2);
 
         if (count%1000==0) {
             save_sample(filename,out);
@@ -100,9 +107,6 @@ void brain::resynth(const string &filename, const brain &other, float ratio){
         pos += (m_block_size-m_overlap);
     }
     save_sample(filename,out);
-
-    cerr<<m_blocks.size()<<" brain blocks..."<<endl;
-
 }
 
 

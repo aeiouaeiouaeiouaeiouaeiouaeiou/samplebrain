@@ -24,11 +24,16 @@ public:
     void resynth(const std::string &filename, const brain &other, float ratio);
 
     const sample &get_block_pcm(u32 index) const;
+    const brain_block &get_block(u32 index) const;
+    const u32 &get_block_size() const { return m_block_size; }
+    const u32 &get_overlap() const { return m_overlap; }
+
+    u32 search(const brain_block &target, float ratio) const;
+
     static bool unit_test();
 
 private:
 
-    u32 search(const brain_block &target, float ratio) const;
     void chop_and_add(const sample &s, u32 block_size, u32 overlap, bool ditchpcm=false);
 
     vector<brain_block> m_blocks;
@@ -36,6 +41,7 @@ private:
 
     u32 m_block_size;
     u32 m_overlap;
+
 };
 
 #endif

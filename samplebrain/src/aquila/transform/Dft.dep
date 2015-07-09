@@ -1,0 +1,2 @@
+Dft.o: src/aquila/transform/Dft.cpp src/aquila/transform/Dft.h \
+ src/aquila/transform/Fft.h src/aquila/transform/../global.h
