@@ -38,23 +38,23 @@ void save_sample(const string &filename, const sample s) {
 }
 
 // rewrites whole brain
-void brain::init(u32 block_size, u32 overlap, bool ditchpcm) {
+void brain::init(u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
     m_blocks.clear();
     m_block_size = block_size;
     m_overlap = overlap;
     for (vector<sample>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
-        chop_and_add(*i, block_size, overlap, ditchpcm);
+        chop_and_add(*i, block_size, overlap, env, ditchpcm);
     }
 }
 
-void brain::chop_and_add(const sample &s, u32 block_size, u32 overlap, bool ditchpcm) {
+void brain::chop_and_add(const sample &s, u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
     u32 pos=0;
     while (pos+block_size-1<s.get_length()) {
         cerr<<'\r';
         cerr<<"adding: "<<pos/(float)s.get_length()*100;
         sample region;
         s.get_region(region,pos,pos+block_size-1);
-        m_blocks.push_back(block("",region,44100,ditchpcm));
+        m_blocks.push_back(block("",region,44100,env,ditchpcm));
         pos += (block_size-overlap);
     }
 }
@@ -123,13 +123,13 @@ bool brain::unit_test() {
     assert(b.m_samples.size()==2);
     assert(s.get_length()==100);
 
-    b.init(10, 0);
+    b.init(10, 0, 0);
     assert(b.m_samples.size()==2);
     assert(b.m_blocks.size()==20);
-    b.init(10, 5);
+    b.init(10, 5, 0);
     assert(b.m_samples.size()==2);
     assert(b.m_blocks.size()==38);
-    b.init(20, 5);
+    b.init(20, 5, 0);
     assert(b.m_samples.size()==2);
     assert(b.m_blocks.size()==12);
 
@@ -139,8 +139,8 @@ bool brain::unit_test() {
     brain b3;
     b3.load_sound("test_data/up.wav");
 
-    b2.init(512, 0);
-    b3.init(512, 0);
+    b2.init(512, 0, 20);
+    b3.init(512, 0, 20);
     assert(b3.search(b2.m_blocks[0],1)==0);
     assert(b3.search(b2.m_blocks[9],1)==9);
     assert(b3.search(b2.m_blocks[19],1)==19);

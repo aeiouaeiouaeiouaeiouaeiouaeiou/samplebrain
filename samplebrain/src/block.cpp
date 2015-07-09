@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <iostream>
 
-#include "libmfcc.h"
 #include "block.h"
 
 using namespace spiralcore;
@@ -20,7 +19,7 @@ void enveloper(sample &s, u32 start, u32 end) {
     }
 }
 
-block::block(const string &filename, const sample &pcm, u32 rate, bool ditchpcm) :
+block::block(const string &filename, const sample &pcm, u32 rate, u32 env, bool ditchpcm) :
     m_pcm(pcm),
     m_fft(pcm.get_length()),
     m_mfcc(MFCC_FILTERS),
@@ -32,7 +31,7 @@ block::block(const string &filename, const sample &pcm, u32 rate, bool ditchpcm)
     assert(m_mfcc_proc!=NULL);
     assert(m_fftw!=NULL);
 
-    enveloper(m_pcm,50,50);
+    enveloper(m_pcm,env,env);
 
     m_fftw->impulse2freq(m_pcm.get_non_const_buffer());
 
@@ -104,7 +103,7 @@ bool block::unit_test() {
         data[i]=i/(float)data.get_length();
     }
 
-    block bb("test",data,44100);
+    block bb("test",data,44100,0);
 
     assert(bb.m_pcm.get_length()==data.get_length());
     //assert(bb.m_fft.get_length()==data.get_length());
@@ -113,7 +112,7 @@ bool block::unit_test() {
     assert(bb.m_rate==44100);
     assert(bb.m_block_size==data.get_length());
 
-    block bb2("test",data,44100);
+    block bb2("test",data,44100,0);
     assert(bb.compare(bb2,1)==0);
     assert(bb.compare(bb2,0)==0);
     assert(bb.compare(bb2,0.5)==0);
@@ -123,13 +122,13 @@ bool block::unit_test() {
         data[i]=i%10;
     }
 
-    block cpy("test",data,100);
+    block cpy("test",data,100,4);
     {
-    block bb3("test",data2,44100);
-    assert(bb.compare(bb3,1)!=0);
-    assert(bb.compare(bb3,0)!=0);
-    assert(bb.compare(bb3,0.5)!=0);
-    cpy=bb3;
+        block bb3("test",data2,44100,4);
+        assert(bb.compare(bb3,1)!=0);
+        assert(bb.compare(bb3,0)!=0);
+        assert(bb.compare(bb3,0.5)!=0);
+        cpy=bb3;
     }
 
     assert(cpy.m_pcm.get_length()==200);

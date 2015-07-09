@@ -12,7 +12,7 @@ namespace spiralcore {
 class block {
 public:
     // runs analysis on pcm
-    block(const std::string &filename, const sample &pcm, u32 rate, bool ditchpcm=false);
+    block(const std::string &filename, const sample &pcm, u32 rate, u32 env, bool ditchpcm=false);
 
     // returns distance based on ratio of fft-mfcc values
     double compare(const block &other, float ratio) const;

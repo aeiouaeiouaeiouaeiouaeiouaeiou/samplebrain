@@ -53,20 +53,21 @@ void run_audio(void* c, unsigned int frames) {
 
 int main(int argc, char *argv[])
 {
-//    unit_test();
+    unit_test();
 
     cerr<<"starting"<<endl;
     brain source, target;
-    source.load_sound("../sound/source/shostakovich6.wav");
-//    source.load_sound("../sound/source/808.wav");
+//    source.load_sound("../sound/source/shostakovich6.wav");
+    source.load_sound("../sound/source/808.wav");
+    source.load_sound("../sound/source/full.wav");
 
-    target.load_sound("../sound/source/sb-left.wav");
 //    target.load_sound("../sound/source/sb-left.wav");
+    target.load_sound("../sound/source/apache.wav");
     cerr<<"loaded sounds"<<endl;
 
-    u32 len=3000;
-    source.init(len,len-len);
-    target.init(len,len-len/2);
+    u32 len=1024;
+    source.init(len,len-len,50);
+    target.init(len,len-len/4,50);
     cerr<<"ready..."<<endl;
 
     a = new audio_device("samplebrain",44100,2048);

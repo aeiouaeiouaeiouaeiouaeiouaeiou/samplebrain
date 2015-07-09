@@ -14,7 +14,7 @@ public:
     brain();
 
     // rewrites whole brain
-    void init(u32 block_size, u32 overlap, bool ditchpcm=false);
+    void init(u32 block_size, u32 overlap, u32 env, bool ditchpcm=false);
 
     // load, chop up and add to brain
     // todo: add tags
@@ -25,6 +25,7 @@ public:
 
     const sample &get_block_pcm(u32 index) const;
     const block &get_block(u32 index) const;
+    const u32 get_num_blocks() const { return m_blocks.size(); }
     const u32 get_block_size() const { return m_block_size; }
     const u32 get_overlap() const { return m_overlap; }
 
@@ -34,7 +35,7 @@ public:
 
 private:
 
-    void chop_and_add(const sample &s, u32 block_size, u32 overlap, bool ditchpcm=false);
+    void chop_and_add(const sample &s, u32 block_size, u32 overlap, u32 env, bool ditchpcm=false);
 
     vector<block> m_blocks;
     vector<sample> m_samples;

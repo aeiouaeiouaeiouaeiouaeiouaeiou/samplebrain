@@ -4,4 +4,4 @@ make distclean
 autoheader
 # build configure
 autoconf configure.ac > configure
-./configure CXX=g++-4.7
+./configure CXX=g++-4.7 CCFLAGS=-O3
