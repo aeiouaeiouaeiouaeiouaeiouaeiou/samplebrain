@@ -13,8 +13,8 @@ SRCS :=   	src/fft.cpp \
 
 TARGET_SRCS    := src/main.cpp
 
-# for the minute, go out and up to link to the vision lib
-CCFLAGS = @CFLAGS@ -std=c++11 -ffast-math -Wno-unused -Isrc
+# @CFLAGS@
+CCFLAGS = -Ofast -march=native -mtune=native -std=c++11 -ffast-math -Wno-unused -Isrc
 LDFLAGS = @LDFLAGS@
 LIBS    = @LIBS@
 

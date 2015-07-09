@@ -1,4 +1,5 @@
 AC_INIT(samplebrain, version-0.1)
+: ${CXXFLAGS="-O3"}
 AC_PROG_CC
 
 AC_CHECK_LIB(m, cos)

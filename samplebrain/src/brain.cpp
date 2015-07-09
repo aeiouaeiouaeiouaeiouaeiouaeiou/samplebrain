@@ -91,7 +91,7 @@ void brain::resynth(const string &filename, const brain &other, float ratio){
     u32 pos = 0;
     u32 count = 0;
     cerr<<other.m_blocks.size()<<" brain blocks..."<<endl;
-
+    cerr<<endl;
     for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
         cerr<<'\r';
         cerr<<"searching: "<<count/float(m_blocks.size())*100;

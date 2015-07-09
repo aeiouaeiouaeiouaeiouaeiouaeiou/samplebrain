@@ -12,11 +12,17 @@ void renderer::init(brain &source, brain &target, float ratio) {
     m_ratio = ratio;
 }
 
+static int ratio_time = 0;
+
 void renderer::process(u32 nframes, float *buf) {
     // get blocks from source for the current buffer
     u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
     u32 tgt_start = m_render_time/(float)tgt_shift;
     u32 tgt_end = (m_render_time+nframes)/(float)tgt_shift;
+
+    m_ratio = sin((ratio_time++)*0.01)*0.5+0.5;
+    cerr<<'\r';
+    cerr<<m_ratio;
 
     if (tgt_end>=m_target.get_num_blocks()) {
         m_render_time=0;

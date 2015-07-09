@@ -66,6 +66,8 @@ void block::init_fft(u32 block_size)
     }
 }
 
+#define FFT_BIAS 200
+
 double block::compare(const block &other, float ratio) const {
     double mfcc_acc=0;
     double fft_acc=0;
@@ -74,7 +76,7 @@ double block::compare(const block &other, float ratio) const {
         for (u32 i=0; i<m_fft.get_length(); ++i) {
             fft_acc+=(m_fft[i]-other.m_fft[i]) * (m_fft[i]-other.m_fft[i]);
         }
-        return fft_acc/(float)m_fft.get_length();
+        return (fft_acc/(float)m_fft.get_length())*FFT_BIAS;
     }
 
     if (ratio==1) {
@@ -92,7 +94,7 @@ double block::compare(const block &other, float ratio) const {
         mfcc_acc+=(m_mfcc[i]-other.m_mfcc[i]) * (m_mfcc[i]-other.m_mfcc[i]);
     }
 
-    return (fft_acc/(float)m_fft.get_length())*(1-ratio) +
+    return (fft_acc/(float)m_fft.get_length())*(1-ratio)*FFT_BIAS +
         (mfcc_acc/(float)MFCC_FILTERS)*ratio;
 }
 
