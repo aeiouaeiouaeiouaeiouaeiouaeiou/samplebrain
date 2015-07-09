@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
     source.load_sound("../sound/source/pw3.wav");
     source.load_sound("../sound/source/claps.wav");
     source.load_sound("../sound/source/eagle.wav");
+//    source.load_sound("../sound/source/sailingbybit.wav");
+
 
     //target.load_sound("../sound/source/sb-left.wav");
     target.load_sound("../sound/source/apache.wav");

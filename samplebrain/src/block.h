@@ -15,7 +15,7 @@ public:
     block(const std::string &filename, const sample &pcm, u32 rate, u32 env, bool ditchpcm=false);
 
     // returns distance based on ratio of fft-mfcc values
-    double compare(const block &other, float ratio) const;
+    double compare(const block &other, float ratio, int fftwack) const;
 
     static void init_fft(u32 block_size);
     static bool unit_test();

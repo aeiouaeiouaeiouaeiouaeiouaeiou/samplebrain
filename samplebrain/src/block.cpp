@@ -68,12 +68,20 @@ void block::init_fft(u32 block_size)
 
 #define FFT_BIAS 200
 
-double block::compare(const block &other, float ratio) const {
+double block::compare(const block &other, float ratio, int fftwack) const {
     double mfcc_acc=0;
     double fft_acc=0;
 
+/*    s32 fft_start = fftwack-10;
+    s32 fft_end = fftwack+10;
+    if (fft_start<0) fft_start=0;
+    if (fft_end>m_fft.get_length()) fft_end=m_fft.get_length();
+*/
+    s32 fft_start = 0;
+    s32 fft_end = m_fft.get_length();
+
     if (ratio==0) {
-        for (u32 i=0; i<m_fft.get_length(); ++i) {
+        for (u32 i=fft_start; i<fft_end; ++i) {
             fft_acc+=(m_fft[i]-other.m_fft[i]) * (m_fft[i]-other.m_fft[i]);
         }
         return (fft_acc/(float)m_fft.get_length())*FFT_BIAS;
@@ -87,7 +95,7 @@ double block::compare(const block &other, float ratio) const {
     }
 
     // calculate both
-    for (u32 i=0; i<m_fft.get_length(); ++i) {
+    for (u32 i=fft_start; i<fft_end; ++i) {
         fft_acc+=(m_fft[i]-other.m_fft[i]) * (m_fft[i]-other.m_fft[i]);
     }
     for (u32 i=0; i<MFCC_FILTERS; ++i) {
@@ -115,9 +123,9 @@ bool block::unit_test() {
     assert(bb.m_block_size==data.get_length());
 
     block bb2("test",data,44100,0);
-    assert(bb.compare(bb2,1)==0);
-    assert(bb.compare(bb2,0)==0);
-    assert(bb.compare(bb2,0.5)==0);
+    assert(bb.compare(bb2,1,0)==0);
+    assert(bb.compare(bb2,0,0)==0);
+    assert(bb.compare(bb2,0.5,0)==0);
 
     sample data2(200);
     for (u32 i=0; i<data.get_length(); i++) {
@@ -127,9 +135,9 @@ bool block::unit_test() {
     block cpy("test",data,100,4);
     {
         block bb3("test",data2,44100,4);
-        assert(bb.compare(bb3,1)!=0);
-        assert(bb.compare(bb3,0)!=0);
-        assert(bb.compare(bb3,0.5)!=0);
+        assert(bb.compare(bb3,1,0)!=0);
+        assert(bb.compare(bb3,0,0)!=0);
+        assert(bb.compare(bb3,0.5,0)!=0);
         cpy=bb3;
     }
 

@@ -24,6 +24,9 @@ void renderer::process(u32 nframes, float *buf) {
     cerr<<'\r';
     cerr<<m_ratio;
 
+    u32 fftwack = 0; //100*(sin((ratio_time++)*0.01)*0.5+0.5);
+    //m_ratio = 0;
+
     if (tgt_end>=m_target.get_num_blocks()) {
         m_render_time=0;
         m_render_blocks.clear();
@@ -38,7 +41,7 @@ void renderer::process(u32 nframes, float *buf) {
     // get indices for current buffer
     for (u32 tgt_index = tgt_start; tgt_index<=tgt_end; tgt_index++) {
         u32 time=tgt_index*tgt_shift;
-        u32 src_index = m_source.search(m_target.get_block(tgt_index), m_ratio);
+        u32 src_index = m_source.search(m_target.get_block(tgt_index), m_ratio, fftwack);
         // put them in the index list
         m_render_blocks.push_back(render_block(src_index,time));
     }
