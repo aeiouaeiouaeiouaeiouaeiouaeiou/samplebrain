@@ -1,15 +1,17 @@
 TARGET  := samplebrain
 TARGET_LIB := libsamplebrain.a
 
-SRCS :=    src/fft.cpp \
-		   src/brain.cpp \
-		   src/brain_block.cpp \
-		   src/libmfcc.cpp \
-		   src/main.cpp \
-	    src/mfcc.cpp \
-		src/aquila/filter/MelFilterBank.cpp \
-		src/aquila/filter/MelFilter.cpp \
-		src/aquila/transform/Dct.cpp
+SRCS :=   	src/fft.cpp \
+		   	src/brain.cpp \
+		   	src/block.cpp \
+		   	src/libmfcc.cpp \
+		   	src/main.cpp \
+		    src/mfcc.cpp \
+			src/renderer.cpp \
+			src/aquila/filter/MelFilterBank.cpp \
+			src/aquila/filter/MelFilter.cpp \
+			src/aquila/transform/Dct.cpp \
+			src/renderer.cpp
 
 TARGET_SRCS    := src/main.cpp
 

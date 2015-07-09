@@ -17,50 +17,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <unistd.h>
 
 #include "jellyfish/audio.h"
 
-#include "brain_block.h"
+#include "block.h"
 #include "brain.h"
+#include "renderer.h"
 
 using namespace std;
 
 void unit_test() {
-    cerr<<"testing brain_block"<<endl;
-    if (brain_block::unit_test()) cerr<<"passed"<<endl;
+    cerr<<"testing block"<<endl;
+    if (block::unit_test()) cerr<<"passed"<<endl;
     else cerr<<"failed"<<endl;
     cerr<<"testing brain"<<endl;
     if (brain::unit_test()) cerr<<"passed"<<endl;
     else cerr<<"failed"<<endl;
+    cerr<<"testing renderer"<<endl;
+    if (renderer::unit_test()) cerr<<"passed"<<endl;
+    else cerr<<"failed"<<endl;
+
+
+}
+
+audio_device *a = NULL;
+
+void run_audio(void* c, unsigned int frames) {
+    a->left_out.zero();
+    renderer *rr = (renderer*)c;
+    rr->process(frames,a->left_out.get_non_const_buffer());
+
+//    sleep(1);
 }
 
 int main(int argc, char *argv[])
 {
-    unit_test();
+//    unit_test();
 
     cerr<<"starting"<<endl;
     brain source, target;
-//    source.load_sound("../sound/source/shostakovich6.wav");
-    source.load_sound("../sound/source/amen_brother.wav");
-    source.load_sound("../sound/source/808.wav");
-    source.load_sound("../sound/source/eagle.wav");
-    source.load_sound("../sound/source/claps.wav");
-    source.load_sound("../sound/source/dream2.wav");
+    source.load_sound("../sound/source/shostakovich6.wav");
+//    source.load_sound("../sound/source/808.wav");
 
-    target.load_sound("../sound/source/camron.wav");
+    target.load_sound("../sound/source/sb-left.wav");
 //    target.load_sound("../sound/source/sb-left.wav");
     cerr<<"loaded sounds"<<endl;
 
     u32 len=3000;
-    source.init(len,len-len/4);
-    target.init(len,len-len/4);
+    source.init(len,len-len);
+    target.init(len,len-len/2);
     cerr<<"ready..."<<endl;
 
-    audio_device *a = new audio_device("samplebrain",44100,2048);
+    a = new audio_device("samplebrain",44100,2048);
+
     //target.resynth_listen("shosta-dream-0.5.wav",source,0.5,a);
+
+    renderer rr(source,target,1);
+
+	a->m_client.set_callback(run_audio, &rr);
 
     //target.resynth("shosta-dream-0.5.wav",source,0.5);
 
-
+    while (true) sleep(1);
 
 }
