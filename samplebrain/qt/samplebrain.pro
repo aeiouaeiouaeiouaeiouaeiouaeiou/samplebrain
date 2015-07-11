@@ -14,10 +14,12 @@ HEADERS += MainWindow.h \
            generated/ui_samplebrain.h \
 
 SOURCES += MainWindow.cpp \
+           audio_thread.cpp \
+           process_thread.cpp \
            qtmain.cpp
 
 INCLUDEPATH += ../src
-LIBS += -L.. -lsamplebrain -ljellyfish -lportaudio -lfftw3 -lsndfile -ldl -lpthread -lm
+LIBS += -L.. -lsamplebrain -ljellyfish -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 
 # assets
 #RESOURCES     = application.qrc

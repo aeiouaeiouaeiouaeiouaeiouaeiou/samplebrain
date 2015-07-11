@@ -5,6 +5,7 @@ using namespace spiralcore;
 using namespace std;
 
 void renderer::init(brain &source, brain &target) {
+    m_volume=1;
     m_source=source;
     m_target=target;
     m_render_time=0;

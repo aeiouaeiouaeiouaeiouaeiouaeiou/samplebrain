@@ -7,20 +7,17 @@
 
 #include "jellyfish/audio.h"
 
-#include "block.h"
-#include "brain.h"
-#include "renderer.h"
+#include "process_thread.h"
+#include "audio_thread.h"
 
 using namespace std;
 
 audio_device *a = NULL;
-renderer *rr = NULL;
 
 void run_audio(void* c, unsigned int frames) {
+    audio_thread *at = (audio_thread*)c;
     a->left_out.zero();
-    rr->process(frames,a->left_out.get_non_const_buffer());
-
-//    sleep(1);
+    at->process(a->left_out);
 }
 
 int main( int argc , char *argv[] ){
@@ -28,10 +25,11 @@ int main( int argc , char *argv[] ){
     MainWindow mainWin;
     mainWin.show();
 
-    mainWin.init_brain();
-    rr = mainWin.m_renderer;
+    process_thread pt;
+    audio_thread at(pt);
+
     a = new audio_device("samplebrain",44100,2048);
-	a->m_client.set_callback(run_audio, &rr);
+	a->m_client.set_callback(run_audio, &at);
 
     return app.exec();
 }

@@ -1,8 +1,8 @@
 #include <QtGui>
 #include "generated/ui_samplebrain.h"
 
-#include "brain.h"
-#include "renderer.h"
+#include <iostream>
+#include <lo/lo.h>
 
 class MainWindow : public QMainWindow
 {
@@ -11,24 +11,21 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
 
-    void init_brain();
 
-    spiralcore::brain m_source, m_target;
-    spiralcore::renderer *m_renderer;
 
 protected:
 
 private slots:
 
-    void play_slot() { m_renderer->set_playing(true); }
-    void stop_slot() { m_renderer->set_playing(false); }
-    void ratio_slot(int s) { m_renderer->get_params()->m_ratio=s/100.0f; }
-    void ratio_slot(double s) { m_renderer->get_params()->m_ratio=s/100.0f; }
-    void fft1_start_slot(int s) { m_renderer->get_params()->m_fft1_start=s; }
-    void fft1_end_slot(int s) { m_renderer->get_params()->m_fft1_end=s; }
-    void fft2_start_slot(int s) { m_renderer->get_params()->m_fft2_start=s; }
-    void fft2_end_slot(int s) { m_renderer->get_params()->m_fft2_end=s; }
-    void volume_slot(int s) {  m_renderer->set_volume(s/50.0f); }
+    void play_slot() { lo_send(m_process_address,"/init",""); }
+    void stop_slot() {} //{ m_renderer->set_playing(false); }
+    void ratio_slot(int s) { lo_send(m_audio_address,"/ratio","f",s/100.0f); }
+    void ratio_slot(double s) { lo_send(m_audio_address,"/ratio","f",s); }
+    void fft1_start_slot(int s) { lo_send(m_audio_address,"/fft1_start","i",s); }
+    void fft1_end_slot(int s) { lo_send(m_audio_address,"/fft1_end","i",s); }
+    void fft2_start_slot(int s){} // { m_renderer->get_params()->m_fft2_start=s; }
+    void fft2_end_slot(int s){} // { m_renderer->get_params()->m_fft2_end=s; }
+    void volume_slot(int s){} // {  m_renderer->set_volume(s/50.0f); }
     void run_slot() {}
     void load_target() {}
     void target_block_size(int) {}
@@ -42,5 +39,6 @@ private slots:
 
 private:
     Ui_MainWindow m_Ui;
-
+    lo_address m_audio_address;
+    lo_address m_process_address;
 };

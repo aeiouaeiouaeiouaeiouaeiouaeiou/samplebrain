@@ -26,9 +26,9 @@ public:
 
     const sample &get_block_pcm(u32 index) const;
     const block &get_block(u32 index) const;
-    const u32 get_num_blocks() const { return m_blocks.size(); }
-    const u32 get_block_size() const { return m_block_size; }
-    const u32 get_overlap() const { return m_overlap; }
+    u32 get_num_blocks() const { return m_blocks.size(); }
+    u32 get_block_size() const { return m_block_size; }
+    u32 get_overlap() const { return m_overlap; }
 
     u32 search(const block &target, const search_params &params) const;
 
