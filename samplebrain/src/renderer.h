@@ -2,6 +2,9 @@
 #include <jellyfish/fluxa/sample.h>
 #include "brain.h"
 
+#ifndef SB_RENDERER
+#define SB_RENDERER
+
 namespace spiralcore {
 
 class renderer {
@@ -12,6 +15,8 @@ public:
 
     void init(brain &source, brain &target, float ratio);
     void process(u32 nframes, float *buf);
+
+    void set_ratio(float s) { m_ratio=s; }
 
     static bool unit_test();
 
@@ -36,3 +41,5 @@ private:
 };
 
 }
+
+#endif

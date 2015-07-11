@@ -35,7 +35,7 @@ block::block(const string &filename, const sample &pcm, u32 rate, u32 env, bool 
 
     m_fftw->impulse2freq(m_pcm.get_non_const_buffer());
 
-    std::vector<std::complex<double>> mfspec;
+    std::vector<std::complex<double> > mfspec;
 
     for (u32 i=0; i<m_block_size; ++i) {
         m_fft[i]=m_fftw->m_spectrum[i][0];

@@ -20,7 +20,6 @@ void renderer::process(u32 nframes, float *buf) {
     u32 tgt_start = m_render_time/(float)tgt_shift;
     u32 tgt_end = (m_render_time+nframes)/(float)tgt_shift;
 
-    m_ratio = sin((ratio_time++)*0.01)*0.5+0.5;
     cerr<<'\r';
     cerr<<m_ratio;
 
