@@ -53,7 +53,7 @@ void run_audio(void* c, unsigned int frames) {
 
 int main(int argc, char *argv[])
 {
-//    unit_test();
+    unit_test();
 
     cerr<<"starting"<<endl;
     brain source, target;
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 
     //target.resynth_listen("shosta-dream-0.5.wav",source,0.5,a);
 
-    renderer rr(source,target,1);
+    renderer rr(source,target);
 
 	a->m_client.set_callback(run_audio, &rr);
 

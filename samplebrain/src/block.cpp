@@ -68,7 +68,7 @@ void block::init_fft(u32 block_size)
 
 #define FFT_BIAS 200
 
-double block::compare(const block &other, float ratio, int fftwack) const {
+double block::compare(const block &other, const search_params &params) const {
     double mfcc_acc=0;
     double fft_acc=0;
 
@@ -77,17 +77,17 @@ double block::compare(const block &other, float ratio, int fftwack) const {
     if (fft_start<0) fft_start=0;
     if (fft_end>m_fft.get_length()) fft_end=m_fft.get_length();
 */
-    s32 fft_start = 0;
-    s32 fft_end = m_fft.get_length();
+    s32 fft_start = params.m_fft1_start;
+    s32 fft_end = fmin(params.m_fft1_end,m_fft.get_length());
 
-    if (ratio==0) {
+    if (params.m_ratio==0) {
         for (u32 i=fft_start; i<fft_end; ++i) {
             fft_acc+=(m_fft[i]-other.m_fft[i]) * (m_fft[i]-other.m_fft[i]);
         }
         return (fft_acc/(float)m_fft.get_length())*FFT_BIAS;
     }
 
-    if (ratio==1) {
+    if (params.m_ratio==1) {
         for (u32 i=0; i<MFCC_FILTERS; ++i) {
             mfcc_acc+=(m_mfcc[i]-other.m_mfcc[i]) * (m_mfcc[i]-other.m_mfcc[i]);
         }
@@ -102,8 +102,8 @@ double block::compare(const block &other, float ratio, int fftwack) const {
         mfcc_acc+=(m_mfcc[i]-other.m_mfcc[i]) * (m_mfcc[i]-other.m_mfcc[i]);
     }
 
-    return (fft_acc/(float)m_fft.get_length())*(1-ratio)*FFT_BIAS +
-        (mfcc_acc/(float)MFCC_FILTERS)*ratio;
+    return (fft_acc/(float)m_fft.get_length())*(1-params.m_ratio)*FFT_BIAS +
+        (mfcc_acc/(float)MFCC_FILTERS)*params.m_ratio;
 }
 
 
@@ -122,10 +122,14 @@ bool block::unit_test() {
     assert(bb.m_rate==44100);
     assert(bb.m_block_size==data.get_length());
 
+    search_params p(0,0,100,0,100);
+
     block bb2("test",data,44100,0);
-    assert(bb.compare(bb2,1,0)==0);
-    assert(bb.compare(bb2,0,0)==0);
-    assert(bb.compare(bb2,0.5,0)==0);
+    assert(bb.compare(bb2,p)==0);
+    p.m_ratio=1;
+    assert(bb.compare(bb2,p)==0);
+    p.m_ratio=0.5;
+    assert(bb.compare(bb2,p)==0);
 
     sample data2(200);
     for (u32 i=0; i<data.get_length(); i++) {
@@ -135,9 +139,11 @@ bool block::unit_test() {
     block cpy("test",data,100,4);
     {
         block bb3("test",data2,44100,4);
-        assert(bb.compare(bb3,1,0)!=0);
-        assert(bb.compare(bb3,0,0)!=0);
-        assert(bb.compare(bb3,0.5,0)!=0);
+        p.m_ratio=0.0;
+        assert(bb.compare(bb3,p)!=0);
+        assert(bb.compare(bb3,p)!=0);
+        p.m_ratio=0.5;
+        assert(bb.compare(bb3,p)!=0);
         cpy=bb3;
     }
 

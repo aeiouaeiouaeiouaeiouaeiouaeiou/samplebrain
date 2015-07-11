@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainYv5241.ui'
+** Form generated from reading UI file 'samplebrainxS5241.ui'
 **
-** Created: Sat Jul 11 10:34:17 2015
+** Created: Sat Jul 11 12:25:49 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINYV5241_H
-#define SAMPLEBRAINYV5241_H
+#ifndef SAMPLEBRAINXS5241_H
+#define SAMPLEBRAINXS5241_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -22,12 +22,10 @@
 #include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
 #include <QtGui/QPushButton>
-#include <QtGui/QSlider>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
-#include <QtGui/QTextEdit>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -47,6 +45,7 @@ public:
     QPushButton *pushButtonPlay;
     QPushButton *pushButtonStop;
     QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_16;
     QLabel *label_6;
     QDial *dialRatio;
     QDoubleSpinBox *doubleSpinBoxRatio;
@@ -66,10 +65,10 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QLabel *label_12;
     QSpinBox *spinBoxFFT2End;
+    QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_13;
-    QSlider *verticalSliderVolume;
-    QSpacerItem *verticalSpacer_3;
+    QDial *dialVolume;
     QVBoxLayout *verticalLayout_9;
     QLabel *label_16;
     QLabel *label_15;
@@ -82,10 +81,6 @@ public:
     QSpinBox *spinBoxBlockOverlapTarget;
     QPushButton *pushButtonGenerateTarget;
     QSpacerItem *verticalSpacer;
-    QVBoxLayout *verticalLayout_8;
-    QLabel *label_14;
-    QTextEdit *textEdit;
-    QPushButton *pushButtonRun;
     QWidget *sampleTab;
     QHBoxLayout *horizontalLayout_8;
     QVBoxLayout *verticalLayout_2;
@@ -115,7 +110,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 603);
+        MainWindow->resize(724, 603);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
@@ -163,17 +158,33 @@ public:
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         label_6 = new QLabel(controlTab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setFont(font1);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font2.setPointSize(14);
+        font2.setBold(true);
+        font2.setWeight(75);
+        label_6->setFont(font2);
 
-        verticalLayout_3->addWidget(label_6);
+        horizontalLayout_16->addWidget(label_6);
 
         dialRatio = new QDial(controlTab);
         dialRatio->setObjectName(QString::fromUtf8("dialRatio"));
         dialRatio->setEnabled(true);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(dialRatio->sizePolicy().hasHeightForWidth());
+        dialRatio->setSizePolicy(sizePolicy);
+        dialRatio->setMinimumSize(QSize(60, 60));
 
-        verticalLayout_3->addWidget(dialRatio);
+        horizontalLayout_16->addWidget(dialRatio);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_16);
 
         doubleSpinBoxRatio = new QDoubleSpinBox(controlTab);
         doubleSpinBoxRatio->setObjectName(QString::fromUtf8("doubleSpinBoxRatio"));
@@ -184,7 +195,7 @@ public:
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         label_7 = new QLabel(controlTab);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setFont(font1);
+        label_7->setFont(font2);
 
         verticalLayout_4->addWidget(label_7);
 
@@ -227,7 +238,7 @@ public:
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         label_8 = new QLabel(controlTab);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setFont(font1);
+        label_8->setFont(font2);
 
         verticalLayout_5->addWidget(label_8);
 
@@ -269,6 +280,10 @@ public:
 
         verticalLayout_7->addLayout(verticalLayout_3);
 
+        verticalSpacer_3 = new QSpacerItem(323, 511, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_7->addItem(verticalSpacer_3);
+
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         label_13 = new QLabel(controlTab);
@@ -277,18 +292,14 @@ public:
 
         verticalLayout_6->addWidget(label_13);
 
-        verticalSliderVolume = new QSlider(controlTab);
-        verticalSliderVolume->setObjectName(QString::fromUtf8("verticalSliderVolume"));
-        verticalSliderVolume->setOrientation(Qt::Vertical);
+        dialVolume = new QDial(controlTab);
+        dialVolume->setObjectName(QString::fromUtf8("dialVolume"));
+        dialVolume->setValue(99);
 
-        verticalLayout_6->addWidget(verticalSliderVolume);
+        verticalLayout_6->addWidget(dialVolume);
 
 
         verticalLayout_7->addLayout(verticalLayout_6);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_7->addItem(verticalSpacer_3);
 
 
         horizontalLayout_15->addLayout(verticalLayout_7);
@@ -357,28 +368,6 @@ public:
 
 
         horizontalLayout_15->addLayout(verticalLayout_9);
-
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
-        label_14 = new QLabel(controlTab);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-        label_14->setFont(font);
-
-        verticalLayout_8->addWidget(label_14);
-
-        textEdit = new QTextEdit(controlTab);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-
-        verticalLayout_8->addWidget(textEdit);
-
-        pushButtonRun = new QPushButton(controlTab);
-        pushButtonRun->setObjectName(QString::fromUtf8("pushButtonRun"));
-        pushButtonRun->setFont(font1);
-
-        verticalLayout_8->addWidget(pushButtonRun);
-
-
-        horizontalLayout_15->addLayout(verticalLayout_8);
 
         tabWidget->addTab(controlTab, QString());
         sampleTab = new QWidget();
@@ -516,8 +505,6 @@ public:
         QObject::connect(spinBoxFFT1End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_end_slot(int)));
         QObject::connect(spinBoxFFT2Start, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft2_start_slot(int)));
         QObject::connect(spinBoxFFT2End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft2_end_slot(int)));
-        QObject::connect(verticalSliderVolume, SIGNAL(sliderMoved(int)), MainWindow, SLOT(volume_slot(int)));
-        QObject::connect(pushButtonRun, SIGNAL(released()), MainWindow, SLOT(run_slot()));
         QObject::connect(pushButtonLoadTarget, SIGNAL(released()), MainWindow, SLOT(load_target()));
         QObject::connect(spinBoxBlockSizeTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_size(int)));
         QObject::connect(spinBoxBlockOverlapTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_overlap(int)));
@@ -527,8 +514,9 @@ public:
         QObject::connect(spinBoxSpectSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft_spectrum_size(int)));
         QObject::connect(pushButtonGenerate, SIGNAL(released()), MainWindow, SLOT(generate()));
         QObject::connect(pushButtonLoadSound, SIGNAL(released()), MainWindow, SLOT(load_sound()));
+        QObject::connect(dialVolume, SIGNAL(sliderMoved(int)), MainWindow, SLOT(volume_slot(int)));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -549,13 +537,11 @@ public:
         label_12->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("MainWindow", "Volume", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label_15->setText(QApplication::translate("MainWindow", "no sound yet...", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
         pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "generate blocks", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "livecode brain", 0, QApplication::UnicodeUTF8));
-        pushButtonRun->setText(QApplication::translate("MainWindow", "run", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "brain parameters", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
@@ -577,4 +563,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINYV5241_H
+#endif // SAMPLEBRAINXS5241_H

@@ -3,6 +3,7 @@
 #include "jellyfish/core/types.h"
 #include "jellyfish/fluxa/sample.h"
 #include "block.h"
+#include "search_params.h"
 
 #ifndef BRAIN
 #define BRAIN
@@ -21,7 +22,7 @@ public:
     sample load_sound(std::string filename);
     // take another brain and rebuild this brain from bits of that one
     // (presumably this one is made from a single sample)
-    void resynth(const std::string &filename, const brain &other, float ratio, u32 fftwack);
+    void resynth(const std::string &filename, const brain &other, const search_params &params);
 
     const sample &get_block_pcm(u32 index) const;
     const block &get_block(u32 index) const;
@@ -29,7 +30,7 @@ public:
     const u32 get_block_size() const { return m_block_size; }
     const u32 get_overlap() const { return m_overlap; }
 
-    u32 search(const block &target, float ratio, u32 fftwack) const;
+    u32 search(const block &target, const search_params &params) const;
 
     static bool unit_test();
 

@@ -68,12 +68,12 @@ const block &brain::get_block(u32 index) const {
 }
 
 // returns index to block
-u32 brain::search(const block &target, float ratio, u32 fftwack) const {
+u32 brain::search(const block &target, const search_params &params) const {
     double closest = 999999999;
     u32 closest_index = 0;
     u32 index = 0;
     for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
-        double diff = target.compare(*i,ratio,fftwack);
+        double diff = target.compare(*i,params);
         if (diff<closest) {
             closest=diff;
             closest_index = index;
@@ -85,7 +85,7 @@ u32 brain::search(const block &target, float ratio, u32 fftwack) const {
 
 // take another brain and rebuild this brain from bits of that one
 // (presumably this one is made from a single sample)
-void brain::resynth(const string &filename, const brain &other, float ratio, u32 fftwack){
+void brain::resynth(const string &filename, const brain &other, const search_params &params){
     sample out((m_block_size-m_overlap)*m_blocks.size());
     out.zero();
     u32 pos = 0;
@@ -95,7 +95,7 @@ void brain::resynth(const string &filename, const brain &other, float ratio, u32
     for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
         cerr<<'\r';
         cerr<<"searching: "<<count/float(m_blocks.size())*100;
-        u32 index = other.search(*i,ratio, fftwack);
+        u32 index = other.search(*i, params);
         //cerr<<index<<endl;
         out.mul_mix(other.get_block_pcm(index),pos,0.2);
 
@@ -141,10 +141,13 @@ bool brain::unit_test() {
 
     b2.init(512, 0, 20);
     b3.init(512, 0, 20);
-    assert(b3.search(b2.m_blocks[0],1,0)==0);
-    assert(b3.search(b2.m_blocks[9],1,0)==9);
-    assert(b3.search(b2.m_blocks[19],1,0)==19);
-    assert(b3.search(b2.m_blocks[29],1,0)==29);
+
+    search_params p(1,0,100,0,100);
+
+    assert(b3.search(b2.m_blocks[0],p)==0);
+    assert(b3.search(b2.m_blocks[9],p)==9);
+    assert(b3.search(b2.m_blocks[19],p)==19);
+    assert(b3.search(b2.m_blocks[29],p)==29);
 
 //    sample r = b2.resynth(b,1);
 //    assert(r.get_length()==200);

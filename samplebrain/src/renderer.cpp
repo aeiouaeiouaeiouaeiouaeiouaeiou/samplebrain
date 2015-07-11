@@ -4,27 +4,23 @@
 using namespace spiralcore;
 using namespace std;
 
-void renderer::init(brain &source, brain &target, float ratio) {
+void renderer::init(brain &source, brain &target) {
     m_source=source;
     m_target=target;
     m_render_time=0;
     m_render_blocks.clear();
-    m_ratio = ratio;
 }
 
 static int ratio_time = 0;
 
 void renderer::process(u32 nframes, float *buf) {
+    if (!m_playing) return;
+
     // get blocks from source for the current buffer
     u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
     u32 tgt_start = m_render_time/(float)tgt_shift;
     u32 tgt_end = (m_render_time+nframes)/(float)tgt_shift;
 
-    cerr<<'\r';
-    cerr<<m_ratio;
-
-    u32 fftwack = 0; //100*(sin((ratio_time++)*0.01)*0.5+0.5);
-    //m_ratio = 0;
 
     if (tgt_end>=m_target.get_num_blocks()) {
         m_render_time=0;
@@ -40,7 +36,7 @@ void renderer::process(u32 nframes, float *buf) {
     // get indices for current buffer
     for (u32 tgt_index = tgt_start; tgt_index<=tgt_end; tgt_index++) {
         u32 time=tgt_index*tgt_shift;
-        u32 src_index = m_source.search(m_target.get_block(tgt_index), m_ratio, fftwack);
+        u32 src_index = m_source.search(m_target.get_block(tgt_index), m_search_params);
         // put them in the index list
         m_render_blocks.push_back(render_block(src_index,time));
     }
@@ -72,7 +68,7 @@ void renderer::process(u32 nframes, float *buf) {
             u32 block_pos = block_start;
             u32 block_end = pcm.get_length();
             while (block_pos<block_end && buffer_pos<nframes) {
-                buf[buffer_pos]+=pcm[block_pos]*0.2;
+                buf[buffer_pos]+=pcm[block_pos]*0.2*m_volume;
                 ++buffer_pos;
                 ++block_pos;
             }
@@ -100,7 +96,7 @@ bool renderer::unit_test() {
     target.load_sound("test_data/up.wav");
     target.init(10,0,0);
 
-    renderer rr(source,target,1);
+    renderer rr(source,target);
     float *buf=new float[10];
     rr.process(10,buf);
     assert(rr.m_render_blocks.size()==2);

@@ -37,6 +37,6 @@ void MainWindow::init_brain() {
 
     //target.resynth_listen("shosta-dream-0.5.wav",source,0.5,a);
 
-    m_renderer = new renderer(m_source,m_target,1);
+    m_renderer = new renderer(m_source,m_target);
 
 }
