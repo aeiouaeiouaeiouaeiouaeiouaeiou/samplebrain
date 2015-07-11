@@ -1,3 +1,4 @@
+#include <list>
 #include <vector>
 #include <string>
 #include "jellyfish/core/types.h"
@@ -17,9 +18,20 @@ public:
     // rewrites whole brain
     void init(u32 block_size, u32 overlap, u32 env, bool ditchpcm=false);
 
+    class sound {
+    public:
+        sound(const std::string &name, const sample &sample) :
+            m_filename(name), m_sample(sample) {}
+
+        std::string m_filename;
+        sample m_sample;
+    };
+
     // load, chop up and add to brain
     // todo: add tags
-    sample load_sound(std::string filename);
+    void load_sound(std::string filename);
+    void delete_sound(std::string filename);
+    void clear_sounds() { m_samples.clear(); }
     // take another brain and rebuild this brain from bits of that one
     // (presumably this one is made from a single sample)
     void resynth(const std::string &filename, const brain &other, const search_params &params);
@@ -39,7 +51,7 @@ private:
     void chop_and_add(const sample &s, u32 block_size, u32 overlap, u32 env, bool ditchpcm=false);
 
     vector<block> m_blocks;
-    vector<sample> m_samples;
+    std::list<sound> m_samples;
 
     u32 m_block_size;
     u32 m_overlap;

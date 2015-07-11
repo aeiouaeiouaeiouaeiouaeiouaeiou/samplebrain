@@ -11,15 +11,24 @@ brain::brain()
 
 // load, chop up and add to brain
 // todo: add tags
-sample brain::load_sound(std::string filename) {
+void brain::load_sound(std::string filename) {
     SF_INFO sfinfo;
     sfinfo.format=0;
     SNDFILE* f=sf_open(filename.c_str(), SFM_READ, &sfinfo);
-    sample s(sfinfo.frames);
-    sf_readf_float(f, s.get_non_const_buffer(), s.get_length());
-    sf_close(f);
-    m_samples.push_back(s);
-    return s;
+    if (f!=NULL) {
+        sample s(sfinfo.frames);
+        sf_readf_float(f, s.get_non_const_buffer(), s.get_length());
+        m_samples.push_back(sound(filename,s));
+    }
+}
+
+void brain::delete_sound(std::string filename) {
+    for (std::list<sound>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
+        if (i->m_filename==filename) {
+            m_samples.erase(i);
+            return;
+        }
+    }
 }
 
 void save_sample(const string &filename, const sample s) {
@@ -42,8 +51,8 @@ void brain::init(u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
     m_blocks.clear();
     m_block_size = block_size;
     m_overlap = overlap;
-    for (vector<sample>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
-        chop_and_add(*i, block_size, overlap, env, ditchpcm);
+    for (std::list<sound>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
+        chop_and_add(i->m_sample, block_size, overlap, env, ditchpcm);
     }
 }
 
@@ -115,16 +124,10 @@ bool brain::unit_test() {
     assert(b.m_samples.size()==0);
     assert(b.m_blocks.size()==0);
 
-    sample s=b.load_sound("test_data/100f32.wav");
-    assert(b.m_samples.size()==1);
-    assert(s.get_length()==100);
-
-    s=b.load_sound("test_data/100i16.wav");
+    b.load_sound("test_data/100f32.wav");
+    b.load_sound("test_data/100i16.wav");
     assert(b.m_samples.size()==2);
-    assert(s.get_length()==100);
-
     b.init(10, 0, 0);
-    assert(b.m_samples.size()==2);
     assert(b.m_blocks.size()==20);
     b.init(10, 5, 0);
     assert(b.m_samples.size()==2);

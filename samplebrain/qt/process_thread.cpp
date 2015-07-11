@@ -4,8 +4,18 @@
 using namespace spiralcore;
 using namespace std;
 
+static void _process(void *c) {
+    process_thread *p=(process_thread*)c;
+    p->process();
+}
+
 process_thread::process_thread() :
-    m_osc("8889")
+    m_osc("8889"),
+    m_source_block_size(3000),
+    m_source_overlap(0.75),
+    m_target_block_size(3000),
+    m_target_overlap(0.75),
+    m_env(50)
 {
     m_brain_mutex = new pthread_mutex_t;
     pthread_mutex_init(m_brain_mutex,NULL);
@@ -13,25 +23,63 @@ process_thread::process_thread() :
 
     // start the processing thread
     pthread_t *thread = new pthread_t;
-    pthread_create(thread,NULL,(void*(*)(void*))process_thread::process,this);
+    pthread_create(thread,NULL,(void*(*)(void*))_process,this);
 
 }
 
-void process_thread::process(void *c) {
-    process_thread *p=(process_thread*)c;
+void process_thread::process() {
     command_ring_buffer::command cmd;
 
     while(true) {
-        while (p->m_osc.get(cmd)) {
+        while (m_osc.get(cmd)) {
             string name = cmd.m_name;
             cerr<<name<<endl;
             if (name=="/init") {
-                p->init_brain();
+                init_brain();
+            }
+            if (name=="/load_sample") {
+                pthread_mutex_lock(m_brain_mutex);
+                m_source.load_sound(cmd.get_string(0));
+                pthread_mutex_unlock(m_brain_mutex);
+            }
+            if (name=="/delete_sample") {
+                pthread_mutex_lock(m_brain_mutex);
+                m_source.delete_sound(cmd.get_string(0));
+                pthread_mutex_unlock(m_brain_mutex);
+            }
+            if (name=="/source_block_size") {
+                m_source_block_size = cmd.get_int(0);
+            }
+            if (name=="/source_overlap") {
+                m_source_overlap = m_source_block_size-m_source_block_size/cmd.get_float(0);
+            }
+            if (name=="/generate_brain") {
+                pthread_mutex_lock(m_brain_mutex);
+                m_source.init(m_source_block_size, m_source_overlap, m_env);
+                pthread_mutex_unlock(m_brain_mutex);
+            }
+            if (name=="/load_target") {
+                pthread_mutex_lock(m_brain_mutex);
+                m_target.clear_sounds();
+                m_target.load_sound(cmd.get_string(0));
+                pthread_mutex_unlock(m_brain_mutex);
+            }
+            if (name=="/target_block_size") {
+                m_target_block_size = cmd.get_int(0);
+            }
+            if (name=="/target_overlap") {
+                m_target_overlap = m_target_block_size-m_target_block_size/cmd.get_float(0);
+            }
+            if (name=="/generate_target") {
+                pthread_mutex_lock(m_brain_mutex);
+                m_target.init(m_target_block_size, m_target_overlap, m_env);
+                pthread_mutex_unlock(m_brain_mutex);
             }
         }
         usleep(500);
     }
 }
+
 
 
 void process_thread::init_brain() {

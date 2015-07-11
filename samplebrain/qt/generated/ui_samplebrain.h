@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainxS5241.ui'
+** Form generated from reading UI file 'samplebrainHz5241.ui'
 **
-** Created: Sat Jul 11 12:25:49 2015
+** Created: Sat Jul 11 20:24:05 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINXS5241_H
-#define SAMPLEBRAINXS5241_H
+#ifndef SAMPLEBRAINHZ5241_H
+#define SAMPLEBRAINHZ5241_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -39,12 +39,11 @@ public:
     QTabWidget *tabWidget;
     QWidget *controlTab;
     QHBoxLayout *horizontalLayout_15;
-    QVBoxLayout *verticalLayout_7;
+    QVBoxLayout *verticalLayout_3;
     QLabel *label_19;
     QHBoxLayout *horizontalLayout_12;
     QPushButton *pushButtonPlay;
     QPushButton *pushButtonStop;
-    QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_16;
     QLabel *label_6;
     QDial *dialRatio;
@@ -65,10 +64,10 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QLabel *label_12;
     QSpinBox *spinBoxFFT2End;
-    QSpacerItem *verticalSpacer_3;
-    QVBoxLayout *verticalLayout_6;
     QLabel *label_13;
+    QHBoxLayout *horizontalLayout_17;
     QDial *dialVolume;
+    QPushButton *pushButtonRestartAudio;
     QVBoxLayout *verticalLayout_9;
     QLabel *label_16;
     QLabel *label_15;
@@ -78,7 +77,7 @@ public:
     QSpinBox *spinBoxBlockSizeTarget;
     QHBoxLayout *horizontalLayout_14;
     QLabel *label_18;
-    QSpinBox *spinBoxBlockOverlapTarget;
+    QDoubleSpinBox *doubleSpinBoxBlockOverlapTarget;
     QPushButton *pushButtonGenerateTarget;
     QSpacerItem *verticalSpacer;
     QWidget *sampleTab;
@@ -90,7 +89,7 @@ public:
     QSpinBox *spinBoxBlockSize;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_2;
-    QSpinBox *spinBoxBlockOverlap;
+    QDoubleSpinBox *doubleSpinBoxBlockOverlap;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_4;
     QSpinBox *spinBoxSpectSize;
@@ -104,6 +103,8 @@ public:
     QListWidget *listWidgetSounds;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButtonLoadSound;
+    QPushButton *pushButtonDeleteSound;
+    QPushButton *pushButtonClearBrain;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -117,47 +118,46 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        QFont font;
+        font.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font.setBold(true);
+        font.setWeight(75);
+        tabWidget->setFont(font);
         controlTab = new QWidget();
         controlTab->setObjectName(QString::fromUtf8("controlTab"));
         horizontalLayout_15 = new QHBoxLayout(controlTab);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         label_19 = new QLabel(controlTab);
         label_19->setObjectName(QString::fromUtf8("label_19"));
-        QFont font;
-        font.setFamily(QString::fromUtf8("Comic Sans MS"));
-        font.setPointSize(20);
-        font.setBold(true);
-        font.setWeight(75);
-        label_19->setFont(font);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font1.setPointSize(20);
+        font1.setBold(true);
+        font1.setWeight(75);
+        label_19->setFont(font1);
 
-        verticalLayout_7->addWidget(label_19);
+        verticalLayout_3->addWidget(label_19);
 
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
         pushButtonPlay = new QPushButton(controlTab);
         pushButtonPlay->setObjectName(QString::fromUtf8("pushButtonPlay"));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Comic Sans MS"));
-        font1.setBold(true);
-        font1.setWeight(75);
-        pushButtonPlay->setFont(font1);
+        pushButtonPlay->setFont(font);
         pushButtonPlay->setFlat(false);
 
         horizontalLayout_12->addWidget(pushButtonPlay);
 
         pushButtonStop = new QPushButton(controlTab);
         pushButtonStop->setObjectName(QString::fromUtf8("pushButtonStop"));
-        pushButtonStop->setFont(font1);
+        pushButtonStop->setFont(font);
 
         horizontalLayout_12->addWidget(pushButtonStop);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_12);
+        verticalLayout_3->addLayout(horizontalLayout_12);
 
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         horizontalLayout_16 = new QHBoxLayout();
         horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         label_6 = new QLabel(controlTab);
@@ -188,6 +188,9 @@ public:
 
         doubleSpinBoxRatio = new QDoubleSpinBox(controlTab);
         doubleSpinBoxRatio->setObjectName(QString::fromUtf8("doubleSpinBoxRatio"));
+        doubleSpinBoxRatio->setMaximum(1);
+        doubleSpinBoxRatio->setSingleStep(0.01);
+        doubleSpinBoxRatio->setValue(0.5);
 
         verticalLayout_3->addWidget(doubleSpinBoxRatio);
 
@@ -203,7 +206,7 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         label_9 = new QLabel(controlTab);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setFont(font1);
+        label_9->setFont(font);
 
         horizontalLayout_3->addWidget(label_9);
 
@@ -219,12 +222,13 @@ public:
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
         label_10 = new QLabel(controlTab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setFont(font1);
+        label_10->setFont(font);
 
         horizontalLayout_9->addWidget(label_10);
 
         spinBoxFFT1End = new QSpinBox(controlTab);
         spinBoxFFT1End->setObjectName(QString::fromUtf8("spinBoxFFT1End"));
+        spinBoxFFT1End->setValue(99);
 
         horizontalLayout_9->addWidget(spinBoxFFT1End);
 
@@ -246,7 +250,7 @@ public:
         horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
         label_11 = new QLabel(controlTab);
         label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setFont(font1);
+        label_11->setFont(font);
 
         horizontalLayout_10->addWidget(label_11);
 
@@ -262,12 +266,13 @@ public:
         horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
         label_12 = new QLabel(controlTab);
         label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setFont(font1);
+        label_12->setFont(font);
 
         horizontalLayout_11->addWidget(label_12);
 
         spinBoxFFT2End = new QSpinBox(controlTab);
         spinBoxFFT2End->setObjectName(QString::fromUtf8("spinBoxFFT2End"));
+        spinBoxFFT2End->setValue(99);
 
         horizontalLayout_11->addWidget(spinBoxFFT2End);
 
@@ -277,50 +282,49 @@ public:
 
         verticalLayout_3->addLayout(verticalLayout_5);
 
-
-        verticalLayout_7->addLayout(verticalLayout_3);
-
-        verticalSpacer_3 = new QSpacerItem(323, 511, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_7->addItem(verticalSpacer_3);
-
-        verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         label_13 = new QLabel(controlTab);
         label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setFont(font1);
+        label_13->setFont(font);
 
-        verticalLayout_6->addWidget(label_13);
+        verticalLayout_3->addWidget(label_13);
 
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
         dialVolume = new QDial(controlTab);
         dialVolume->setObjectName(QString::fromUtf8("dialVolume"));
         dialVolume->setValue(99);
 
-        verticalLayout_6->addWidget(dialVolume);
+        horizontalLayout_17->addWidget(dialVolume);
+
+        pushButtonRestartAudio = new QPushButton(controlTab);
+        pushButtonRestartAudio->setObjectName(QString::fromUtf8("pushButtonRestartAudio"));
+        pushButtonRestartAudio->setFont(font);
+
+        horizontalLayout_17->addWidget(pushButtonRestartAudio);
 
 
-        verticalLayout_7->addLayout(verticalLayout_6);
+        verticalLayout_3->addLayout(horizontalLayout_17);
 
 
-        horizontalLayout_15->addLayout(verticalLayout_7);
+        horizontalLayout_15->addLayout(verticalLayout_3);
 
         verticalLayout_9 = new QVBoxLayout();
         verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
         label_16 = new QLabel(controlTab);
         label_16->setObjectName(QString::fromUtf8("label_16"));
-        label_16->setFont(font);
+        label_16->setFont(font1);
 
         verticalLayout_9->addWidget(label_16);
 
         label_15 = new QLabel(controlTab);
         label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setFont(font1);
+        label_15->setFont(font);
 
         verticalLayout_9->addWidget(label_15);
 
         pushButtonLoadTarget = new QPushButton(controlTab);
         pushButtonLoadTarget->setObjectName(QString::fromUtf8("pushButtonLoadTarget"));
-        pushButtonLoadTarget->setFont(font1);
+        pushButtonLoadTarget->setFont(font);
 
         verticalLayout_9->addWidget(pushButtonLoadTarget);
 
@@ -328,12 +332,14 @@ public:
         horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
         label_17 = new QLabel(controlTab);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setFont(font1);
+        label_17->setFont(font);
 
         horizontalLayout_13->addWidget(label_17);
 
         spinBoxBlockSizeTarget = new QSpinBox(controlTab);
         spinBoxBlockSizeTarget->setObjectName(QString::fromUtf8("spinBoxBlockSizeTarget"));
+        spinBoxBlockSizeTarget->setMaximum(99999);
+        spinBoxBlockSizeTarget->setValue(3000);
 
         horizontalLayout_13->addWidget(spinBoxBlockSizeTarget);
 
@@ -344,21 +350,24 @@ public:
         horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
         label_18 = new QLabel(controlTab);
         label_18->setObjectName(QString::fromUtf8("label_18"));
-        label_18->setFont(font1);
+        label_18->setFont(font);
 
         horizontalLayout_14->addWidget(label_18);
 
-        spinBoxBlockOverlapTarget = new QSpinBox(controlTab);
-        spinBoxBlockOverlapTarget->setObjectName(QString::fromUtf8("spinBoxBlockOverlapTarget"));
+        doubleSpinBoxBlockOverlapTarget = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxBlockOverlapTarget->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlapTarget"));
+        doubleSpinBoxBlockOverlapTarget->setMaximum(1);
+        doubleSpinBoxBlockOverlapTarget->setSingleStep(0.01);
+        doubleSpinBoxBlockOverlapTarget->setValue(0.75);
 
-        horizontalLayout_14->addWidget(spinBoxBlockOverlapTarget);
+        horizontalLayout_14->addWidget(doubleSpinBoxBlockOverlapTarget);
 
 
         verticalLayout_9->addLayout(horizontalLayout_14);
 
         pushButtonGenerateTarget = new QPushButton(controlTab);
         pushButtonGenerateTarget->setObjectName(QString::fromUtf8("pushButtonGenerateTarget"));
-        pushButtonGenerateTarget->setFont(font1);
+        pushButtonGenerateTarget->setFont(font);
 
         verticalLayout_9->addWidget(pushButtonGenerateTarget);
 
@@ -378,7 +387,7 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label_3 = new QLabel(sampleTab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setFont(font);
+        label_3->setFont(font1);
 
         verticalLayout_2->addWidget(label_3);
 
@@ -386,12 +395,14 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         label = new QLabel(sampleTab);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setFont(font1);
+        label->setFont(font);
 
         horizontalLayout_4->addWidget(label);
 
         spinBoxBlockSize = new QSpinBox(sampleTab);
         spinBoxBlockSize->setObjectName(QString::fromUtf8("spinBoxBlockSize"));
+        spinBoxBlockSize->setMaximum(99999);
+        spinBoxBlockSize->setValue(3000);
 
         horizontalLayout_4->addWidget(spinBoxBlockSize);
 
@@ -402,14 +413,17 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         label_2 = new QLabel(sampleTab);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setFont(font1);
+        label_2->setFont(font);
 
         horizontalLayout_6->addWidget(label_2);
 
-        spinBoxBlockOverlap = new QSpinBox(sampleTab);
-        spinBoxBlockOverlap->setObjectName(QString::fromUtf8("spinBoxBlockOverlap"));
+        doubleSpinBoxBlockOverlap = new QDoubleSpinBox(sampleTab);
+        doubleSpinBoxBlockOverlap->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlap"));
+        doubleSpinBoxBlockOverlap->setMaximum(1);
+        doubleSpinBoxBlockOverlap->setSingleStep(0.01);
+        doubleSpinBoxBlockOverlap->setValue(0.75);
 
-        horizontalLayout_6->addWidget(spinBoxBlockOverlap);
+        horizontalLayout_6->addWidget(doubleSpinBoxBlockOverlap);
 
 
         verticalLayout_2->addLayout(horizontalLayout_6);
@@ -418,7 +432,7 @@ public:
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         label_4 = new QLabel(sampleTab);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setFont(font1);
+        label_4->setFont(font);
 
         horizontalLayout_5->addWidget(label_4);
 
@@ -432,7 +446,7 @@ public:
 
         pushButtonGenerate = new QPushButton(sampleTab);
         pushButtonGenerate->setObjectName(QString::fromUtf8("pushButtonGenerate"));
-        pushButtonGenerate->setFont(font1);
+        pushButtonGenerate->setFont(font);
 
         verticalLayout_2->addWidget(pushButtonGenerate);
 
@@ -440,13 +454,13 @@ public:
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         pushButtonLosdBrain = new QPushButton(sampleTab);
         pushButtonLosdBrain->setObjectName(QString::fromUtf8("pushButtonLosdBrain"));
-        pushButtonLosdBrain->setFont(font1);
+        pushButtonLosdBrain->setFont(font);
 
         horizontalLayout_7->addWidget(pushButtonLosdBrain);
 
         pushButtonSaveBrain = new QPushButton(sampleTab);
         pushButtonSaveBrain->setObjectName(QString::fromUtf8("pushButtonSaveBrain"));
-        pushButtonSaveBrain->setFont(font1);
+        pushButtonSaveBrain->setFont(font);
 
         horizontalLayout_7->addWidget(pushButtonSaveBrain);
 
@@ -464,7 +478,7 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label_5 = new QLabel(sampleTab);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setFont(font1);
+        label_5->setFont(font);
 
         verticalLayout->addWidget(label_5);
 
@@ -477,9 +491,21 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         pushButtonLoadSound = new QPushButton(sampleTab);
         pushButtonLoadSound->setObjectName(QString::fromUtf8("pushButtonLoadSound"));
-        pushButtonLoadSound->setFont(font1);
+        pushButtonLoadSound->setFont(font);
 
         horizontalLayout_2->addWidget(pushButtonLoadSound);
+
+        pushButtonDeleteSound = new QPushButton(sampleTab);
+        pushButtonDeleteSound->setObjectName(QString::fromUtf8("pushButtonDeleteSound"));
+        pushButtonDeleteSound->setFont(font);
+
+        horizontalLayout_2->addWidget(pushButtonDeleteSound);
+
+        pushButtonClearBrain = new QPushButton(sampleTab);
+        pushButtonClearBrain->setObjectName(QString::fromUtf8("pushButtonClearBrain"));
+        pushButtonClearBrain->setFont(font);
+
+        horizontalLayout_2->addWidget(pushButtonClearBrain);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -507,14 +533,17 @@ public:
         QObject::connect(spinBoxFFT2End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft2_end_slot(int)));
         QObject::connect(pushButtonLoadTarget, SIGNAL(released()), MainWindow, SLOT(load_target()));
         QObject::connect(spinBoxBlockSizeTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_size(int)));
-        QObject::connect(spinBoxBlockOverlapTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_overlap(int)));
         QObject::connect(pushButtonGenerateTarget, SIGNAL(released()), MainWindow, SLOT(generate_target_blocks()));
         QObject::connect(spinBoxBlockSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(block_size(int)));
-        QObject::connect(spinBoxBlockOverlap, SIGNAL(valueChanged(int)), MainWindow, SLOT(block_overlap(int)));
         QObject::connect(spinBoxSpectSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft_spectrum_size(int)));
         QObject::connect(pushButtonGenerate, SIGNAL(released()), MainWindow, SLOT(generate()));
         QObject::connect(pushButtonLoadSound, SIGNAL(released()), MainWindow, SLOT(load_sound()));
         QObject::connect(dialVolume, SIGNAL(sliderMoved(int)), MainWindow, SLOT(volume_slot(int)));
+        QObject::connect(doubleSpinBoxBlockOverlap, SIGNAL(valueChanged(double)), MainWindow, SLOT(block_overlap(double)));
+        QObject::connect(doubleSpinBoxBlockOverlapTarget, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_block_overlap(double)));
+        QObject::connect(pushButtonClearBrain, SIGNAL(released()), MainWindow, SLOT(clear_brain()));
+        QObject::connect(pushButtonDeleteSound, SIGNAL(released()), MainWindow, SLOT(delete_sound()));
+        QObject::connect(pushButtonRestartAudio, SIGNAL(released()), MainWindow, SLOT(restart_audio()));
 
         tabWidget->setCurrentIndex(0);
 
@@ -536,22 +565,25 @@ public:
         label_11->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("MainWindow", "Volume", 0, QApplication::UnicodeUTF8));
+        pushButtonRestartAudio->setText(QApplication::translate("MainWindow", "restart audio", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("MainWindow", "no sound yet...", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
-        pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "generate blocks", 0, QApplication::UnicodeUTF8));
+        pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "(re)generate blocks", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "brain parameters", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "fft spectrum size", 0, QApplication::UnicodeUTF8));
-        pushButtonGenerate->setText(QApplication::translate("MainWindow", "generate", 0, QApplication::UnicodeUTF8));
+        pushButtonGenerate->setText(QApplication::translate("MainWindow", "(re)generate", 0, QApplication::UnicodeUTF8));
         pushButtonLosdBrain->setText(QApplication::translate("MainWindow", "load", 0, QApplication::UnicodeUTF8));
         pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("MainWindow", "brain contents", 0, QApplication::UnicodeUTF8));
         pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", 0, QApplication::UnicodeUTF8));
+        pushButtonDeleteSound->setText(QApplication::translate("MainWindow", "delete selected", 0, QApplication::UnicodeUTF8));
+        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear brain", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(sampleTab), QApplication::translate("MainWindow", "brain", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
@@ -563,4 +595,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINXS5241_H
+#endif // SAMPLEBRAINHZ5241_H

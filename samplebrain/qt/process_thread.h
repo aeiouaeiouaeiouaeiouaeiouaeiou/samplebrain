@@ -14,9 +14,15 @@ public:
     brain m_source, m_target;
     pthread_mutex_t* m_brain_mutex;
 
+    void process();
+
 private:
-    static void process(void *c);
 	OSC_server m_osc;
+    u32 m_source_block_size;
+    float m_source_overlap;
+    u32 m_target_block_size;
+    float m_target_overlap;
+    float m_env;
 };
 
 }
