@@ -58,6 +58,7 @@ void brain::init(u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
 
 void brain::chop_and_add(const sample &s, u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
     u32 pos=0;
+    if (overlap>=block_size) overlap=0;
     while (pos+block_size-1<s.get_length()) {
         cerr<<'\r';
         cerr<<"adding: "<<pos/(float)s.get_length()*100;

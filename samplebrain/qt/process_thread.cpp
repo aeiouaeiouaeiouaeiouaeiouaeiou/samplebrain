@@ -51,7 +51,7 @@ void process_thread::process() {
                 m_source_block_size = cmd.get_int(0);
             }
             if (name=="/source_overlap") {
-                m_source_overlap = m_source_block_size-m_source_block_size/cmd.get_float(0);
+                m_source_overlap = m_source_block_size*cmd.get_float(0);
             }
             if (name=="/generate_brain") {
                 pthread_mutex_lock(m_brain_mutex);
@@ -68,7 +68,8 @@ void process_thread::process() {
                 m_target_block_size = cmd.get_int(0);
             }
             if (name=="/target_overlap") {
-                m_target_overlap = m_target_block_size-m_target_block_size/cmd.get_float(0);
+                m_target_overlap = m_target_block_size*cmd.get_float(0);
+                cerr<<m_target_overlap<<endl;
             }
             if (name=="/generate_target") {
                 pthread_mutex_lock(m_brain_mutex);

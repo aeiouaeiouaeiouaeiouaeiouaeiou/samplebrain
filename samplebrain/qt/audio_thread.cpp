@@ -10,11 +10,11 @@ audio_thread::audio_thread(process_thread &p) :
     m_brain_mutex(p.m_brain_mutex),
     m_osc("8888")
 {
+    start_audio();
     pthread_mutex_lock(m_brain_mutex);
     m_renderer = new renderer(p.m_source,p.m_target);
     pthread_mutex_unlock(m_brain_mutex);
     m_osc.run();
-    start_audio();
 }
 
 void audio_thread::start_audio() {

@@ -6,6 +6,7 @@ using namespace std;
 
 void renderer::init(brain &source, brain &target) {
     m_volume=1;
+    m_playing=false;
     m_source=source;
     m_target=target;
     m_render_time=0;
@@ -22,8 +23,7 @@ void renderer::process(u32 nframes, float *buf) {
     u32 tgt_start = m_render_time/(float)tgt_shift;
     u32 tgt_end = (m_render_time+nframes)/(float)tgt_shift;
 
-
-    if (tgt_end>=m_target.get_num_blocks()) {
+    if (tgt_end>=m_target.get_num_blocks() || m_source.get_num_blocks()==0) {
         m_render_time=0;
         m_render_blocks.clear();
         // next time...
