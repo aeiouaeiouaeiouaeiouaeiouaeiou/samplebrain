@@ -10,7 +10,7 @@ namespace spiralcore {
 class audio_thread {
 public:
     audio_thread(process_thread &p);
-    void process(sample &s);
+    void process(sample &left, sample &right);
 
     static void run_audio(void* c, unsigned int frames);
     audio_device *m_audio_device;

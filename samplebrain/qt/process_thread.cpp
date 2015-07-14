@@ -1,5 +1,6 @@
 #include "process_thread.h"
 #include <iostream>
+#include <unistd.h>
 
 using namespace spiralcore;
 using namespace std;

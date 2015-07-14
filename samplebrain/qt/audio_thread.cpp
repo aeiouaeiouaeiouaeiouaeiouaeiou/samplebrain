@@ -26,10 +26,11 @@ void audio_thread::start_audio() {
 void audio_thread::run_audio(void* c, unsigned int frames) {
     audio_thread *at = (audio_thread*)c;
     at->m_audio_device->left_out.zero();
-    at->process(at->m_audio_device->left_out);
+    at->process(at->m_audio_device->left_out,
+		at->m_audio_device->right_out);
 }
 
-void audio_thread::process(sample &s) {
+void audio_thread::process(sample &s, sample &s2) {
 
     command_ring_buffer::command cmd;
 	while (m_osc.get(cmd)) {
@@ -58,13 +59,18 @@ void audio_thread::process(sample &s) {
         }
         if (name=="/restart_audio") {
             start_audio();
-       }
+	}
+	if (name=="/volume") {
+  	  m_renderer->set_volume(cmd.get_float(0)*10);
+	}
     }
 
     s.zero();
+    s2.zero();
     if (!pthread_mutex_trylock(m_brain_mutex)) {
         m_renderer->process(s.get_length(),s.get_non_const_buffer());
         pthread_mutex_unlock(m_brain_mutex);
+	s2=s;
     } else {
         cerr<<"audio no lock..."<<endl;
     }
