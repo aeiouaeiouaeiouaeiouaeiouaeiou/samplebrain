@@ -4,6 +4,7 @@
 #include "fft.h"
 #include "mfcc.h"
 #include "search_params.h"
+#include "window.h"
 
 #ifndef BLOCK
 #define BLOCK
@@ -13,7 +14,7 @@ namespace spiralcore {
 class block {
 public:
     // runs analysis on pcm
-    block(const std::string &filename, const sample &pcm, u32 rate, u32 env, bool ditchpcm=false);
+    block(const std::string &filename, const sample &pcm, u32 rate, const window &w, bool ditchpcm=false);
 
     // returns distance based on ratio of fft-mfcc values
     double compare(const block &other, const search_params &params) const;

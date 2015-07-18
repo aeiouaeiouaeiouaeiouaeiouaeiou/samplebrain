@@ -91,26 +91,29 @@ void renderer::process(u32 nframes, float *buf) {
 bool renderer::unit_test() {
     brain source;
     source.load_sound("test_data/up.wav");
-    source.init(10,0,0);
+    source.init(10,0,window::RECTANGLE);
 
     brain target;
     target.load_sound("test_data/up.wav");
-    target.init(10,0,0);
+    target.init(10,0,window::RECTANGLE);
 
     renderer rr(source,target);
+    rr.set_playing(true);
     float *buf=new float[10];
     rr.process(10,buf);
     assert(rr.m_render_blocks.size()==2);
     rr.process(10,buf);
     assert(rr.m_render_blocks.size()==3);
+    delete[] buf;
+    buf=new float[20];
     rr.process(20,buf);
     assert(rr.m_render_blocks.size()==4);
     rr.process(5,buf);
     assert(rr.m_render_blocks.size()==2);
 
-    target.init(10,5,0);
+    target.init(10,5,window::RECTANGLE);
     rr.process(10,buf);
     assert(rr.m_render_blocks.size()==5);
-
+    delete[] buf;
 
 }

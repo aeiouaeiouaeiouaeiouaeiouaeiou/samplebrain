@@ -59,10 +59,10 @@ void audio_thread::process(sample &s, sample &s2) {
         }
         if (name=="/restart_audio") {
             start_audio();
-	}
-	if (name=="/volume") {
-  	  m_renderer->set_volume(cmd.get_float(0)*10);
-	}
+        }
+        if (name=="/volume") {
+            m_renderer->set_volume(cmd.get_float(0)*10);
+        }
     }
 
     s.zero();

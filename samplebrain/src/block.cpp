@@ -10,16 +10,8 @@ Aquila::Mfcc *block::m_mfcc_proc;
 
 static const int MFCC_FILTERS=12;
 
-void enveloper(sample &s, u32 start, u32 end) {
-    for(u32 i=0; i<start; ++i) {
-        s[i]*=i/(float)start;
-    }
-    for(u32 i=0; i<end; ++i) {
-        s[(s.get_length()-1)-i]*=i/(float)end;
-    }
-}
 
-block::block(const string &filename, const sample &pcm, u32 rate, u32 env, bool ditchpcm) :
+block::block(const string &filename, const sample &pcm, u32 rate, const window &w, bool ditchpcm) :
     m_pcm(pcm),
     m_fft(pcm.get_length()),
     m_mfcc(MFCC_FILTERS),
@@ -31,7 +23,7 @@ block::block(const string &filename, const sample &pcm, u32 rate, u32 env, bool 
     assert(m_mfcc_proc!=NULL);
     assert(m_fftw!=NULL);
 
-    enveloper(m_pcm,env,env);
+    w.run(m_pcm);
 
     m_fftw->impulse2freq(m_pcm.get_non_const_buffer());
 
@@ -112,8 +104,11 @@ bool block::unit_test() {
     for (u32 i=0; i<data.get_length(); i++) {
         data[i]=i/(float)data.get_length();
     }
+    window w;
+    w.init(data.get_length());
+    w.set_current_type(window::RECTANGLE);
 
-    block bb("test",data,44100,0);
+    block bb("test",data,44100,w);
 
     assert(bb.m_pcm.get_length()==data.get_length());
     //assert(bb.m_fft.get_length()==data.get_length());
@@ -123,8 +118,7 @@ bool block::unit_test() {
     assert(bb.m_block_size==data.get_length());
 
     search_params p(0,0,100,0,100);
-
-    block bb2("test",data,44100,0);
+    block bb2("test",data,44100,w);
     assert(bb.compare(bb2,p)==0);
     p.m_ratio=1;
     assert(bb.compare(bb2,p)==0);
@@ -136,9 +130,9 @@ bool block::unit_test() {
         data[i]=i%10;
     }
 
-    block cpy("test",data,100,4);
+    block cpy("test",data,100,w);
     {
-        block bb3("test",data2,44100,4);
+        block bb3("test",data2,44100,w);
         p.m_ratio=0.0;
         assert(bb.compare(bb3,p)!=0);
         assert(bb.compare(bb3,p)!=0);

@@ -31,7 +31,7 @@
        <attribute name="title">
         <string>search</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_15">
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -307,7 +307,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_9">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
            <widget class="QLabel" name="label_16">
             <property name="font">
@@ -411,6 +411,76 @@
            </layout>
           </item>
           <item>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="3" column="0">
+             <widget class="QRadioButton" name="radioButton_bartlettTarget">
+              <property name="text">
+               <string>bartlett</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QRadioButton" name="radioButton_blackmanTarget">
+              <property name="text">
+               <string>blackman</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QRadioButton" name="radioButton_gaussianTarget">
+              <property name="text">
+               <string>gaussian</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QRadioButton" name="radioButton_hammingTarget">
+              <property name="text">
+               <string>hamming</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QRadioButton" name="radioButton_hannTarget">
+              <property name="text">
+               <string>hann</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QRadioButton" name="radioButton_flattopTarget">
+              <property name="text">
+               <string>flat top</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QRadioButton" name="radioButton_dodgyTarget">
+              <property name="text">
+               <string>dodgy</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QRadioButton" name="radioButton_rectangleTarget">
+              <property name="text">
+               <string>rectangle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>window shape</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButtonGenerateTarget">
             <property name="font">
              <font>
@@ -445,7 +515,7 @@
        <attribute name="title">
         <string>brain</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
@@ -523,23 +593,72 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <widget class="QLabel" name="label_4">
-              <property name="font">
-               <font>
-                <family>Comic Sans MS</family>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="3" column="0">
+             <widget class="QRadioButton" name="radioButton_bartlett">
               <property name="text">
-               <string>fft spectrum size</string>
+               <string>bartlett</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QSpinBox" name="spinBoxSpectSize"/>
+            <item row="2" column="0">
+             <widget class="QRadioButton" name="radioButton_dodgy">
+              <property name="text">
+               <string>dodgy</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QRadioButton" name="radioButton_blackman">
+              <property name="text">
+               <string>blackman</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QRadioButton" name="radioButton_gaussian">
+              <property name="text">
+               <string>gaussian</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QRadioButton" name="radioButton_hamming">
+              <property name="text">
+               <string>hamming</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QRadioButton" name="radioButton_hann">
+              <property name="text">
+               <string>hann</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QRadioButton" name="radioButton_flattop">
+              <property name="text">
+               <string>flat top</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QRadioButton" name="radioButton_rectagle">
+              <property name="text">
+               <string>rectangle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>window shape</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -597,7 +716,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>508</height>
              </size>
             </property>
            </spacer>
@@ -874,22 +993,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBoxSpectSize</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>fft_spectrum_size(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>188</x>
-     <y>171</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButtonGenerate</sender>
    <signal>released()</signal>
    <receiver>MainWindow</receiver>
@@ -1017,6 +1120,262 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>radioButton_bartlett</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_bartlett(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_blackman</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_blackman(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_dodgy</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_dodgy(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>203</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_flattop</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_flattop(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_gaussian</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_gaussian(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>203</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hamming</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_hamming(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hann</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_hann(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_rectagle</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_rectangle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_bartlettTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_bartlett(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_blackmanTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_blackman(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>319</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_dodgyTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_dodgy(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_flattopTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_flattop(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_gaussianTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_gaussian(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hammingTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_hamming(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hannTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_hann(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>319</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_rectangleTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_rectangle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -1042,5 +1401,21 @@
   <slot>generate_target_blocks()</slot>
   <slot>clear_brain()</slot>
   <slot>restart_audio()</slot>
+  <slot>window_dodgy(bool)</slot>
+  <slot>window_bartlett(bool)</slot>
+  <slot>window_blackman(bool)</slot>
+  <slot>window_flattop(bool)</slot>
+  <slot>window_gaussian(bool)</slot>
+  <slot>window_hamming(bool)</slot>
+  <slot>window_hann(bool)</slot>
+  <slot>window_rectangle(bool)</slot>
+  <slot>window_target_dodgy(bool)</slot>
+  <slot>window_target_bartlett(bool)</slot>
+  <slot>window_target_blackman(bool)</slot>
+  <slot>window_target_flattop(bool)</slot>
+  <slot>window_target_gaussian(bool)</slot>
+  <slot>window_target_hamming(bool)</slot>
+  <slot>window_target_hann(bool)</slot>
+  <slot>window_target_rectangle(bool)</slot>
  </slots>
 </ui>

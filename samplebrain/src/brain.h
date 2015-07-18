@@ -5,6 +5,7 @@
 #include "jellyfish/fluxa/sample.h"
 #include "block.h"
 #include "search_params.h"
+#include "window.h"
 
 #ifndef BRAIN
 #define BRAIN
@@ -16,7 +17,7 @@ public:
     brain();
 
     // rewrites whole brain
-    void init(u32 block_size, u32 overlap, u32 env, bool ditchpcm=false);
+    void init(u32 block_size, u32 overlap, window::type t, bool ditchpcm=false);
 
     class sound {
     public:
@@ -48,13 +49,15 @@ public:
 
 private:
 
-    void chop_and_add(const sample &s, u32 block_size, u32 overlap, u32 env, bool ditchpcm=false);
+    void chop_and_add(const sample &s, bool ditchpcm=false);
 
     vector<block> m_blocks;
     std::list<sound> m_samples;
 
     u32 m_block_size;
     u32 m_overlap;
+
+    window m_window;
 
 };
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sndfile.h>
+#include <jellyfish/audio.h>
 #include "brain.h"
 
 using namespace std;
@@ -31,41 +32,28 @@ void brain::delete_sound(std::string filename) {
     }
 }
 
-void save_sample(const string &filename, const sample s) {
-    SF_INFO sfinfo;
-    sfinfo.format=SF_FORMAT_WAV | SF_FORMAT_FLOAT;
-    sfinfo.frames=s.get_length();
-    sfinfo.samplerate=44100;
-    sfinfo.channels=1;
-    sfinfo.sections=1;
-    sfinfo.seekable=0;
-    SNDFILE* f=sf_open(filename.c_str(), SFM_WRITE, &sfinfo);
-    if (!f) cerr<<"couldn't open "<<filename<<endl;
-    u32 written = sf_writef_float(f, s.get_buffer(), s.get_length());
-    if (written!=s.get_length()) cerr<<"error: wrote "<<written<<endl;
-    sf_close(f);
-}
-
 // rewrites whole brain
-void brain::init(u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
+void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     m_blocks.clear();
     m_block_size = block_size;
     m_overlap = overlap;
+    m_window.init(block_size);
+    m_window.set_current_type(t);
     for (std::list<sound>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
-        chop_and_add(i->m_sample, block_size, overlap, env, ditchpcm);
+        chop_and_add(i->m_sample, ditchpcm);
     }
 }
 
-void brain::chop_and_add(const sample &s, u32 block_size, u32 overlap, u32 env, bool ditchpcm) {
+void brain::chop_and_add(const sample &s, bool ditchpcm) {
     u32 pos=0;
-    if (overlap>=block_size) overlap=0;
-    while (pos+block_size-1<s.get_length()) {
+    if (m_overlap>=m_block_size) m_overlap=0;
+    while (pos+m_block_size-1<s.get_length()) {
         cerr<<'\r';
         cerr<<"adding: "<<pos/(float)s.get_length()*100;
         sample region;
-        s.get_region(region,pos,pos+block_size-1);
-        m_blocks.push_back(block("",region,44100,env,ditchpcm));
-        pos += (block_size-overlap);
+        s.get_region(region,pos,pos+m_block_size-1);
+        m_blocks.push_back(block("",region,44100,m_window,ditchpcm));
+        pos += (m_block_size-m_overlap);
     }
 }
 
@@ -110,13 +98,13 @@ void brain::resynth(const string &filename, const brain &other, const search_par
         out.mul_mix(other.get_block_pcm(index),pos,0.2);
 
         if (count%1000==0) {
-            save_sample(filename,out);
+            audio_device::save_sample(filename,out);
         }
 
         ++count;
         pos += (m_block_size-m_overlap);
     }
-    save_sample(filename,out);
+    audio_device::save_sample(filename,out);
 }
 
 
@@ -128,14 +116,17 @@ bool brain::unit_test() {
     b.load_sound("test_data/100f32.wav");
     b.load_sound("test_data/100i16.wav");
     assert(b.m_samples.size()==2);
-    b.init(10, 0, 0);
+    cerr<<"hjelele"<<endl;
+
+    b.init(10, 0, window::RECTANGLE);
     assert(b.m_blocks.size()==20);
-    b.init(10, 5, 0);
+    b.init(10, 5, window::RECTANGLE);
     assert(b.m_samples.size()==2);
     assert(b.m_blocks.size()==38);
-    b.init(20, 5, 0);
+    b.init(20, 5, window::RECTANGLE);
     assert(b.m_samples.size()==2);
     assert(b.m_blocks.size()==12);
+
 
     // replicate brains
     brain b2;
@@ -143,8 +134,8 @@ bool brain::unit_test() {
     brain b3;
     b3.load_sound("test_data/up.wav");
 
-    b2.init(512, 0, 20);
-    b3.init(512, 0, 20);
+    b2.init(512, 0, window::BLACKMAN);
+    b3.init(512, 0, window::BLACKMAN);
 
     search_params p(1,0,100,0,100);
 

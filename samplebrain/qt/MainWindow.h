@@ -3,8 +3,10 @@
 
 #include <iostream>
 #include <lo/lo.h>
+#include "window.h"
 
 using namespace std;
+using namespace spiralcore;
 
 class MainWindow : public QMainWindow
 {
@@ -70,6 +72,24 @@ private slots:
         m_Ui.listWidgetSounds->clear();
     }
     void restart_audio() { lo_send(m_audio_address,"/restart_audio",""); }
+
+    void window_dodgy(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::DODGY); }
+    void window_bartlett(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::BARTLETT); }
+    void window_blackman(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::BLACKMAN); }
+    void window_flattop(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::FLAT_TOP); }
+    void window_gaussian(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::GAUSSIAN); }
+    void window_hamming(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::HAMMING); }
+    void window_hann(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::HANN); }
+    void window_rectangle(bool s) { if (s) lo_send(m_process_address,"/window_type","i",window::RECTANGLE); }
+
+    void window_target_dodgy(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::DODGY); }
+    void window_target_bartlett(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::BARTLETT); }
+    void window_target_blackman(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::BLACKMAN); }
+    void window_target_flattop(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::FLAT_TOP); }
+    void window_target_gaussian(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::GAUSSIAN); }
+    void window_target_hamming(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::HAMMING); }
+    void window_target_hann(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::HANN); }
+    void window_target_rectangle(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::RECTANGLE); }
 
 private:
     Ui_MainWindow m_Ui;

@@ -58,30 +58,35 @@ int main(int argc, char *argv[])
     cerr<<"starting"<<endl;
     brain source, target;
 //    source.load_sound("../sound/source/shostakovich6.wav");
-    source.load_sound("../sound/source/808.wav");
-    source.load_sound("../sound/source/joey.wav");
-    source.load_sound("../sound/source/pw2.wav");
-    source.load_sound("../sound/source/pw3.wav");
-    source.load_sound("../sound/source/claps.wav");
-    source.load_sound("../sound/source/eagle.wav");
+
+//    source.load_sound("../sound/source/808.wav");
+//    source.load_sound("../sound/source/joey.wav");
+//    source.load_sound("../sound/source/pw2.wav");
+//    source.load_sound("../sound/source/pw3.wav");
+//    source.load_sound("../sound/source/claps.wav");
+//    source.load_sound("../sound/source/eagle.wav");
+
 //    source.load_sound("../sound/source/sailingbybit.wav");
+    source.load_sound("../sound/source/rise.wav");
 
 
     //target.load_sound("../sound/source/sb-left.wav");
-    target.load_sound("../sound/source/apache.wav");
+    target.load_sound("../sound/source/rise.wav");
     cerr<<"loaded sounds"<<endl;
     cerr<<endl;
     u32 len=3000;
-    source.init(len,len-len,50);
-    target.init(len,len-len/8,50);
+    source.init(len,len-len,window::DODGY);
+    target.init(len,len-len/4,window::DODGY);
     cerr<<"ready..."<<endl;
     cerr<<"we have "<<source.get_num_blocks()<<" brain blocks ("<<source.get_num_blocks()*len/44100.0<<" secs)"<<endl<<endl;
 
-    a = new audio_device("samplebrain",44100,2048);
+    a = new audio_device("samplebrain",44100,4096);
 
     //target.resynth_listen("shosta-dream-0.5.wav",source,0.5,a);
 
     renderer rr(source,target);
+    rr.set_playing(true);
+    rr.get_params()->m_ratio=0;
 
 	a->m_client.set_callback(run_audio, &rr);
 
