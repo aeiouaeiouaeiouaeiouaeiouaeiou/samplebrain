@@ -17,6 +17,11 @@ audio_thread::audio_thread(process_thread &p) :
     m_osc.run();
 }
 
+audio_thread::~audio_thread() {
+    delete m_renderer;
+    if (m_audio_device!=NULL) delete m_audio_device;
+}
+
 void audio_thread::start_audio() {
     if (m_audio_device!=NULL) delete m_audio_device;
     m_audio_device = new audio_device("samplebrain",44100,2048);
@@ -39,7 +44,7 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/start") {
             m_renderer->set_playing(true);
         }
-        if (name=="/stop") {
+        if (name=="/pause") {
             m_renderer->set_playing(false);
         }
         if (name=="/ratio") {

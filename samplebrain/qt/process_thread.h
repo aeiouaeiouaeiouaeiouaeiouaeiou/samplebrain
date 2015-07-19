@@ -9,6 +9,7 @@ namespace spiralcore {
 class process_thread {
 public:
     process_thread();
+    ~process_thread();
 
     brain m_source, m_target;
     pthread_mutex_t* m_brain_mutex;
@@ -23,6 +24,7 @@ private:
     float m_target_overlap;
     window::type m_window_type;
     window::type m_target_window_type;
+    pthread_t *m_thread;
 };
 
 }

@@ -19,7 +19,7 @@ SOURCES += MainWindow.cpp \
            qtmain.cpp
 
 INCLUDEPATH += ../src
-LIBS += -L.. -lsamplebrain -ljellyfish -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm 
+LIBS += -L.. -lsamplebrain -ljellyfish -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 
 # assets
-#RESOURCES     = application.qrc
+RESOURCES     = samplebrain.qrc

@@ -24,9 +24,13 @@ process_thread::process_thread() :
     m_osc.run();
 
     // start the processing thread
-    pthread_t *thread = new pthread_t;
-    pthread_create(thread,NULL,(void*(*)(void*))_process,this);
+    m_thread = new pthread_t;
+    pthread_create(m_thread,NULL,(void*(*)(void*))_process,this);
+}
 
+process_thread::~process_thread() {
+    pthread_cancel(*m_thread);
+    delete m_brain_mutex;
 }
 
 void process_thread::process() {

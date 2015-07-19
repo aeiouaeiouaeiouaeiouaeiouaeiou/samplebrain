@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <lo/lo.h>
+#include <string>
 #include "window.h"
 
 using namespace std;
@@ -22,7 +23,7 @@ protected:
 private slots:
 
     void play_slot() { lo_send(m_audio_address,"/start",""); }
-    void stop_slot() { lo_send(m_audio_address,"/stop",""); }
+    void stop_slot() { lo_send(m_audio_address,"/pause",""); }
     void ratio_slot(int s) { lo_send(m_audio_address,"/ratio","f",s/100.0f); }
     void ratio_slot(double s) { lo_send(m_audio_address,"/ratio","f",s); }
     void fft1_start_slot(int s) { lo_send(m_audio_address,"/fft1_start","i",s); }
@@ -91,7 +92,36 @@ private slots:
     void window_target_hann(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::HANN); }
     void window_target_rectangle(bool s) { if (s) lo_send(m_process_address,"/target_window_type","i",window::RECTANGLE); }
 
+    void record() {
+        if (m_save_wav=="") {
+            QString s=QFileDialog::getSaveFileName(
+                this,
+                QString("Select an wav file"),
+                ".",
+                QString("Sounds (*.wav)"));
+            m_save_wav = s.toStdString();
+            // chop off .wav
+            size_t pos = m_save_wav.find_last_of(".");
+            if (pos!=string::npos) {
+                m_save_wav = m_save_wav.substr(0,pos);
+            }
+
+        }
+
+        char fn[1024];
+        snprintf(fn,1024,"%s-%i.wav",m_save_wav.c_str(),m_record_id);
+        lo_send(m_process_address,"/record","s",fn);
+        cerr<<fn<<endl;
+        m_record_id++;
+    }
+
+    void stop_record() {
+        lo_send(m_process_address,"/stop","");
+    }
+
 private:
+    string m_save_wav;
+    u32 m_record_id;
     Ui_MainWindow m_Ui;
     lo_address m_audio_address;
     lo_address m_process_address;

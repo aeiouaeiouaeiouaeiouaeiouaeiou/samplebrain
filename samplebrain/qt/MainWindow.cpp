@@ -12,4 +12,6 @@ MainWindow::MainWindow()
 
     m_audio_address = lo_address_new_from_url("osc.udp://localhost:8888");
     m_process_address = lo_address_new_from_url("osc.udp://localhost:8889");
+    m_save_wav="";
+    m_record_id=0;
 }

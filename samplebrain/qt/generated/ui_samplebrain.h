@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainSB4993.ui'
+** Form generated from reading UI file 'samplebrainMg4993.ui'
 **
-** Created: Sat Jul 18 19:57:06 2015
+** Created: Sun Jul 19 11:35:24 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINSB4993_H
-#define SAMPLEBRAINSB4993_H
+#ifndef SAMPLEBRAINMG4993_H
+#define SAMPLEBRAINMG4993_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -22,8 +22,10 @@
 #include <QtGui/QLabel>
 #include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
+#include <QtGui/QPlainTextEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
+#include <QtGui/QSlider>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
@@ -37,18 +39,15 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_7;
     QTabWidget *tabWidget;
     QWidget *controlTab;
     QHBoxLayout *horizontalLayout_8;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_19;
-    QHBoxLayout *horizontalLayout_12;
-    QPushButton *pushButtonPlay;
-    QPushButton *pushButtonStop;
     QHBoxLayout *horizontalLayout_16;
     QLabel *label_6;
-    QDial *dialRatio;
+    QSlider *sliderRatio;
     QDoubleSpinBox *doubleSpinBoxRatio;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_7;
@@ -66,10 +65,7 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QLabel *label_12;
     QSpinBox *spinBoxFFT2End;
-    QLabel *label_13;
-    QHBoxLayout *horizontalLayout_17;
-    QDial *dialVolume;
-    QPushButton *pushButtonRestartAudio;
+    QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
     QLabel *label_15;
@@ -124,17 +120,27 @@ public:
     QPushButton *pushButtonLoadSound;
     QPushButton *pushButtonDeleteSound;
     QPushButton *pushButtonClearBrain;
+    QWidget *logTab;
+    QHBoxLayout *horizontalLayout_15;
+    QPlainTextEdit *plainTextEdit;
+    QHBoxLayout *horizontalLayout_12;
+    QPushButton *pushButtonPlay;
+    QPushButton *pushButtonStop;
+    QPushButton *pushButtonRecord;
+    QPushButton *pushButtonStopRecord;
+    QSpacerItem *horizontalSpacer;
+    QDial *dialVolume;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(724, 603);
+        MainWindow->resize(724, 613);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        horizontalLayout = new QHBoxLayout(centralwidget);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        verticalLayout_7 = new QVBoxLayout(centralwidget);
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         QFont font;
@@ -159,24 +165,6 @@ public:
 
         verticalLayout_3->addWidget(label_19);
 
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        pushButtonPlay = new QPushButton(controlTab);
-        pushButtonPlay->setObjectName(QString::fromUtf8("pushButtonPlay"));
-        pushButtonPlay->setFont(font);
-        pushButtonPlay->setFlat(false);
-
-        horizontalLayout_12->addWidget(pushButtonPlay);
-
-        pushButtonStop = new QPushButton(controlTab);
-        pushButtonStop->setObjectName(QString::fromUtf8("pushButtonStop"));
-        pushButtonStop->setFont(font);
-
-        horizontalLayout_12->addWidget(pushButtonStop);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_12);
-
         horizontalLayout_16 = new QHBoxLayout();
         horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         label_6 = new QLabel(controlTab);
@@ -190,20 +178,20 @@ public:
 
         horizontalLayout_16->addWidget(label_6);
 
-        dialRatio = new QDial(controlTab);
-        dialRatio->setObjectName(QString::fromUtf8("dialRatio"));
-        dialRatio->setEnabled(true);
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(dialRatio->sizePolicy().hasHeightForWidth());
-        dialRatio->setSizePolicy(sizePolicy);
-        dialRatio->setMinimumSize(QSize(60, 60));
-
-        horizontalLayout_16->addWidget(dialRatio);
-
 
         verticalLayout_3->addLayout(horizontalLayout_16);
+
+        sliderRatio = new QSlider(controlTab);
+        sliderRatio->setObjectName(QString::fromUtf8("sliderRatio"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(sliderRatio->sizePolicy().hasHeightForWidth());
+        sliderRatio->setSizePolicy(sizePolicy);
+        sliderRatio->setValue(50);
+        sliderRatio->setOrientation(Qt::Horizontal);
+
+        verticalLayout_3->addWidget(sliderRatio);
 
         doubleSpinBoxRatio = new QDoubleSpinBox(controlTab);
         doubleSpinBoxRatio->setObjectName(QString::fromUtf8("doubleSpinBoxRatio"));
@@ -298,31 +286,12 @@ public:
 
         verticalLayout_5->addLayout(horizontalLayout_11);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_5->addItem(verticalSpacer_3);
+
 
         verticalLayout_3->addLayout(verticalLayout_5);
-
-        label_13 = new QLabel(controlTab);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setFont(font);
-
-        verticalLayout_3->addWidget(label_13);
-
-        horizontalLayout_17 = new QHBoxLayout();
-        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
-        dialVolume = new QDial(controlTab);
-        dialVolume->setObjectName(QString::fromUtf8("dialVolume"));
-        dialVolume->setValue(99);
-
-        horizontalLayout_17->addWidget(dialVolume);
-
-        pushButtonRestartAudio = new QPushButton(controlTab);
-        pushButtonRestartAudio->setObjectName(QString::fromUtf8("pushButtonRestartAudio"));
-        pushButtonRestartAudio->setFont(font);
-
-        horizontalLayout_17->addWidget(pushButtonRestartAudio);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_17);
 
 
         horizontalLayout_8->addLayout(verticalLayout_3);
@@ -619,8 +588,75 @@ public:
         horizontalLayout_5->addLayout(verticalLayout);
 
         tabWidget->addTab(sampleTab, QString());
+        logTab = new QWidget();
+        logTab->setObjectName(QString::fromUtf8("logTab"));
+        horizontalLayout_15 = new QHBoxLayout(logTab);
+        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
+        plainTextEdit = new QPlainTextEdit(logTab);
+        plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
 
-        horizontalLayout->addWidget(tabWidget);
+        horizontalLayout_15->addWidget(plainTextEdit);
+
+        tabWidget->addTab(logTab, QString());
+
+        verticalLayout_7->addWidget(tabWidget);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        pushButtonPlay = new QPushButton(centralwidget);
+        pushButtonPlay->setObjectName(QString::fromUtf8("pushButtonPlay"));
+        pushButtonPlay->setFont(font);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/images/images/play.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonPlay->setIcon(icon);
+        pushButtonPlay->setIconSize(QSize(64, 64));
+        pushButtonPlay->setFlat(true);
+
+        horizontalLayout_12->addWidget(pushButtonPlay);
+
+        pushButtonStop = new QPushButton(centralwidget);
+        pushButtonStop->setObjectName(QString::fromUtf8("pushButtonStop"));
+        pushButtonStop->setFont(font);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/images/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonStop->setIcon(icon1);
+        pushButtonStop->setIconSize(QSize(64, 64));
+        pushButtonStop->setFlat(true);
+
+        horizontalLayout_12->addWidget(pushButtonStop);
+
+        pushButtonRecord = new QPushButton(centralwidget);
+        pushButtonRecord->setObjectName(QString::fromUtf8("pushButtonRecord"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/images/images/record.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonRecord->setIcon(icon2);
+        pushButtonRecord->setIconSize(QSize(64, 64));
+        pushButtonRecord->setFlat(true);
+
+        horizontalLayout_12->addWidget(pushButtonRecord);
+
+        pushButtonStopRecord = new QPushButton(centralwidget);
+        pushButtonStopRecord->setObjectName(QString::fromUtf8("pushButtonStopRecord"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/images/images/stop.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonStopRecord->setIcon(icon3);
+        pushButtonStopRecord->setIconSize(QSize(64, 64));
+        pushButtonStopRecord->setFlat(true);
+
+        horizontalLayout_12->addWidget(pushButtonStopRecord);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_12->addItem(horizontalSpacer);
+
+        dialVolume = new QDial(centralwidget);
+        dialVolume->setObjectName(QString::fromUtf8("dialVolume"));
+        dialVolume->setValue(99);
+
+        horizontalLayout_12->addWidget(dialVolume);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_12);
 
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
@@ -630,7 +666,6 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(pushButtonPlay, SIGNAL(released()), MainWindow, SLOT(play_slot()));
         QObject::connect(pushButtonStop, SIGNAL(released()), MainWindow, SLOT(stop_slot()));
-        QObject::connect(dialRatio, SIGNAL(sliderMoved(int)), MainWindow, SLOT(ratio_slot(int)));
         QObject::connect(doubleSpinBoxRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(ratio_slot(double)));
         QObject::connect(spinBoxFFT1Start, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_start_slot(int)));
         QObject::connect(spinBoxFFT1End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_end_slot(int)));
@@ -647,7 +682,6 @@ public:
         QObject::connect(doubleSpinBoxBlockOverlapTarget, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_block_overlap(double)));
         QObject::connect(pushButtonClearBrain, SIGNAL(released()), MainWindow, SLOT(clear_brain()));
         QObject::connect(pushButtonDeleteSound, SIGNAL(released()), MainWindow, SLOT(delete_sound()));
-        QObject::connect(pushButtonRestartAudio, SIGNAL(released()), MainWindow, SLOT(restart_audio()));
         QObject::connect(radioButton_bartlett, SIGNAL(toggled(bool)), MainWindow, SLOT(window_bartlett(bool)));
         QObject::connect(radioButton_blackman, SIGNAL(toggled(bool)), MainWindow, SLOT(window_blackman(bool)));
         QObject::connect(radioButton_dodgy, SIGNAL(toggled(bool)), MainWindow, SLOT(window_dodgy(bool)));
@@ -664,6 +698,9 @@ public:
         QObject::connect(radioButton_hammingTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hamming(bool)));
         QObject::connect(radioButton_hannTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hann(bool)));
         QObject::connect(radioButton_rectangleTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_rectangle(bool)));
+        QObject::connect(sliderRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(ratio_slot(int)));
+        QObject::connect(pushButtonStop, SIGNAL(released()), MainWindow, SLOT(stop_record()));
+        QObject::connect(pushButtonRecord, SIGNAL(released()), MainWindow, SLOT(record()));
 
         tabWidget->setCurrentIndex(0);
 
@@ -673,10 +710,8 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.0.3", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.0.4", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "tweakage", 0, QApplication::UnicodeUTF8));
-        pushButtonPlay->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
-        pushButtonStop->setText(QApplication::translate("MainWindow", "Stop", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft <-> mfcc ratio", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindow", "fft subsection 1", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
@@ -684,8 +719,6 @@ public:
         label_8->setText(QApplication::translate("MainWindow", "fft subsection 2", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "Volume", 0, QApplication::UnicodeUTF8));
-        pushButtonRestartAudio->setText(QApplication::translate("MainWindow", "restart audio", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("MainWindow", "no sound yet...", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
@@ -722,6 +755,11 @@ public:
         pushButtonDeleteSound->setText(QApplication::translate("MainWindow", "delete selected", 0, QApplication::UnicodeUTF8));
         pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear brain", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(sampleTab), QApplication::translate("MainWindow", "brain", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(logTab), QApplication::translate("MainWindow", "log", 0, QApplication::UnicodeUTF8));
+        pushButtonPlay->setText(QString());
+        pushButtonStop->setText(QString());
+        pushButtonRecord->setText(QString());
+        pushButtonStopRecord->setText(QString());
     } // retranslateUi
 
 };
@@ -732,4 +770,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINSB4993_H
+#endif // SAMPLEBRAINMG4993_H
