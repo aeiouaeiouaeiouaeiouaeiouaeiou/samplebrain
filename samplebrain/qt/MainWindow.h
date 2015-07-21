@@ -1,3 +1,19 @@
+// Copyright (C) 2015 Foam Kernow
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
 #include <QtGui>
 #include "generated/ui_samplebrain.h"
 
@@ -33,13 +49,13 @@ private slots:
     void volume_slot(int s) { lo_send(m_audio_address,"/volume","f",s/100.0f); }
     void run_slot() {}
     void load_target() {
-        QString s=QFileDialog::getOpenFileName(
+        m_last_file=QFileDialog::getOpenFileName(
             this,
             QString("Select an wav file"),
-            ".",
+            m_last_file,
             QString("Sounds (*.wav)"));
 
-        lo_send(m_process_address,"/load_target","s",s.toStdString().c_str());
+        lo_send(m_process_address,"/load_target","s",m_last_file.toStdString().c_str());
     }
     void target_block_size(int s) { lo_send(m_process_address,"/target_block_size","i",s); }
     void target_block_overlap(double s) { lo_send(m_process_address,"/target_overlap","f",s); }
@@ -49,15 +65,15 @@ private slots:
     void fft_spectrum_size(int) {}
     void generate() { lo_send(m_process_address,"/generate_brain",""); }
     void load_sound() {
-        QString s=QFileDialog::getOpenFileName(
+        m_last_file=QFileDialog::getOpenFileName(
             this,
             QString("Select an wav file"),
-            ".",
+            m_last_file,
             QString("Sounds (*.wav)"));
 
-        lo_send(m_process_address,"/load_sample","s",s.toStdString().c_str());
+        lo_send(m_process_address,"/load_sample","s",m_last_file.toStdString().c_str());
 
-        m_Ui.listWidgetSounds->addItem(s);
+        m_Ui.listWidgetSounds->addItem(m_last_file);
     }
     void delete_sound() {
         QList<QListWidgetItem *> itemList = m_Ui.listWidgetSounds->selectedItems();
@@ -94,12 +110,12 @@ private slots:
 
     void record() {
         if (m_save_wav=="") {
-            QString s=QFileDialog::getSaveFileName(
+            m_last_file=QFileDialog::getSaveFileName(
                 this,
                 QString("Select an wav file"),
-                ".",
+                m_last_file,
                 QString("Sounds (*.wav)"));
-            m_save_wav = s.toStdString();
+            m_save_wav = m_last_file.toStdString();
             // chop off .wav
             size_t pos = m_save_wav.find_last_of(".");
             if (pos!=string::npos) {
@@ -109,18 +125,19 @@ private slots:
         }
 
         char fn[1024];
-        snprintf(fn,1024,"%s-%i.wav",m_save_wav.c_str(),m_record_id);
-        lo_send(m_process_address,"/record","s",fn);
+        snprintf(fn,1024,"%s-%i",m_save_wav.c_str(),m_record_id);
+        lo_send(m_audio_address,"/record","s",fn);
         cerr<<fn<<endl;
         m_record_id++;
     }
 
     void stop_record() {
-        lo_send(m_process_address,"/stop","");
+        lo_send(m_audio_address,"/stop","");
     }
 
 private:
     string m_save_wav;
+    QString m_last_file;
     u32 m_record_id;
     Ui_MainWindow m_Ui;
     lo_address m_audio_address;

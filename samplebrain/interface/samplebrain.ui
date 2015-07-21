@@ -837,6 +837,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QDial" name="dialVolume">
+        <property name="value">
+         <number>99</number>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -850,9 +857,12 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDial" name="dialVolume">
-        <property name="value">
-         <number>99</number>
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../qt/samplebrain.qrc">:/images/images/at.png</pixmap>
         </property>
        </widget>
       </item>
@@ -1427,13 +1437,13 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonStop</sender>
+   <sender>pushButtonStopRecord</sender>
    <signal>released()</signal>
    <receiver>MainWindow</receiver>
    <slot>stop_record()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>144</x>
+     <x>328</x>
      <y>543</y>
     </hint>
     <hint type="destinationlabel">

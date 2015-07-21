@@ -1,3 +1,19 @@
+// Copyright (C) 2015 Foam Kernow
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
 #include "audio_thread.h"
 #include <iostream>
 
@@ -32,7 +48,8 @@ void audio_thread::run_audio(void* c, unsigned int frames) {
     audio_thread *at = (audio_thread*)c;
     at->m_audio_device->left_out.zero();
     at->process(at->m_audio_device->left_out,
-		at->m_audio_device->right_out);
+                at->m_audio_device->right_out);
+    at->m_audio_device->maybe_record();
 }
 
 void audio_thread::process(sample &s, sample &s2) {
@@ -67,6 +84,14 @@ void audio_thread::process(sample &s, sample &s2) {
         }
         if (name=="/volume") {
             m_renderer->set_volume(cmd.get_float(0)*10);
+        }
+        if (name=="/record") {
+            m_renderer->set_playing(true);
+            m_audio_device->start_recording(cmd.get_string(0));
+        }
+        if (name=="/stop") {
+            m_audio_device->stop_recording();
+            m_renderer->set_playing(false);
         }
     }
 

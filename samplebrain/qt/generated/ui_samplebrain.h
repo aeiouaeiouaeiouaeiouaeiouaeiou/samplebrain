@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainMg4993.ui'
+** Form generated from reading UI file 'samplebrainB32443.ui'
 **
-** Created: Sun Jul 19 11:35:24 2015
+** Created: Tue Jul 21 14:56:57 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINMG4993_H
-#define SAMPLEBRAINMG4993_H
+#ifndef SAMPLEBRAINB32443_H
+#define SAMPLEBRAINB32443_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -128,8 +128,9 @@ public:
     QPushButton *pushButtonStop;
     QPushButton *pushButtonRecord;
     QPushButton *pushButtonStopRecord;
-    QSpacerItem *horizontalSpacer;
     QDial *dialVolume;
+    QSpacerItem *horizontalSpacer;
+    QLabel *label_13;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -645,15 +646,21 @@ public:
 
         horizontalLayout_12->addWidget(pushButtonStopRecord);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_12->addItem(horizontalSpacer);
-
         dialVolume = new QDial(centralwidget);
         dialVolume->setObjectName(QString::fromUtf8("dialVolume"));
         dialVolume->setValue(99);
 
         horizontalLayout_12->addWidget(dialVolume);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_12->addItem(horizontalSpacer);
+
+        label_13 = new QLabel(centralwidget);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setPixmap(QPixmap(QString::fromUtf8(":/images/images/at.png")));
+
+        horizontalLayout_12->addWidget(label_13);
 
 
         verticalLayout_7->addLayout(horizontalLayout_12);
@@ -699,7 +706,7 @@ public:
         QObject::connect(radioButton_hannTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hann(bool)));
         QObject::connect(radioButton_rectangleTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_rectangle(bool)));
         QObject::connect(sliderRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(ratio_slot(int)));
-        QObject::connect(pushButtonStop, SIGNAL(released()), MainWindow, SLOT(stop_record()));
+        QObject::connect(pushButtonStopRecord, SIGNAL(released()), MainWindow, SLOT(stop_record()));
         QObject::connect(pushButtonRecord, SIGNAL(released()), MainWindow, SLOT(record()));
 
         tabWidget->setCurrentIndex(0);
@@ -760,6 +767,7 @@ public:
         pushButtonStop->setText(QString());
         pushButtonRecord->setText(QString());
         pushButtonStopRecord->setText(QString());
+        label_13->setText(QString());
     } // retranslateUi
 
 };
@@ -770,4 +778,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINMG4993_H
+#endif // SAMPLEBRAINB32443_H
