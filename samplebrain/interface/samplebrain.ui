@@ -50,195 +50,182 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_6">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>fft &lt;-&gt; mfcc ratio</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_16">
             <item>
-             <widget class="QLabel" name="label_6">
-              <property name="font">
-               <font>
-                <family>Comic Sans MS</family>
-                <pointsize>14</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
+             <widget class="QSlider" name="sliderRatio">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="text">
-               <string>fft &lt;-&gt; mfcc ratio</string>
+              <property name="value">
+               <number>50</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QSlider" name="sliderRatio">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="value">
-             <number>50</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxRatio">
-            <property name="maximum">
-             <double>1.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.010000000000000</double>
-            </property>
-            <property name="value">
-             <double>0.500000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="font">
-               <font>
-                <family>Comic Sans MS</family>
-                <pointsize>14</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>fft subsection 1</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QLabel" name="label_9">
-                <property name="font">
-                 <font>
-                  <family>Comic Sans MS</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Start</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxFFT1Start"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QLabel" name="label_10">
-                <property name="font">
-                 <font>
-                  <family>Comic Sans MS</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>End</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxFFT1End">
-                <property name="value">
-                 <number>99</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QLabel" name="label_8">
-              <property name="font">
-               <font>
-                <family>Comic Sans MS</family>
-                <pointsize>14</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>fft subsection 2</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <item>
-               <widget class="QLabel" name="label_11">
-                <property name="font">
-                 <font>
-                  <family>Comic Sans MS</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Start</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxFFT2Start"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <item>
-               <widget class="QLabel" name="label_12">
-                <property name="font">
-                 <font>
-                  <family>Comic Sans MS</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>End</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxFFT2End">
-                <property name="value">
-                 <number>99</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_3">
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxRatio">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-             </spacer>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_20">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>freq &amp; dynamics &lt;-&gt; freq ratio</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QSlider" name="sliderNRatio">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="value">
+               <number>50</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxNRatio">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>fft subsection</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxFFT1Start"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>End</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxFFT1End">
+              <property name="value">
+               <number>99</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -256,20 +243,6 @@
             </property>
             <property name="text">
              <string>target sound</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_15">
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>no sound yet...</string>
             </property>
            </widget>
           </item>
@@ -909,6 +882,118 @@
    </hints>
   </connection>
   <connection>
+   <sender>dialVolume</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>volume_slot(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>480</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonStopRecord</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>stop_record()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonRecord</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>record()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxBlockSize</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>block_size(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>105</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonLoadTarget</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_target()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonGenerateTarget</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>generate_target_blocks()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxBlockSizeTarget</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>target_block_size(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>doubleSpinBoxRatio</sender>
    <signal>valueChanged(double)</signal>
    <receiver>MainWindow</receiver>
@@ -957,102 +1042,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBoxFFT2Start</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>fft2_start_slot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>154</x>
-     <y>366</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxFFT2End</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>fft2_end_slot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>154</x>
-     <y>399</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonLoadTarget</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>load_target()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>277</x>
-     <y>103</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxBlockSizeTarget</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>target_block_size(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>313</x>
-     <y>136</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonGenerateTarget</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>generate_target_blocks()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>277</x>
-     <y>202</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxBlockSize</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>block_size(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>188</x>
-     <y>105</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButtonGenerate</sender>
    <signal>released()</signal>
    <receiver>MainWindow</receiver>
@@ -1085,22 +1074,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>dialVolume</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>volume_slot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>189</x>
-     <y>480</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>doubleSpinBoxBlockOverlap</sender>
    <signal>valueChanged(double)</signal>
    <receiver>MainWindow</receiver>
@@ -1109,6 +1082,38 @@
     <hint type="sourcelabel">
      <x>188</x>
      <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hammingTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_hamming(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonDeleteSound</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>delete_sound()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>476</x>
+     <y>544</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1133,14 +1138,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonClearBrain</sender>
-   <signal>released()</signal>
+   <sender>radioButton_dodgy</sender>
+   <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>clear_brain()</slot>
+   <slot>window_dodgy(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>544</y>
+     <x>75</x>
+     <y>203</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1149,13 +1154,77 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonDeleteSound</sender>
-   <signal>released()</signal>
+   <sender>radioButton_blackman</sender>
+   <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>delete_sound()</slot>
+   <slot>window_blackman(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>476</x>
+     <x>75</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hann</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_hann(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hamming</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_hamming(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_gaussian</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_gaussian(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>203</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonClearBrain</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clear_brain()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>590</x>
      <y>544</y>
     </hint>
     <hint type="destinationlabel">
@@ -1181,38 +1250,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_blackman</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_blackman(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>75</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_dodgy</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_dodgy(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>75</x>
-     <y>203</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>radioButton_flattop</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
@@ -1221,54 +1258,6 @@
     <hint type="sourcelabel">
      <x>75</x>
      <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_gaussian</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_gaussian(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>188</x>
-     <y>203</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_hamming</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_hamming(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>188</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_hann</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_hann(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>188</x>
-     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1293,46 +1282,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_bartlettTarget</sender>
+   <sender>radioButton_rectangleTarget</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_target_bartlett(bool)</slot>
+   <slot>window_target_rectangle(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>449</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_blackmanTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_blackman(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_dodgyTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_dodgy(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>261</y>
+     <x>619</x>
+     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1357,14 +1314,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_gaussianTarget</sender>
+   <sender>radioButton_blackmanTarget</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_target_gaussian(bool)</slot>
+   <slot>window_target_blackman(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>619</x>
-     <y>261</y>
+     <x>449</x>
+     <y>319</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1373,14 +1330,30 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_hammingTarget</sender>
+   <sender>radioButton_bartlettTarget</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_target_hamming(bool)</slot>
+   <slot>window_target_bartlett(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>619</x>
+     <x>449</x>
      <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_dodgyTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_dodgy(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1405,14 +1378,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_rectangleTarget</sender>
+   <sender>radioButton_gaussianTarget</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_target_rectangle(bool)</slot>
+   <slot>window_target_gaussian(bool)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>619</x>
-     <y>348</y>
+     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1437,14 +1410,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonStopRecord</sender>
-   <signal>released()</signal>
+   <sender>sliderNRatio</sender>
+   <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>stop_record()</slot>
+   <slot>n_ratio_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>328</x>
-     <y>543</y>
+     <x>159</x>
+     <y>211</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1453,14 +1426,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonRecord</sender>
-   <signal>released()</signal>
+   <sender>doubleSpinBoxNRatio</sender>
+   <signal>valueChanged(double)</signal>
    <receiver>MainWindow</receiver>
-   <slot>record()</slot>
+   <slot>n_ratio_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>543</y>
+     <x>330</x>
+     <y>211</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1511,5 +1484,7 @@
   <slot>window_target_rectangle(bool)</slot>
   <slot>record()</slot>
   <slot>stop_record()</slot>
+  <slot>n_ratio_slot(int)</slot>
+  <slot>n_ratio_slot(double)</slot>
  </slots>
 </ui>

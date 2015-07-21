@@ -59,19 +59,19 @@ int main(int argc, char *argv[])
     brain source, target;
 //    source.load_sound("../sound/source/shostakovich6.wav");
 
-//    source.load_sound("../sound/source/808.wav");
-//    source.load_sound("../sound/source/joey.wav");
-//    source.load_sound("../sound/source/pw2.wav");
-//    source.load_sound("../sound/source/pw3.wav");
-//    source.load_sound("../sound/source/claps.wav");
-//    source.load_sound("../sound/source/eagle.wav");
+    source.load_sound("../sound/source/808.wav");
+    source.load_sound("../sound/source/joey.wav");
+    source.load_sound("../sound/source/pw2.wav");
+    source.load_sound("../sound/source/pw3.wav");
+    source.load_sound("../sound/source/claps.wav");
+    source.load_sound("../sound/source/eagle.wav");
 
-//    source.load_sound("../sound/source/sailingbybit.wav");
-    source.load_sound("../sound/source/rise.wav");
+    target.load_sound("../sound/source/apache.wav");
+//    source.load_sound("../sound/source/rise.wav");
 
 
     //target.load_sound("../sound/source/sb-left.wav");
-    target.load_sound("../sound/source/rise.wav");
+//    target.load_sound("../sound/source/rise.wav");
     cerr<<"loaded sounds"<<endl;
     cerr<<endl;
     u32 len=3000;
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
     renderer rr(source,target);
     rr.set_playing(true);
-    rr.get_params()->m_ratio=0;
+    rr.get_params()->m_ratio=0.5;
 
 	a->m_client.set_callback(run_audio, &rr);
 

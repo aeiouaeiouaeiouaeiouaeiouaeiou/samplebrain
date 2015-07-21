@@ -25,10 +25,10 @@ namespace spiralcore {
 
 class renderer {
 public:
-    renderer(brain &source, brain &target) :
+renderer(brain &source, brain &target) :
     m_source(source),
-    m_target(target),
-    m_search_params(0,0,100,0,100)
+        m_target(target),
+        m_search_params(0,0,0,100,0,100)
     { init(source,target); }
 
     void init(brain &source, brain &target);

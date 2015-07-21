@@ -67,6 +67,9 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/ratio") {
             m_renderer->get_params()->m_ratio = cmd.get_float(0);
         }
+        if (name=="/n_ratio") {
+            m_renderer->get_params()->m_n_ratio = cmd.get_float(0);
+        }
         if (name=="/fft1_start") {
             m_renderer->get_params()->m_fft1_start = cmd.get_int(0);
         }

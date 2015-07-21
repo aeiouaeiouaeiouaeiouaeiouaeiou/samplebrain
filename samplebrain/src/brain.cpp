@@ -153,7 +153,7 @@ bool brain::unit_test() {
     b2.init(512, 0, window::BLACKMAN);
     b3.init(512, 0, window::BLACKMAN);
 
-    search_params p(1,0,100,0,100);
+    search_params p(1,0,0,100,0,100);
 
     assert(b3.search(b2.m_blocks[0],p)==0);
     assert(b3.search(b2.m_blocks[9],p)==9);

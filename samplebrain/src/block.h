@@ -41,9 +41,20 @@ public:
     const sample &get_pcm() const { return m_pcm; }
 
 private:
+
+    void process(const sample &pcm, sample &fft, sample &mfcc);
+
+    double _compare(const sample &fft_a, const sample &mfcc_a,
+                    const sample &fft_b, const sample &mfcc_b,
+                    const search_params &params) const;
+
     sample m_pcm;
     sample m_fft;
     sample m_mfcc;
+
+    sample m_n_pcm;
+    sample m_n_fft;
+    sample m_n_mfcc;
 
     u32 m_block_size;
     u32 m_rate;

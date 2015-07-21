@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'samplebrainB32443.ui'
 **
-** Created: Tue Jul 21 14:56:57 2015
+** Created: Tue Jul 21 15:50:16 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,30 +45,23 @@ public:
     QHBoxLayout *horizontalLayout_8;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_19;
-    QHBoxLayout *horizontalLayout_16;
     QLabel *label_6;
+    QHBoxLayout *horizontalLayout_16;
     QSlider *sliderRatio;
     QDoubleSpinBox *doubleSpinBoxRatio;
-    QVBoxLayout *verticalLayout_4;
+    QLabel *label_20;
+    QHBoxLayout *horizontalLayout;
+    QSlider *sliderNRatio;
+    QDoubleSpinBox *doubleSpinBoxNRatio;
     QLabel *label_7;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_9;
     QSpinBox *spinBoxFFT1Start;
-    QHBoxLayout *horizontalLayout_9;
     QLabel *label_10;
     QSpinBox *spinBoxFFT1End;
-    QVBoxLayout *verticalLayout_5;
-    QLabel *label_8;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_11;
-    QSpinBox *spinBoxFFT2Start;
-    QHBoxLayout *horizontalLayout_11;
-    QLabel *label_12;
-    QSpinBox *spinBoxFFT2End;
     QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
-    QLabel *label_15;
     QPushButton *pushButtonLoadTarget;
     QHBoxLayout *horizontalLayout_13;
     QLabel *label_17;
@@ -166,8 +159,6 @@ public:
 
         verticalLayout_3->addWidget(label_19);
 
-        horizontalLayout_16 = new QHBoxLayout();
-        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         label_6 = new QLabel(controlTab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         QFont font2;
@@ -177,11 +168,10 @@ public:
         font2.setWeight(75);
         label_6->setFont(font2);
 
-        horizontalLayout_16->addWidget(label_6);
+        verticalLayout_3->addWidget(label_6);
 
-
-        verticalLayout_3->addLayout(horizontalLayout_16);
-
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         sliderRatio = new QSlider(controlTab);
         sliderRatio->setObjectName(QString::fromUtf8("sliderRatio"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -192,23 +182,59 @@ public:
         sliderRatio->setValue(50);
         sliderRatio->setOrientation(Qt::Horizontal);
 
-        verticalLayout_3->addWidget(sliderRatio);
+        horizontalLayout_16->addWidget(sliderRatio);
 
         doubleSpinBoxRatio = new QDoubleSpinBox(controlTab);
         doubleSpinBoxRatio->setObjectName(QString::fromUtf8("doubleSpinBoxRatio"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(doubleSpinBoxRatio->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxRatio->setSizePolicy(sizePolicy1);
         doubleSpinBoxRatio->setMaximum(1);
         doubleSpinBoxRatio->setSingleStep(0.01);
         doubleSpinBoxRatio->setValue(0.5);
 
-        verticalLayout_3->addWidget(doubleSpinBoxRatio);
+        horizontalLayout_16->addWidget(doubleSpinBoxRatio);
 
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+
+        verticalLayout_3->addLayout(horizontalLayout_16);
+
+        label_20 = new QLabel(controlTab);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+        label_20->setFont(font2);
+
+        verticalLayout_3->addWidget(label_20);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        sliderNRatio = new QSlider(controlTab);
+        sliderNRatio->setObjectName(QString::fromUtf8("sliderNRatio"));
+        sizePolicy.setHeightForWidth(sliderNRatio->sizePolicy().hasHeightForWidth());
+        sliderNRatio->setSizePolicy(sizePolicy);
+        sliderNRatio->setValue(50);
+        sliderNRatio->setOrientation(Qt::Horizontal);
+
+        horizontalLayout->addWidget(sliderNRatio);
+
+        doubleSpinBoxNRatio = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxNRatio->setObjectName(QString::fromUtf8("doubleSpinBoxNRatio"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxNRatio->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxNRatio->setSizePolicy(sizePolicy1);
+        doubleSpinBoxNRatio->setMaximum(1);
+        doubleSpinBoxNRatio->setSingleStep(0.01);
+        doubleSpinBoxNRatio->setValue(0.5);
+
+        horizontalLayout->addWidget(doubleSpinBoxNRatio);
+
+
+        verticalLayout_3->addLayout(horizontalLayout);
+
         label_7 = new QLabel(controlTab);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         label_7->setFont(font2);
 
-        verticalLayout_4->addWidget(label_7);
+        verticalLayout_3->addWidget(label_7);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -223,76 +249,24 @@ public:
 
         horizontalLayout_3->addWidget(spinBoxFFT1Start);
 
-
-        verticalLayout_4->addLayout(horizontalLayout_3);
-
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
         label_10 = new QLabel(controlTab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
         label_10->setFont(font);
 
-        horizontalLayout_9->addWidget(label_10);
+        horizontalLayout_3->addWidget(label_10);
 
         spinBoxFFT1End = new QSpinBox(controlTab);
         spinBoxFFT1End->setObjectName(QString::fromUtf8("spinBoxFFT1End"));
         spinBoxFFT1End->setValue(99);
 
-        horizontalLayout_9->addWidget(spinBoxFFT1End);
+        horizontalLayout_3->addWidget(spinBoxFFT1End);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_9);
-
-
-        verticalLayout_3->addLayout(verticalLayout_4);
-
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        label_8 = new QLabel(controlTab);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setFont(font2);
-
-        verticalLayout_5->addWidget(label_8);
-
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        label_11 = new QLabel(controlTab);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setFont(font);
-
-        horizontalLayout_10->addWidget(label_11);
-
-        spinBoxFFT2Start = new QSpinBox(controlTab);
-        spinBoxFFT2Start->setObjectName(QString::fromUtf8("spinBoxFFT2Start"));
-
-        horizontalLayout_10->addWidget(spinBoxFFT2Start);
-
-
-        verticalLayout_5->addLayout(horizontalLayout_10);
-
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        label_12 = new QLabel(controlTab);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setFont(font);
-
-        horizontalLayout_11->addWidget(label_12);
-
-        spinBoxFFT2End = new QSpinBox(controlTab);
-        spinBoxFFT2End->setObjectName(QString::fromUtf8("spinBoxFFT2End"));
-        spinBoxFFT2End->setValue(99);
-
-        horizontalLayout_11->addWidget(spinBoxFFT2End);
-
-
-        verticalLayout_5->addLayout(horizontalLayout_11);
+        verticalLayout_3->addLayout(horizontalLayout_3);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_5->addItem(verticalSpacer_3);
-
-
-        verticalLayout_3->addLayout(verticalLayout_5);
+        verticalLayout_3->addItem(verticalSpacer_3);
 
 
         horizontalLayout_8->addLayout(verticalLayout_3);
@@ -304,12 +278,6 @@ public:
         label_16->setFont(font1);
 
         verticalLayout_6->addWidget(label_16);
-
-        label_15 = new QLabel(controlTab);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setFont(font);
-
-        verticalLayout_6->addWidget(label_15);
 
         pushButtonLoadTarget = new QPushButton(controlTab);
         pushButtonLoadTarget->setObjectName(QString::fromUtf8("pushButtonLoadTarget"));
@@ -673,41 +641,41 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(pushButtonPlay, SIGNAL(released()), MainWindow, SLOT(play_slot()));
         QObject::connect(pushButtonStop, SIGNAL(released()), MainWindow, SLOT(stop_slot()));
+        QObject::connect(dialVolume, SIGNAL(sliderMoved(int)), MainWindow, SLOT(volume_slot(int)));
+        QObject::connect(pushButtonStopRecord, SIGNAL(released()), MainWindow, SLOT(stop_record()));
+        QObject::connect(pushButtonRecord, SIGNAL(released()), MainWindow, SLOT(record()));
+        QObject::connect(spinBoxBlockSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(block_size(int)));
+        QObject::connect(pushButtonLoadTarget, SIGNAL(released()), MainWindow, SLOT(load_target()));
+        QObject::connect(pushButtonGenerateTarget, SIGNAL(released()), MainWindow, SLOT(generate_target_blocks()));
+        QObject::connect(spinBoxBlockSizeTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_size(int)));
         QObject::connect(doubleSpinBoxRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(ratio_slot(double)));
         QObject::connect(spinBoxFFT1Start, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_start_slot(int)));
         QObject::connect(spinBoxFFT1End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_end_slot(int)));
-        QObject::connect(spinBoxFFT2Start, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft2_start_slot(int)));
-        QObject::connect(spinBoxFFT2End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft2_end_slot(int)));
-        QObject::connect(pushButtonLoadTarget, SIGNAL(released()), MainWindow, SLOT(load_target()));
-        QObject::connect(spinBoxBlockSizeTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_size(int)));
-        QObject::connect(pushButtonGenerateTarget, SIGNAL(released()), MainWindow, SLOT(generate_target_blocks()));
-        QObject::connect(spinBoxBlockSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(block_size(int)));
         QObject::connect(pushButtonGenerate, SIGNAL(released()), MainWindow, SLOT(generate()));
         QObject::connect(pushButtonLoadSound, SIGNAL(released()), MainWindow, SLOT(load_sound()));
-        QObject::connect(dialVolume, SIGNAL(sliderMoved(int)), MainWindow, SLOT(volume_slot(int)));
         QObject::connect(doubleSpinBoxBlockOverlap, SIGNAL(valueChanged(double)), MainWindow, SLOT(block_overlap(double)));
-        QObject::connect(doubleSpinBoxBlockOverlapTarget, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_block_overlap(double)));
-        QObject::connect(pushButtonClearBrain, SIGNAL(released()), MainWindow, SLOT(clear_brain()));
-        QObject::connect(pushButtonDeleteSound, SIGNAL(released()), MainWindow, SLOT(delete_sound()));
-        QObject::connect(radioButton_bartlett, SIGNAL(toggled(bool)), MainWindow, SLOT(window_bartlett(bool)));
-        QObject::connect(radioButton_blackman, SIGNAL(toggled(bool)), MainWindow, SLOT(window_blackman(bool)));
-        QObject::connect(radioButton_dodgy, SIGNAL(toggled(bool)), MainWindow, SLOT(window_dodgy(bool)));
-        QObject::connect(radioButton_flattop, SIGNAL(toggled(bool)), MainWindow, SLOT(window_flattop(bool)));
-        QObject::connect(radioButton_gaussian, SIGNAL(toggled(bool)), MainWindow, SLOT(window_gaussian(bool)));
-        QObject::connect(radioButton_hamming, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hamming(bool)));
-        QObject::connect(radioButton_hann, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hann(bool)));
-        QObject::connect(radioButton_rectagle, SIGNAL(toggled(bool)), MainWindow, SLOT(window_rectangle(bool)));
-        QObject::connect(radioButton_bartlettTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_bartlett(bool)));
-        QObject::connect(radioButton_blackmanTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_blackman(bool)));
-        QObject::connect(radioButton_dodgyTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_dodgy(bool)));
-        QObject::connect(radioButton_flattopTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_flattop(bool)));
-        QObject::connect(radioButton_gaussianTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_gaussian(bool)));
         QObject::connect(radioButton_hammingTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hamming(bool)));
-        QObject::connect(radioButton_hannTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hann(bool)));
+        QObject::connect(pushButtonDeleteSound, SIGNAL(released()), MainWindow, SLOT(delete_sound()));
+        QObject::connect(doubleSpinBoxBlockOverlapTarget, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_block_overlap(double)));
+        QObject::connect(radioButton_dodgy, SIGNAL(toggled(bool)), MainWindow, SLOT(window_dodgy(bool)));
+        QObject::connect(radioButton_blackman, SIGNAL(toggled(bool)), MainWindow, SLOT(window_blackman(bool)));
+        QObject::connect(radioButton_hann, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hann(bool)));
+        QObject::connect(radioButton_hamming, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hamming(bool)));
+        QObject::connect(radioButton_gaussian, SIGNAL(toggled(bool)), MainWindow, SLOT(window_gaussian(bool)));
+        QObject::connect(pushButtonClearBrain, SIGNAL(released()), MainWindow, SLOT(clear_brain()));
+        QObject::connect(radioButton_bartlett, SIGNAL(toggled(bool)), MainWindow, SLOT(window_bartlett(bool)));
+        QObject::connect(radioButton_flattop, SIGNAL(toggled(bool)), MainWindow, SLOT(window_flattop(bool)));
+        QObject::connect(radioButton_rectagle, SIGNAL(toggled(bool)), MainWindow, SLOT(window_rectangle(bool)));
         QObject::connect(radioButton_rectangleTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_rectangle(bool)));
+        QObject::connect(radioButton_flattopTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_flattop(bool)));
+        QObject::connect(radioButton_blackmanTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_blackman(bool)));
+        QObject::connect(radioButton_bartlettTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_bartlett(bool)));
+        QObject::connect(radioButton_dodgyTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_dodgy(bool)));
+        QObject::connect(radioButton_hannTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hann(bool)));
+        QObject::connect(radioButton_gaussianTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_gaussian(bool)));
         QObject::connect(sliderRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(ratio_slot(int)));
-        QObject::connect(pushButtonStopRecord, SIGNAL(released()), MainWindow, SLOT(stop_record()));
-        QObject::connect(pushButtonRecord, SIGNAL(released()), MainWindow, SLOT(record()));
+        QObject::connect(sliderNRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_ratio_slot(int)));
+        QObject::connect(doubleSpinBoxNRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_ratio_slot(double)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -720,14 +688,11 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.0.4", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "tweakage", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft <-> mfcc ratio", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("MainWindow", "fft subsection 1", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics <-> freq ratio", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("MainWindow", "fft subsection", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "fft subsection 2", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "no sound yet...", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));

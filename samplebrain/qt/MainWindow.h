@@ -42,6 +42,8 @@ private slots:
     void stop_slot() { lo_send(m_audio_address,"/pause",""); }
     void ratio_slot(int s) { lo_send(m_audio_address,"/ratio","f",s/100.0f); }
     void ratio_slot(double s) { lo_send(m_audio_address,"/ratio","f",s); }
+    void n_ratio_slot(int s) { lo_send(m_audio_address,"/n_ratio","f",s/100.0f); }
+    void n_ratio_slot(double s) { lo_send(m_audio_address,"/n_ratio","f",s); }
     void fft1_start_slot(int s) { lo_send(m_audio_address,"/fft1_start","i",s); }
     void fft1_end_slot(int s) { lo_send(m_audio_address,"/fft1_end","i",s); }
     void fft2_start_slot(int s){} // { m_renderer->get_params()->m_fft2_start=s; }
