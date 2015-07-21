@@ -88,6 +88,9 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/volume") {
             m_renderer->set_volume(cmd.get_float(0)*10);
         }
+        if (name=="/invert") {
+            m_renderer->set_invert(cmd.get_int(0));
+        }
         if (name=="/record") {
             m_renderer->set_playing(true);
             m_audio_device->start_recording(cmd.get_string(0));

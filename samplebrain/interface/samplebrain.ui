@@ -215,6 +215,25 @@
            </layout>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxInvert">
+            <property name="sizeIncrement">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>invert</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -1441,6 +1460,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>checkBoxInvert</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>invert_slot(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>313</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -1486,5 +1521,6 @@
   <slot>stop_record()</slot>
   <slot>n_ratio_slot(int)</slot>
   <slot>n_ratio_slot(double)</slot>
+  <slot>invert_slot(bool)</slot>
  </slots>
 </ui>

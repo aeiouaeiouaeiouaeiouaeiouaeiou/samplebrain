@@ -49,6 +49,11 @@ private slots:
     void fft2_start_slot(int s){} // { m_renderer->get_params()->m_fft2_start=s; }
     void fft2_end_slot(int s){} // { m_renderer->get_params()->m_fft2_end=s; }
     void volume_slot(int s) { lo_send(m_audio_address,"/volume","f",s/100.0f); }
+    void invert_slot(bool s) { if (s) {
+            lo_send(m_audio_address,"/invert","i",1);
+        } else {
+            lo_send(m_audio_address,"/invert","i",0);
+        }}
     void run_slot() {}
     void load_target() {
         m_last_file=QFileDialog::getOpenFileName(

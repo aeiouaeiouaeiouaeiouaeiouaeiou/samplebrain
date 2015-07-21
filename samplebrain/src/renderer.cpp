@@ -54,7 +54,12 @@ void renderer::process(u32 nframes, float *buf) {
     // get indices for current buffer
     for (u32 tgt_index = tgt_start; tgt_index<=tgt_end; tgt_index++) {
         u32 time=tgt_index*tgt_shift;
-        u32 src_index = m_source.search(m_target.get_block(tgt_index), m_search_params);
+        u32 src_index;
+        if (!m_invert) {
+            src_index = m_source.search(m_target.get_block(tgt_index), m_search_params);
+        } else {
+            src_index = m_source.rev_search(m_target.get_block(tgt_index), m_search_params);
+        }
         // put them in the index list
         m_render_blocks.push_back(render_block(src_index,time));
     }

@@ -36,6 +36,7 @@ renderer(brain &source, brain &target) :
 
     void set_playing(bool s) { m_playing=s; }
     void set_volume(float s) { m_volume=s; }
+    void set_invert(bool s) { m_invert=s; }
     search_params *get_params() { return &m_search_params; }
 
     static bool unit_test();
@@ -58,7 +59,7 @@ private:
     search_params m_search_params;
     float m_volume;
     bool m_playing;
-
+    bool m_invert;
     std::list<render_block> m_render_blocks;
     u32 m_render_time;
 };

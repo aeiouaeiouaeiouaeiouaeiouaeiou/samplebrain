@@ -1,19 +1,20 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainB32443.ui'
+** Form generated from reading UI file 'samplebrainm32443.ui'
 **
-** Created: Tue Jul 21 15:50:16 2015
+** Created: Tue Jul 21 22:01:28 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINB32443_H
-#define SAMPLEBRAINB32443_H
+#ifndef SAMPLEBRAINM32443_H
+#define SAMPLEBRAINM32443_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QDial>
 #include <QtGui/QDoubleSpinBox>
 #include <QtGui/QGridLayout>
@@ -59,6 +60,7 @@ public:
     QSpinBox *spinBoxFFT1Start;
     QLabel *label_10;
     QSpinBox *spinBoxFFT1End;
+    QCheckBox *checkBoxInvert;
     QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
@@ -263,6 +265,13 @@ public:
 
 
         verticalLayout_3->addLayout(horizontalLayout_3);
+
+        checkBoxInvert = new QCheckBox(controlTab);
+        checkBoxInvert->setObjectName(QString::fromUtf8("checkBoxInvert"));
+        checkBoxInvert->setSizeIncrement(QSize(0, 0));
+        checkBoxInvert->setIconSize(QSize(16, 16));
+
+        verticalLayout_3->addWidget(checkBoxInvert);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -676,6 +685,7 @@ public:
         QObject::connect(sliderRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(ratio_slot(int)));
         QObject::connect(sliderNRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_ratio_slot(int)));
         QObject::connect(doubleSpinBoxNRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_ratio_slot(double)));
+        QObject::connect(checkBoxInvert, SIGNAL(toggled(bool)), MainWindow, SLOT(invert_slot(bool)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -692,6 +702,7 @@ public:
         label_7->setText(QApplication::translate("MainWindow", "fft subsection", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
+        checkBoxInvert->setText(QApplication::translate("MainWindow", "invert", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
@@ -743,4 +754,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINB32443_H
+#endif // SAMPLEBRAINM32443_H

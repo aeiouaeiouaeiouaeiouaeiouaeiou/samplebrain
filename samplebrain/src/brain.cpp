@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <sndfile.h>
+#include <float.h>
 #include <jellyfish/audio.h>
 #include "brain.h"
 
@@ -83,7 +84,7 @@ const block &brain::get_block(u32 index) const {
 
 // returns index to block
 u32 brain::search(const block &target, const search_params &params) const {
-    double closest = 999999999;
+    double closest = FLT_MAX;
     u32 closest_index = 0;
     u32 index = 0;
     for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
@@ -95,6 +96,22 @@ u32 brain::search(const block &target, const search_params &params) const {
         ++index;
     }
     return closest_index;
+}
+
+// returns index to block
+u32 brain::rev_search(const block &target, const search_params &params) const {
+    double furthest = 0;
+    u32 furthest_index = 0;
+    u32 index = 0;
+    for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+        double diff = target.compare(*i,params);
+        if (diff>furthest) {
+            furthest=diff;
+            furthest_index = index;
+        }
+        ++index;
+    }
+    return furthest_index;
 }
 
 // take another brain and rebuild this brain from bits of that one

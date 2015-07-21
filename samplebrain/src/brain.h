@@ -60,6 +60,7 @@ public:
     u32 get_overlap() const { return m_overlap; }
 
     u32 search(const block &target, const search_params &params) const;
+    u32 rev_search(const block &target, const search_params &params) const;
 
     static bool unit_test();
 
