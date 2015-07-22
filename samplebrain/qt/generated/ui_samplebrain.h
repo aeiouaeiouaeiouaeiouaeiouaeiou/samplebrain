@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainm32443.ui'
+** Form generated from reading UI file 'samplebrainC26316.ui'
 **
-** Created: Tue Jul 21 22:01:28 2015
+** Created: Wed Jul 22 15:20:00 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINM32443_H
-#define SAMPLEBRAINM32443_H
+#ifndef SAMPLEBRAINC26316_H
+#define SAMPLEBRAINC26316_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -40,10 +40,10 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout_7;
+    QVBoxLayout *verticalLayout_4;
     QTabWidget *tabWidget;
     QWidget *controlTab;
-    QHBoxLayout *horizontalLayout_8;
+    QHBoxLayout *horizontalLayout_10;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_19;
     QLabel *label_6;
@@ -61,6 +61,15 @@ public:
     QLabel *label_10;
     QSpinBox *spinBoxFFT1End;
     QCheckBox *checkBoxInvert;
+    QLabel *label_23;
+    QLabel *label_21;
+    QHBoxLayout *horizontalLayout_8;
+    QSlider *sliderNMix;
+    QDoubleSpinBox *doubleSpinBoxNMix;
+    QLabel *label_22;
+    QHBoxLayout *horizontalLayout_9;
+    QSlider *sliderTargetMix;
+    QDoubleSpinBox *doubleSpinBoxTargetMix;
     QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
@@ -135,8 +144,8 @@ public:
         MainWindow->resize(724, 613);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout_7 = new QVBoxLayout(centralwidget);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_4 = new QVBoxLayout(centralwidget);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         QFont font;
@@ -146,8 +155,8 @@ public:
         tabWidget->setFont(font);
         controlTab = new QWidget();
         controlTab->setObjectName(QString::fromUtf8("controlTab"));
-        horizontalLayout_8 = new QHBoxLayout(controlTab);
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        horizontalLayout_10 = new QHBoxLayout(controlTab);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         label_19 = new QLabel(controlTab);
@@ -165,7 +174,7 @@ public:
         label_6->setObjectName(QString::fromUtf8("label_6"));
         QFont font2;
         font2.setFamily(QString::fromUtf8("Comic Sans MS"));
-        font2.setPointSize(14);
+        font2.setPointSize(9);
         font2.setBold(true);
         font2.setWeight(75);
         label_6->setFont(font2);
@@ -214,7 +223,7 @@ public:
         sliderNRatio->setObjectName(QString::fromUtf8("sliderNRatio"));
         sizePolicy.setHeightForWidth(sliderNRatio->sizePolicy().hasHeightForWidth());
         sliderNRatio->setSizePolicy(sizePolicy);
-        sliderNRatio->setValue(50);
+        sliderNRatio->setValue(0);
         sliderNRatio->setOrientation(Qt::Horizontal);
 
         horizontalLayout->addWidget(sliderNRatio);
@@ -225,7 +234,7 @@ public:
         doubleSpinBoxNRatio->setSizePolicy(sizePolicy1);
         doubleSpinBoxNRatio->setMaximum(1);
         doubleSpinBoxNRatio->setSingleStep(0.01);
-        doubleSpinBoxNRatio->setValue(0.5);
+        doubleSpinBoxNRatio->setValue(0);
 
         horizontalLayout->addWidget(doubleSpinBoxNRatio);
 
@@ -273,12 +282,79 @@ public:
 
         verticalLayout_3->addWidget(checkBoxInvert);
 
+        label_23 = new QLabel(controlTab);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setFont(font1);
+
+        verticalLayout_3->addWidget(label_23);
+
+        label_21 = new QLabel(controlTab);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setFont(font2);
+
+        verticalLayout_3->addWidget(label_21);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        sliderNMix = new QSlider(controlTab);
+        sliderNMix->setObjectName(QString::fromUtf8("sliderNMix"));
+        sizePolicy.setHeightForWidth(sliderNMix->sizePolicy().hasHeightForWidth());
+        sliderNMix->setSizePolicy(sizePolicy);
+        sliderNMix->setValue(0);
+        sliderNMix->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_8->addWidget(sliderNMix);
+
+        doubleSpinBoxNMix = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxNMix->setObjectName(QString::fromUtf8("doubleSpinBoxNMix"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxNMix->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxNMix->setSizePolicy(sizePolicy1);
+        doubleSpinBoxNMix->setMaximum(1);
+        doubleSpinBoxNMix->setSingleStep(0.01);
+        doubleSpinBoxNMix->setValue(0);
+
+        horizontalLayout_8->addWidget(doubleSpinBoxNMix);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_8);
+
+        label_22 = new QLabel(controlTab);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setFont(font2);
+
+        verticalLayout_3->addWidget(label_22);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        sliderTargetMix = new QSlider(controlTab);
+        sliderTargetMix->setObjectName(QString::fromUtf8("sliderTargetMix"));
+        sizePolicy.setHeightForWidth(sliderTargetMix->sizePolicy().hasHeightForWidth());
+        sliderTargetMix->setSizePolicy(sizePolicy);
+        sliderTargetMix->setValue(0);
+        sliderTargetMix->setSliderPosition(0);
+        sliderTargetMix->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_9->addWidget(sliderTargetMix);
+
+        doubleSpinBoxTargetMix = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxTargetMix->setObjectName(QString::fromUtf8("doubleSpinBoxTargetMix"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxTargetMix->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxTargetMix->setSizePolicy(sizePolicy1);
+        doubleSpinBoxTargetMix->setMaximum(1);
+        doubleSpinBoxTargetMix->setSingleStep(0.01);
+        doubleSpinBoxTargetMix->setValue(0);
+
+        horizontalLayout_9->addWidget(doubleSpinBoxTargetMix);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_9);
+
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_3->addItem(verticalSpacer_3);
 
 
-        horizontalLayout_8->addLayout(verticalLayout_3);
+        horizontalLayout_10->addLayout(verticalLayout_3);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
@@ -324,7 +400,7 @@ public:
         doubleSpinBoxBlockOverlapTarget->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlapTarget"));
         doubleSpinBoxBlockOverlapTarget->setMaximum(1);
         doubleSpinBoxBlockOverlapTarget->setSingleStep(0.01);
-        doubleSpinBoxBlockOverlapTarget->setValue(0.75);
+        doubleSpinBoxBlockOverlapTarget->setValue(0);
 
         horizontalLayout_14->addWidget(doubleSpinBoxBlockOverlapTarget);
 
@@ -393,7 +469,7 @@ public:
         verticalLayout_6->addItem(verticalSpacer);
 
 
-        horizontalLayout_8->addLayout(verticalLayout_6);
+        horizontalLayout_10->addLayout(verticalLayout_6);
 
         tabWidget->addTab(controlTab, QString());
         sampleTab = new QWidget();
@@ -438,7 +514,7 @@ public:
         doubleSpinBoxBlockOverlap->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlap"));
         doubleSpinBoxBlockOverlap->setMaximum(1);
         doubleSpinBoxBlockOverlap->setSingleStep(0.01);
-        doubleSpinBoxBlockOverlap->setValue(0.75);
+        doubleSpinBoxBlockOverlap->setValue(0);
 
         horizontalLayout_6->addWidget(doubleSpinBoxBlockOverlap);
 
@@ -577,7 +653,7 @@ public:
 
         tabWidget->addTab(logTab, QString());
 
-        verticalLayout_7->addWidget(tabWidget);
+        verticalLayout_4->addWidget(tabWidget);
 
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
@@ -640,7 +716,7 @@ public:
         horizontalLayout_12->addWidget(label_13);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_12);
+        verticalLayout_4->addLayout(horizontalLayout_12);
 
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
@@ -686,6 +762,10 @@ public:
         QObject::connect(sliderNRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_ratio_slot(int)));
         QObject::connect(doubleSpinBoxNRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_ratio_slot(double)));
         QObject::connect(checkBoxInvert, SIGNAL(toggled(bool)), MainWindow, SLOT(invert_slot(bool)));
+        QObject::connect(sliderNMix, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_mix_slot(int)));
+        QObject::connect(sliderTargetMix, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_mix_slot(int)));
+        QObject::connect(doubleSpinBoxNMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_mix_slot(double)));
+        QObject::connect(doubleSpinBoxTargetMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_mix_slot(double)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -696,13 +776,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.0.4", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("MainWindow", "tweakage", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindow", "fft <-> mfcc ratio", 0, QApplication::UnicodeUTF8));
-        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics <-> freq ratio", 0, QApplication::UnicodeUTF8));
+        label_19->setText(QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindow", "fft <-> mfcc", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics <-> freq only", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindow", "fft subsection", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
-        checkBoxInvert->setText(QApplication::translate("MainWindow", "invert", 0, QApplication::UnicodeUTF8));
+        checkBoxInvert->setText(QApplication::translate("MainWindow", "search for least similar", 0, QApplication::UnicodeUTF8));
+        label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
+        label_21->setText(QApplication::translate("MainWindow", "dynamic <-> normalised mix", 0, QApplication::UnicodeUTF8));
+        label_22->setText(QApplication::translate("MainWindow", "brain <-> target mix", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
@@ -754,4 +837,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINM32443_H
+#endif // SAMPLEBRAINC26316_H

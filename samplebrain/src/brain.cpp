@@ -74,10 +74,6 @@ void brain::chop_and_add(const sample &s, bool ditchpcm) {
     }
 }
 
-const sample &brain::get_block_pcm(u32 index) const {
-    return m_blocks[index].get_pcm();
-}
-
 const block &brain::get_block(u32 index) const {
     return m_blocks[index];
 }
@@ -116,7 +112,7 @@ u32 brain::rev_search(const block &target, const search_params &params) const {
 
 // take another brain and rebuild this brain from bits of that one
 // (presumably this one is made from a single sample)
-void brain::resynth(const string &filename, const brain &other, const search_params &params){
+/*void brain::resynth(const string &filename, const brain &other, const search_params &params){
     sample out((m_block_size-m_overlap)*m_blocks.size());
     out.zero();
     u32 pos = 0;
@@ -139,7 +135,7 @@ void brain::resynth(const string &filename, const brain &other, const search_par
     }
     audio_device::save_sample(filename,out);
 }
-
+*/
 
 bool brain::unit_test() {
     brain b;

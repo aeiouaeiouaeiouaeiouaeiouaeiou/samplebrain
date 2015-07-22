@@ -22,10 +22,13 @@ using namespace std;
 
 void renderer::init(brain &source, brain &target) {
     m_volume=1;
+    m_invert=false;
     m_playing=false;
     m_source=source;
     m_target=target;
     m_render_time=0;
+    m_n_mix=0;
+    m_target_mix=0;
     m_render_blocks.clear();
 }
 
@@ -34,7 +37,7 @@ static int ratio_time = 0;
 void renderer::process(u32 nframes, float *buf) {
     if (!m_playing) return;
 
-    // get blocks from source for the current buffer
+    // get new blocks from source for the current buffer
     u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
     u32 tgt_start = m_render_time/(float)tgt_shift;
     u32 tgt_end = (m_render_time+nframes)/(float)tgt_shift;
@@ -47,12 +50,12 @@ void renderer::process(u32 nframes, float *buf) {
     }
 
 
-//    cerr<<"-----------------"<<endl;
-//    cerr<<"tgt start:"<<tgt_start<<endl;
-//    cerr<<"tgt end:"<<tgt_end<<endl;
+    //cerr<<"-----------------"<<endl;
+    //cerr<<"tgt start:"<<tgt_start<<endl;
+    //cerr<<"tgt end:"<<tgt_end<<endl;
 
     // get indices for current buffer
-    for (u32 tgt_index = tgt_start; tgt_index<=tgt_end; tgt_index++) {
+    for (u32 tgt_index = tgt_start+1; tgt_index<=tgt_end; tgt_index++) {
         u32 time=tgt_index*tgt_shift;
         u32 src_index;
         if (!m_invert) {
@@ -61,12 +64,14 @@ void renderer::process(u32 nframes, float *buf) {
             src_index = m_source.rev_search(m_target.get_block(tgt_index), m_search_params);
         }
         // put them in the index list
-        m_render_blocks.push_back(render_block(src_index,time));
+        m_render_blocks.push_back(render_block(src_index,tgt_index,time));
     }
 
     // render all blocks in list
     for (std::list<render_block>::iterator i=m_render_blocks.begin(); i!=m_render_blocks.end(); ++i) {
-        const sample &pcm=m_source.get_block_pcm(i->m_index);
+        const sample &pcm=m_source.get_block(i->m_index).get_pcm();
+        const sample &n_pcm=m_source.get_block(i->m_index).get_n_pcm();
+        const sample &target_pcm=m_target.get_block(i->m_tgt_index).get_pcm();
         // get the sample offset into the buffer
         s32 offset = i->m_time-m_render_time;
 
@@ -90,8 +95,18 @@ void renderer::process(u32 nframes, float *buf) {
             u32 buffer_pos = buffer_start;
             u32 block_pos = block_start;
             u32 block_end = pcm.get_length();
+
+
             while (block_pos<block_end && buffer_pos<nframes) {
-                buf[buffer_pos]+=pcm[block_pos]*0.2*m_volume;
+                // mix with normalised version
+                float brain_sample = (pcm[block_pos]*(1-m_n_mix)+
+                                      n_pcm[block_pos]*m_n_mix);
+
+                // for mixing with target audio
+                float target_sample = target_pcm[block_pos];
+
+                buf[buffer_pos]+=(brain_sample*(1-m_target_mix) +
+                                  target_sample*m_target_mix)*0.2*m_volume;
                 ++buffer_pos;
                 ++block_pos;
             }
@@ -123,19 +138,19 @@ bool renderer::unit_test() {
     rr.set_playing(true);
     float *buf=new float[10];
     rr.process(10,buf);
-    assert(rr.m_render_blocks.size()==2);
+    assert(rr.m_render_blocks.size()==1);
     rr.process(10,buf);
-    assert(rr.m_render_blocks.size()==3);
+    assert(rr.m_render_blocks.size()==2);
     delete[] buf;
     buf=new float[20];
     rr.process(20,buf);
-    assert(rr.m_render_blocks.size()==4);
+    assert(rr.m_render_blocks.size()==3);
     rr.process(5,buf);
-    assert(rr.m_render_blocks.size()==2);
+    assert(rr.m_render_blocks.size()==1);
 
     target.init(10,5,window::RECTANGLE);
     rr.process(10,buf);
-    assert(rr.m_render_blocks.size()==5);
+    assert(rr.m_render_blocks.size()==3);
     delete[] buf;
 
 }

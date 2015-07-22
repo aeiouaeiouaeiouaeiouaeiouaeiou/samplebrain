@@ -15,16 +15,20 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <fft.h>
-#include <jellyfish/core/types.h>
+
+#include <iostream>
 
 using namespace spiralcore;
+using namespace std;
 
 static const int MAX_FFT_LENGTH = 4096;
 
-FFT::FFT(int length) :
+FFT::FFT(u32 length, u32 bins) :
     m_length(length),
+    m_num_bins(bins),
     m_in(new double[length]),
-    m_spectrum(new fftw_complex[length])
+    m_spectrum(new fftw_complex[length]),
+    m_bin(new float[bins])
 {
 	m_plan = fftw_plan_dft_r2c_1d(m_length, m_in, m_spectrum, FFTW_ESTIMATE);
 }
@@ -45,4 +49,32 @@ void FFT::impulse2freq(const float *imp)
     }
 
     fftw_execute(m_plan);
+}
+
+void FFT::calculate_bins() {
+	float useful_area = m_length/2;
+
+	for (unsigned int n=0; n<m_num_bins; n++) {
+		float value = 0;
+
+		float f = n/(float)m_num_bins;
+		float t = (n+1)/(float)m_num_bins;
+		//f*=f;
+		//t*=t;
+		u32 from = f*useful_area;
+		u32 to = t*useful_area;
+
+        //cerr<<"fft bin:"<<from<<" "<<to<<" - "<<m_length<<endl;
+
+		for (u32 i=from; i<=to; i++) {
+			if (i<m_length) {
+				value += m_spectrum[i][0];
+			}
+		}
+
+		if (value<0) value=-value;
+		m_bin[n]=value;
+	}
+
+
 }

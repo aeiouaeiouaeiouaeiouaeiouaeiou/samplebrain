@@ -48,6 +48,8 @@ void run_audio(void* c, unsigned int frames) {
     renderer *rr = (renderer*)c;
     rr->process(frames,a->left_out.get_non_const_buffer());
 
+    a->maybe_record();
+
 //    sleep(1);
 }
 
@@ -59,24 +61,25 @@ int main(int argc, char *argv[])
     brain source, target;
 //    source.load_sound("../sound/source/shostakovich6.wav");
 
-    source.load_sound("../sound/source/808.wav");
+/*    source.load_sound("../sound/source/808.wav");
     source.load_sound("../sound/source/joey.wav");
     source.load_sound("../sound/source/pw2.wav");
     source.load_sound("../sound/source/pw3.wav");
     source.load_sound("../sound/source/claps.wav");
     source.load_sound("../sound/source/eagle.wav");
-
     target.load_sound("../sound/source/apache.wav");
-//    source.load_sound("../sound/source/rise.wav");
+*/
+    source.load_sound("../sound/source/totalsine.wav");
 
+    target.load_sound("../sound/source/sailingbybit.wav");
 
     //target.load_sound("../sound/source/sb-left.wav");
 //    target.load_sound("../sound/source/rise.wav");
     cerr<<"loaded sounds"<<endl;
     cerr<<endl;
     u32 len=3000;
-    source.init(len,len-len,window::DODGY);
-    target.init(len,len-len/4,window::DODGY);
+    source.init(len,len-len,window::HANN);
+    target.init(len,len-len,window::HANN);
     cerr<<"ready..."<<endl;
     cerr<<"we have "<<source.get_num_blocks()<<" brain blocks ("<<source.get_num_blocks()*len/44100.0<<" secs)"<<endl<<endl;
 
@@ -88,6 +91,7 @@ int main(int argc, char *argv[])
     rr.set_playing(true);
     rr.get_params()->m_ratio=0.5;
 
+    a->start_recording("debug");
 	a->m_client.set_callback(run_audio, &rr);
 
     //target.resynth("shosta-dream-0.5.wav",source,0.5);

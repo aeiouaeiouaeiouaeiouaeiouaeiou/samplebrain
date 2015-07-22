@@ -39,6 +39,7 @@ public:
     static bool unit_test();
 
     const sample &get_pcm() const { return m_pcm; }
+    const sample &get_n_pcm() const { return m_n_pcm; }
 
 private:
 

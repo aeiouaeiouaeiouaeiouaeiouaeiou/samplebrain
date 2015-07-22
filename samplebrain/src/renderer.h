@@ -37,6 +37,8 @@ renderer(brain &source, brain &target) :
     void set_playing(bool s) { m_playing=s; }
     void set_volume(float s) { m_volume=s; }
     void set_invert(bool s) { m_invert=s; }
+    void set_n_mix(float s) { m_n_mix=s; }
+    void set_target_mix(float s) { m_target_mix=s; }
     search_params *get_params() { return &m_search_params; }
 
     static bool unit_test();
@@ -46,9 +48,10 @@ private:
     // realtime stuff
     class render_block {
     public:
-        render_block(u32 index, u32 time) :
-            m_index(index), m_time(time), m_finished(false) {}
+        render_block(u32 index, u32 tgt_index, u32 time) :
+            m_index(index), m_tgt_index(tgt_index), m_time(time), m_finished(false) {}
         u32 m_index;
+        u32 m_tgt_index; // original target block
         u32 m_time; // in samples
         bool m_finished;
     };
@@ -62,6 +65,8 @@ private:
     bool m_invert;
     std::list<render_block> m_render_blocks;
     u32 m_render_time;
+    float m_n_mix;
+    float m_target_mix;
 };
 
 }

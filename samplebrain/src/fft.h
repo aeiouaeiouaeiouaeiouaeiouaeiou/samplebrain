@@ -15,6 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <fftw3.h>
+#include <jellyfish/core/types.h>
 
 #ifndef SPIRALCORE_FFT
 #define SPIRALCORE_FFT
@@ -26,14 +27,17 @@ namespace spiralcore {
 class FFT
 {
 public:
-    FFT(int length);
+    FFT(u32 length, u32 num_bins);
     ~FFT();
 	void impulse2freq(const float *imp);
+    void calculate_bins();
 
 	fftw_plan m_plan;
-	unsigned int m_length;
+	u32 m_length;
+    u32 m_num_bins;
 	double *m_in;
 	fftw_complex *m_spectrum;
+    float *m_bin;
 };
 
 }

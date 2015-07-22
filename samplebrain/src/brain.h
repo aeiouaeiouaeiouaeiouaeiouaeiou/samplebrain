@@ -51,9 +51,10 @@ public:
     void clear_sounds() { m_samples.clear(); }
     // take another brain and rebuild this brain from bits of that one
     // (presumably this one is made from a single sample)
-    void resynth(const std::string &filename, const brain &other, const search_params &params);
+    //void resynth(const std::string &filename, const brain &other, const search_params &params);
 
     const sample &get_block_pcm(u32 index) const;
+    const sample &get_block_n_pcm(u32 index) const;
     const block &get_block(u32 index) const;
     u32 get_num_blocks() const { return m_blocks.size(); }
     u32 get_block_size() const { return m_block_size; }

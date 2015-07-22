@@ -88,7 +88,7 @@ void block::init_fft(u32 block_size)
 {
     if (m_fftw == NULL || m_fftw->m_length!=block_size) {
         if (m_fftw == NULL) delete m_fftw;
-        m_fftw = new FFT(block_size);
+        m_fftw = new FFT(block_size,100);
         if (m_mfcc_proc == NULL) delete m_mfcc_proc;
         m_mfcc_proc = new Aquila::Mfcc(block_size);
     }
@@ -96,16 +96,25 @@ void block::init_fft(u32 block_size)
 
 void block::process(const sample &pcm, sample &fft, sample &mfcc) {
     m_fftw->impulse2freq(pcm.get_buffer());
+    m_fftw->calculate_bins();
 
     // calculate fft
     std::vector<std::complex<double> > mfspec;
     for (u32 i=0; i<m_block_size; ++i) {
-        fft[i]=m_fftw->m_spectrum[i][0];
         mfspec.push_back(std::complex<double>(m_fftw->m_spectrum[i][0],
                                               m_fftw->m_spectrum[i][1]));
     }
 
-    if (m_block_size>100) fft.crop_to(100);
+    u32 fft_size = m_block_size;
+    if (fft_size>100) {
+        fft.crop_to(100);
+        fft_size=100;
+    }
+
+    for (u32 i=0; i<fft_size; ++i) {
+        fft[i]=m_fftw->m_bin[i];
+    }
+
 
     // calculate mfcc
     std::vector<double> m = m_mfcc_proc->calculate(mfspec,MFCC_FILTERS);

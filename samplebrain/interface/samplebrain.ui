@@ -14,7 +14,7 @@
    <string>samplebrain 0.0.4</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_7">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
@@ -31,7 +31,7 @@
        <attribute name="title">
         <string>search</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -45,7 +45,7 @@
              </font>
             </property>
             <property name="text">
-             <string>tweakage</string>
+             <string>search</string>
             </property>
            </widget>
           </item>
@@ -54,13 +54,13 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
-              <pointsize>14</pointsize>
+              <pointsize>9</pointsize>
               <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>fft &lt;-&gt; mfcc ratio</string>
+             <string>fft &lt;-&gt; mfcc</string>
             </property>
            </widget>
           </item>
@@ -108,13 +108,13 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
-              <pointsize>14</pointsize>
+              <pointsize>9</pointsize>
               <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>freq &amp; dynamics &lt;-&gt; freq ratio</string>
+             <string>freq &amp; dynamics &lt;-&gt; freq only</string>
             </property>
            </widget>
           </item>
@@ -129,7 +129,7 @@
                </sizepolicy>
               </property>
               <property name="value">
-               <number>50</number>
+               <number>0</number>
               </property>
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -151,7 +151,7 @@
                <double>0.010000000000000</double>
               </property>
               <property name="value">
-               <double>0.500000000000000</double>
+               <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -162,7 +162,7 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
-              <pointsize>14</pointsize>
+              <pointsize>9</pointsize>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -223,7 +223,7 @@
              </size>
             </property>
             <property name="text">
-             <string>invert</string>
+             <string>search for least similar</string>
             </property>
             <property name="iconSize">
              <size>
@@ -232,6 +232,132 @@
              </size>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_23">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+              <pointsize>20</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>mix</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+              <pointsize>9</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>dynamic &lt;-&gt; normalised mix</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QSlider" name="sliderNMix">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxNMix">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_22">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+              <pointsize>9</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>brain &lt;-&gt; target mix</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QSlider" name="sliderTargetMix">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="sliderPosition">
+               <number>0</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxTargetMix">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <spacer name="verticalSpacer_3">
@@ -332,7 +458,7 @@
                <double>0.010000000000000</double>
               </property>
               <property name="value">
-               <double>0.750000000000000</double>
+               <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -514,7 +640,7 @@
                <double>0.010000000000000</double>
               </property>
               <property name="value">
-               <double>0.750000000000000</double>
+               <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -866,6 +992,7 @@
  </widget>
  <resources>
   <include location="../qt/samplebrain.qrc"/>
+  <include location="../../../../.designer/qt/samplebrain.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -1476,6 +1603,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>sliderNMix</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>n_mix_slot(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>386</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderTargetMix</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>target_mix_slot(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBoxNMix</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>n_mix_slot(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>386</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBoxTargetMix</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>target_mix_slot(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -1522,5 +1713,9 @@
   <slot>n_ratio_slot(int)</slot>
   <slot>n_ratio_slot(double)</slot>
   <slot>invert_slot(bool)</slot>
+  <slot>n_mix_slot(int)</slot>
+  <slot>n_mix_slot(double)</slot>
+  <slot>target_mix_slot(int)</slot>
+  <slot>target_mix_slot(double)</slot>
  </slots>
 </ui>
