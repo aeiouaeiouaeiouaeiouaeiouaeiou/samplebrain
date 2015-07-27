@@ -33,9 +33,17 @@ void renderer::init(brain &source, brain &target) {
     m_search_algo=BASIC;
     m_slide_error=1;
     m_target_index=0;
+    m_last_tgt_shift=0;
 }
 
 static int ratio_time = 0;
+
+void renderer::reset() {
+    m_target_time=0;
+    m_render_time=0;
+    m_target_index=0;
+    m_render_blocks.clear();
+}
 
 void renderer::process(u32 nframes, float *buf) {
     if (!m_playing) return;
@@ -44,11 +52,10 @@ void renderer::process(u32 nframes, float *buf) {
     u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
     u32 tgt_end = (m_target_time+nframes)/(float)tgt_shift;
 
-    if (tgt_end>=m_target.get_num_blocks() || m_source.get_num_blocks()==0) {
-        m_target_time=0;
-        m_render_time=0;
-        m_target_index=0;
-        m_render_blocks.clear();
+    if (tgt_shift!=m_last_tgt_shift ||
+        tgt_end>=m_target.get_num_blocks() || m_source.get_num_blocks()==0) {
+        reset();
+        m_last_tgt_shift = tgt_shift;
         // next time...
         return;
     }

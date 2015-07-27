@@ -28,7 +28,7 @@ public:
 renderer(brain &source, brain &target) :
     m_source(source),
         m_target(target),
-        m_search_params(0,0,0,100,1)
+        m_search_params(0,0,0,100,0)
         { init(source,target); }
 
     enum search_algo {
@@ -39,6 +39,9 @@ renderer(brain &source, brain &target) :
     };
 
     void init(brain &source, brain &target);
+
+    void reset();
+
     void process(u32 nframes, float *buf);
 
     void set_search_algo(search_algo s) { m_search_algo=s; }
@@ -80,7 +83,7 @@ private:
 
     search_algo m_search_algo;
     double m_slide_error;
-
+    u32 m_last_tgt_shift;
 
     std::list<render_block> m_render_blocks;
 };
