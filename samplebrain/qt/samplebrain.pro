@@ -16,6 +16,7 @@ HEADERS += MainWindow.h \
 SOURCES += MainWindow.cpp \
            audio_thread.cpp \
            process_thread.cpp \
+           feedback.cpp \
            qtmain.cpp
 
 INCLUDEPATH += ../src

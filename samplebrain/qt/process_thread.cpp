@@ -17,6 +17,7 @@
 #include "process_thread.h"
 #include <iostream>
 #include <unistd.h>
+#include "status.h"
 
 using namespace spiralcore;
 using namespace std;
@@ -103,7 +104,6 @@ void process_thread::process() {
             if (name=="/target_window_type") {
                 m_target_window_type=(window::type)cmd.get_int(0);
             }
-
         }
         usleep(500);
     }

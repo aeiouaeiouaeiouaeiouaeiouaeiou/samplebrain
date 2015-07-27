@@ -27,6 +27,14 @@ Aquila::Mfcc *block::m_mfcc_proc;
 
 static const int MFCC_FILTERS=12;
 
+double blend(double a, double b, double t) {
+    return a*(1-t)+b*t;
+}
+
+double square(double a) {
+    return a*a;
+}
+
 void normalise(sample &in) {
     // find min/max
     float max = 0;
@@ -64,7 +72,8 @@ block::block(const string &filename, const sample &pcm, u32 rate, const window &
     m_n_mfcc(MFCC_FILTERS),
     m_block_size(pcm.get_length()),
     m_rate(rate),
-    m_orig_filename(filename)
+    m_orig_filename(filename),
+    m_usage(0)
 {
     init_fft(m_pcm.get_length());
     assert(m_mfcc_proc!=NULL);
@@ -138,33 +147,37 @@ double block::_compare(const sample &fft_a, const sample &mfcc_a,
 
     if (params.m_ratio==0) {
         for (u32 i=fft_start; i<fft_end; ++i) {
-            fft_acc+=(fft_a[i]-fft_b[i]) * (fft_a[i]-fft_b[i]);
+            fft_acc+=square(fft_a[i]-fft_b[i]);
         }
         return (fft_acc/(float)fft_a.get_length())*FFT_BIAS;
     }
 
     if (params.m_ratio==1) {
         for (u32 i=0; i<MFCC_FILTERS; ++i) {
-            mfcc_acc+=(mfcc_a[i]-mfcc_b[i]) * (mfcc_a[i]-mfcc_b[i]);
+            mfcc_acc+=square(mfcc_a[i]-mfcc_b[i]);
         }
         return mfcc_acc/(float)MFCC_FILTERS;
     }
 
     // calculate both
     for (u32 i=fft_start; i<fft_end; ++i) {
-        fft_acc+=(fft_a[i]-fft_b[i]) * (fft_a[i]-fft_b[i]);
+        fft_acc+=square(fft_a[i]-fft_b[i]);
     }
     for (u32 i=0; i<MFCC_FILTERS; ++i) {
-        mfcc_acc+=(mfcc_a[i]-mfcc_b[i]) * (mfcc_a[i]-mfcc_b[i]);
+        mfcc_acc+=square(mfcc_a[i]-mfcc_b[i]);
     }
 
-    return (fft_acc/(float)fft_a.get_length())*(1-params.m_ratio)*FFT_BIAS +
-        (mfcc_acc/(float)MFCC_FILTERS)*params.m_ratio;
+    return blend(fft_acc/(float)fft_a.get_length(),
+                 mfcc_acc/(float)MFCC_FILTERS,
+                 params.m_ratio);
 }
 
 double block::compare(const block &other, const search_params &params) const {
-    return _compare(m_fft, m_mfcc, other.m_fft, other.m_mfcc, params) * (1-params.m_n_ratio) +
-        _compare(m_n_fft, m_n_mfcc, other.m_n_fft, other.m_n_mfcc, params) * params.m_n_ratio;
+    return blend(
+        blend(_compare(m_fft, m_mfcc, other.m_fft, other.m_mfcc, params),
+              _compare(m_n_fft, m_n_mfcc, other.m_n_fft, other.m_n_mfcc, params),
+              params.m_n_ratio),
+        other.m_usage, params.m_usage_importance);
 }
 
 bool block::unit_test() {
@@ -215,7 +228,7 @@ bool block::unit_test() {
     assert(bb.m_rate==44100);
     assert(bb.m_block_size==data.get_length());
 
-    search_params p(0,0,0,100,0,100);
+    search_params p(0,0,0,100,0);
     block bb2("test",data,44100,w);
     assert(bb.compare(bb2,p)==0);
     p.m_ratio=1;

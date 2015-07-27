@@ -8,6 +8,7 @@ SRCS :=   	src/fft.cpp \
 		    src/mfcc.cpp \
 			src/renderer.cpp \
 			src/window.cpp \
+			src/status.cpp \
 			src/aquila/filter/MelFilterBank.cpp \
 			src/aquila/filter/MelFilter.cpp \
 			src/aquila/transform/Dct.cpp \

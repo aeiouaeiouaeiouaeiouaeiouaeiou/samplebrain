@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainC26316.ui'
+** Form generated from reading UI file 'samplebraing19815.ui'
 **
-** Created: Wed Jul 22 15:20:00 2015
+** Created: Mon Jul 27 14:41:28 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINC26316_H
-#define SAMPLEBRAINC26316_H
+#ifndef SAMPLEBRAING19815_H
+#define SAMPLEBRAING19815_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -43,34 +43,43 @@ public:
     QVBoxLayout *verticalLayout_4;
     QTabWidget *tabWidget;
     QWidget *controlTab;
-    QHBoxLayout *horizontalLayout_10;
+    QHBoxLayout *horizontalLayout_17;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_19;
-    QLabel *label_6;
     QHBoxLayout *horizontalLayout_16;
+    QLabel *label_6;
     QSlider *sliderRatio;
     QDoubleSpinBox *doubleSpinBoxRatio;
-    QLabel *label_20;
     QHBoxLayout *horizontalLayout;
+    QLabel *label_20;
     QSlider *sliderNRatio;
     QDoubleSpinBox *doubleSpinBoxNRatio;
-    QLabel *label_7;
     QHBoxLayout *horizontalLayout_3;
+    QLabel *label_7;
     QLabel *label_9;
     QSpinBox *spinBoxFFT1Start;
     QLabel *label_10;
     QSpinBox *spinBoxFFT1End;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_24;
+    QSlider *sliderNovelty;
+    QDoubleSpinBox *doubleSpinBoxNovelty;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_25;
+    QSlider *sliderBoredom;
+    QDoubleSpinBox *doubleSpinBoxBoredom;
     QCheckBox *checkBoxInvert;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *verticalSpacer_3;
     QLabel *label_23;
-    QLabel *label_21;
     QHBoxLayout *horizontalLayout_8;
+    QLabel *label_21;
     QSlider *sliderNMix;
     QDoubleSpinBox *doubleSpinBoxNMix;
-    QLabel *label_22;
     QHBoxLayout *horizontalLayout_9;
+    QLabel *label_22;
     QSlider *sliderTargetMix;
     QDoubleSpinBox *doubleSpinBoxTargetMix;
-    QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
     QPushButton *pushButtonLoadTarget;
@@ -141,7 +150,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(724, 613);
+        MainWindow->resize(643, 619);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -155,8 +164,8 @@ public:
         tabWidget->setFont(font);
         controlTab = new QWidget();
         controlTab->setObjectName(QString::fromUtf8("controlTab"));
-        horizontalLayout_10 = new QHBoxLayout(controlTab);
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        horizontalLayout_17 = new QHBoxLayout(controlTab);
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         label_19 = new QLabel(controlTab);
@@ -170,6 +179,8 @@ public:
 
         verticalLayout_3->addWidget(label_19);
 
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         label_6 = new QLabel(controlTab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         QFont font2;
@@ -179,10 +190,8 @@ public:
         font2.setWeight(75);
         label_6->setFont(font2);
 
-        verticalLayout_3->addWidget(label_6);
+        horizontalLayout_16->addWidget(label_6);
 
-        horizontalLayout_16 = new QHBoxLayout();
-        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         sliderRatio = new QSlider(controlTab);
         sliderRatio->setObjectName(QString::fromUtf8("sliderRatio"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -211,14 +220,14 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_16);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_20 = new QLabel(controlTab);
         label_20->setObjectName(QString::fromUtf8("label_20"));
         label_20->setFont(font2);
 
-        verticalLayout_3->addWidget(label_20);
+        horizontalLayout->addWidget(label_20);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         sliderNRatio = new QSlider(controlTab);
         sliderNRatio->setObjectName(QString::fromUtf8("sliderNRatio"));
         sizePolicy.setHeightForWidth(sliderNRatio->sizePolicy().hasHeightForWidth());
@@ -241,16 +250,21 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         label_7 = new QLabel(controlTab);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         label_7->setFont(font2);
 
-        verticalLayout_3->addWidget(label_7);
+        horizontalLayout_3->addWidget(label_7);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         label_9 = new QLabel(controlTab);
         label_9->setObjectName(QString::fromUtf8("label_9"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label_9->sizePolicy().hasHeightForWidth());
+        label_9->setSizePolicy(sizePolicy2);
         label_9->setFont(font);
 
         horizontalLayout_3->addWidget(label_9);
@@ -262,6 +276,8 @@ public:
 
         label_10 = new QLabel(controlTab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
+        sizePolicy2.setHeightForWidth(label_10->sizePolicy().hasHeightForWidth());
+        label_10->setSizePolicy(sizePolicy2);
         label_10->setFont(font);
 
         horizontalLayout_3->addWidget(label_10);
@@ -275,6 +291,66 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_3);
 
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        label_24 = new QLabel(controlTab);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+        label_24->setFont(font2);
+
+        horizontalLayout_10->addWidget(label_24);
+
+        sliderNovelty = new QSlider(controlTab);
+        sliderNovelty->setObjectName(QString::fromUtf8("sliderNovelty"));
+        sizePolicy.setHeightForWidth(sliderNovelty->sizePolicy().hasHeightForWidth());
+        sliderNovelty->setSizePolicy(sizePolicy);
+        sliderNovelty->setValue(0);
+        sliderNovelty->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_10->addWidget(sliderNovelty);
+
+        doubleSpinBoxNovelty = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxNovelty->setObjectName(QString::fromUtf8("doubleSpinBoxNovelty"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxNovelty->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxNovelty->setSizePolicy(sizePolicy1);
+        doubleSpinBoxNovelty->setMaximum(1);
+        doubleSpinBoxNovelty->setSingleStep(0.01);
+        doubleSpinBoxNovelty->setValue(0);
+
+        horizontalLayout_10->addWidget(doubleSpinBoxNovelty);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_10);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        label_25 = new QLabel(controlTab);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+        label_25->setFont(font2);
+
+        horizontalLayout_11->addWidget(label_25);
+
+        sliderBoredom = new QSlider(controlTab);
+        sliderBoredom->setObjectName(QString::fromUtf8("sliderBoredom"));
+        sizePolicy.setHeightForWidth(sliderBoredom->sizePolicy().hasHeightForWidth());
+        sliderBoredom->setSizePolicy(sizePolicy);
+        sliderBoredom->setValue(0);
+        sliderBoredom->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_11->addWidget(sliderBoredom);
+
+        doubleSpinBoxBoredom = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxBoredom->setObjectName(QString::fromUtf8("doubleSpinBoxBoredom"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxBoredom->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxBoredom->setSizePolicy(sizePolicy1);
+        doubleSpinBoxBoredom->setMaximum(1);
+        doubleSpinBoxBoredom->setSingleStep(0.01);
+        doubleSpinBoxBoredom->setValue(0);
+
+        horizontalLayout_11->addWidget(doubleSpinBoxBoredom);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_11);
+
         checkBoxInvert = new QCheckBox(controlTab);
         checkBoxInvert->setObjectName(QString::fromUtf8("checkBoxInvert"));
         checkBoxInvert->setSizeIncrement(QSize(0, 0));
@@ -282,20 +358,28 @@ public:
 
         verticalLayout_3->addWidget(checkBoxInvert);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        verticalLayout_3->addItem(horizontalSpacer_2);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_3);
+
         label_23 = new QLabel(controlTab);
         label_23->setObjectName(QString::fromUtf8("label_23"));
         label_23->setFont(font1);
 
         verticalLayout_3->addWidget(label_23);
 
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         label_21 = new QLabel(controlTab);
         label_21->setObjectName(QString::fromUtf8("label_21"));
         label_21->setFont(font2);
 
-        verticalLayout_3->addWidget(label_21);
+        horizontalLayout_8->addWidget(label_21);
 
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         sliderNMix = new QSlider(controlTab);
         sliderNMix->setObjectName(QString::fromUtf8("sliderNMix"));
         sizePolicy.setHeightForWidth(sliderNMix->sizePolicy().hasHeightForWidth());
@@ -318,14 +402,14 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_8);
 
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
         label_22 = new QLabel(controlTab);
         label_22->setObjectName(QString::fromUtf8("label_22"));
         label_22->setFont(font2);
 
-        verticalLayout_3->addWidget(label_22);
+        horizontalLayout_9->addWidget(label_22);
 
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
         sliderTargetMix = new QSlider(controlTab);
         sliderTargetMix->setObjectName(QString::fromUtf8("sliderTargetMix"));
         sizePolicy.setHeightForWidth(sliderTargetMix->sizePolicy().hasHeightForWidth());
@@ -349,12 +433,8 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_9);
 
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_3->addItem(verticalSpacer_3);
-
-
-        horizontalLayout_10->addLayout(verticalLayout_3);
+        horizontalLayout_17->addLayout(verticalLayout_3);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
@@ -469,7 +549,7 @@ public:
         verticalLayout_6->addItem(verticalSpacer);
 
 
-        horizontalLayout_10->addLayout(verticalLayout_6);
+        horizontalLayout_17->addLayout(verticalLayout_6);
 
         tabWidget->addTab(controlTab, QString());
         sampleTab = new QWidget();
@@ -766,6 +846,10 @@ public:
         QObject::connect(sliderTargetMix, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_mix_slot(int)));
         QObject::connect(doubleSpinBoxNMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_mix_slot(double)));
         QObject::connect(doubleSpinBoxTargetMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_mix_slot(double)));
+        QObject::connect(doubleSpinBoxBoredom, SIGNAL(valueChanged(double)), MainWindow, SLOT(boredom_slot(double)));
+        QObject::connect(sliderBoredom, SIGNAL(valueChanged(int)), MainWindow, SLOT(boredom_slot(int)));
+        QObject::connect(doubleSpinBoxNovelty, SIGNAL(valueChanged(double)), MainWindow, SLOT(novelty_slot(double)));
+        QObject::connect(sliderNovelty, SIGNAL(valueChanged(int)), MainWindow, SLOT(novelty_slot(int)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -775,17 +859,55 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.0.4", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindow", "fft <-> mfcc", 0, QApplication::UnicodeUTF8));
-        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics <-> freq only", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.0.5", 0, QApplication::UnicodeUTF8));
+        label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderRatio->setToolTip(QApplication::translate("MainWindow", "plain fft match vs mfcc values ", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics / freq only", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderNRatio->setToolTip(QApplication::translate("MainWindow", "match original or normalised blocks", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        label_7->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
         label_7->setText(QApplication::translate("MainWindow", "fft subsection", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        spinBoxFFT1Start->setToolTip(QApplication::translate("MainWindow", "start frequency to use for fft match", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         label_10->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        spinBoxFFT1End->setToolTip(QApplication::translate("MainWindow", "end frequency to use for fft match", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        label_24->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+        label_24->setText(QApplication::translate("MainWindow", "novelty", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderNovelty->setToolTip(QApplication::translate("MainWindow", "use new blocks rather than similar ones", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        label_25->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+        label_25->setText(QApplication::translate("MainWindow", "boredom", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderBoredom->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to ware off", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        checkBoxInvert->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
         checkBoxInvert->setText(QApplication::translate("MainWindow", "search for least similar", 0, QApplication::UnicodeUTF8));
         label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("MainWindow", "dynamic <-> normalised mix", 0, QApplication::UnicodeUTF8));
-        label_22->setText(QApplication::translate("MainWindow", "brain <-> target mix", 0, QApplication::UnicodeUTF8));
+        label_21->setText(QApplication::translate("MainWindow", "dynamic / normalised ", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderNMix->setToolTip(QApplication::translate("MainWindow", "mix in the normalised blocks", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        label_22->setText(QApplication::translate("MainWindow", "brain / target", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderTargetMix->setToolTip(QApplication::translate("MainWindow", "mix in the original blocks", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
@@ -837,4 +959,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINC26316_H
+#endif // SAMPLEBRAING19815_H

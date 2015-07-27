@@ -15,6 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <string>
+#include <vector>
 #include "jellyfish/fluxa/sample.h"
 #include "jellyfish/core/types.h"
 #include "fft.h"
@@ -41,6 +42,10 @@ public:
     const sample &get_pcm() const { return m_pcm; }
     const sample &get_n_pcm() const { return m_n_pcm; }
 
+    std::vector<u32> &get_synapse() { return m_synapse; }
+    const std::vector<u32> &get_synapse_const() const { return m_synapse; }
+    float &get_usage() { return m_usage; }
+
 private:
 
     void process(const sample &pcm, sample &fft, sample &mfcc);
@@ -62,6 +67,9 @@ private:
     std::string m_orig_filename;
     static FFT *m_fftw;
     static Aquila::Mfcc *m_mfcc_proc;
+
+    std::vector<u32> m_synapse;
+    float m_usage;
 
 };
 

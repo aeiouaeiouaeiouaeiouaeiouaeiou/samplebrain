@@ -60,14 +60,24 @@ public:
     u32 get_block_size() const { return m_block_size; }
     u32 get_overlap() const { return m_overlap; }
 
-    u32 search(const block &target, const search_params &params) const;
-    u32 rev_search(const block &target, const search_params &params) const;
+    void set_usage_falloff(float s) { m_usage_falloff=s; }
+
+    // basic search
+    u32 search(const block &target, const search_params &params);
+    u32 rev_search(const block &target, const search_params &params);
+
+    // synaptic search
+    double calc_average_diff(search_params &params);
+    void build_synapses(search_params &params, double threshold);
+    u32 search_synapses(const block &target, search_params &params);
+    double get_current_error() { return m_current_error/m_average_error; }
 
     static bool unit_test();
 
 private:
 
-    void chop_and_add(const sample &s, bool ditchpcm=false);
+    void chop_and_add(const sample &s, u32 count, bool ditchpcm=false);
+    void deplete_usage();
 
     vector<block> m_blocks;
     std::list<sound> m_samples;
@@ -77,6 +87,10 @@ private:
 
     window m_window;
 
+    u32 m_current_block_index;
+    double m_current_error;
+    double m_average_error;
+    float m_usage_falloff;
 };
 
 }

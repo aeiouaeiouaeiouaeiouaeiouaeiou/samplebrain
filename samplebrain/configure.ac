@@ -7,6 +7,7 @@ AC_CHECK_LIB(fftw3, main)
 AC_CHECK_LIB(portaudio, main)
 AC_CHECK_LIB(jellyfish, main)
 AC_CHECK_LIB(sndfile, main)
+AC_CHECK_LIB(lo, main)
 
 AC_PROG_CXX
 AC_LANG(C++)

@@ -21,6 +21,7 @@
 #include <lo/lo.h>
 #include <string>
 #include "window.h"
+#include "feedback.h"
 
 using namespace std;
 using namespace spiralcore;
@@ -40,23 +41,72 @@ private slots:
 
     void play_slot() { lo_send(m_audio_address,"/start",""); }
     void stop_slot() { lo_send(m_audio_address,"/pause",""); }
-    void ratio_slot(int s) { lo_send(m_audio_address,"/ratio","f",s/100.0f); }
-    void ratio_slot(double s) { lo_send(m_audio_address,"/ratio","f",s); }
-    void n_ratio_slot(int s) { lo_send(m_audio_address,"/n_ratio","f",s/100.0f); }
-    void n_ratio_slot(double s) { lo_send(m_audio_address,"/n_ratio","f",s); }
+
+    void ratio_slot(int s) {
+        lo_send(m_audio_address,"/ratio","f",s/100.0f);
+        m_Ui.doubleSpinBoxRatio->setValue(s/100.0f);
+    }
+    void ratio_slot(double s) {
+        lo_send(m_audio_address,"/ratio","f",s);
+        m_Ui.sliderRatio->setValue(s*100);
+    }
+
+    void n_ratio_slot(int s) {
+        lo_send(m_audio_address,"/n_ratio","f",s/100.0f);
+        m_Ui.doubleSpinBoxNRatio->setValue(s/100.0f);
+    }
+    void n_ratio_slot(double s) {
+        lo_send(m_audio_address,"/n_ratio","f",s);
+        m_Ui.sliderNRatio->setValue(s*100);
+    }
+
     void fft1_start_slot(int s) { lo_send(m_audio_address,"/fft1_start","i",s); }
     void fft1_end_slot(int s) { lo_send(m_audio_address,"/fft1_end","i",s); }
     void fft2_start_slot(int s){} // { m_renderer->get_params()->m_fft2_start=s; }
     void fft2_end_slot(int s){} // { m_renderer->get_params()->m_fft2_end=s; }
-    void n_mix_slot(int s) { lo_send(m_audio_address,"/n_mix","f",s/100.0f); }
-    void n_mix_slot(double s) { lo_send(m_audio_address,"/n_mix","f",s); }
-    void target_mix_slot(int s) { lo_send(m_audio_address,"/target_mix","f",s/100.0f); }
-    void target_mix_slot(double s) { lo_send(m_audio_address,"/target_mix","f",s); }
+
+    void n_mix_slot(int s) {
+        lo_send(m_audio_address,"/n_mix","f",s/100.0f);
+        m_Ui.doubleSpinBoxNMix->setValue(s/100.0f);
+    }
+    void n_mix_slot(double s) {
+        lo_send(m_audio_address,"/n_mix","f",s);
+        m_Ui.sliderNMix->setValue(s*100);
+    }
+
+    void novelty_slot(int s) {
+        lo_send(m_audio_address,"/novelty","f",s/100.0f);
+        m_Ui.doubleSpinBoxNovelty->setValue(s/100.0f);
+    }
+    void novelty_slot(double s) {
+        lo_send(m_audio_address,"/novelty","f",s);
+        m_Ui.sliderNovelty->setValue(s*100);
+    }
+
+    void boredom_slot(int s) {
+        float v=s/100.0f;
+        lo_send(m_audio_address,"/boredom","f",v);
+        m_Ui.doubleSpinBoxBoredom->setValue(v);
+    }
+    void boredom_slot(double s) {
+        lo_send(m_audio_address,"/boredom","f",s);
+        m_Ui.sliderBoredom->setValue(s*100);
+    }
+
+    void target_mix_slot(int s) {
+        lo_send(m_audio_address,"/target_mix","f",s/100.0f);
+        m_Ui.doubleSpinBoxTargetMix->setValue(s/100.0f);
+    }
+    void target_mix_slot(double s) {
+        lo_send(m_audio_address,"/target_mix","f",s);
+        m_Ui.sliderTargetMix->setValue(s*100);
+    }
+
     void volume_slot(int s) { lo_send(m_audio_address,"/volume","f",s/100.0f); }
     void invert_slot(bool s) { if (s) {
-            lo_send(m_audio_address,"/invert","i",1);
+            lo_send(m_audio_address,"/search_algo","i",1);
         } else {
-            lo_send(m_audio_address,"/invert","i",0);
+            lo_send(m_audio_address,"/search_algo","i",0);
         }}
     void run_slot() {}
     void load_target() {
@@ -146,6 +196,10 @@ private slots:
         lo_send(m_audio_address,"/stop","");
     }
 
+    void update_status() {
+        m_feedback.poll(m_Ui.statusbar);
+    }
+
 private:
     string m_save_wav;
     QString m_last_file;
@@ -153,4 +207,5 @@ private:
     Ui_MainWindow m_Ui;
     lo_address m_audio_address;
     lo_address m_process_address;
+    feedback m_feedback;
 };

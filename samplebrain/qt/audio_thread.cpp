@@ -33,9 +33,14 @@ audio_thread::audio_thread(process_thread &p) :
     m_osc.run();
 }
 
+static bool state = 1;
+
 audio_thread::~audio_thread() {
-    delete m_renderer;
+    state=0;
+    cerr<<"deleting audio device"<<endl;
     if (m_audio_device!=NULL) delete m_audio_device;
+    cerr<<"deleting renderer"<<endl;
+    delete m_renderer;
 }
 
 void audio_thread::start_audio() {
@@ -45,11 +50,13 @@ void audio_thread::start_audio() {
 }
 
 void audio_thread::run_audio(void* c, unsigned int frames) {
-    audio_thread *at = (audio_thread*)c;
-    at->m_audio_device->left_out.zero();
-    at->process(at->m_audio_device->left_out,
-                at->m_audio_device->right_out);
-    at->m_audio_device->maybe_record();
+    if (state) {
+        audio_thread *at = (audio_thread*)c;
+        at->m_audio_device->left_out.zero();
+        at->process(at->m_audio_device->left_out,
+                    at->m_audio_device->right_out);
+        at->m_audio_device->maybe_record();
+    }
 }
 
 void audio_thread::process(sample &s, sample &s2) {
@@ -76,11 +83,8 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/fft1_end") {
             m_renderer->get_params()->m_fft1_end = cmd.get_int(0);
         }
-        if (name=="/fft2_start") {
-            m_renderer->get_params()->m_fft2_start = cmd.get_int(0);
-        }
-        if (name=="/fft2_end") {
-            m_renderer->get_params()->m_fft2_end = cmd.get_int(0);
+        if (name=="/novelty") {
+            m_renderer->get_params()->m_usage_importance = cmd.get_float(0);
         }
         if (name=="/restart_audio") {
             start_audio();
@@ -88,8 +92,13 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/volume") {
             m_renderer->set_volume(cmd.get_float(0)*10);
         }
-        if (name=="/invert") {
-            m_renderer->set_invert(cmd.get_int(0));
+        if (name=="/search_algo") {
+            switch(cmd.get_int(0)) {
+            case 0: m_renderer->set_search_algo(renderer::BASIC); break;
+            case 1: m_renderer->set_search_algo(renderer::REV_BASIC); break;
+            case 2: m_renderer->set_search_algo(renderer::SYNAPTIC); break;
+            case 3: m_renderer->set_search_algo(renderer::SYNAPTIC_SLIDE); break;
+            }
         }
         if (name=="/n_mix") {
             m_renderer->set_n_mix(cmd.get_float(0));
@@ -104,6 +113,9 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/stop") {
             m_audio_device->stop_recording();
             m_renderer->set_playing(false);
+        }
+        if (name=="/boredom") {
+            m_renderer->get_source().set_usage_falloff(cmd.get_float(0));
         }
     }
 

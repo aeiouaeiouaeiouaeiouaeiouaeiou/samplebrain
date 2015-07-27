@@ -22,14 +22,17 @@ using namespace std;
 
 void renderer::init(brain &source, brain &target) {
     m_volume=1;
-    m_invert=false;
     m_playing=false;
     m_source=source;
     m_target=target;
+    m_target_time=0;
     m_render_time=0;
     m_n_mix=0;
     m_target_mix=0;
     m_render_blocks.clear();
+    m_search_algo=BASIC;
+    m_slide_error=1;
+    m_target_index=0;
 }
 
 static int ratio_time = 0;
@@ -39,32 +42,55 @@ void renderer::process(u32 nframes, float *buf) {
 
     // get new blocks from source for the current buffer
     u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
-    u32 tgt_start = m_render_time/(float)tgt_shift;
-    u32 tgt_end = (m_render_time+nframes)/(float)tgt_shift;
+    u32 tgt_end = (m_target_time+nframes)/(float)tgt_shift;
 
     if (tgt_end>=m_target.get_num_blocks() || m_source.get_num_blocks()==0) {
+        m_target_time=0;
         m_render_time=0;
+        m_target_index=0;
         m_render_blocks.clear();
         // next time...
         return;
     }
 
 
-    //cerr<<"-----------------"<<endl;
-    //cerr<<"tgt start:"<<tgt_start<<endl;
-    //cerr<<"tgt end:"<<tgt_end<<endl;
+//    cerr<<"-----------------"<<endl;
+//    cerr<<"tgt start:"<<m_target_index<<endl;
+//    cerr<<"tgt end:"<<tgt_end<<endl;
 
     // get indices for current buffer
-    for (u32 tgt_index = tgt_start+1; tgt_index<=tgt_end; tgt_index++) {
-        u32 time=tgt_index*tgt_shift;
-        u32 src_index;
-        if (!m_invert) {
-            src_index = m_source.search(m_target.get_block(tgt_index), m_search_params);
-        } else {
-            src_index = m_source.rev_search(m_target.get_block(tgt_index), m_search_params);
+    u32 counter = m_target_index;
+    //u32 cur_time = m_render_time;
+    while (counter<=tgt_end) {
+        u32 time=m_target_index*tgt_shift;
+        u32 src_index=0;
+
+        switch (m_search_algo) {
+        case BASIC:
+            src_index = m_source.search(m_target.get_block(m_target_index), m_search_params);
+            break;
+        case REV_BASIC:
+            src_index = m_source.rev_search(m_target.get_block(m_target_index), m_search_params);
+            break;
+        case SYNAPTIC:
+        case SYNAPTIC_SLIDE:
+            src_index = m_source.search_synapses(m_target.get_block(m_target_index), m_search_params);
+            break;
         }
-        // put them in the index list
-        m_render_blocks.push_back(render_block(src_index,tgt_index,time));
+
+        if (m_search_algo==SYNAPTIC_SLIDE) {
+            m_render_blocks.push_back(render_block(src_index,m_target_index,time));
+
+            if (m_source.get_current_error()<m_slide_error) {
+                m_target_index++;
+            }
+            else{ cerr<<"skip"<<endl; }
+        } else {
+            // put them in the index list
+            m_render_blocks.push_back(render_block(src_index,m_target_index,time));
+            m_target_index++;
+        }
+        counter++;
     }
 
     // render all blocks in list
@@ -123,6 +149,7 @@ void renderer::process(u32 nframes, float *buf) {
     }
 
     m_render_time+=nframes;
+    m_target_time+=nframes;
 }
 
 bool renderer::unit_test() {
@@ -138,7 +165,7 @@ bool renderer::unit_test() {
     rr.set_playing(true);
     float *buf=new float[10];
     rr.process(10,buf);
-    assert(rr.m_render_blocks.size()==1);
+    assert(rr.m_render_blocks.size()==2);
     rr.process(10,buf);
     assert(rr.m_render_blocks.size()==2);
     delete[] buf;
@@ -150,7 +177,7 @@ bool renderer::unit_test() {
 
     target.init(10,5,window::RECTANGLE);
     rr.process(10,buf);
-    assert(rr.m_render_blocks.size()==3);
+    assert(rr.m_render_blocks.size()==5);
     delete[] buf;
 
 }
