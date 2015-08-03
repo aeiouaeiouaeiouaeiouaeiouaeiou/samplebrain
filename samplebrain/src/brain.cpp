@@ -234,10 +234,11 @@ ios &spiralcore::operator||(ios &s, brain &b) {
     u32 version=0;
     string id("brain");
     s||id||version;
-    s||b.m_blocks;
+    stream_vector(s,b.m_blocks);
     stream_list(s,b.m_samples);
     s||b.m_block_size||b.m_overlap||b.m_window;
-    s||b.m_current_block_index||b.m_average_error||b.m_usage_falloff;
+    s||b.m_current_block_index||b.m_current_error||
+        b.m_average_error||b.m_usage_falloff;
 }
 
 bool brain::unit_test() {
@@ -275,6 +276,7 @@ bool brain::unit_test() {
     assert(b3.search(b2.m_blocks[19],p)==19);
     assert(b3.search(b2.m_blocks[29],p)==29);
 
+
     ofstream of("test_data/test.brain",ios::binary);
     of||b3;
     of.close();
@@ -284,6 +286,8 @@ bool brain::unit_test() {
     ifs||b4;
     ifs.close();
 
+    assert(b3.m_samples.size()==b4.m_samples.size());
+    assert(b3.m_blocks.size()==b4.m_blocks.size());
 
     assert(b4.search(b2.m_blocks[0],p)==0);
     assert(b4.search(b2.m_blocks[9],p)==9);

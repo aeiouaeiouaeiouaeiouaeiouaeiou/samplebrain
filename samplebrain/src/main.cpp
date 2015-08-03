@@ -38,8 +38,6 @@ void unit_test() {
     cerr<<"testing renderer"<<endl;
     if (renderer::unit_test()) cerr<<"passed"<<endl;
     else cerr<<"failed"<<endl;
-
-
 }
 
 audio_device *a = NULL;

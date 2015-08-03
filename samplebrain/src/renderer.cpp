@@ -170,8 +170,10 @@ bool renderer::unit_test() {
 
     renderer rr(source,target);
     rr.set_playing(true);
-    float *buf=new float[10];
+    float *buf=new float[400];
     rr.process(10,buf);
+    rr.process(10,buf);
+
     assert(rr.m_render_blocks.size()==2);
     rr.process(10,buf);
     assert(rr.m_render_blocks.size()==2);
@@ -184,7 +186,10 @@ bool renderer::unit_test() {
 
     target.init(10,5,window::RECTANGLE);
     rr.process(10,buf);
-    assert(rr.m_render_blocks.size()==5);
+    rr.process(10,buf);
+    rr.process(10,buf);
+    rr.process(10,buf);
+    assert(rr.m_render_blocks.size()==4);
     delete[] buf;
 
 }

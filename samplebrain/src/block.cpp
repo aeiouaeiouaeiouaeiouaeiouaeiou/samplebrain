@@ -273,7 +273,7 @@ bool block::unit_test() {
 
     sample data2(200);
     for (u32 i=0; i<data.get_length(); i++) {
-        data[i]=i%10;
+        data2[i]=i%10;
     }
 
     block cpy("test",data,100,w);
