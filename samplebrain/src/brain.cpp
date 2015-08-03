@@ -223,6 +223,23 @@ void brain::deplete_usage() {
 }
 */
 
+ios &spiralcore::operator||(ios &s, brain::sound &b) {
+    u32 version=0;
+    string id("brain::sound");
+    s||id||version;
+    s||b.m_filename||b.m_sample;
+}
+
+ios &spiralcore::operator||(ios &s, brain &b) {
+    u32 version=0;
+    string id("brain");
+    s||id||version;
+    s||b.m_blocks;
+    stream_list(s,b.m_samples);
+    s||b.m_block_size||b.m_overlap||b.m_window;
+    s||b.m_current_block_index||b.m_average_error||b.m_usage_falloff;
+}
+
 bool brain::unit_test() {
     brain b;
     assert(b.m_samples.size()==0);
@@ -257,6 +274,24 @@ bool brain::unit_test() {
     assert(b3.search(b2.m_blocks[9],p)==9);
     assert(b3.search(b2.m_blocks[19],p)==19);
     assert(b3.search(b2.m_blocks[29],p)==29);
+
+    ofstream of("test_data/test.brain",ios::binary);
+    of||b3;
+    of.close();
+
+    brain b4;
+    ifstream ifs("test_data/test.brain",ios::binary);
+    ifs||b4;
+    ifs.close();
+
+
+    assert(b4.search(b2.m_blocks[0],p)==0);
+    assert(b4.search(b2.m_blocks[9],p)==9);
+    assert(b4.search(b2.m_blocks[19],p)==19);
+    assert(b4.search(b2.m_blocks[29],p)==29);
+
+
+    cerr<<"!!!"<<endl;
 
 //    sample r = b2.resynth(b,1);
 //    assert(r.get_length()==200);

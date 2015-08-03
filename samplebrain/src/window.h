@@ -44,6 +44,8 @@ public:
     void set_current_type(type t) { m_current_type=t; }
     void run(const sample &sample) const;
 
+    friend ios &operator||(ios &s, window &b);
+
 private:
     void clear();
 
@@ -52,6 +54,8 @@ private:
     std::vector<sample*> m_windows;
 
 };
+
+ios &operator||(ios &s, window &b);
 
 }
 

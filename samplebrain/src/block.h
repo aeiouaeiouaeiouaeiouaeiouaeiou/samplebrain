@@ -22,6 +22,7 @@
 #include "mfcc.h"
 #include "search_params.h"
 #include "window.h"
+#include "jellyfish/core/stream.h"
 
 #ifndef BLOCK
 #define BLOCK
@@ -32,6 +33,7 @@ class block {
 public:
     // runs analysis on pcm
     block(const std::string &filename, const sample &pcm, u32 rate, const window &w, bool ditchpcm=false);
+    block() {}
 
     // returns distance based on ratio of fft-mfcc values
     double compare(const block &other, const search_params &params) const;
@@ -71,7 +73,11 @@ private:
     std::vector<u32> m_synapse;
     float m_usage;
 
+    friend ios &operator||(ios &s, block &b);
+
 };
+
+ios &operator||(ios &s, block &b);
 
 }
 

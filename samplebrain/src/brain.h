@@ -40,6 +40,8 @@ public:
         sound(const std::string &name, const sample &sample) :
             m_filename(name), m_sample(sample) {}
 
+        sound() {}; // needed for streaming
+
         std::string m_filename;
         sample m_sample;
     };
@@ -74,6 +76,8 @@ public:
 
     static bool unit_test();
 
+    friend ios &operator||(ios &s, brain &b);
+
 private:
 
     void chop_and_add(const sample &s, u32 count, bool ditchpcm=false);
@@ -92,6 +96,9 @@ private:
     double m_average_error;
     float m_usage_falloff;
 };
+
+ios &operator||(ios &s, brain::sound &b);
+ios &operator||(ios &s, brain &b);
 
 }
 

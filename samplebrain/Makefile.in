@@ -16,7 +16,7 @@ SRCS :=   	src/fft.cpp \
 TARGET_SRCS    := src/main.cpp
 
 # @CFLAGS@
-CCFLAGS = -Ofast -march=native -mtune=native -std=c++11 -ffast-math -Wno-unused -Isrc -I/opt/local/include
+CCFLAGS = -g -Ofast -march=native -mtune=native -std=c++11 -ffast-math -Wno-unused -Isrc -I/opt/local/include
 LDFLAGS = @LDFLAGS@
 LIBS    = @LIBS@
 

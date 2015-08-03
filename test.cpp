@@ -4,6 +4,9 @@
 #include <vector>
 #include <cmath>
 
+#include <fstream>
+
+
 using namespace std;
 
 class desc {
@@ -54,9 +57,89 @@ public:
     }
 };
 
+
+
+template<typename T>ios &operator||(ios &s, T &v) {
+    ofstream *pos=dynamic_cast<ofstream*>(&s);
+    if (pos!=NULL) {
+        ofstream &os = *pos;
+        return os.write((char*)(&v),sizeof(T));
+    }
+    else
+    {
+        ifstream *pis=dynamic_cast<ifstream*>(&s);
+        assert(pis);
+        ifstream &is = *pis;
+        return is.read((char *)(&v),sizeof(T));
+    }
+}
+
+template<typename T>ios &stream_array(ios &s, T *v, size_t &len) {
+    ofstream *pos=dynamic_cast<ofstream*>(&s);
+    if (pos!=NULL) {
+        ofstream &os = *pos;
+        os||len;
+        return os.write((char*)v,sizeof(T)*len);
+    }
+    else
+    {
+        ifstream *pis=dynamic_cast<ifstream*>(&s);
+        assert(pis);
+        ifstream &is = *pis;
+        is||len;
+        return is.read((char *)v,sizeof(T)*len);
+    }
+}
+
+
+
+
+class sertest {
+public:
+    sertest() {
+        size = 100;
+        buf = new float[size];
+    }
+
+    void build() {
+        for (unsigned int n=0; n<size; n++) {
+            buf[n]=n;
+        }
+    }
+
+    float a;
+    int c;
+    float *buf;
+    size_t size;
+};
+
+bool operator||(ios &s, sertest &v) {
+    s||v.a||v.c;
+    stream_array(s,v.buf,v.size);
+}
+
+
 int main() {
-    auto func = [] () { cout << "Hello world"; };
-    func(); // now call the function
+
+    sertest ss;
+    ss.a=100;
+    ss.c=230;
+    ss.build();
+
+    ofstream of("test.bin", ios::binary);
+    of||ss;
+    of.close();
+
+    sertest sb;
+    ifstream inf("test.bin", ios::binary);
+    inf||sb;
+    inf.close();
+
+    cerr<<sb.a<<" "<<sb.c<<" "<<sb.buf[50]<<endl;
+
+
+//    auto func = [] () { cout << "Hello world"; };
+    //   func(); // now call the function
 
 /*    test t=test(999);
     desc d;
