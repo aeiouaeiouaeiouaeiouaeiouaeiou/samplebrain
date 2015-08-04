@@ -108,3 +108,25 @@ void window::run(const sample &input) const {
         input[n]*=(*m_windows[m_current_type])[n];
     }
 }
+
+ios &spiralcore::operator||(ios &s, window &b) {
+    u32 version=0;
+    string id("window");
+    s||id||version;
+    s||b.m_current_type;
+    std::ofstream *pos=dynamic_cast<std::ofstream*>(&s);
+    if (pos!=NULL) {
+        u32 size=0;
+        // get the size from the first window
+        if (b.m_windows.size()>0) {
+            size=b.m_windows[0]->get_length();
+        }
+        s||size;
+    } else {
+        u32 size=0;
+        s||size;
+        // reinit using size if we are reading in
+        b.init(size);
+    }
+    return s;
+}

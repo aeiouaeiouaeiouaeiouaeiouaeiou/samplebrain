@@ -37,9 +37,7 @@ static bool state = 1;
 
 audio_thread::~audio_thread() {
     state=0;
-    cerr<<"deleting audio device"<<endl;
     if (m_audio_device!=NULL) delete m_audio_device;
-    cerr<<"deleting renderer"<<endl;
     delete m_renderer;
 }
 
@@ -64,7 +62,7 @@ void audio_thread::process(sample &s, sample &s2) {
     command_ring_buffer::command cmd;
 	while (m_osc.get(cmd)) {
         string name = cmd.m_name;
-		cerr<<name<<endl;
+		//cerr<<name<<endl;
         if (name=="/start") {
             m_renderer->set_playing(true);
         }
@@ -116,6 +114,9 @@ void audio_thread::process(sample &s, sample &s2) {
         }
         if (name=="/boredom") {
             m_renderer->get_source().set_usage_falloff(cmd.get_float(0));
+        }
+        if (name=="/synapses") {
+            m_renderer->get_params()->m_num_synapses=cmd.get_int(0);
         }
     }
 

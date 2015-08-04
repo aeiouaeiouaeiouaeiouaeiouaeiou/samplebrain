@@ -33,6 +33,7 @@ int main( int argc , char *argv[] ){
 
     process_thread pt;
     audio_thread at(pt);
+    pt.register_renderer(at.m_renderer);
 
     return app.exec();
 }

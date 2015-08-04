@@ -84,6 +84,7 @@ block::block(const string &filename, const sample &pcm, u32 rate, const window &
 
     // rerun the normalised version
     normalise(m_n_pcm);
+    w.run(m_n_pcm);
     process(m_n_pcm,m_n_fft,m_n_mfcc);
 
     if (ditchpcm) {
@@ -180,7 +181,23 @@ double block::compare(const block &other, const search_params &params) const {
         other.m_usage, params.m_usage_importance);
 }
 
+ios &spiralcore::operator||(ios &s, block &b) {
+    u32 version=1;
+    string id("block");
+    s||id||version;
+
+    s||b.m_pcm||b.m_fft||b.m_mfcc;
+    s||b.m_n_pcm||b.m_n_fft||b.m_n_mfcc;
+
+    s||b.m_block_size||b.m_rate||b.m_orig_filename;
+    stream_vector(s,b.m_synapse);
+    return s;
+}
+
+
 bool block::unit_test() {
+
+    stream_unit_test();
 
     sample ntest(3);
     u32 idx=0;
@@ -228,6 +245,25 @@ bool block::unit_test() {
     assert(bb.m_rate==44100);
     assert(bb.m_block_size==data.get_length());
 
+    ofstream of("test_data/blocktest.bin",ios::binary);
+    of||bb;
+    of.close();
+
+    cerr<<"written"<<endl;
+
+    ifstream ifs("test_data/blocktest.bin",ios::binary);
+    block bbb;
+    ifs||bbb;
+    ifs.close();
+
+    assert(bbb.m_pcm.get_length()==data.get_length());
+    //assert(bb.m_fft.get_length()==data.get_length());
+    assert(bbb.m_mfcc.get_length()==MFCC_FILTERS);
+    assert(bbb.m_orig_filename==string("test"));
+    assert(bbb.m_rate==44100);
+    assert(bbb.m_block_size==data.get_length());
+
+
     search_params p(0,0,0,100,0);
     block bb2("test",data,44100,w);
     assert(bb.compare(bb2,p)==0);
@@ -238,7 +274,7 @@ bool block::unit_test() {
 
     sample data2(200);
     for (u32 i=0; i<data.get_length(); i++) {
-        data[i]=i%10;
+        data2[i]=i%10;
     }
 
     block cpy("test",data,100,w);

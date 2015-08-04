@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="New document 1">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="255.65918"
+     inkscape:cy="681.62441"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="814"
+     inkscape:window-height="690"
+     inkscape:window-x="525"
+     inkscape:window-y="129"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path2987"
+       sodipodi:cx="225"
+       sodipodi:cy="427.36218"
+       sodipodi:rx="125"
+       sodipodi:ry="125"
+       d="m 350,427.36218 a 125,125 0 1 1 -250,0 125,125 0 1 1 250,0 z"
+       transform="translate(25,200)" />
+    <rect
+       style="fill:#e60000;fill-opacity:1;stroke:none"
+       id="rect3757"
+       width="150"
+       height="150"
+       x="100"
+       y="102.36218"
+       ry="50"
+       inkscape:export-filename="/home/dave/code/samplebrain/samplebrain/qt/images/record.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="path3759"
+       sodipodi:cx="175"
+       sodipodi:cy="177.36218"
+       sodipodi:rx="45"
+       sodipodi:ry="45"
+       d="m 220,177.36218 a 45,45 0 1 1 -90,0 45,45 0 1 1 90,0 z" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3757-0"
+       width="150"
+       height="150"
+       x="250"
+       y="102.36218"
+       ry="50"
+       inkscape:export-filename="/home/dave/code/samplebrain/samplebrain/qt/images/stop.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3779"
+       width="70"
+       height="70"
+       x="290"
+       y="142.36218"
+       ry="0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3781"
+       width="30"
+       height="10"
+       x="400"
+       y="282.36218" />
+    <rect
+       style="fill:#00d02f;fill-opacity:1;stroke:none"
+       id="rect3757-8"
+       width="150"
+       height="150"
+       x="100"
+       y="252.36218"
+       ry="50"
+       inkscape:export-filename="/home/dave/code/samplebrain/samplebrain/qt/images/play.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <rect
+       style="fill:#0b45f0;fill-opacity:1;stroke:none"
+       id="rect3757-0-2"
+       width="150"
+       height="150"
+       x="250"
+       y="252.36218"
+       ry="50"
+       inkscape:export-filename="/home/dave/code/samplebrain/samplebrain/qt/images/pause.png"
+       inkscape:export-xdpi="120"
+       inkscape:export-ydpi="120" />
+    <path
+       style="fill:#ffffff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 140,372.36218 0,-90 80,50 z"
+       id="path3810"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3812"
+       width="30"
+       height="70"
+       x="290"
+       y="292.36218" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3812-5"
+       width="30"
+       height="70"
+       x="330"
+       y="292.36218" />
+  </g>
+</svg>
