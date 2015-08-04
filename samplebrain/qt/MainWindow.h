@@ -92,7 +92,9 @@ private slots:
         lo_send(m_audio_address,"/boredom","f",s);
         m_Ui.sliderBoredom->setValue(s*100);
     }
-
+    void synapses(int s) {
+        lo_send(m_audio_address,"/synapses","i",s);
+    }
     void target_mix_slot(int s) {
         lo_send(m_audio_address,"/target_mix","f",s/100.0f);
         m_Ui.doubleSpinBoxTargetMix->setValue(s/100.0f);
@@ -103,11 +105,12 @@ private slots:
     }
 
     void volume_slot(int s) { lo_send(m_audio_address,"/volume","f",s/100.0f); }
-    void invert_slot(bool s) { if (s) {
-            lo_send(m_audio_address,"/search_algo","i",1);
-        } else {
-            lo_send(m_audio_address,"/search_algo","i",0);
-        }}
+
+    void algo_basic(bool s) { if (s) lo_send(m_audio_address,"/search_algo","i",0); }
+    void algo_rev_basic(bool s) { if (s) lo_send(m_audio_address,"/search_algo","i",1); }
+    void algo_synaptic(bool s) { if (s) lo_send(m_audio_address,"/search_algo","i",2); }
+    void algo_synaptic_slide(bool s) { if (s) lo_send(m_audio_address,"/search_algo","i",3); }
+
     void run_slot() {}
     void load_target() {
         m_last_file=QFileDialog::getOpenFileName(
@@ -195,6 +198,26 @@ private slots:
     void stop_record() {
         lo_send(m_audio_address,"/stop","");
     }
+
+    void load_brain() {
+        m_last_file=QFileDialog::getOpenFileName(
+            this,
+            QString("Select a brain file"),
+            m_last_file,
+            QString("Brains (*.brain)"));
+
+        lo_send(m_process_address,"/load_brain","s",m_last_file.toStdString().c_str());
+    }
+    void save_brain() {
+        m_last_file=QFileDialog::getSaveFileName(
+            this,
+            QString("Select a brain file"),
+            m_last_file,
+            QString("Brains (*.brain)"));
+
+        lo_send(m_process_address,"/save_brain","s",m_last_file.toStdString().c_str());
+    }
+
 
     void update_status() {
         m_feedback.poll(m_Ui.statusbar);

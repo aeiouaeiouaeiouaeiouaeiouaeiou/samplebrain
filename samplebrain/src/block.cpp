@@ -84,6 +84,7 @@ block::block(const string &filename, const sample &pcm, u32 rate, const window &
 
     // rerun the normalised version
     normalise(m_n_pcm);
+    w.run(m_n_pcm);
     process(m_n_pcm,m_n_fft,m_n_mfcc);
 
     if (ditchpcm) {

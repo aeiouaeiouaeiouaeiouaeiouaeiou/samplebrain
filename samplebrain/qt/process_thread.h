@@ -16,6 +16,7 @@
 
 #include "jellyfish/fluxa/OSC_server.h"
 #include "brain.h"
+#include "renderer.h"
 #include <pthread.h>
 
 #pragma once
@@ -27,8 +28,9 @@ public:
     process_thread();
     ~process_thread();
 
-    brain m_source, m_target;
     pthread_mutex_t* m_brain_mutex;
+
+    void register_renderer(renderer *p) { m_renderer=p; }
 
     void process();
 
@@ -36,6 +38,9 @@ public:
     void load_target(const std::string &filename);
     void save_source(const std::string &filename);
     void save_target(const std::string &filename);
+
+    // only for use in mutex
+    brain m_source, m_target;
 
 private:
 	OSC_server m_osc;
@@ -46,6 +51,9 @@ private:
     window::type m_window_type;
     window::type m_target_window_type;
     pthread_t *m_thread;
+
+    // only use in mutex obvs...
+    renderer *m_renderer;
 };
 
 }

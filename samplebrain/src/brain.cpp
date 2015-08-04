@@ -144,9 +144,9 @@ double brain::calc_average_diff(search_params &params) {
 
 void brain::build_synapses_thresh(search_params &params, double thresh) {
     m_average_error = calc_average_diff(params)*thresh;
-    double err=m_average_error*thresh;
+    double err = m_average_error*thresh;
     u32 brain_size = m_blocks.size();
-    u32 outer_index=0;
+    u32 outer_index = 0;
     for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
         u32 index = 0;
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
@@ -167,14 +167,18 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
 void brain::build_synapses_fixed(search_params &params) {
     //m_average_error = calc_average_diff(params)*thresh;
     u32 brain_size = m_blocks.size();
-    u32 outer_index=0;
+    u32 outer_index = 0;
+    u32 num_synapses = NUM_FIXED_SYNAPSES;
+    if (num_synapses>=m_blocks.size()) num_synapses=m_blocks.size()-1;
+
     for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+        status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
         u32 index = 0;
         vector<pair<int,double>> collect;
-        status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
 
         // collect comparisons to all other blocks
         for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
+            assert(index<m_blocks.size());
             if (index!=outer_index) {
                 double diff = i->compare(*j,params);
                 collect.push_back(pair<int,double>(index,diff));
@@ -189,8 +193,11 @@ void brain::build_synapses_fixed(search_params &params) {
                  return a.second<b.second;
              });
 
+
         // add the closest ones to the list
-        for(u32 n=0; n<NUM_FIXED_SYNAPSES; ++n) {
+        for(u32 n=0; n<num_synapses; ++n) {
+            assert(collect[n].first<m_blocks.size());
+
             i->get_synapse().push_back(collect[n].first);
         }
 
@@ -200,7 +207,11 @@ void brain::build_synapses_fixed(search_params &params) {
 
 
 void brain::jiggle() {
-    m_current_block_index=rand()%m_blocks.size();
+    if (m_blocks.size()>0) {
+        m_current_block_index=rand()%m_blocks.size();
+    } else {
+        m_current_block_index=0;
+    }
 }
 
 
@@ -209,14 +220,19 @@ u32 brain::search_synapses(const block &target, search_params &params) {
     double closest = DBL_MAX;
     u32 closest_index = 0;
     // find nearest in synaptic connections
+    if (current.get_synapse_const().size()<params.m_num_synapses) {
+        params.m_num_synapses = current.get_synapse_const().size()-1;
+    }
+    assert(current.get_synapse_const().size()>params.m_num_synapses);
 
-//    cerr<<"searching "<<current.get_synapse_const().size()<<" connections"<<endl;
-    vector<u32>::const_iterator i=current.get_synapse_const().begin();
     u32 synapse_count=0;
     // use m_num_synapses to restrict search
     // only makes sense when ordered by closeness in fixed mode
+    vector<u32>::const_iterator i=current.get_synapse_const().begin();
     while (i!=current.get_synapse_const().end() &&
            synapse_count<params.m_num_synapses) {
+        assert(*i<m_blocks.size());
+
         const block &other = get_block(*i);
         double diff = target.compare(other,params);
         if (diff<closest) {

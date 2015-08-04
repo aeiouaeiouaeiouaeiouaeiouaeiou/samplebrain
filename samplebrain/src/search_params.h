@@ -27,7 +27,7 @@ public:
         m_fft1_start(s1),
         m_fft1_end(e1),
         m_usage_importance(usage_importance),
-        m_num_synapses(100)
+        m_num_synapses(20)
         {}
 
     float m_ratio;

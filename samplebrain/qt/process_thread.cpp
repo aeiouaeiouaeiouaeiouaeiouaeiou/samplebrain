@@ -56,7 +56,7 @@ void process_thread::process() {
     while(true) {
         while (m_osc.get(cmd)) {
             string name = cmd.m_name;
-            cerr<<name<<endl;
+            //cerr<<name<<endl;
             if (name=="/load_sample") {
                 pthread_mutex_lock(m_brain_mutex);
                 m_source.load_sound(cmd.get_string(0));
@@ -75,8 +75,10 @@ void process_thread::process() {
             }
             if (name=="/generate_brain") {
                 pthread_mutex_lock(m_brain_mutex);
-                cerr<<m_window_type<<endl;
                 m_source.init(m_source_block_size, m_source_overlap, m_window_type);
+                search_params p(1,0,0,100,0);
+                m_source.build_synapses_fixed(p);
+                m_renderer->reset();
                 pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/load_target") {
@@ -90,11 +92,9 @@ void process_thread::process() {
             }
             if (name=="/target_overlap") {
                 m_target_overlap = m_target_block_size*cmd.get_float(0);
-                cerr<<m_target_overlap<<endl;
             }
             if (name=="/generate_target") {
                 pthread_mutex_lock(m_brain_mutex);
-                cerr<<m_target_window_type<<endl;
                 m_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
                 pthread_mutex_unlock(m_brain_mutex);
             }
@@ -104,7 +104,46 @@ void process_thread::process() {
             if (name=="/target_window_type") {
                 m_target_window_type=(window::type)cmd.get_int(0);
             }
+            if (name=="/load_brain") {
+                load_source(cmd.get_string(0));
+            }
+            if (name=="/save_brain") {
+                save_source(cmd.get_string(0));
+            }
         }
         usleep(500);
     }
+}
+
+
+void process_thread::load_source(const std::string &filename) {
+    pthread_mutex_lock(m_brain_mutex);
+    ifstream ifs(filename.c_str(),ios::binary);
+    ifs||m_source;
+    ifs.close();
+    pthread_mutex_unlock(m_brain_mutex);
+}
+
+void process_thread::load_target(const std::string &filename) {
+    pthread_mutex_lock(m_brain_mutex);
+    ifstream ifs(filename.c_str(),ios::binary);
+    ifs||m_target;
+    ifs.close();
+    pthread_mutex_unlock(m_brain_mutex);
+}
+
+void process_thread::save_source(const std::string &filename) {
+    pthread_mutex_lock(m_brain_mutex);
+    ofstream ofs(filename.c_str(),ios::binary);
+    ofs||m_source;
+    ofs.close();
+    pthread_mutex_unlock(m_brain_mutex);
+}
+
+void process_thread::save_target(const std::string &filename) {
+    pthread_mutex_lock(m_brain_mutex);
+    ofstream ofs(filename.c_str(),ios::binary);
+    ofs||m_target;
+    ofs.close();
+    pthread_mutex_unlock(m_brain_mutex);
 }
