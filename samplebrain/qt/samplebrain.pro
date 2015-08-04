@@ -21,7 +21,7 @@ SOURCES += MainWindow.cpp \
 
 INCLUDEPATH += ../src
 LIBS += -L.. -lsamplebrain -ljellyfish -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
-CONFIG+=debug
+#CONFIG+=debug
 
 # assets
 RESOURCES     = samplebrain.qrc
