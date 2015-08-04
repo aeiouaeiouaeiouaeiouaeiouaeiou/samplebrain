@@ -25,6 +25,9 @@
 using namespace std;
 using namespace spiralcore;
 
+static const u32 NUM_FIXED_SYNAPSES = 1000;
+static const double usage_factor = 1000000;
+
 brain::brain() :
     m_current_block_index(0),
     m_average_error(0),
@@ -89,8 +92,6 @@ const block &brain::get_block(u32 index) const {
     return m_blocks[index];
 }
 
-static const double usage_factor = 1000000;
-
 // returns index to block
 u32 brain::search(const block &target, const search_params &params) {
     double closest = FLT_MAX;
@@ -129,6 +130,7 @@ u32 brain::rev_search(const block &target, const search_params &params) {
     return furthest_index;
 }
 
+// really slow - every to every comparison of blocks calculating average distance
 double brain::calc_average_diff(search_params &params) {
     double diff=0;
     for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
@@ -140,7 +142,7 @@ double brain::calc_average_diff(search_params &params) {
     return diff;
 }
 
-void brain::build_synapses(search_params &params, double thresh) {
+void brain::build_synapses_thresh(search_params &params, double thresh) {
     m_average_error = calc_average_diff(params)*thresh;
     double err=m_average_error*thresh;
     u32 brain_size = m_blocks.size();
@@ -150,6 +152,7 @@ void brain::build_synapses(search_params &params, double thresh) {
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
         for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
             if (index!=outer_index) {
+                // collect connections that are under threshold in closeness
                 double diff = i->compare(*j,params);
                 if (diff<err) {
                     i->get_synapse().push_back(index);
@@ -161,6 +164,46 @@ void brain::build_synapses(search_params &params, double thresh) {
     }
 }
 
+void brain::build_synapses_fixed(search_params &params) {
+    //m_average_error = calc_average_diff(params)*thresh;
+    u32 brain_size = m_blocks.size();
+    u32 outer_index=0;
+    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+        u32 index = 0;
+        vector<pair<int,double>> collect;
+        status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
+
+        // collect comparisons to all other blocks
+        for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
+            if (index!=outer_index) {
+                double diff = i->compare(*j,params);
+                collect.push_back(pair<int,double>(index,diff));
+            }
+            ++index;
+        }
+
+        // sort them by closeness
+        sort(collect.begin(),collect.end(),
+             [](const pair<int,double> &a,
+                const pair<int,double> &b) -> bool {
+                 return a.second<b.second;
+             });
+
+        // add the closest ones to the list
+        for(u32 n=0; n<NUM_FIXED_SYNAPSES; ++n) {
+            i->get_synapse().push_back(collect[n].first);
+        }
+
+        ++outer_index;
+    }
+}
+
+
+void brain::jiggle() {
+    m_current_block_index=rand()%m_blocks.size();
+}
+
+
 u32 brain::search_synapses(const block &target, search_params &params) {
     const block &current = get_block(m_current_block_index);
     double closest = DBL_MAX;
@@ -168,14 +211,20 @@ u32 brain::search_synapses(const block &target, search_params &params) {
     // find nearest in synaptic connections
 
 //    cerr<<"searching "<<current.get_synapse_const().size()<<" connections"<<endl;
-    for (vector<u32>::const_iterator i=current.get_synapse_const().begin();
-         i!=current.get_synapse_const().end(); ++i) {
+    vector<u32>::const_iterator i=current.get_synapse_const().begin();
+    u32 synapse_count=0;
+    // use m_num_synapses to restrict search
+    // only makes sense when ordered by closeness in fixed mode
+    while (i!=current.get_synapse_const().end() &&
+           synapse_count<params.m_num_synapses) {
         const block &other = get_block(*i);
         double diff = target.compare(other,params);
         if (diff<closest) {
             closest=diff;
             closest_index = *i;
         }
+        ++i;
+        ++synapse_count;
     }
 
     deplete_usage();

@@ -32,6 +32,11 @@ public:
 
     void process();
 
+    void load_source(const std::string &filename);
+    void load_target(const std::string &filename);
+    void save_source(const std::string &filename);
+    void save_target(const std::string &filename);
+
 private:
 	OSC_server m_osc;
     u32 m_source_block_size;

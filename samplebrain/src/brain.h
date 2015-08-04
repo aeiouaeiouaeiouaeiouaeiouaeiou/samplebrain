@@ -35,6 +35,9 @@ public:
     // rewrites whole brain
     void init(u32 block_size, u32 overlap, window::type t, bool ditchpcm=false);
 
+    // randomise the synaptic pointer
+    void jiggle();
+
     class sound {
     public:
         sound(const std::string &name, const sample &sample) :
@@ -70,7 +73,8 @@ public:
 
     // synaptic search
     double calc_average_diff(search_params &params);
-    void build_synapses(search_params &params, double threshold);
+    void build_synapses_thresh(search_params &params, double threshold);
+    void build_synapses_fixed(search_params &params);
     u32 search_synapses(const block &target, search_params &params);
     double get_current_error() { return m_current_error/m_average_error; }
 

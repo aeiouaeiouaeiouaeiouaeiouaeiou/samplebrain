@@ -43,6 +43,7 @@ void renderer::reset() {
     m_render_time=0;
     m_target_index=0;
     m_render_blocks.clear();
+    m_source.jiggle();
 }
 
 void renderer::process(u32 nframes, float *buf) {
