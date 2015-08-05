@@ -33,6 +33,7 @@ void renderer::init(brain &source, brain &target) {
     m_search_algo=BASIC;
     m_slide_error=1;
     m_target_index=0;
+    m_target_counter=0;
     m_last_tgt_shift=0;
 }
 
@@ -42,11 +43,163 @@ void renderer::reset() {
     m_target_time=0;
     m_render_time=0;
     m_target_index=0;
+    m_target_counter=0;
     m_render_blocks.clear();
     m_source.jiggle();
 }
 
+
 void renderer::process(u32 nframes, float *buf) {
+    if (!m_playing) return;
+    if (!find_render_blocks(nframes)) return;
+
+    render(nframes,buf);
+
+    clean_up();
+
+    m_render_time+=nframes;
+    m_target_time+=nframes;
+}
+
+bool renderer::find_render_blocks(u32 nframes) {
+    // get new blocks from source for the current buffer
+
+    // where are we phase?
+    u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
+    u32 tgt_end = (m_target_time+nframes)/(float)tgt_shift;
+
+    // stuff has changed - recompute and abort
+    if (tgt_shift!=m_last_tgt_shift ||
+        tgt_end>=m_target.get_num_blocks() || m_source.get_num_blocks()==0) {
+        reset();
+        m_last_tgt_shift = tgt_shift;
+        // next time...
+        return false;
+    }
+
+
+//    cerr<<"-----------------"<<endl;
+//    cerr<<"tgt start:"<<m_target_index<<endl;
+//    cerr<<"tgt end:"<<tgt_end<<endl;
+
+    // search phase
+    // get indices for current buffer
+    u32 counter = m_target_counter;
+    //u32 cur_time = m_render_time;
+    while (counter<=tgt_end) {
+        u32 time=m_target_counter*tgt_shift;
+        u32 src_index=0;
+
+        switch (m_search_algo) {
+        case BASIC:
+            src_index = m_source.search(m_target.get_block(m_target_index), m_search_params);
+            break;
+        case REV_BASIC:
+            src_index = m_source.rev_search(m_target.get_block(m_target_index), m_search_params);
+            break;
+        case SYNAPTIC:
+        case SYNAPTIC_SLIDE:
+            src_index = m_source.search_synapses(m_target.get_block(m_target_index), m_search_params);
+            break;
+        }
+
+        if (m_search_algo==SYNAPTIC_SLIDE) {
+            m_render_blocks.push_back(render_block(src_index,m_target_index,time));
+
+            if (m_source.get_current_error()<m_slide_error &&
+                m_target_counter%1==0) {
+                m_target_index++;
+            }
+            m_target_counter++;
+
+        } else {
+            // put them in the index list
+            m_render_blocks.push_back(render_block(src_index,m_target_index,time));
+
+            if (m_target_counter%1==0) {
+                m_target_index++;
+            }
+            m_target_counter++;
+        }
+        counter++;
+    }
+    return true;
+}
+
+void renderer::render(u32 nframes, float *buf) {
+    // render phase
+    // render all blocks in list
+    for (std::list<render_block>::iterator i=m_render_blocks.begin(); i!=m_render_blocks.end(); ++i) {
+        const sample &pcm=m_source.get_block(i->m_index).get_pcm();
+        const sample &n_pcm=m_source.get_block(i->m_index).get_n_pcm();
+        const sample &target_pcm=m_target.get_block(i->m_tgt_index).get_pcm();
+        // get the sample offset into the buffer
+        s32 offset = i->m_time-m_render_time;
+
+        // assume midway through block
+        u32 block_start = offset;
+        u32 buffer_start = 0;
+        if (offset<0) {
+            block_start=-offset;
+            if (block_start>=pcm.get_length()) i->m_finished=true;
+        } else { // block is midway through buffer
+            block_start=0;
+            buffer_start=offset;
+        }
+
+//        cerr<<"-----------------"<<endl;
+//        cerr<<"block start:"<<block_start<<endl;
+//        cerr<<"buffer start:"<<buffer_start<<endl;
+
+        if (!i->m_finished) {
+            // mix in
+            u32 buffer_pos = buffer_start;
+            u32 block_pos = block_start;
+            u32 block_end = pcm.get_length();
+
+
+            while (block_pos<block_end && buffer_pos<nframes) {
+                // mix with normalised version
+                float brain_sample = (pcm[block_pos]*(1-m_n_mix)+
+                                      n_pcm[block_pos]*m_n_mix);
+
+                // for mixing with target audio
+                float target_sample = target_pcm[block_pos];
+
+                buf[buffer_pos]+=(brain_sample*(1-m_target_mix) +
+                                  target_sample*m_target_mix)*0.2*m_volume;
+                ++buffer_pos;
+                ++block_pos;
+            }
+        }
+    }
+}
+
+void renderer::clean_up() {
+    // cleanup phase
+    // delete old ones
+    std::list<render_block>::iterator i=m_render_blocks.begin();
+    std::list<render_block>::iterator ni=m_render_blocks.begin();
+    while(i!=m_render_blocks.end()) {
+        ni++;
+        if (i->m_finished) m_render_blocks.erase(i);
+        i=ni;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+void renderer::old_process(u32 nframes, float *buf) {
     if (!m_playing) return;
 
     // get new blocks from source for the current buffer
@@ -159,6 +312,7 @@ void renderer::process(u32 nframes, float *buf) {
     m_render_time+=nframes;
     m_target_time+=nframes;
 }
+
 
 bool renderer::unit_test() {
     brain source;
