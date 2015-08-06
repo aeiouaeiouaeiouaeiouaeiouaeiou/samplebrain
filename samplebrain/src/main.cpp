@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 */
 
     brain source;
-    ifstream ifs("shosta.brain",ios::binary);
+    ifstream ifs("mix.brain",ios::binary);
     ifs||source;
     ifs.close();
 
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     rr.get_params()->m_num_synapses=40;
     rr.set_slide_error(3400.5);
     rr.set_search_algo(renderer::SYNAPTIC);
-    rr.set_target_mix(0.2);
+    rr.set_target_mix(0.9);
     rr.set_stretch(10);
     a->start_recording("debug");
 	a->m_client.set_callback(run_audio, &rr);

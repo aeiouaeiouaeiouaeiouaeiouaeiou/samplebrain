@@ -83,7 +83,7 @@ private:
     float m_volume;
     bool m_playing;
     u32 m_target_index;
-    u32 m_target_counter;
+    u32 m_render_index;
     float m_target_time;
     u32 m_render_time;
     u32 m_stretch;
