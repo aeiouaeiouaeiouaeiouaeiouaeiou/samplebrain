@@ -118,6 +118,12 @@ void audio_thread::process(sample &s, sample &s2) {
         if (name=="/synapses") {
             m_renderer->get_params()->m_num_synapses=cmd.get_int(0);
         }
+        if (name=="/search-stretch") {
+            m_renderer->set_stretch(cmd.get_int(0));
+        }
+        if (name=="/slide-error") {
+            m_renderer->set_slide_error(cmd.get_int(0));
+        }
     }
 
     s.zero();

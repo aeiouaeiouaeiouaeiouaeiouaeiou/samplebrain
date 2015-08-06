@@ -51,6 +51,7 @@ renderer(brain &source, brain &target) :
     void set_n_mix(float s) { m_n_mix=s; }
     void set_target_mix(float s) { m_target_mix=s; }
     void set_slide_error(double s) { m_slide_error=s; }
+    void set_stretch(u32 s) { m_stretch=s; }
     search_params *get_params() { return &m_search_params; }
 
     brain &get_source() { return m_source; }
@@ -83,7 +84,7 @@ private:
     bool m_playing;
     u32 m_target_index;
     u32 m_target_counter;
-    u32 m_target_time;
+    float m_target_time;
     u32 m_render_time;
     u32 m_stretch;
     float m_n_mix;

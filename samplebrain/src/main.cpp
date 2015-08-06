@@ -123,12 +123,15 @@ int main(int argc, char *argv[])
     source.set_usage_falloff(0.9);
     rr.get_params()->m_num_synapses=40;
     rr.set_slide_error(3400.5);
-    rr.set_search_algo(renderer::SYNAPTIC_SLIDE);
+    rr.set_search_algo(renderer::SYNAPTIC);
     rr.set_target_mix(0.2);
+    rr.set_stretch(10);
     a->start_recording("debug");
 	a->m_client.set_callback(run_audio, &rr);
 
     //target.resynth("shosta-dream-0.5.wav",source,0.5);
+
+
 
     while (true) sleep(1);
 

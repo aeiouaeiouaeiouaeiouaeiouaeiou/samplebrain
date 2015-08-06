@@ -103,6 +103,12 @@ private slots:
         lo_send(m_audio_address,"/target_mix","f",s);
         m_Ui.sliderTargetMix->setValue(s*100);
     }
+    void search_stretch(int s) {
+        lo_send(m_audio_address,"/search-stretch","i",s);
+    }
+    void slide_error(int s) {
+        lo_send(m_audio_address,"/slide-error","i",s);
+    }
 
     void volume_slot(int s) { lo_send(m_audio_address,"/volume","f",s/100.0f); }
 
