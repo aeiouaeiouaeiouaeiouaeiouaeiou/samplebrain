@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainuQB562.ui'
+** Form generated from reading UI file 'samplebrainj32146.ui'
 **
-** Created: Tue Aug 4 16:33:54 2015
+** Created: Thu Aug 6 13:25:50 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINUQB562_H
-#define SAMPLEBRAINUQB562_H
+#ifndef SAMPLEBRAINJ32146_H
+#define SAMPLEBRAINJ32146_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -42,7 +42,7 @@ public:
     QVBoxLayout *verticalLayout_4;
     QTabWidget *tabWidget;
     QWidget *controlTab;
-    QHBoxLayout *horizontalLayout_19;
+    QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_19;
     QHBoxLayout *horizontalLayout_16;
@@ -67,18 +67,25 @@ public:
     QLabel *label_25;
     QSlider *sliderBoredom;
     QDoubleSpinBox *doubleSpinBoxBoredom;
-    QHBoxLayout *horizontalLayout_17;
-    QLabel *label_26;
-    QSlider *sliderSynapses;
-    QSpinBox *spinBoxSynapses;
+    QHBoxLayout *horizontalLayout_19;
+    QLabel *label_28;
+    QSlider *sliderSearchStretch;
+    QSpinBox *spinBoxSearchStretch;
     QLabel *label_27;
     QHBoxLayout *horizontalLayout_18;
     QRadioButton *radioButtonAlgoBasic;
     QRadioButton *radioButtonAlgoRevBasic;
     QRadioButton *radioButtonSynaptic;
     QRadioButton *radioButtonSynapticSlide;
+    QHBoxLayout *horizontalLayout_17;
+    QLabel *label_26;
+    QSlider *sliderSynapses;
+    QSpinBox *spinBoxSynapses;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *label_29;
+    QSlider *sliderSlideError;
+    QSpinBox *spinBoxSlideError;
     QSpacerItem *horizontalSpacer_2;
-    QSpacerItem *verticalSpacer_3;
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_21;
@@ -88,6 +95,7 @@ public:
     QLabel *label_22;
     QSlider *sliderTargetMix;
     QDoubleSpinBox *doubleSpinBoxTargetMix;
+    QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
     QPushButton *pushButtonLoadTarget;
@@ -151,15 +159,15 @@ public:
     QSpacerItem *horizontalSpacer;
     QLabel *label_13;
     QStatusBar *statusbar;
-    QButtonGroup *buttonGroup;
     QButtonGroup *buttonGroup_2;
     QButtonGroup *buttonGroup_3;
+    QButtonGroup *buttonGroup;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1134, 691);
+        MainWindow->resize(1134, 707);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -173,8 +181,8 @@ public:
         tabWidget->setFont(font);
         controlTab = new QWidget();
         controlTab->setObjectName(QString::fromUtf8("controlTab"));
-        horizontalLayout_19 = new QHBoxLayout(controlTab);
-        horizontalLayout_19->setObjectName(QString::fromUtf8("horizontalLayout_19"));
+        horizontalLayout_5 = new QHBoxLayout(controlTab);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         label_19 = new QLabel(controlTab);
@@ -364,35 +372,37 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_11);
 
-        horizontalLayout_17 = new QHBoxLayout();
-        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
-        label_26 = new QLabel(controlTab);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
-        label_26->setFont(font2);
+        horizontalLayout_19 = new QHBoxLayout();
+        horizontalLayout_19->setObjectName(QString::fromUtf8("horizontalLayout_19"));
+        label_28 = new QLabel(controlTab);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+        label_28->setFont(font2);
 
-        horizontalLayout_17->addWidget(label_26);
+        horizontalLayout_19->addWidget(label_28);
 
-        sliderSynapses = new QSlider(controlTab);
-        sliderSynapses->setObjectName(QString::fromUtf8("sliderSynapses"));
-        sizePolicy.setHeightForWidth(sliderSynapses->sizePolicy().hasHeightForWidth());
-        sliderSynapses->setSizePolicy(sizePolicy);
-        sliderSynapses->setMaximum(1000);
-        sliderSynapses->setValue(20);
-        sliderSynapses->setOrientation(Qt::Horizontal);
+        sliderSearchStretch = new QSlider(controlTab);
+        sliderSearchStretch->setObjectName(QString::fromUtf8("sliderSearchStretch"));
+        sizePolicy.setHeightForWidth(sliderSearchStretch->sizePolicy().hasHeightForWidth());
+        sliderSearchStretch->setSizePolicy(sizePolicy);
+        sliderSearchStretch->setMinimum(1);
+        sliderSearchStretch->setMaximum(10);
+        sliderSearchStretch->setValue(1);
+        sliderSearchStretch->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_17->addWidget(sliderSynapses);
+        horizontalLayout_19->addWidget(sliderSearchStretch);
 
-        spinBoxSynapses = new QSpinBox(controlTab);
-        spinBoxSynapses->setObjectName(QString::fromUtf8("spinBoxSynapses"));
-        sizePolicy1.setHeightForWidth(spinBoxSynapses->sizePolicy().hasHeightForWidth());
-        spinBoxSynapses->setSizePolicy(sizePolicy1);
-        spinBoxSynapses->setMaximum(1000);
-        spinBoxSynapses->setValue(20);
+        spinBoxSearchStretch = new QSpinBox(controlTab);
+        spinBoxSearchStretch->setObjectName(QString::fromUtf8("spinBoxSearchStretch"));
+        sizePolicy1.setHeightForWidth(spinBoxSearchStretch->sizePolicy().hasHeightForWidth());
+        spinBoxSearchStretch->setSizePolicy(sizePolicy1);
+        spinBoxSearchStretch->setMinimum(1);
+        spinBoxSearchStretch->setMaximum(10);
+        spinBoxSearchStretch->setValue(1);
 
-        horizontalLayout_17->addWidget(spinBoxSynapses);
+        horizontalLayout_19->addWidget(spinBoxSearchStretch);
 
 
-        verticalLayout_3->addLayout(horizontalLayout_17);
+        verticalLayout_3->addLayout(horizontalLayout_19);
 
         label_27 = new QLabel(controlTab);
         label_27->setObjectName(QString::fromUtf8("label_27"));
@@ -432,7 +442,7 @@ public:
         radioButtonSynapticSlide = new QRadioButton(controlTab);
         buttonGroup_3->addButton(radioButtonSynapticSlide);
         radioButtonSynapticSlide->setObjectName(QString::fromUtf8("radioButtonSynapticSlide"));
-        radioButtonSynapticSlide->setEnabled(false);
+        radioButtonSynapticSlide->setEnabled(true);
         radioButtonSynapticSlide->setCheckable(true);
 
         horizontalLayout_18->addWidget(radioButtonSynapticSlide);
@@ -440,13 +450,71 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_18);
 
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
+        label_26 = new QLabel(controlTab);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+        label_26->setFont(font2);
+
+        horizontalLayout_17->addWidget(label_26);
+
+        sliderSynapses = new QSlider(controlTab);
+        sliderSynapses->setObjectName(QString::fromUtf8("sliderSynapses"));
+        sizePolicy.setHeightForWidth(sliderSynapses->sizePolicy().hasHeightForWidth());
+        sliderSynapses->setSizePolicy(sizePolicy);
+        sliderSynapses->setMaximum(1000);
+        sliderSynapses->setValue(20);
+        sliderSynapses->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_17->addWidget(sliderSynapses);
+
+        spinBoxSynapses = new QSpinBox(controlTab);
+        spinBoxSynapses->setObjectName(QString::fromUtf8("spinBoxSynapses"));
+        sizePolicy1.setHeightForWidth(spinBoxSynapses->sizePolicy().hasHeightForWidth());
+        spinBoxSynapses->setSizePolicy(sizePolicy1);
+        spinBoxSynapses->setMaximum(1000);
+        spinBoxSynapses->setValue(20);
+
+        horizontalLayout_17->addWidget(spinBoxSynapses);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_17);
+
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
+        label_29 = new QLabel(controlTab);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        label_29->setFont(font2);
+
+        horizontalLayout_20->addWidget(label_29);
+
+        sliderSlideError = new QSlider(controlTab);
+        sliderSlideError->setObjectName(QString::fromUtf8("sliderSlideError"));
+        sizePolicy.setHeightForWidth(sliderSlideError->sizePolicy().hasHeightForWidth());
+        sliderSlideError->setSizePolicy(sizePolicy);
+        sliderSlideError->setMaximum(10000);
+        sliderSlideError->setSingleStep(100);
+        sliderSlideError->setValue(1000);
+        sliderSlideError->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_20->addWidget(sliderSlideError);
+
+        spinBoxSlideError = new QSpinBox(controlTab);
+        spinBoxSlideError->setObjectName(QString::fromUtf8("spinBoxSlideError"));
+        sizePolicy1.setHeightForWidth(spinBoxSlideError->sizePolicy().hasHeightForWidth());
+        spinBoxSlideError->setSizePolicy(sizePolicy1);
+        spinBoxSlideError->setMaximum(10000);
+        spinBoxSlideError->setSingleStep(100);
+        spinBoxSlideError->setValue(1000);
+
+        horizontalLayout_20->addWidget(spinBoxSlideError);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_20);
+
         horizontalSpacer_2 = new QSpacerItem(21, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         verticalLayout_3->addItem(horizontalSpacer_2);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer_3);
 
         label_23 = new QLabel(controlTab);
         label_23->setObjectName(QString::fromUtf8("label_23"));
@@ -515,8 +583,12 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_9);
 
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        horizontalLayout_19->addLayout(verticalLayout_3);
+        verticalLayout_3->addItem(verticalSpacer_3);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_3);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
@@ -641,7 +713,7 @@ public:
         verticalLayout_6->addItem(verticalSpacer);
 
 
-        horizontalLayout_19->addLayout(verticalLayout_6);
+        horizontalLayout_5->addLayout(verticalLayout_6);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -777,7 +849,7 @@ public:
         verticalLayout_2->addItem(verticalSpacer_2);
 
 
-        horizontalLayout_19->addLayout(verticalLayout_2);
+        horizontalLayout_5->addLayout(verticalLayout_2);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -816,7 +888,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
 
-        horizontalLayout_19->addLayout(verticalLayout);
+        horizontalLayout_5->addLayout(verticalLayout);
 
         tabWidget->addTab(controlTab, QString());
         logTab = new QWidget();
@@ -906,56 +978,62 @@ public:
         QObject::connect(dialVolume, SIGNAL(sliderMoved(int)), MainWindow, SLOT(volume_slot(int)));
         QObject::connect(pushButtonStopRecord, SIGNAL(released()), MainWindow, SLOT(stop_record()));
         QObject::connect(pushButtonRecord, SIGNAL(released()), MainWindow, SLOT(record()));
-        QObject::connect(pushButtonLoadTarget, SIGNAL(released()), MainWindow, SLOT(load_target()));
-        QObject::connect(pushButtonGenerateTarget, SIGNAL(released()), MainWindow, SLOT(generate_target_blocks()));
-        QObject::connect(spinBoxBlockSizeTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_size(int)));
-        QObject::connect(doubleSpinBoxRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(ratio_slot(double)));
-        QObject::connect(spinBoxFFT1Start, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_start_slot(int)));
-        QObject::connect(spinBoxFFT1End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_end_slot(int)));
-        QObject::connect(radioButton_hammingTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hamming(bool)));
-        QObject::connect(doubleSpinBoxBlockOverlapTarget, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_block_overlap(double)));
-        QObject::connect(radioButton_rectangleTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_rectangle(bool)));
-        QObject::connect(radioButton_flattopTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_flattop(bool)));
-        QObject::connect(radioButton_blackmanTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_blackman(bool)));
-        QObject::connect(radioButton_bartlettTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_bartlett(bool)));
         QObject::connect(radioButton_dodgyTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_dodgy(bool)));
+        QObject::connect(radioButton_blackmanTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_blackman(bool)));
+        QObject::connect(spinBoxFFT1End, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_end_slot(int)));
+        QObject::connect(doubleSpinBoxRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(ratio_slot(double)));
         QObject::connect(radioButton_hannTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hann(bool)));
         QObject::connect(radioButton_gaussianTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_gaussian(bool)));
+        QObject::connect(sliderSynapses, SIGNAL(valueChanged(int)), spinBoxSynapses, SLOT(setValue(int)));
+        QObject::connect(doubleSpinBoxTargetMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_mix_slot(double)));
+        QObject::connect(pushButtonGenerateTarget, SIGNAL(released()), MainWindow, SLOT(generate_target_blocks()));
+        QObject::connect(spinBoxBlockSizeTarget, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_block_size(int)));
+        QObject::connect(pushButtonLoadTarget, SIGNAL(released()), MainWindow, SLOT(load_target()));
+        QObject::connect(spinBoxFFT1Start, SIGNAL(valueChanged(int)), MainWindow, SLOT(fft1_start_slot(int)));
+        QObject::connect(radioButton_hammingTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_hamming(bool)));
+        QObject::connect(radioButton_flattopTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_flattop(bool)));
+        QObject::connect(radioButton_bartlettTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_bartlett(bool)));
+        QObject::connect(doubleSpinBoxBlockOverlapTarget, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_block_overlap(double)));
+        QObject::connect(radioButton_rectangleTarget, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_rectangle(bool)));
+        QObject::connect(spinBoxSynapses, SIGNAL(valueChanged(int)), sliderSynapses, SLOT(setValue(int)));
+        QObject::connect(spinBoxSynapses, SIGNAL(valueChanged(int)), MainWindow, SLOT(synapses(int)));
         QObject::connect(sliderRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(ratio_slot(int)));
         QObject::connect(sliderNRatio, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_ratio_slot(int)));
         QObject::connect(doubleSpinBoxNRatio, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_ratio_slot(double)));
-        QObject::connect(sliderNMix, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_mix_slot(int)));
+        QObject::connect(radioButton_dodgy, SIGNAL(toggled(bool)), MainWindow, SLOT(window_dodgy(bool)));
         QObject::connect(sliderTargetMix, SIGNAL(valueChanged(int)), MainWindow, SLOT(target_mix_slot(int)));
+        QObject::connect(sliderNMix, SIGNAL(valueChanged(int)), MainWindow, SLOT(n_mix_slot(int)));
         QObject::connect(doubleSpinBoxNMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(n_mix_slot(double)));
-        QObject::connect(doubleSpinBoxTargetMix, SIGNAL(valueChanged(double)), MainWindow, SLOT(target_mix_slot(double)));
+        QObject::connect(pushButtonLoadBrain, SIGNAL(released()), MainWindow, SLOT(load_brain()));
+        QObject::connect(radioButtonSynaptic, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_synaptic(bool)));
         QObject::connect(doubleSpinBoxBoredom, SIGNAL(valueChanged(double)), MainWindow, SLOT(boredom_slot(double)));
-        QObject::connect(sliderBoredom, SIGNAL(valueChanged(int)), MainWindow, SLOT(boredom_slot(int)));
         QObject::connect(doubleSpinBoxNovelty, SIGNAL(valueChanged(double)), MainWindow, SLOT(novelty_slot(double)));
         QObject::connect(sliderNovelty, SIGNAL(valueChanged(int)), MainWindow, SLOT(novelty_slot(int)));
-        QObject::connect(sliderSynapses, SIGNAL(valueChanged(int)), spinBoxSynapses, SLOT(setValue(int)));
-        QObject::connect(sliderSynapses, SIGNAL(valueChanged(int)), MainWindow, SLOT(synapses(int)));
-        QObject::connect(spinBoxSynapses, SIGNAL(valueChanged(int)), sliderSynapses, SLOT(setValue(int)));
-        QObject::connect(spinBoxSynapses, SIGNAL(valueChanged(int)), MainWindow, SLOT(synapses(int)));
-        QObject::connect(radioButtonAlgoBasic, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_basic(bool)));
-        QObject::connect(radioButtonAlgoRevBasic, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_rev_basic(bool)));
-        QObject::connect(radioButtonSynaptic, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_synaptic(bool)));
-        QObject::connect(radioButtonSynapticSlide, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_synaptic_slide(bool)));
-        QObject::connect(pushButtonLoadBrain, SIGNAL(released()), MainWindow, SLOT(load_brain()));
-        QObject::connect(pushButtonSaveBrain, SIGNAL(released()), MainWindow, SLOT(save_brain()));
-        QObject::connect(spinBoxBlockSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(block_size(int)));
-        QObject::connect(doubleSpinBoxBlockOverlap, SIGNAL(valueChanged(double)), MainWindow, SLOT(block_overlap(double)));
-        QObject::connect(radioButton_dodgy, SIGNAL(toggled(bool)), MainWindow, SLOT(window_dodgy(bool)));
+        QObject::connect(sliderBoredom, SIGNAL(valueChanged(int)), MainWindow, SLOT(boredom_slot(int)));
         QObject::connect(radioButton_bartlett, SIGNAL(toggled(bool)), MainWindow, SLOT(window_bartlett(bool)));
         QObject::connect(radioButton_blackman, SIGNAL(toggled(bool)), MainWindow, SLOT(window_blackman(bool)));
-        QObject::connect(radioButton_flattop, SIGNAL(toggled(bool)), MainWindow, SLOT(window_flattop(bool)));
+        QObject::connect(sliderSynapses, SIGNAL(valueChanged(int)), MainWindow, SLOT(synapses(int)));
+        QObject::connect(radioButtonSynapticSlide, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_synaptic_slide(bool)));
+        QObject::connect(spinBoxBlockSize, SIGNAL(valueChanged(int)), MainWindow, SLOT(block_size(int)));
+        QObject::connect(doubleSpinBoxBlockOverlap, SIGNAL(valueChanged(double)), MainWindow, SLOT(block_overlap(double)));
         QObject::connect(radioButton_gaussian, SIGNAL(toggled(bool)), MainWindow, SLOT(window_gaussian(bool)));
-        QObject::connect(radioButton_hamming, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hamming(bool)));
-        QObject::connect(radioButton_hann, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hann(bool)));
+        QObject::connect(radioButton_flattop, SIGNAL(toggled(bool)), MainWindow, SLOT(window_flattop(bool)));
+        QObject::connect(radioButtonAlgoBasic, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_basic(bool)));
+        QObject::connect(radioButtonAlgoRevBasic, SIGNAL(toggled(bool)), MainWindow, SLOT(algo_rev_basic(bool)));
         QObject::connect(radioButton_rectagle, SIGNAL(toggled(bool)), MainWindow, SLOT(window_target_rectangle(bool)));
-        QObject::connect(pushButtonGenerate, SIGNAL(released()), MainWindow, SLOT(generate()));
-        QObject::connect(pushButtonLoadSound, SIGNAL(released()), MainWindow, SLOT(load_sound()));
+        QObject::connect(radioButton_hamming, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hamming(bool)));
+        QObject::connect(pushButtonSaveBrain, SIGNAL(released()), MainWindow, SLOT(save_brain()));
         QObject::connect(pushButtonDeleteSound, SIGNAL(released()), MainWindow, SLOT(delete_sound()));
         QObject::connect(pushButtonClearBrain, SIGNAL(released()), MainWindow, SLOT(clear_brain()));
+        QObject::connect(pushButtonGenerate, SIGNAL(released()), MainWindow, SLOT(generate()));
+        QObject::connect(pushButtonLoadSound, SIGNAL(released()), MainWindow, SLOT(load_sound()));
+        QObject::connect(radioButton_hann, SIGNAL(toggled(bool)), MainWindow, SLOT(window_hann(bool)));
+        QObject::connect(sliderSearchStretch, SIGNAL(valueChanged(int)), spinBoxSearchStretch, SLOT(setValue(int)));
+        QObject::connect(spinBoxSearchStretch, SIGNAL(valueChanged(int)), sliderSearchStretch, SLOT(setValue(int)));
+        QObject::connect(sliderSearchStretch, SIGNAL(valueChanged(int)), MainWindow, SLOT(search_stretch(int)));
+        QObject::connect(sliderSlideError, SIGNAL(valueChanged(int)), spinBoxSlideError, SLOT(setValue(int)));
+        QObject::connect(spinBoxSlideError, SIGNAL(valueChanged(int)), sliderSlideError, SLOT(setValue(int)));
+        QObject::connect(sliderSlideError, SIGNAL(valueChanged(int)), MainWindow, SLOT(slide_error(int)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -965,7 +1043,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.6", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.7", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -999,17 +1077,17 @@ public:
 #endif // QT_NO_TOOLTIP
         label_25->setText(QApplication::translate("MainWindow", "boredom", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        sliderBoredom->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to ware off", 0, QApplication::UnicodeUTF8));
+        sliderBoredom->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        label_26->setToolTip(QString());
+        label_28->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_26->setText(QApplication::translate("MainWindow", "synpases", 0, QApplication::UnicodeUTF8));
+        label_28->setText(QApplication::translate("MainWindow", "search stretch", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        sliderSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+        sliderSearchStretch->setToolTip(QApplication::translate("MainWindow", "repeat search (set novelty to 0 for dodgy jungle timessssstretch)", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        spinBoxSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+        spinBoxSearchStretch->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         label_27->setText(QApplication::translate("MainWindow", "algorithm", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1028,6 +1106,26 @@ public:
         radioButtonSynapticSlide->setToolTip(QApplication::translate("MainWindow", "search based on synapses and sonify search process", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         radioButtonSynapticSlide->setText(QApplication::translate("MainWindow", "synaptic slide", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        label_26->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+        label_26->setText(QApplication::translate("MainWindow", "num synpases", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        spinBoxSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        label_29->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+        label_29->setText(QApplication::translate("MainWindow", "synaptic slide error", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderSlideError->setToolTip(QApplication::translate("MainWindow", "block difference higher than this causes a new search, skipping the target", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        spinBoxSlideError->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
         label_21->setText(QApplication::translate("MainWindow", "dynamic / normalised ", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1087,4 +1185,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINUQB562_H
+#endif // SAMPLEBRAINJ32146_H

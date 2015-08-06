@@ -26,7 +26,7 @@ using namespace std;
 using namespace spiralcore;
 
 static const u32 NUM_FIXED_SYNAPSES = 1000;
-static const double usage_factor = 1000000;
+static const double usage_factor = 1000;
 
 brain::brain() :
     m_current_block_index(0),

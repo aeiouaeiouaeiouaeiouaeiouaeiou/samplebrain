@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>1134</width>
-    <height>691</height>
+    <height>707</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.6</string>
+   <string>samplebrain 0.7</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -31,7 +31,7 @@
        <attribute name="title">
         <string>search</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_19">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
@@ -340,7 +340,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>how long it takes for the novelty to ware off</string>
+               <string>how long it takes for the novelty to wear off</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -375,9 +375,9 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_17">
+           <layout class="QHBoxLayout" name="horizontalLayout_19">
             <item>
-             <widget class="QLabel" name="label_26">
+             <widget class="QLabel" name="label_28">
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
@@ -390,12 +390,12 @@
                <string/>
               </property>
               <property name="text">
-               <string>synpases</string>
+               <string>search stretch</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QSlider" name="sliderSynapses">
+             <widget class="QSlider" name="sliderSearchStretch">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -403,13 +403,16 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>how many connections to search (ordered in closeness)</string>
+               <string>repeat search (set novelty to 0 for dodgy jungle timessssstretch)</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
               </property>
               <property name="maximum">
-               <number>1000</number>
+               <number>10</number>
               </property>
               <property name="value">
-               <number>20</number>
+               <number>1</number>
               </property>
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -417,7 +420,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="spinBoxSynapses">
+             <widget class="QSpinBox" name="spinBoxSearchStretch">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -427,11 +430,14 @@
               <property name="toolTip">
                <string>how many connections to search (ordered in closeness)</string>
               </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
               <property name="maximum">
-               <number>1000</number>
+               <number>10</number>
               </property>
               <property name="value">
-               <number>20</number>
+               <number>1</number>
               </property>
              </widget>
             </item>
@@ -502,7 +508,7 @@
             <item>
              <widget class="QRadioButton" name="radioButtonSynapticSlide">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="toolTip">
                <string>search based on synapses and sonify search process</string>
@@ -521,6 +527,138 @@
            </layout>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_17">
+            <item>
+             <widget class="QLabel" name="label_26">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <pointsize>9</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>num synpases</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="sliderSynapses">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>how many connections to search (ordered in closeness)</string>
+              </property>
+              <property name="maximum">
+               <number>1000</number>
+              </property>
+              <property name="value">
+               <number>20</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxSynapses">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>how many connections to search (ordered in closeness)</string>
+              </property>
+              <property name="maximum">
+               <number>1000</number>
+              </property>
+              <property name="value">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_20">
+            <item>
+             <widget class="QLabel" name="label_29">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <pointsize>9</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>synaptic slide error</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="sliderSlideError">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>block difference higher than this causes a new search, skipping the target</string>
+              </property>
+              <property name="maximum">
+               <number>10000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>1000</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxSlideError">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>how many connections to search (ordered in closeness)</string>
+              </property>
+              <property name="maximum">
+               <number>10000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>1000</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -529,19 +667,6 @@
              <size>
               <width>21</width>
               <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
              </size>
             </property>
            </spacer>
@@ -677,6 +802,19 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -1423,18 +1561,130 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonLoadTarget</sender>
-   <signal>released()</signal>
+   <sender>radioButton_dodgyTarget</sender>
+   <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>load_target()</slot>
+   <slot>window_target_dodgy(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>277</x>
-     <y>103</y>
+     <x>449</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_blackmanTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_blackman(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>319</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxFFT1End</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fft1_end_slot(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>310</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
      <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBoxRatio</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>ratio_slot(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_hannTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_hann(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>319</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_gaussianTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_gaussian(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>619</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderSynapses</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxSynapses</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>341</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBoxTargetMix</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>target_mix_slot(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
     </hint>
    </hints>
   </connection>
@@ -1471,14 +1721,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>doubleSpinBoxRatio</sender>
-   <signal>valueChanged(double)</signal>
+   <sender>pushButtonLoadTarget</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>ratio_slot(double)</slot>
+   <slot>load_target()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>109</x>
-     <y>223</y>
+     <x>277</x>
+     <y>103</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1503,22 +1753,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>spinBoxFFT1End</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>fft1_end_slot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>154</x>
-     <y>310</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>radioButton_hammingTarget</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
@@ -1526,6 +1760,38 @@
    <hints>
     <hint type="sourcelabel">
      <x>619</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_flattopTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_flattop(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_bartlettTarget</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_bartlett(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
      <y>290</y>
     </hint>
     <hint type="destinationlabel">
@@ -1567,98 +1833,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_flattopTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_flattop(bool)</slot>
+   <sender>spinBoxSynapses</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderSynapses</receiver>
+   <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>449</x>
-     <y>348</y>
+     <x>341</x>
+     <y>289</y>
     </hint>
     <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
+     <x>237</x>
+     <y>289</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_blackmanTarget</sender>
-   <signal>toggled(bool)</signal>
+   <sender>spinBoxSynapses</sender>
+   <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_target_blackman(bool)</slot>
+   <slot>synapses(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>449</x>
-     <y>319</y>
+     <x>341</x>
+     <y>289</y>
     </hint>
     <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_bartlettTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_bartlett(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_dodgyTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_dodgy(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_hannTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_hann(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_gaussianTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_gaussian(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
+     <x>566</x>
+     <y>345</y>
     </hint>
    </hints>
   </connection>
@@ -1711,18 +1913,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>sliderNMix</sender>
-   <signal>valueChanged(int)</signal>
+   <sender>radioButton_dodgy</sender>
+   <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>n_mix_slot(int)</slot>
+   <slot>window_dodgy(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>159</x>
-     <y>386</y>
+     <x>615</x>
+     <y>203</y>
     </hint>
     <hint type="destinationlabel">
-     <x>361</x>
-     <y>306</y>
+     <x>566</x>
+     <y>345</y>
     </hint>
    </hints>
   </connection>
@@ -1735,6 +1937,22 @@
     <hint type="sourcelabel">
      <x>159</x>
      <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderNMix</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>n_mix_slot(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>386</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1759,18 +1977,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>doubleSpinBoxTargetMix</sender>
-   <signal>valueChanged(double)</signal>
+   <sender>pushButtonLoadBrain</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>target_mix_slot(double)</slot>
+   <slot>load_brain()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
-     <y>446</y>
+     <x>615</x>
+     <y>357</y>
     </hint>
     <hint type="destinationlabel">
-     <x>361</x>
-     <y>306</y>
+     <x>566</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSynaptic</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>algo_synaptic(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
     </hint>
    </hints>
   </connection>
@@ -1782,22 +2016,6 @@
    <hints>
     <hint type="sourcelabel">
      <x>411</x>
-     <y>253</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>321</x>
-     <y>309</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sliderBoredom</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>boredom_slot(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>291</x>
      <y>253</y>
     </hint>
     <hint type="destinationlabel">
@@ -1839,18 +2057,50 @@
    </hints>
   </connection>
   <connection>
-   <sender>sliderSynapses</sender>
+   <sender>sliderBoredom</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>spinBoxSynapses</receiver>
-   <slot>setValue(int)</slot>
+   <receiver>MainWindow</receiver>
+   <slot>boredom_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>289</y>
+     <x>291</x>
+     <y>253</y>
     </hint>
     <hint type="destinationlabel">
-     <x>341</x>
-     <y>289</y>
+     <x>321</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_bartlett</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_bartlett(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>615</x>
+     <y>232</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_blackman</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_blackman(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>615</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
     </hint>
    </hints>
   </connection>
@@ -1863,86 +2113,6 @@
     <hint type="sourcelabel">
      <x>237</x>
      <y>289</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxSynapses</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>sliderSynapses</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>341</x>
-     <y>289</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>237</x>
-     <y>289</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spinBoxSynapses</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>synapses(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>341</x>
-     <y>289</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonAlgoBasic</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_basic(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>51</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonAlgoRevBasic</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_rev_basic(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>129</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonSynaptic</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_synaptic(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>215</x>
-     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -1959,38 +2129,6 @@
     <hint type="sourcelabel">
      <x>314</x>
      <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonLoadBrain</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>load_brain()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>357</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonSaveBrain</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>save_brain()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>728</x>
-     <y>357</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2031,46 +2169,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_dodgy</sender>
+   <sender>radioButton_gaussian</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_dodgy(bool)</slot>
+   <slot>window_gaussian(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>615</x>
+     <x>728</x>
      <y>203</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_bartlett</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_bartlett(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_blackman</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_blackman(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2095,14 +2201,46 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_gaussian</sender>
+   <sender>radioButtonAlgoBasic</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_gaussian(bool)</slot>
+   <slot>algo_basic(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonAlgoRevBasic</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>algo_rev_basic(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_rectagle</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>window_target_rectangle(bool)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>728</x>
-     <y>203</y>
+     <y>290</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2127,14 +2265,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_hann</sender>
-   <signal>toggled(bool)</signal>
+   <sender>pushButtonSaveBrain</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_hann(bool)</slot>
+   <slot>save_brain()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>728</x>
-     <y>261</y>
+     <y>357</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2143,14 +2281,30 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_rectagle</sender>
-   <signal>toggled(bool)</signal>
+   <sender>pushButtonDeleteSound</sender>
+   <signal>released()</signal>
    <receiver>MainWindow</receiver>
-   <slot>window_target_rectangle(bool)</slot>
+   <slot>delete_sound()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>728</x>
-     <y>290</y>
+     <x>951</x>
+     <y>550</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonClearBrain</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clear_brain()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1061</x>
+     <y>550</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2191,14 +2345,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonDeleteSound</sender>
-   <signal>released()</signal>
+   <sender>radioButton_hann</sender>
+   <signal>toggled(bool)</signal>
    <receiver>MainWindow</receiver>
-   <slot>delete_sound()</slot>
+   <slot>window_hann(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>951</x>
-     <y>550</y>
+     <x>728</x>
+     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2207,14 +2361,94 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButtonClearBrain</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>clear_brain()</slot>
+   <sender>sliderSearchStretch</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxSearchStretch</receiver>
+   <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1061</x>
-     <y>550</y>
+     <x>241</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>343</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxSearchStretch</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderSearchStretch</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>241</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderSearchStretch</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>search_stretch(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderSlideError</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBoxSlideError</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>410</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxSlideError</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliderSlideError</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>410</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderSlideError</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slide_error(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>410</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2283,10 +2517,12 @@
   <slot>algo_synaptic_slide(bool)</slot>
   <slot>load_brain()</slot>
   <slot>save_brain()</slot>
+  <slot>slide_error(int)</slot>
+  <slot>search_stretch(int)</slot>
  </slots>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

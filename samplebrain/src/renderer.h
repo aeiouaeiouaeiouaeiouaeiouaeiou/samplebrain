@@ -43,6 +43,7 @@ renderer(brain &source, brain &target) :
     void reset();
 
     void process(u32 nframes, float *buf);
+    void old_process(u32 nframes, float *buf);
 
     void set_search_algo(search_algo s) { m_search_algo=s; }
     void set_playing(bool s) { m_playing=s; }
@@ -50,6 +51,7 @@ renderer(brain &source, brain &target) :
     void set_n_mix(float s) { m_n_mix=s; }
     void set_target_mix(float s) { m_target_mix=s; }
     void set_slide_error(double s) { m_slide_error=s; }
+    void set_stretch(u32 s) { m_stretch=s; }
     search_params *get_params() { return &m_search_params; }
 
     brain &get_source() { return m_source; }
@@ -57,6 +59,11 @@ renderer(brain &source, brain &target) :
     static bool unit_test();
 
 private:
+
+    bool find_render_blocks(u32 nframes);
+    void render(u32 nframes, float *buf);
+    void clean_up();
+
 
     // realtime stuff
     class render_block {
@@ -76,8 +83,10 @@ private:
     float m_volume;
     bool m_playing;
     u32 m_target_index;
-    u32 m_target_time;
+    u32 m_target_counter;
+    float m_target_time;
     u32 m_render_time;
+    u32 m_stretch;
     float m_n_mix;
     float m_target_mix;
 
