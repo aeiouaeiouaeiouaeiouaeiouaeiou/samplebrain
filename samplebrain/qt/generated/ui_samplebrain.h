@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainj32146.ui'
+** Form generated from reading UI file 'samplebrainj21537.ui'
 **
-** Created: Thu Aug 6 13:25:50 2015
+** Created: Fri Aug 7 09:55:34 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINJ32146_H
-#define SAMPLEBRAINJ32146_H
+#ifndef SAMPLEBRAINJ21537_H
+#define SAMPLEBRAINJ21537_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -385,7 +385,7 @@ public:
         sizePolicy.setHeightForWidth(sliderSearchStretch->sizePolicy().hasHeightForWidth());
         sliderSearchStretch->setSizePolicy(sizePolicy);
         sliderSearchStretch->setMinimum(1);
-        sliderSearchStretch->setMaximum(10);
+        sliderSearchStretch->setMaximum(50);
         sliderSearchStretch->setValue(1);
         sliderSearchStretch->setOrientation(Qt::Horizontal);
 
@@ -396,7 +396,7 @@ public:
         sizePolicy1.setHeightForWidth(spinBoxSearchStretch->sizePolicy().hasHeightForWidth());
         spinBoxSearchStretch->setSizePolicy(sizePolicy1);
         spinBoxSearchStretch->setMinimum(1);
-        spinBoxSearchStretch->setMaximum(10);
+        spinBoxSearchStretch->setMaximum(50);
         spinBoxSearchStretch->setValue(1);
 
         horizontalLayout_19->addWidget(spinBoxSearchStretch);
@@ -1043,7 +1043,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.7", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.8", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1185,4 +1185,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINJ32146_H
+#endif // SAMPLEBRAINJ21537_H

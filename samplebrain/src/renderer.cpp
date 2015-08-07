@@ -33,7 +33,7 @@ void renderer::init(brain &source, brain &target) {
     m_search_algo=BASIC;
     m_slide_error=1;
     m_target_index=0;
-    m_target_counter=0;
+    m_render_index=0;
     m_stretch=1;
     m_last_tgt_shift=0;
 }
@@ -44,7 +44,7 @@ void renderer::reset() {
     m_target_time=0;
     m_render_time=0;
     m_target_index=0;
-    m_target_counter=0;
+    m_render_index=0;
     m_render_blocks.clear();
     m_source.jiggle();
 }
@@ -59,15 +59,21 @@ void renderer::process(u32 nframes, float *buf) {
     clean_up();
 
     m_render_time+=nframes;
-    m_target_time+=nframes/(float)m_stretch;
+    //m_target_time+=nframes/(float)m_stretch;
 }
+
+// target_time = samples time into target stream
+// render_time = position in output stream, updated per process - used for offsets
 
 bool renderer::find_render_blocks(u32 nframes) {
     // get new blocks from source for the current buffer
 
     // where are we phase?
     u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
+    m_target_index = m_target_time/(float)tgt_shift;
     u32 tgt_end = (m_target_time+nframes)/(float)tgt_shift;
+    u32 rnd_end = (m_render_time+nframes)/(float)tgt_shift;
+
 
     // stuff has changed - recompute and abort
     if (tgt_shift!=m_last_tgt_shift ||
@@ -79,23 +85,26 @@ bool renderer::find_render_blocks(u32 nframes) {
         return false;
     }
 
-
-/*    cerr<<"-----------------"<<endl;
+/*
+    cerr<<"-----------------"<<endl;
     cerr<<"tgt start:"<<m_target_index<<endl;
     cerr<<"tgt end:"<<tgt_end<<endl;
     cerr<<":"<<tgt_end-m_target_index<<endl;
-    cerr<<"block time "<<m_target_counter*tgt_shift<<endl;
     cerr<<"target time "<<m_target_time<<endl;
+    cerr<<"target time (index) "<<m_target_index*tgt_shift<<endl;
+    cerr<<"real vs index = "<<(s32)m_target_time-(s32)(m_target_index*tgt_shift)<<endl;
     cerr<<"render time "<<m_render_time<<endl;
-
-    cerr<<": "<<(s32)m_render_time-(s32)(m_target_time)<<endl;*/
+    cerr<<"render time (index) "<<m_render_index*tgt_shift<<endl;
+    cerr<<"real vs index = "<<(s32)m_render_time-(s32)(m_render_index*tgt_shift)<<endl;
+    cerr<<m_render_blocks.size()<<endl;
+*/
 
     // search phase
     // get indices for current buffer
-    u32 counter = m_target_index;
+    u32 counter = m_render_index;
     //u32 cur_time = m_render_time;
-    while (counter<=tgt_end) {
-        u32 time=m_target_counter*tgt_shift;
+    while (counter<=rnd_end) {
+        u32 time=m_render_index*tgt_shift;
         u32 src_index=0;
 
         switch (m_search_algo) {
@@ -115,23 +124,21 @@ bool renderer::find_render_blocks(u32 nframes) {
             m_render_blocks.push_back(render_block(src_index,m_target_index,time));
 
             if (m_source.get_current_error()<m_slide_error &&
-                m_target_counter%m_stretch==0) {
+                m_render_index%m_stretch==0) {
                 m_target_index++;
-                //m_target_time+=tgt_shift;
+                m_target_time+=tgt_shift;
             }
-            m_target_counter++;
-
         } else {
             // put them in the index list
             m_render_blocks.push_back(render_block(src_index,m_target_index,time));
 
-            if (m_target_counter%m_stretch==0) {
+            if (m_render_index%m_stretch==0) {
                 m_target_index++;
-                //m_target_time+=tgt_shift;
+                m_target_time+=tgt_shift;
             }
-            m_target_counter++;
         }
         counter++;
+        m_render_index++;
     }
     return true;
 }
@@ -241,7 +248,7 @@ void renderer::old_process(u32 nframes, float *buf) {
     u32 counter = m_target_index;
     //u32 cur_time = m_render_time;
     while (counter<=tgt_end) {
-        u32 time=m_target_index*tgt_shift;
+        u32 time=m_render_index*tgt_shift;
         u32 src_index=0;
 
         switch (m_search_algo) {

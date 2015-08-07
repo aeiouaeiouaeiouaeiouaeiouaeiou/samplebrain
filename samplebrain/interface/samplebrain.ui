@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.7</string>
+   <string>samplebrain 0.8</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -409,7 +409,7 @@
                <number>1</number>
               </property>
               <property name="maximum">
-               <number>10</number>
+               <number>50</number>
               </property>
               <property name="value">
                <number>1</number>
@@ -434,7 +434,7 @@
                <number>1</number>
               </property>
               <property name="maximum">
-               <number>10</number>
+               <number>50</number>
               </property>
               <property name="value">
                <number>1</number>
