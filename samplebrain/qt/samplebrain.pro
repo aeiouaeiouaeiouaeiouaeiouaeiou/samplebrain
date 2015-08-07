@@ -17,11 +17,31 @@ SOURCES += MainWindow.cpp \
            audio_thread.cpp \
            process_thread.cpp \
            feedback.cpp \
-           qtmain.cpp
+           qtmain.cpp \
+           ../src/block.cpp \
+           ../src/brain.cpp \
+           ../src/fft.cpp \
+           ../src/mfcc.cpp \
+           ../src/renderer.cpp \
+           ../src/status.cpp \
+           ../src/window.cpp \
+           ../src/aquila/filter/MelFilterBank.cpp \
+           ../src/aquila/filter/MelFilter.cpp \
+           ../src/aquila/transform/Dct.cpp \
+           ../../../jellyfish/src/fluxa/sample.cpp \
+           ../../../jellyfish/src/fluxa/ring_buffer.cpp \
+           ../../../jellyfish/src/fluxa/command_ring_buffer.cpp \
+           ../../../jellyfish/src/audio/portaudio_client.cpp \
+           ../../../jellyfish/src/audio.cpp \
+           ../../../jellyfish/src/fluxa/OSC_server.cpp \
+           ../../../jellyfish/src/fluxa/allocator.cpp \
+           ../../../jellyfish/src/core/stream.cpp
 
 INCLUDEPATH += ../src
-LIBS += -L.. -lsamplebrain -ljellyfish -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
+LIBS += -L.. -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 #CONFIG+=debug
+
+QMAKE_CXXFLAGS += -Wunused-parameter -std=c++11 -DDONT_USE_FLUXA_GRAPH
 
 # assets
 RESOURCES     = samplebrain.qrc
