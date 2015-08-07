@@ -15,6 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <fft.h>
+#include <string.h>
 
 #include <iostream>
 
@@ -30,6 +31,7 @@ FFT::FFT(u32 length, u32 bins) :
     m_spectrum(new fftw_complex[length]),
     m_bin(new float[bins])
 {
+  memset(m_spectrum,0,sizeof(fftw_complex)*length);
 	m_plan = fftw_plan_dft_r2c_1d(m_length, m_in, m_spectrum, FFTW_ESTIMATE);
 }
 

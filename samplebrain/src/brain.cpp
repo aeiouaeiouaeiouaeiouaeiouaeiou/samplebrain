@@ -203,6 +203,7 @@ void brain::build_synapses_fixed(search_params &params) {
 
         ++outer_index;
     }
+    status::update("Done: %d synapses grown for %d blocks",num_synapses*brain_size,brain_size);
 }
 
 
@@ -223,7 +224,7 @@ u32 brain::search_synapses(const block &target, search_params &params) {
     if (current.get_synapse_const().size()<params.m_num_synapses) {
         params.m_num_synapses = current.get_synapse_const().size()-1;
     }
-    assert(current.get_synapse_const().size()>params.m_num_synapses);
+    //    assert(current.get_synapse_const().size()>params.m_num_synapses);
 
     u32 synapse_count=0;
     // use m_num_synapses to restrict search
@@ -231,7 +232,7 @@ u32 brain::search_synapses(const block &target, search_params &params) {
     vector<u32>::const_iterator i=current.get_synapse_const().begin();
     while (i!=current.get_synapse_const().end() &&
            synapse_count<params.m_num_synapses) {
-        assert(*i<m_blocks.size());
+      //assert(*i<m_blocks.size());
 
         const block &other = get_block(*i);
         double diff = target.compare(other,params);
