@@ -22,9 +22,9 @@ using namespace std;
 
 audio_thread::audio_thread(process_thread &p) :
     m_audio_device(NULL),
+    m_osc("8888"),
     m_process_thread(p),
-    m_brain_mutex(p.m_brain_mutex),
-    m_osc("8888")
+    m_brain_mutex(p.m_brain_mutex)
 {
     start_audio();
     pthread_mutex_lock(m_brain_mutex);
@@ -83,6 +83,9 @@ void audio_thread::process(sample &s, sample &s2) {
         }
         if (name=="/novelty") {
             m_renderer->get_params()->m_usage_importance = cmd.get_float(0);
+        }
+        if (name=="/stickyness") {
+            m_renderer->get_params()->m_stickyness = cmd.get_float(0);
         }
         if (name=="/restart_audio") {
             start_audio();

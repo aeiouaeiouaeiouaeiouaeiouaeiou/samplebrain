@@ -41,7 +41,7 @@ INCLUDEPATH += ../src
 LIBS += -L.. -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 #CONFIG+=debug
 
-QMAKE_CXXFLAGS += -Wunused-parameter -std=c++11 -DDONT_USE_FLUXA_GRAPH
+QMAKE_CXXFLAGS += -Wall -Wno-unused -std=c++11 -DDONT_USE_FLUXA_GRAPH
 
 # assets
 RESOURCES     = samplebrain.qrc

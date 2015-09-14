@@ -63,7 +63,8 @@ void normalise(sample &in) {
     }
 }
 
-block::block(const string &filename, const sample &pcm, u32 rate, const window &w, bool ditchpcm) :
+block::block(u64 id, const string &filename, const sample &pcm, u32 rate, const window &w, bool ditchpcm) :
+    m_id(id),
     m_pcm(pcm),
     m_fft(pcm.get_length()),
     m_mfcc(MFCC_FILTERS),
@@ -143,8 +144,8 @@ double block::_compare(const sample &fft_a, const sample &mfcc_a,
     double mfcc_acc=0;
     double fft_acc=0;
 
-    s32 fft_start = params.m_fft1_start;
-    s32 fft_end = fmin(params.m_fft1_end,m_fft.get_length());
+    u32 fft_start = params.m_fft1_start;
+    u32 fft_end = fmin(params.m_fft1_end,m_fft.get_length());
 
     if (params.m_ratio==0) {
         for (u32 i=fft_start; i<fft_end; ++i) {
@@ -182,9 +183,11 @@ double block::compare(const block &other, const search_params &params) const {
 }
 
 ios &spiralcore::operator||(ios &s, block &b) {
-    u32 version=1;
+    u32 version=2;
     string id("block");
     s||id||version;
+
+    if (version>1) s||b.m_id;
 
     s||b.m_pcm||b.m_fft||b.m_mfcc;
     s||b.m_n_pcm||b.m_n_fft||b.m_n_mfcc;
@@ -236,7 +239,7 @@ bool block::unit_test() {
     w.init(data.get_length());
     w.set_current_type(window::RECTANGLE);
 
-    block bb("test",data,44100,w);
+    block bb(0,"test",data,44100,w);
 
     assert(bb.m_pcm.get_length()==data.get_length());
     //assert(bb.m_fft.get_length()==data.get_length());
@@ -265,7 +268,7 @@ bool block::unit_test() {
 
 
     search_params p(0,0,0,100,0);
-    block bb2("test",data,44100,w);
+    block bb2(0,"test",data,44100,w);
     assert(bb.compare(bb2,p)==0);
     p.m_ratio=1;
     assert(bb.compare(bb2,p)==0);
@@ -277,9 +280,9 @@ bool block::unit_test() {
         data2[i]=i%10;
     }
 
-    block cpy("test",data,100,w);
+    block cpy(0,"test",data,100,w);
     {
-        block bb3("test",data2,44100,w);
+        block bb3(0,"test",data2,44100,w);
         p.m_ratio=0.0;
         assert(bb.compare(bb3,p)!=0);
         assert(bb.compare(bb3,p)!=0);

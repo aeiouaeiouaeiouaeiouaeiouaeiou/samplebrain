@@ -1,14 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainj21537.ui'
+** Form generated from reading UI file 'samplebrainJ11878.ui'
 **
-** Created: Fri Aug 7 09:55:34 2015
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINJ21537_H
-#define SAMPLEBRAINJ21537_H
+#ifndef SAMPLEBRAINJ11878_H
+#define SAMPLEBRAINJ11878_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -67,6 +66,10 @@ public:
     QLabel *label_25;
     QSlider *sliderBoredom;
     QDoubleSpinBox *doubleSpinBoxBoredom;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *label_30;
+    QSlider *sliderStickyness;
+    QDoubleSpinBox *doubleSpinBoxStickyness;
     QHBoxLayout *horizontalLayout_19;
     QLabel *label_28;
     QSlider *sliderSearchStretch;
@@ -86,6 +89,7 @@ public:
     QSlider *sliderSlideError;
     QSpinBox *spinBoxSlideError;
     QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *verticalSpacer_3;
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_21;
@@ -95,7 +99,6 @@ public:
     QLabel *label_22;
     QSlider *sliderTargetMix;
     QDoubleSpinBox *doubleSpinBoxTargetMix;
-    QSpacerItem *verticalSpacer_3;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
     QPushButton *pushButtonLoadTarget;
@@ -167,7 +170,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1134, 707);
+        MainWindow->resize(1220, 755);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -372,6 +375,37 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_11);
 
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setObjectName(QString::fromUtf8("horizontalLayout_21"));
+        label_30 = new QLabel(controlTab);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+        label_30->setFont(font2);
+
+        horizontalLayout_21->addWidget(label_30);
+
+        sliderStickyness = new QSlider(controlTab);
+        sliderStickyness->setObjectName(QString::fromUtf8("sliderStickyness"));
+        sizePolicy.setHeightForWidth(sliderStickyness->sizePolicy().hasHeightForWidth());
+        sliderStickyness->setSizePolicy(sizePolicy);
+        sliderStickyness->setMaximum(100);
+        sliderStickyness->setValue(0);
+        sliderStickyness->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_21->addWidget(sliderStickyness);
+
+        doubleSpinBoxStickyness = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxStickyness->setObjectName(QString::fromUtf8("doubleSpinBoxStickyness"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxStickyness->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxStickyness->setSizePolicy(sizePolicy1);
+        doubleSpinBoxStickyness->setMaximum(1);
+        doubleSpinBoxStickyness->setSingleStep(0.01);
+        doubleSpinBoxStickyness->setValue(0);
+
+        horizontalLayout_21->addWidget(doubleSpinBoxStickyness);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_21);
+
         horizontalLayout_19 = new QHBoxLayout();
         horizontalLayout_19->setObjectName(QString::fromUtf8("horizontalLayout_19"));
         label_28 = new QLabel(controlTab);
@@ -516,6 +550,10 @@ public:
 
         verticalLayout_3->addItem(horizontalSpacer_2);
 
+        verticalSpacer_3 = new QSpacerItem(240, 574, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_3);
+
         label_23 = new QLabel(controlTab);
         label_23->setObjectName(QString::fromUtf8("label_23"));
         label_23->setFont(font1);
@@ -582,10 +620,6 @@ public:
 
 
         verticalLayout_3->addLayout(horizontalLayout_9);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer_3);
 
 
         horizontalLayout_5->addLayout(verticalLayout_3);
@@ -1034,6 +1068,8 @@ public:
         QObject::connect(sliderSlideError, SIGNAL(valueChanged(int)), spinBoxSlideError, SLOT(setValue(int)));
         QObject::connect(spinBoxSlideError, SIGNAL(valueChanged(int)), sliderSlideError, SLOT(setValue(int)));
         QObject::connect(sliderSlideError, SIGNAL(valueChanged(int)), MainWindow, SLOT(slide_error(int)));
+        QObject::connect(doubleSpinBoxStickyness, SIGNAL(valueChanged(double)), MainWindow, SLOT(stickyness_slot(double)));
+        QObject::connect(sliderStickyness, SIGNAL(valueChanged(int)), MainWindow, SLOT(stickyness_slot(int)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -1043,7 +1079,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.9", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.10", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1078,6 +1114,13 @@ public:
         label_25->setText(QApplication::translate("MainWindow", "boredom", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         sliderBoredom->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_TOOLTIP
+        label_30->setToolTip(QString());
+#endif // QT_NO_TOOLTIP
+        label_30->setText(QApplication::translate("MainWindow", "stickyness", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderStickyness->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_28->setToolTip(QString());
@@ -1185,4 +1228,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINJ21537_H
+#endif // SAMPLEBRAINJ11878_H

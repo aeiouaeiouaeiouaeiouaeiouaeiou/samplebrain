@@ -109,6 +109,14 @@ private slots:
     void slide_error(int s) {
         lo_send(m_audio_address,"/slide-error","i",s);
     }
+    void stickyness_slot(int s) {
+        lo_send(m_audio_address,"/stickyness","f",s/100.0f);
+        m_Ui.doubleSpinBoxStickyness->setValue(s/100.0f);
+    }
+    void stickyness_slot(double s) {
+        lo_send(m_audio_address,"/stickyness","f",s);
+        m_Ui.sliderStickyness->setValue(s*100);
+    }
 
     void volume_slot(int s) { lo_send(m_audio_address,"/volume","f",s/100.0f); }
 

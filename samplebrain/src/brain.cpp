@@ -30,8 +30,8 @@ static const double usage_factor = 1000;
 
 brain::brain() :
     m_current_block_index(0),
-    m_average_error(0),
     m_current_error(0),
+    m_average_error(0),
     m_usage_falloff(0.9)
 {
     status::update("brain ready...");
@@ -83,13 +83,33 @@ void brain::chop_and_add(const sample &s, u32 count, bool ditchpcm) {
         status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.get_length()*100));
         sample region;
         s.get_region(region,pos,pos+m_block_size-1);
-        m_blocks.push_back(block("",region,44100,m_window,ditchpcm));
+        m_blocks.push_back(block(m_blocks.size(),"",region,44100,m_window,ditchpcm));
         pos += (m_block_size-m_overlap);
     }
 }
 
 const block &brain::get_block(u32 index) const {
     return m_blocks[index];
+}
+
+// helper to do the stickyness comparison and sort out current_block_index
+u32 brain::stickify(const block &target, u32 closest_index, f32 dist, const search_params &params) {
+  u32 next_index = m_current_block_index+1;
+
+  // if we have stickyness turned on and the next block exists
+  if (params.m_stickyness>0 && next_index<m_blocks.size()) {
+      // get next block
+      f32 dist_to_next = target.compare(m_blocks[next_index],params);
+      if (dist_to_next * (1-params.m_stickyness) <
+          dist * params.m_stickyness) {
+          // use the next block rather than the closest
+          m_current_block_index = next_index;
+          return m_current_block_index;
+      }
+  }
+  // use the closest block
+  m_current_block_index = closest_index;
+  return m_current_block_index;
 }
 
 // returns index to block
@@ -107,7 +127,7 @@ u32 brain::search(const block &target, const search_params &params) {
     }
     deplete_usage();
     m_blocks[closest_index].get_usage()+=usage_factor;
-    return closest_index;
+    return stickify(target,closest_index,closest,params);
 }
 
 // returns index to block
@@ -126,6 +146,7 @@ u32 brain::rev_search(const block &target, const search_params &params) {
 
     deplete_usage();
     m_blocks[furthest_index].get_usage()+=usage_factor;
+    m_current_block_index = furthest_index;
 
     return furthest_index;
 }
@@ -174,22 +195,22 @@ void brain::build_synapses_fixed(search_params &params) {
     for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
         u32 index = 0;
-        vector<pair<int,double>> collect;
+        vector<pair<u32,double>> collect;
 
         // collect comparisons to all other blocks
         for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
             assert(index<m_blocks.size());
             if (index!=outer_index) {
                 double diff = i->compare(*j,params);
-                collect.push_back(pair<int,double>(index,diff));
+                collect.push_back(pair<u32,double>(index,diff));
             }
             ++index;
         }
 
         // sort them by closeness
         sort(collect.begin(),collect.end(),
-             [](const pair<int,double> &a,
-                const pair<int,double> &b) -> bool {
+             [](const pair<u32,double> &a,
+                const pair<u32,double> &b) -> bool {
                  return a.second<b.second;
              });
 
@@ -248,9 +269,10 @@ u32 brain::search_synapses(const block &target, search_params &params) {
     m_blocks[m_current_block_index].get_usage()+=usage_factor;
     m_current_error = closest;
 
+    // probably impossible to be false?
     if (closest_index!=0) {
-    //cerr<<"usage:"<<m_blocks[closest_index].get_usage()<<endl;
-        m_current_block_index = closest_index;
+        //cerr<<"usage:"<<m_blocks[closest_index].get_usage()<<endl;
+        return stickify(target,closest_index,closest,params);
     }
     return m_current_block_index;
 }
@@ -294,6 +316,7 @@ ios &spiralcore::operator||(ios &s, brain::sound &b) {
     string id("brain::sound");
     s||id||version;
     s||b.m_filename||b.m_sample;
+    return s;
 }
 
 ios &spiralcore::operator||(ios &s, brain &b) {
@@ -305,6 +328,7 @@ ios &spiralcore::operator||(ios &s, brain &b) {
     s||b.m_block_size||b.m_overlap||b.m_window;
     s||b.m_current_block_index||b.m_current_error||
         b.m_average_error||b.m_usage_falloff;
+    return s;
 }
 
 bool brain::unit_test() {

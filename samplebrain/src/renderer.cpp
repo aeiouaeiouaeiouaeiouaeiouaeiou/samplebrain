@@ -372,4 +372,5 @@ bool renderer::unit_test() {
     assert(rr.m_render_blocks.size()==4);
     delete[] buf;
 
+    return true;
 }
