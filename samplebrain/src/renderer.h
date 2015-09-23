@@ -23,19 +23,19 @@
 
 namespace spiralcore {
 
-class renderer {
-public:
-renderer(brain &source, brain &target) :
+  class renderer {
+  public:
+  renderer(brain &source, brain &target) :
     m_source(source),
-        m_target(target),
-        m_search_params(0,0,0,100,0)
+      m_target(target),
+      m_search_params(0,0,0,100,0)
         { init(source,target); }
 
     enum search_algo {
-        BASIC = 0,
-        REV_BASIC,
-        SYNAPTIC,
-        SYNAPTIC_SLIDE
+      BASIC = 0,
+      REV_BASIC,
+      SYNAPTIC,
+      SYNAPTIC_SLIDE
     };
 
     void init(brain &source, brain &target);
@@ -58,7 +58,7 @@ renderer(brain &source, brain &target) :
 
     static bool unit_test();
 
-private:
+  private:
 
     bool find_render_blocks(u32 nframes);
     void render(u32 nframes, float *buf);
@@ -68,12 +68,17 @@ private:
     // realtime stuff
     class render_block {
     public:
-        render_block(u32 index, u32 tgt_index, u32 time) :
-            m_index(index), m_tgt_index(tgt_index), m_time(time), m_finished(false) {}
-        u32 m_index;
-        u32 m_tgt_index; // original target block
-        u32 m_time; // in samples
-        bool m_finished;
+    render_block(u32 index, u32 tgt_index, u32 time) :
+      m_index(index),
+        m_tgt_index(tgt_index),
+        m_time(time),
+        m_finished(false),
+        m_position(0) {}
+      u32 m_index;
+      u32 m_tgt_index; // original target block
+      u32 m_time; // in samples
+      bool m_finished;
+      float m_position; // in samples
     };
 
     brain &m_source;
@@ -89,13 +94,14 @@ private:
     u32 m_stretch;
     float m_n_mix;
     float m_target_mix;
+    float m_autotune;
 
     search_algo m_search_algo;
     double m_slide_error;
     u32 m_last_tgt_shift;
 
     std::list<render_block> m_render_blocks;
-};
+  };
 
 }
 

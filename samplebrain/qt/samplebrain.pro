@@ -25,6 +25,7 @@ SOURCES += MainWindow.cpp \
            ../src/renderer.cpp \
            ../src/status.cpp \
            ../src/window.cpp \
+           ../src/pitchshift.cpp \
            ../src/aquila/filter/MelFilterBank.cpp \
            ../src/aquila/filter/MelFilter.cpp \
            ../src/aquila/transform/Dct.cpp \
@@ -38,7 +39,7 @@ SOURCES += MainWindow.cpp \
            ../../../jellyfish/src/core/stream.cpp
 
 INCLUDEPATH += ../src
-LIBS += -L.. -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
+LIBS += -L.. -lrubberband -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 #CONFIG+=debug
 
 QMAKE_CXXFLAGS += -Wall -Wno-unused -std=c++11 -DDONT_USE_FLUXA_GRAPH

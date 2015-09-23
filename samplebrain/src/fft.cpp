@@ -25,58 +25,73 @@ using namespace std;
 static const int MAX_FFT_LENGTH = 4096;
 
 FFT::FFT(u32 length, u32 bins) :
-    m_length(length),
-    m_num_bins(bins),
-    m_in(new double[length]),
-    m_spectrum(new fftw_complex[length]),
-    m_bin(new float[bins])
+  m_length(length),
+  m_num_bins(bins),
+  m_in(new double[length]),
+  m_spectrum(new fftw_complex[length]),
+  m_bin(new float[bins])
 {
   memset(m_spectrum,0,sizeof(fftw_complex)*length);
-	m_plan = fftw_plan_dft_r2c_1d(m_length, m_in, m_spectrum, FFTW_ESTIMATE);
+  m_plan = fftw_plan_dft_r2c_1d(m_length, m_in, m_spectrum, FFTW_ESTIMATE);
 }
 
 FFT::~FFT()
 {
-	delete[] m_in;
-	fftw_destroy_plan(m_plan);
+  delete[] m_in;
+  fftw_destroy_plan(m_plan);
 }
 
 void FFT::impulse2freq(const float *imp)
 {
-    unsigned int i;
+  unsigned int i;
 
-    for (i=0; i<m_length; i++)
+  for (i=0; i<m_length; i++)
     {
-        m_in[i] = imp[i];
+      m_in[i] = imp[i];
     }
 
-    fftw_execute(m_plan);
+  fftw_execute(m_plan);
+}
+
+static const float SRATE = 44100;
+
+float FFT::calculate_dominant_freq() {
+  double highest = 0;
+  u32 index = 0;
+  for (u32 i=0; i<m_length/2; ++i) {
+    double t = m_spectrum[i][0]*m_spectrum[i][0];
+    if (t>highest) {
+      index=i;
+      highest=t;
+    }
+  }
+  return index * (SRATE/(float)m_length);
 }
 
 void FFT::calculate_bins() {
-	float useful_area = m_length/2;
+  float useful_area = m_length/2;
 
-	for (unsigned int n=0; n<m_num_bins; n++) {
-		float value = 0;
+  for (unsigned int n=0; n<m_num_bins; n++) {
+    float value = 0;
 
-		float f = n/(float)m_num_bins;
-		float t = (n+1)/(float)m_num_bins;
-		//f*=f;
-		//t*=t;
-		u32 from = f*useful_area;
-		u32 to = t*useful_area;
+    float f = n/(float)m_num_bins;
+    float t = (n+1)/(float)m_num_bins;
+    //f*=f;
+    //t*=t;
+    u32 from = f*useful_area;
+    u32 to = t*useful_area;
 
-        //cerr<<"fft bin:"<<from<<" "<<to<<" - "<<m_length<<endl;
+    //cerr<<"fft bin:"<<from<<" "<<to<<" - "<<m_length<<endl;
 
-		for (u32 i=from; i<=to; i++) {
-			if (i<m_length) {
-				value += m_spectrum[i][0];
-			}
-		}
+    for (u32 i=from; i<=to; i++) {
+      if (i<m_length) {
+        value += m_spectrum[i][0]*m_spectrum[i][0];
+      }
+    }
 
-		if (value<0) value=-value;
-		m_bin[n]=value;
-	}
+    if (value<0) value=-value;
+    m_bin[n]=value;
+  }
 
 
 }

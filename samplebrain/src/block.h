@@ -29,8 +29,8 @@
 
 namespace spiralcore {
 
-class block {
-public:
+  class block {
+  public:
     // runs analysis on pcm
     block(u64 id, const std::string &filename, const sample &pcm, u32 rate, const window &w, bool ditchpcm=false);
     block() {}
@@ -47,10 +47,12 @@ public:
     std::vector<u32> &get_synapse() { return m_synapse; }
     const std::vector<u32> &get_synapse_const() const { return m_synapse; }
     float &get_usage() { return m_usage; }
+    float get_freq() const { return m_dominant_freq; }
+    float get_n_freq() const { return m_n_dominant_freq; }
 
-private:
+  private:
 
-    void process(const sample &pcm, sample &fft, sample &mfcc);
+    void process(const sample &pcm, sample &fft, sample &mfcc, float &freq);
 
     double _compare(const sample &fft_a, const sample &mfcc_a,
                     const sample &fft_b, const sample &mfcc_b,
@@ -75,11 +77,14 @@ private:
     std::vector<u32> m_synapse;
     float m_usage;
 
+    float m_dominant_freq;
+    float m_n_dominant_freq;
+
     friend ios &operator||(ios &s, block &b);
 
-};
+  };
 
-ios &operator||(ios &s, block &b);
+  ios &operator||(ios &s, block &b);
 
 }
 

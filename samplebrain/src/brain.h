@@ -84,12 +84,13 @@ public:
 
 private:
 
-    void chop_and_add(const sample &s, u32 count, bool ditchpcm=false);
+    void chop_and_add(const sound &s, u32 count, bool ditchpcm=false);
     void deplete_usage();
     u32 stickify(const block &target, u32 closest_index, f32 dist, const search_params &params);
 
     vector<block> m_blocks;
     std::list<sound> m_samples;
+    vector<string> m_active_sounds;
 
     u32 m_block_size;
     u32 m_overlap;

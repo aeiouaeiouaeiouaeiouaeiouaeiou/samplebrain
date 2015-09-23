@@ -71,19 +71,19 @@ void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     u32 count=0;
     for (std::list<sound>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
         count++;
-        chop_and_add(i->m_sample, count, ditchpcm);
+        chop_and_add(*i, count, ditchpcm);
     }
     status::update("all samples processed");
 }
 
-void brain::chop_and_add(const sample &s, u32 count, bool ditchpcm) {
+void brain::chop_and_add(const sound &s, u32 count, bool ditchpcm) {
     u32 pos=0;
     if (m_overlap>=m_block_size) m_overlap=0;
-    while (pos+m_block_size-1<s.get_length()) {
-        status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.get_length()*100));
+    while (pos+m_block_size-1<s.m_sample.get_length()) {
+        status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.m_sample.get_length()*100));
         sample region;
-        s.get_region(region,pos,pos+m_block_size-1);
-        m_blocks.push_back(block(m_blocks.size(),"",region,44100,m_window,ditchpcm));
+        s.m_sample.get_region(region,pos,pos+m_block_size-1);
+        m_blocks.push_back(block(m_blocks.size(),s.m_filename,region,44100,m_window,ditchpcm));
         pos += (m_block_size-m_overlap);
     }
 }
