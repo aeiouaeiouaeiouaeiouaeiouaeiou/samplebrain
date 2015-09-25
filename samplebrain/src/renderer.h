@@ -52,6 +52,7 @@ namespace spiralcore {
     void set_target_mix(float s) { m_target_mix=s; }
     void set_slide_error(double s) { m_slide_error=s; }
     void set_stretch(u32 s) { m_stretch=s; }
+    void set_autotune(float s) { m_autotune=s; }
     search_params *get_params() { return &m_search_params; }
 
     brain &get_source() { return m_source; }

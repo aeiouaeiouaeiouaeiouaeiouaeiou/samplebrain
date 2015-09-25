@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainJ11878.ui'
+** Form generated from reading UI file 'samplebrainPm4153.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINJ11878_H
-#define SAMPLEBRAINJ11878_H
+#ifndef SAMPLEBRAINPM4153_H
+#define SAMPLEBRAINPM4153_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -88,17 +88,6 @@ public:
     QLabel *label_29;
     QSlider *sliderSlideError;
     QSpinBox *spinBoxSlideError;
-    QSpacerItem *horizontalSpacer_2;
-    QSpacerItem *verticalSpacer_3;
-    QLabel *label_23;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *label_21;
-    QSlider *sliderNMix;
-    QDoubleSpinBox *doubleSpinBoxNMix;
-    QHBoxLayout *horizontalLayout_9;
-    QLabel *label_22;
-    QSlider *sliderTargetMix;
-    QDoubleSpinBox *doubleSpinBoxTargetMix;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_16;
     QPushButton *pushButtonLoadTarget;
@@ -119,9 +108,27 @@ public:
     QRadioButton *radioButton_rectangleTarget;
     QLabel *label_14;
     QPushButton *pushButtonGenerateTarget;
+    QLabel *label_23;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *label_31;
+    QSlider *sliderAutotune;
+    QDoubleSpinBox *doubleSpinBoxAutotune;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_21;
+    QSlider *sliderNMix;
+    QDoubleSpinBox *doubleSpinBoxNMix;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_22;
+    QSlider *sliderTargetMix;
+    QDoubleSpinBox *doubleSpinBoxTargetMix;
     QSpacerItem *verticalSpacer;
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
     QLabel *label_3;
+    QListWidget *listWidgetSounds;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *pushButtonLoadSound;
+    QPushButton *pushButtonDeleteSound;
+    QPushButton *pushButtonClearBrain;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label;
     QSpinBox *spinBoxBlockSize;
@@ -129,8 +136,8 @@ public:
     QLabel *label_2;
     QDoubleSpinBox *doubleSpinBoxBlockOverlap;
     QGridLayout *gridLayout;
-    QRadioButton *radioButton_gaussian;
     QRadioButton *radioButton_hamming;
+    QRadioButton *radioButton_gaussian;
     QRadioButton *radioButton_dodgy;
     QRadioButton *radioButton_blackman;
     QRadioButton *radioButton_rectagle;
@@ -142,14 +149,6 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QPushButton *pushButtonLoadBrain;
     QPushButton *pushButtonSaveBrain;
-    QSpacerItem *verticalSpacer_2;
-    QVBoxLayout *verticalLayout;
-    QLabel *label_5;
-    QListWidget *listWidgetSounds;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButtonLoadSound;
-    QPushButton *pushButtonDeleteSound;
-    QPushButton *pushButtonClearBrain;
     QWidget *logTab;
     QHBoxLayout *horizontalLayout_15;
     QPlainTextEdit *plainTextEdit;
@@ -170,7 +169,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1220, 755);
+        MainWindow->resize(1012, 707);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -546,81 +545,6 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_20);
 
-        horizontalSpacer_2 = new QSpacerItem(21, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        verticalLayout_3->addItem(horizontalSpacer_2);
-
-        verticalSpacer_3 = new QSpacerItem(240, 574, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer_3);
-
-        label_23 = new QLabel(controlTab);
-        label_23->setObjectName(QString::fromUtf8("label_23"));
-        label_23->setFont(font1);
-
-        verticalLayout_3->addWidget(label_23);
-
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        label_21 = new QLabel(controlTab);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
-        label_21->setFont(font2);
-
-        horizontalLayout_8->addWidget(label_21);
-
-        sliderNMix = new QSlider(controlTab);
-        sliderNMix->setObjectName(QString::fromUtf8("sliderNMix"));
-        sizePolicy.setHeightForWidth(sliderNMix->sizePolicy().hasHeightForWidth());
-        sliderNMix->setSizePolicy(sizePolicy);
-        sliderNMix->setValue(0);
-        sliderNMix->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_8->addWidget(sliderNMix);
-
-        doubleSpinBoxNMix = new QDoubleSpinBox(controlTab);
-        doubleSpinBoxNMix->setObjectName(QString::fromUtf8("doubleSpinBoxNMix"));
-        sizePolicy1.setHeightForWidth(doubleSpinBoxNMix->sizePolicy().hasHeightForWidth());
-        doubleSpinBoxNMix->setSizePolicy(sizePolicy1);
-        doubleSpinBoxNMix->setMaximum(1);
-        doubleSpinBoxNMix->setSingleStep(0.01);
-        doubleSpinBoxNMix->setValue(0);
-
-        horizontalLayout_8->addWidget(doubleSpinBoxNMix);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_8);
-
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        label_22 = new QLabel(controlTab);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
-        label_22->setFont(font2);
-
-        horizontalLayout_9->addWidget(label_22);
-
-        sliderTargetMix = new QSlider(controlTab);
-        sliderTargetMix->setObjectName(QString::fromUtf8("sliderTargetMix"));
-        sizePolicy.setHeightForWidth(sliderTargetMix->sizePolicy().hasHeightForWidth());
-        sliderTargetMix->setSizePolicy(sizePolicy);
-        sliderTargetMix->setValue(0);
-        sliderTargetMix->setSliderPosition(0);
-        sliderTargetMix->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_9->addWidget(sliderTargetMix);
-
-        doubleSpinBoxTargetMix = new QDoubleSpinBox(controlTab);
-        doubleSpinBoxTargetMix->setObjectName(QString::fromUtf8("doubleSpinBoxTargetMix"));
-        sizePolicy1.setHeightForWidth(doubleSpinBoxTargetMix->sizePolicy().hasHeightForWidth());
-        doubleSpinBoxTargetMix->setSizePolicy(sizePolicy1);
-        doubleSpinBoxTargetMix->setMaximum(1);
-        doubleSpinBoxTargetMix->setSingleStep(0.01);
-        doubleSpinBoxTargetMix->setValue(0);
-
-        horizontalLayout_9->addWidget(doubleSpinBoxTargetMix);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_9);
-
 
         horizontalLayout_5->addLayout(verticalLayout_3);
 
@@ -742,6 +666,104 @@ public:
 
         verticalLayout_6->addWidget(pushButtonGenerateTarget);
 
+        label_23 = new QLabel(controlTab);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setFont(font1);
+
+        verticalLayout_6->addWidget(label_23);
+
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setObjectName(QString::fromUtf8("horizontalLayout_22"));
+        label_31 = new QLabel(controlTab);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+        label_31->setFont(font2);
+
+        horizontalLayout_22->addWidget(label_31);
+
+        sliderAutotune = new QSlider(controlTab);
+        sliderAutotune->setObjectName(QString::fromUtf8("sliderAutotune"));
+        sizePolicy.setHeightForWidth(sliderAutotune->sizePolicy().hasHeightForWidth());
+        sliderAutotune->setSizePolicy(sizePolicy);
+        sliderAutotune->setValue(0);
+        sliderAutotune->setSliderPosition(0);
+        sliderAutotune->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_22->addWidget(sliderAutotune);
+
+        doubleSpinBoxAutotune = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxAutotune->setObjectName(QString::fromUtf8("doubleSpinBoxAutotune"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxAutotune->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxAutotune->setSizePolicy(sizePolicy1);
+        doubleSpinBoxAutotune->setMaximum(1);
+        doubleSpinBoxAutotune->setSingleStep(0.01);
+        doubleSpinBoxAutotune->setValue(0);
+
+        horizontalLayout_22->addWidget(doubleSpinBoxAutotune);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_22);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        label_21 = new QLabel(controlTab);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setFont(font2);
+
+        horizontalLayout_8->addWidget(label_21);
+
+        sliderNMix = new QSlider(controlTab);
+        sliderNMix->setObjectName(QString::fromUtf8("sliderNMix"));
+        sizePolicy.setHeightForWidth(sliderNMix->sizePolicy().hasHeightForWidth());
+        sliderNMix->setSizePolicy(sizePolicy);
+        sliderNMix->setValue(0);
+        sliderNMix->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_8->addWidget(sliderNMix);
+
+        doubleSpinBoxNMix = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxNMix->setObjectName(QString::fromUtf8("doubleSpinBoxNMix"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxNMix->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxNMix->setSizePolicy(sizePolicy1);
+        doubleSpinBoxNMix->setMaximum(1);
+        doubleSpinBoxNMix->setSingleStep(0.01);
+        doubleSpinBoxNMix->setValue(0);
+
+        horizontalLayout_8->addWidget(doubleSpinBoxNMix);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_8);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        label_22 = new QLabel(controlTab);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setFont(font2);
+
+        horizontalLayout_9->addWidget(label_22);
+
+        sliderTargetMix = new QSlider(controlTab);
+        sliderTargetMix->setObjectName(QString::fromUtf8("sliderTargetMix"));
+        sizePolicy.setHeightForWidth(sliderTargetMix->sizePolicy().hasHeightForWidth());
+        sliderTargetMix->setSizePolicy(sizePolicy);
+        sliderTargetMix->setValue(0);
+        sliderTargetMix->setSliderPosition(0);
+        sliderTargetMix->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_9->addWidget(sliderTargetMix);
+
+        doubleSpinBoxTargetMix = new QDoubleSpinBox(controlTab);
+        doubleSpinBoxTargetMix->setObjectName(QString::fromUtf8("doubleSpinBoxTargetMix"));
+        sizePolicy1.setHeightForWidth(doubleSpinBoxTargetMix->sizePolicy().hasHeightForWidth());
+        doubleSpinBoxTargetMix->setSizePolicy(sizePolicy1);
+        doubleSpinBoxTargetMix->setMaximum(1);
+        doubleSpinBoxTargetMix->setSingleStep(0.01);
+        doubleSpinBoxTargetMix->setValue(0);
+
+        horizontalLayout_9->addWidget(doubleSpinBoxTargetMix);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_9);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_6->addItem(verticalSpacer);
@@ -749,13 +771,41 @@ public:
 
         horizontalLayout_5->addLayout(verticalLayout_6);
 
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label_3 = new QLabel(controlTab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setFont(font1);
 
-        verticalLayout_2->addWidget(label_3);
+        verticalLayout->addWidget(label_3);
+
+        listWidgetSounds = new QListWidget(controlTab);
+        listWidgetSounds->setObjectName(QString::fromUtf8("listWidgetSounds"));
+
+        verticalLayout->addWidget(listWidgetSounds);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        pushButtonLoadSound = new QPushButton(controlTab);
+        pushButtonLoadSound->setObjectName(QString::fromUtf8("pushButtonLoadSound"));
+        pushButtonLoadSound->setFont(font);
+
+        horizontalLayout_2->addWidget(pushButtonLoadSound);
+
+        pushButtonDeleteSound = new QPushButton(controlTab);
+        pushButtonDeleteSound->setObjectName(QString::fromUtf8("pushButtonDeleteSound"));
+        pushButtonDeleteSound->setFont(font);
+
+        horizontalLayout_2->addWidget(pushButtonDeleteSound);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        pushButtonClearBrain = new QPushButton(controlTab);
+        pushButtonClearBrain->setObjectName(QString::fromUtf8("pushButtonClearBrain"));
+        pushButtonClearBrain->setFont(font);
+
+        verticalLayout->addWidget(pushButtonClearBrain);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
@@ -773,7 +823,7 @@ public:
         horizontalLayout_4->addWidget(spinBoxBlockSize);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_4);
+        verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
@@ -792,23 +842,23 @@ public:
         horizontalLayout_6->addWidget(doubleSpinBoxBlockOverlap);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_6);
+        verticalLayout->addLayout(horizontalLayout_6);
 
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        radioButton_gaussian = new QRadioButton(controlTab);
+        radioButton_hamming = new QRadioButton(controlTab);
         buttonGroup = new QButtonGroup(MainWindow);
         buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
-        buttonGroup->addButton(radioButton_gaussian);
-        radioButton_gaussian->setObjectName(QString::fromUtf8("radioButton_gaussian"));
-
-        gridLayout->addWidget(radioButton_gaussian, 3, 1, 1, 1);
-
-        radioButton_hamming = new QRadioButton(controlTab);
         buttonGroup->addButton(radioButton_hamming);
         radioButton_hamming->setObjectName(QString::fromUtf8("radioButton_hamming"));
 
         gridLayout->addWidget(radioButton_hamming, 4, 1, 1, 1);
+
+        radioButton_gaussian = new QRadioButton(controlTab);
+        buttonGroup->addButton(radioButton_gaussian);
+        radioButton_gaussian->setObjectName(QString::fromUtf8("radioButton_gaussian"));
+
+        gridLayout->addWidget(radioButton_gaussian, 3, 1, 1, 1);
 
         radioButton_dodgy = new QRadioButton(controlTab);
         buttonGroup->addButton(radioButton_dodgy);
@@ -853,13 +903,13 @@ public:
         gridLayout->addWidget(label_4, 2, 0, 1, 1);
 
 
-        verticalLayout_2->addLayout(gridLayout);
+        verticalLayout->addLayout(gridLayout);
 
         pushButtonGenerate = new QPushButton(controlTab);
         pushButtonGenerate->setObjectName(QString::fromUtf8("pushButtonGenerate"));
         pushButtonGenerate->setFont(font);
 
-        verticalLayout_2->addWidget(pushButtonGenerate);
+        verticalLayout->addWidget(pushButtonGenerate);
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
@@ -876,50 +926,7 @@ public:
         horizontalLayout_7->addWidget(pushButtonSaveBrain);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_7);
-
-        verticalSpacer_2 = new QSpacerItem(20, 508, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_2->addItem(verticalSpacer_2);
-
-
-        horizontalLayout_5->addLayout(verticalLayout_2);
-
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        label_5 = new QLabel(controlTab);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setFont(font);
-
-        verticalLayout->addWidget(label_5);
-
-        listWidgetSounds = new QListWidget(controlTab);
-        listWidgetSounds->setObjectName(QString::fromUtf8("listWidgetSounds"));
-
-        verticalLayout->addWidget(listWidgetSounds);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        pushButtonLoadSound = new QPushButton(controlTab);
-        pushButtonLoadSound->setObjectName(QString::fromUtf8("pushButtonLoadSound"));
-        pushButtonLoadSound->setFont(font);
-
-        horizontalLayout_2->addWidget(pushButtonLoadSound);
-
-        pushButtonDeleteSound = new QPushButton(controlTab);
-        pushButtonDeleteSound->setObjectName(QString::fromUtf8("pushButtonDeleteSound"));
-        pushButtonDeleteSound->setFont(font);
-
-        horizontalLayout_2->addWidget(pushButtonDeleteSound);
-
-        pushButtonClearBrain = new QPushButton(controlTab);
-        pushButtonClearBrain->setObjectName(QString::fromUtf8("pushButtonClearBrain"));
-        pushButtonClearBrain->setFont(font);
-
-        horizontalLayout_2->addWidget(pushButtonClearBrain);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(horizontalLayout_7);
 
 
         horizontalLayout_5->addLayout(verticalLayout);
@@ -1070,6 +1077,8 @@ public:
         QObject::connect(sliderSlideError, SIGNAL(valueChanged(int)), MainWindow, SLOT(slide_error(int)));
         QObject::connect(doubleSpinBoxStickyness, SIGNAL(valueChanged(double)), MainWindow, SLOT(stickyness_slot(double)));
         QObject::connect(sliderStickyness, SIGNAL(valueChanged(int)), MainWindow, SLOT(stickyness_slot(int)));
+        QObject::connect(doubleSpinBoxAutotune, SIGNAL(valueChanged(double)), MainWindow, SLOT(autotune(double)));
+        QObject::connect(sliderAutotune, SIGNAL(sliderMoved(int)), MainWindow, SLOT(autotune(int)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -1079,13 +1088,13 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.10", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.11", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         sliderRatio->setToolTip(QApplication::translate("MainWindow", "plain fft match vs mfcc values ", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
-        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics / freq only", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("MainWindow", "dynamics / freq", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         sliderNRatio->setToolTip(QApplication::translate("MainWindow", "match original or normalised blocks", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
@@ -1120,7 +1129,7 @@ public:
 #endif // QT_NO_TOOLTIP
         label_30->setText(QApplication::translate("MainWindow", "stickyness", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        sliderStickyness->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", 0, QApplication::UnicodeUTF8));
+        sliderStickyness->setToolTip(QApplication::translate("MainWindow", "prioritise brain order over closeness", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_28->setToolTip(QString());
@@ -1140,7 +1149,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         radioButtonAlgoRevBasic->setToolTip(QApplication::translate("MainWindow", "full brain reverse search", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
-        radioButtonAlgoRevBasic->setText(QApplication::translate("MainWindow", "rev basic", 0, QApplication::UnicodeUTF8));
+        radioButtonAlgoRevBasic->setText(QApplication::translate("MainWindow", "rev", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         radioButtonSynaptic->setToolTip(QApplication::translate("MainWindow", "search based on synapse connections", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
@@ -1169,15 +1178,6 @@ public:
 #ifndef QT_NO_TOOLTIP
         spinBoxSlideError->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
-        label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("MainWindow", "dynamic / normalised ", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        sliderNMix->setToolTip(QApplication::translate("MainWindow", "mix in the normalised blocks", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        label_22->setText(QApplication::translate("MainWindow", "brain / target", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        sliderTargetMix->setToolTip(QApplication::translate("MainWindow", "mix in the original blocks", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
         label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
         pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
@@ -1192,11 +1192,27 @@ public:
         radioButton_rectangleTarget->setText(QApplication::translate("MainWindow", "rectangle", 0, QApplication::UnicodeUTF8));
         label_14->setText(QApplication::translate("MainWindow", "window shape", 0, QApplication::UnicodeUTF8));
         pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "(re)generate blocks", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "brain parameters", 0, QApplication::UnicodeUTF8));
+        label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
+        label_31->setText(QApplication::translate("MainWindow", "autotune", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderAutotune->setToolTip(QApplication::translate("MainWindow", "amount to match the frequency", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        label_21->setText(QApplication::translate("MainWindow", "dynamic / normalised ", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderNMix->setToolTip(QApplication::translate("MainWindow", "mix in the normalised blocks", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        label_22->setText(QApplication::translate("MainWindow", "brain / target", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        sliderTargetMix->setToolTip(QApplication::translate("MainWindow", "mix in the original blocks", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+        label_3->setText(QApplication::translate("MainWindow", "brain contents", 0, QApplication::UnicodeUTF8));
+        pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", 0, QApplication::UnicodeUTF8));
+        pushButtonDeleteSound->setText(QApplication::translate("MainWindow", "delete selected", 0, QApplication::UnicodeUTF8));
+        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear brain", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
-        radioButton_gaussian->setText(QApplication::translate("MainWindow", "gaussian", 0, QApplication::UnicodeUTF8));
         radioButton_hamming->setText(QApplication::translate("MainWindow", "hamming", 0, QApplication::UnicodeUTF8));
+        radioButton_gaussian->setText(QApplication::translate("MainWindow", "gaussian", 0, QApplication::UnicodeUTF8));
         radioButton_dodgy->setText(QApplication::translate("MainWindow", "dodgy", 0, QApplication::UnicodeUTF8));
         radioButton_blackman->setText(QApplication::translate("MainWindow", "blackman", 0, QApplication::UnicodeUTF8));
         radioButton_rectagle->setText(QApplication::translate("MainWindow", "rectangle", 0, QApplication::UnicodeUTF8));
@@ -1207,10 +1223,6 @@ public:
         pushButtonGenerate->setText(QApplication::translate("MainWindow", "(re)generate brain", 0, QApplication::UnicodeUTF8));
         pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", 0, QApplication::UnicodeUTF8));
         pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "brain contents", 0, QApplication::UnicodeUTF8));
-        pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", 0, QApplication::UnicodeUTF8));
-        pushButtonDeleteSound->setText(QApplication::translate("MainWindow", "delete selected", 0, QApplication::UnicodeUTF8));
-        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear brain", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(logTab), QApplication::translate("MainWindow", "log", 0, QApplication::UnicodeUTF8));
         pushButtonPlay->setText(QString());
@@ -1228,4 +1240,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINJ11878_H
+#endif // SAMPLEBRAINPM4153_H

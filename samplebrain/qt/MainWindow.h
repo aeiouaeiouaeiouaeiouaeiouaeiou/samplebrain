@@ -60,6 +60,16 @@ private slots:
         m_Ui.sliderNRatio->setValue(s*100);
     }
 
+    void autotune(int s) {
+        lo_send(m_audio_address,"/autotune","f",s/100.0f);
+        m_Ui.doubleSpinBoxAutotune->setValue(s/100.0f);
+    }
+    void autotune(double s) {
+        lo_send(m_audio_address,"/autotune","f",s);
+        m_Ui.sliderAutotune->setValue(s*100);
+    }
+
+
     void fft1_start_slot(int s) { lo_send(m_audio_address,"/fft1_start","i",s); }
     void fft1_end_slot(int s) { lo_send(m_audio_address,"/fft1_end","i",s); }
     void fft2_start_slot(int s){} // { m_renderer->get_params()->m_fft2_start=s; }

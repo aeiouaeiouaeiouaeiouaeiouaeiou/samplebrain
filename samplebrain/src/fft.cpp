@@ -65,7 +65,9 @@ float FFT::calculate_dominant_freq() {
       highest=t;
     }
   }
-  return index * (SRATE/(float)m_length);
+  float freq = index * (SRATE/(float)m_length);
+  if (freq<0.01) freq=0.01;
+  return freq;
 }
 
 void FFT::calculate_bins() {

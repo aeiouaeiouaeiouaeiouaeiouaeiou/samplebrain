@@ -16,7 +16,7 @@
 
 #include "renderer.h"
 #include <iostream>
-#include "pitchshift.h"
+//#include "pitchshift.h"
 
 using namespace spiralcore;
 using namespace std;
@@ -157,14 +157,17 @@ void renderer::render(u32 nframes, float *buf) {
     // get the sample offset into the buffer
     s32 offset = i->m_time-m_render_time;
 
+    u32 block_length = pcm.get_length();
 
     // assume midway through block
     u32 block_start = offset;
     u32 buffer_start = 0;
     if (offset<0) {
       block_start=-offset;
-      if (block_start>=pcm.get_length() ||
-          i->m_position>=pcm.get_length()) i->m_finished=true;
+      if (block_start>=block_length &&
+          i->m_position>=block_length) {
+        i->m_finished=true;
+      }
     } else { // block is midway through buffer
       block_start=0;
       buffer_start=offset;
@@ -174,14 +177,21 @@ void renderer::render(u32 nframes, float *buf) {
     //        cerr<<"block start:"<<block_start<<endl;
     //        cerr<<"buffer start:"<<buffer_start<<endl;
 
-    float pitch_scale = m_target.get_block(i->m_tgt_index).get_freq() /
-      m_source.get_block(i->m_index).get_freq();
 
     // fade in/out autotune
-    pitch_scale = pitch_scale*m_autotune + 1.0f*(1-m_autotune);
+    //pitch_scale = pitch_scale*m_autotune + 1.0f*(1-m_autotune);
+
+    float pitch_scale = 1;
+
+    if (m_autotune>0) {
+      pitch_scale = m_target.get_block(i->m_tgt_index).get_freq() /
+        m_source.get_block(i->m_index).get_freq();
+      float max = 1+(m_autotune*m_autotune)*100.0f;
+      if (pitch_scale>(max)) pitch_scale=max;
+      if (pitch_scale<(1/max)) pitch_scale=1/max;
+    }
 
     //pitchshift::process(pcm,pitch_scale,render_pcm);
-
 
     if (!i->m_finished) {
       // mix in
@@ -189,19 +199,31 @@ void renderer::render(u32 nframes, float *buf) {
       u32 block_pos = block_start;
       u32 block_end = pcm.get_length();
 
+      while (i->m_position<block_end && buffer_pos<nframes) {
 
-      while (block_pos<block_end && buffer_pos<nframes) {
         // mix with normalised version
         float brain_sample = (pcm[i->m_position]*(1-m_n_mix)+
-                              n_pcm[block_pos]*m_n_mix);
+                              n_pcm[i->m_position]*m_n_mix);
 
-        // for mixing with target audio
-        float target_sample = target_pcm[block_pos];
+        float target_sample = 0;
+
+        // if playback scale is lower than target then we may
+        // run off the end of the target block
+        if (block_pos<block_length) {
+          // for mixing with target audio
+          target_sample = target_pcm[block_pos];
+        }
 
         buf[buffer_pos]+=(brain_sample*(1-m_target_mix) +
                           target_sample*m_target_mix)*0.2*m_volume;
 
         i->m_position+=pitch_scale;
+
+        // repeat fast blocks if we are still playing the source
+        if (block_pos<block_length &&
+            i->m_position>block_end) {
+          i->m_position=0;
+        }
 
         ++buffer_pos;
         ++block_pos;
