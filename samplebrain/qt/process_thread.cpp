@@ -110,6 +110,12 @@ void process_thread::process() {
             if (name=="/save_brain") {
                 save_source(cmd.get_string(0));
             }
+            if (name=="/load_session") {
+                load_session(cmd.get_string(0));
+            }
+            if (name=="/save_session") {
+                save_session(cmd.get_string(0));
+            }
         }
         usleep(500);
     }
@@ -118,16 +124,9 @@ void process_thread::process() {
 
 void process_thread::load_source(const std::string &filename) {
     pthread_mutex_lock(m_brain_mutex);
+    m_source.clear();
     ifstream ifs(filename.c_str(),ios::binary);
     ifs||m_source;
-    ifs.close();
-    pthread_mutex_unlock(m_brain_mutex);
-}
-
-void process_thread::load_target(const std::string &filename) {
-    pthread_mutex_lock(m_brain_mutex);
-    ifstream ifs(filename.c_str(),ios::binary);
-    ifs||m_target;
     ifs.close();
     pthread_mutex_unlock(m_brain_mutex);
 }
@@ -140,9 +139,30 @@ void process_thread::save_source(const std::string &filename) {
     pthread_mutex_unlock(m_brain_mutex);
 }
 
-void process_thread::save_target(const std::string &filename) {
+// remember to change GUI side to match...
+void process_thread::load_session(const std::string &filename) {
+    pthread_mutex_lock(m_brain_mutex);
+    m_source.clear();
+    m_target.clear();
+    ifstream ifs(filename.c_str(),ios::binary);
+    ifs||(*m_renderer);
+    ifs||m_source_block_size||m_source_overlap;
+    ifs||m_target_block_size||m_target_overlap;
+    ifs||m_window_type||m_target_window_type;
+    ifs||m_source;
+    ifs||m_target;
+    ifs.close();
+    pthread_mutex_unlock(m_brain_mutex);
+}
+
+void process_thread::save_session(const std::string &filename) {
     pthread_mutex_lock(m_brain_mutex);
     ofstream ofs(filename.c_str(),ios::binary);
+    ofs||(*m_renderer);
+    ofs||m_source_block_size||m_source_overlap;
+    ofs||m_target_block_size||m_target_overlap;
+    ofs||m_window_type||m_target_window_type;
+    ofs||m_source;
     ofs||m_target;
     ofs.close();
     pthread_mutex_unlock(m_brain_mutex);

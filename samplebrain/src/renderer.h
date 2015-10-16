@@ -55,9 +55,19 @@ namespace spiralcore {
     void set_autotune(float s) { m_autotune=s; }
     search_params *get_params() { return &m_search_params; }
 
+    search_algo get_search_algo() { return m_search_algo; }
+    float get_volume() { return m_volume; }
+    float get_n_mix() { return m_n_mix; }
+    float get_target_mix() { return m_target_mix; }
+    double get_slide_error() { return m_slide_error; }
+    u32 get_stretch() { return m_stretch; }
+    float get_autotune() { return m_autotune; }
+
     brain &get_source() { return m_source; }
 
     static bool unit_test();
+
+    friend ios &operator||(ios &s, renderer &b);
 
   private:
 
@@ -104,6 +114,9 @@ namespace spiralcore {
     std::list<render_block> m_render_blocks;
   };
 
+  std::ios &operator||(std::ios &s, renderer &b);
+
 }
+
 
 #endif

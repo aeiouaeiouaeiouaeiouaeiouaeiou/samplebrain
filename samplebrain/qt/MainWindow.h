@@ -69,7 +69,6 @@ private slots:
         m_Ui.sliderAutotune->setValue(s*100);
     }
 
-
     void fft1_start_slot(int s) { lo_send(m_audio_address,"/fft1_start","i",s); }
     void fft1_end_slot(int s) { lo_send(m_audio_address,"/fft1_end","i",s); }
     void fft2_start_slot(int s){} // { m_renderer->get_params()->m_fft2_start=s; }
@@ -200,7 +199,7 @@ private slots:
         if (m_save_wav=="") {
             m_last_file=QFileDialog::getSaveFileName(
                 this,
-                QString("Select an wav file"),
+                QString("Select a wav file"),
                 m_last_file,
                 QString("Sounds (*.wav)"));
             m_save_wav = m_last_file.toStdString();
@@ -242,12 +241,35 @@ private slots:
         lo_send(m_process_address,"/save_brain","s",m_last_file.toStdString().c_str());
     }
 
+    void load_session() {
+        m_last_file=QFileDialog::getOpenFileName(
+            this,
+            QString("Select a session file"),
+            m_last_file,
+            QString("Sessions (*.samplebrain)"));
+
+        lo_send(m_process_address,"/load_session","s",m_last_file.toStdString().c_str());
+        init_from_session(m_last_file.toStdString());
+    }
+
+    void save_session() {
+        m_last_file=QFileDialog::getSaveFileName(
+            this,
+            QString("Select a session file"),
+            m_last_file,
+            QString("Sessions (*.samplebrain)"));
+
+        lo_send(m_process_address,"/save_session","s",m_last_file.toStdString().c_str());
+    }
 
     void update_status() {
         m_feedback.poll(m_Ui.statusbar);
     }
 
 private:
+
+    void init_from_session(const string &filename);
+
     string m_save_wav;
     QString m_last_file;
     u32 m_record_id;

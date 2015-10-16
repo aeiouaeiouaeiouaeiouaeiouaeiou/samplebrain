@@ -35,9 +35,10 @@ public:
     void process();
 
     void load_source(const std::string &filename);
-    void load_target(const std::string &filename);
     void save_source(const std::string &filename);
-    void save_target(const std::string &filename);
+
+    void load_session(const std::string &filename);
+    void save_session(const std::string &filename);
 
     // only for use in mutex
     brain m_source, m_target;

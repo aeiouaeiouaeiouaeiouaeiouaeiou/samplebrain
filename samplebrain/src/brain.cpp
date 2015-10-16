@@ -61,6 +61,12 @@ void brain::delete_sound(std::string filename) {
     }
 }
 
+void brain::clear() {
+   m_blocks.clear();
+   m_samples.clear();
+   m_active_sounds.clear();
+}
+
 // rewrites whole brain
 void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     m_blocks.clear();
@@ -322,6 +328,7 @@ ios &spiralcore::operator||(ios &s, brain::sound &b) {
 ios &spiralcore::operator||(ios &s, brain &b) {
     u32 version=0;
     string id("brain");
+    // changes here need to be reflected in interface loading
     s||id||version;
     stream_vector(s,b.m_blocks);
     stream_list(s,b.m_samples);

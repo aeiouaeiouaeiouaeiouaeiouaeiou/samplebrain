@@ -244,6 +244,18 @@ void renderer::clean_up() {
   }
 }
 
+ios &spiralcore::operator||(ios &s, renderer &r) {
+    u32 version=0;
+    string id("renderer");
+    s||id||version;
+    s||r.m_search_params;
+    s||r.m_volume||r.m_playing||r.m_target_index||r.m_render_index;
+    s||r.m_target_time||r.m_render_time||r.m_stretch;
+    s||r.m_n_mix||r.m_target_mix||r.m_autotune;
+    s||r.m_search_algo||r.m_slide_error||r.m_last_tgt_shift;
+    return s;
+}
+
 bool renderer::unit_test() {
   brain source;
   source.load_sound("test_data/up.wav");

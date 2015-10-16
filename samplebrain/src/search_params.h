@@ -17,6 +17,12 @@
 #ifndef SEARCH_PARAMS
 #define SEARCH_PARAMS
 
+#include "jellyfish/core/types.h"
+#include "jellyfish/core/stream.h"
+#include <iostream>
+
+#pragma once
+
 namespace spiralcore {
 
 class search_params {
@@ -39,6 +45,8 @@ public:
     u32 m_num_synapses;
     f32 m_stickyness;
 };
+
+ std::ios &operator||(std::ios &s, search_params &b);
 
 }
 

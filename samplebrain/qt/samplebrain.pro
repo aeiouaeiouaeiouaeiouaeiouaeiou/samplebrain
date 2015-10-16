@@ -23,6 +23,7 @@ SOURCES += MainWindow.cpp \
            ../src/fft.cpp \
            ../src/mfcc.cpp \
            ../src/renderer.cpp \
+           ../src/search_params.cpp \
            ../src/status.cpp \
            ../src/window.cpp \
            ../src/aquila/filter/MelFilterBank.cpp \

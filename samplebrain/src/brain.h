@@ -49,6 +49,8 @@ public:
         sample m_sample;
     };
 
+    void clear();
+
     // load, chop up and add to brain
     // todo: add tags
     void load_sound(std::string filename);
@@ -58,6 +60,8 @@ public:
     // (presumably this one is made from a single sample)
     //void resynth(const std::string &filename, const brain &other, const search_params &params);
 
+
+    const std::list<sound> &get_samples() { return m_samples; }
     const sample &get_block_pcm(u32 index) const;
     const sample &get_block_n_pcm(u32 index) const;
     const block &get_block(u32 index) const;
@@ -66,6 +70,7 @@ public:
     u32 get_overlap() const { return m_overlap; }
 
     void set_usage_falloff(float s) { m_usage_falloff=s; }
+    float get_usage_falloff() { return m_usage_falloff; }
 
     // basic search
     u32 search(const block &target, const search_params &params);
