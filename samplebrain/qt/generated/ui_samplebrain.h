@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebraing13021.ui'
+** Form generated from reading UI file 'samplebrainQ13021.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAING13021_H
-#define SAMPLEBRAING13021_H
+#ifndef SAMPLEBRAINQ13021_H
+#define SAMPLEBRAINQ13021_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -1011,11 +1011,13 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         pushButtonLoadSession = new QPushButton(centralwidget);
         pushButtonLoadSession->setObjectName(QString::fromUtf8("pushButtonLoadSession"));
+        pushButtonLoadSession->setFont(font);
 
         verticalLayout->addWidget(pushButtonLoadSession);
 
         pushButtonSaveSession = new QPushButton(centralwidget);
         pushButtonSaveSession->setObjectName(QString::fromUtf8("pushButtonSaveSession"));
+        pushButtonSaveSession->setFont(font);
 
         verticalLayout->addWidget(pushButtonSaveSession);
 
@@ -1271,4 +1273,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAING13021_H
+#endif // SAMPLEBRAINQ13021_H

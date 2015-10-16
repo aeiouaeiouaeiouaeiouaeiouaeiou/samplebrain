@@ -1539,6 +1539,13 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QPushButton" name="pushButtonLoadSession">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
            <string>load session</string>
           </property>
@@ -1546,6 +1553,13 @@
         </item>
         <item>
          <widget class="QPushButton" name="pushButtonSaveSession">
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
            <string>save session</string>
           </property>
