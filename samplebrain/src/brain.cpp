@@ -45,14 +45,23 @@ void brain::load_sound(std::string filename) {
     SNDFILE* f=sf_open(filename.c_str(), SFM_READ, &sfinfo);
     if (f!=NULL) {
         sample s(sfinfo.frames);
-        sf_readf_float(f, s.get_non_const_buffer(), s.get_length());
+        float *temp = new float[sfinfo.channels * sfinfo.frames];
+        sf_readf_float(f, temp, sfinfo.channels * sfinfo.frames);
+        // mix down stereo to mono
+        for(u32 i=0; i<sfinfo.frames; i++) {
+          s[i]=0;
+          for(u32 j = 0; j < sfinfo.channels; j++) {
+            s[i]+=temp[i*sfinfo.channels + j];
+          }
+        }
+        delete[] temp;
         m_samples.push_back(sound(filename,s));
         status::update("loaded %s",filename.c_str());
     }
 }
 
 void brain::delete_sound(std::string filename) {
-    for (std::list<sound>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
+    for (auto i=m_samples.begin(); i!=m_samples.end(); ++i) {
         if (i->m_filename==filename) {
             m_samples.erase(i);
             status::update("deleted %s",filename.c_str());
@@ -75,9 +84,9 @@ void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     m_window.init(block_size);
     m_window.set_current_type(t);
     u32 count=0;
-    for (std::list<sound>::iterator i=m_samples.begin(); i!=m_samples.end(); ++i) {
+    for (auto s : m_samples) {
         count++;
-        chop_and_add(*i, count, ditchpcm);
+        chop_and_add(s, count, ditchpcm);
     }
     status::update("all samples processed");
 }
@@ -123,8 +132,8 @@ u32 brain::search(const block &target, const search_params &params) {
     double closest = FLT_MAX;
     u32 closest_index = 0;
     u32 index = 0;
-    for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
-        double diff = target.compare(*i,params);
+    for (auto b : m_blocks) {
+        double diff = target.compare(b,params);
         if (diff<closest) {
             closest=diff;
             closest_index = index;
@@ -141,8 +150,8 @@ u32 brain::rev_search(const block &target, const search_params &params) {
     double furthest = 0;
     u32 furthest_index = 0;
     u32 index = 0;
-    for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
-        double diff = target.compare(*i,params);
+    for (auto b:m_blocks) {
+        double diff = target.compare(b,params);
         if (diff>furthest) {
             furthest=diff;
             furthest_index = index;
@@ -160,9 +169,9 @@ u32 brain::rev_search(const block &target, const search_params &params) {
 // really slow - every to every comparison of blocks calculating average distance
 double brain::calc_average_diff(search_params &params) {
     double diff=0;
-    for (vector<block>::const_iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
-        for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
-            diff += j->compare(*i,params);
+    for (auto i:m_blocks) {
+      for (auto j:m_blocks) {
+            diff += j.compare(i,params);
         }
         diff/=(double)m_blocks.size();
     }
@@ -174,15 +183,15 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
     double err = m_average_error*thresh;
     u32 brain_size = m_blocks.size();
     u32 outer_index = 0;
-    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+    for (auto i:m_blocks) {
         u32 index = 0;
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
-        for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
+        for (auto j:m_blocks) {
             if (index!=outer_index) {
                 // collect connections that are under threshold in closeness
-                double diff = i->compare(*j,params);
+                double diff = i.compare(j,params);
                 if (diff<err) {
-                    i->get_synapse().push_back(index);
+                    i.get_synapse().push_back(index);
                 }
             }
             ++index;
@@ -198,17 +207,17 @@ void brain::build_synapses_fixed(search_params &params) {
     u32 num_synapses = NUM_FIXED_SYNAPSES;
     if (num_synapses>=m_blocks.size()) num_synapses=m_blocks.size()-1;
 
-    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+    for (auto i:m_blocks) {
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
         u32 index = 0;
         vector<pair<u32,double>> collect;
 
         // collect comparisons to all other blocks
-        for (vector<block>::const_iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
+        for (auto j:m_blocks) {
             assert(index<m_blocks.size());
             if (index!=outer_index) {
-                double diff = i->compare(*j,params);
-                collect.push_back(pair<u32,double>(index,diff));
+              double diff = i.compare(j,params);
+              collect.push_back(pair<u32,double>(index,diff));
             }
             ++index;
         }
@@ -224,8 +233,7 @@ void brain::build_synapses_fixed(search_params &params) {
         // add the closest ones to the list
         for(u32 n=0; n<num_synapses; ++n) {
             assert(collect[n].first<m_blocks.size());
-
-            i->get_synapse().push_back(collect[n].first);
+            i.get_synapse().push_back(collect[n].first);
         }
 
         ++outer_index;
