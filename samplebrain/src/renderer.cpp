@@ -258,11 +258,11 @@ ios &spiralcore::operator||(ios &s, renderer &r) {
 
 bool renderer::unit_test() {
   brain source;
-  source.load_sound("test_data/up.wav");
+  source.load_sound("test_data/up.wav", brain::MIX);
   source.init(10,0,window::RECTANGLE);
 
   brain target;
-  target.load_sound("test_data/up.wav");
+  target.load_sound("test_data/up.wav", brain::MIX);
   target.init(10,0,window::RECTANGLE);
 
   renderer rr(source,target);

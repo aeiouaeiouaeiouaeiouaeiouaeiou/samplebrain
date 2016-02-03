@@ -49,8 +49,10 @@ void MainWindow::init_from_session(const string &filename) {
   ifstream ifs(filename.c_str(),ios::binary);
 
   brain s,t;
-
+  u32 version=0;
+  ifs||version;
   renderer r(s,t);
+  ifs||r;
   ifs||r;
 
   u32 target_windowsize;

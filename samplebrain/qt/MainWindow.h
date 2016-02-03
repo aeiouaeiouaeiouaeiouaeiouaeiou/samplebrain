@@ -266,6 +266,10 @@ private slots:
         m_feedback.poll(m_Ui.statusbar);
     }
 
+    void stereo_mode(bool s) {
+      lo_send(m_audio_address,"/stereo","i",s);
+    }
+
 private:
 
     void init_from_session(const string &filename);

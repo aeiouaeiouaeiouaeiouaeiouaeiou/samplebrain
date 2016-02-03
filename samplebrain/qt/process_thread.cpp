@@ -59,7 +59,7 @@ void process_thread::process() {
             //cerr<<name<<endl;
             if (name=="/load_sample") {
                 pthread_mutex_lock(m_brain_mutex);
-                m_source.load_sound(cmd.get_string(0));
+                m_source.load_sound(cmd.get_string(0),brain::MIX);
                 pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/delete_sample") {
@@ -78,13 +78,16 @@ void process_thread::process() {
                 m_source.init(m_source_block_size, m_source_overlap, m_window_type);
                 search_params p(1,0,0,100,0);
                 m_source.build_synapses_fixed(p);
-                m_renderer->reset();
+                m_left_renderer->reset();
+                m_right_renderer->reset();
                 pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/load_target") {
                 pthread_mutex_lock(m_brain_mutex);
-                m_target.clear_sounds();
-                m_target.load_sound(cmd.get_string(0));
+                m_left_target.clear_sounds();
+                m_left_target.load_sound(cmd.get_string(0),brain::LEFT);
+                m_right_target.clear_sounds();
+                m_right_target.load_sound(cmd.get_string(0),brain::RIGHT);
                 pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/target_block_size") {
@@ -95,7 +98,8 @@ void process_thread::process() {
             }
             if (name=="/generate_target") {
                 pthread_mutex_lock(m_brain_mutex);
-                m_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
+                m_left_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
+                m_right_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
                 pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/window_type") {
@@ -139,18 +143,23 @@ void process_thread::save_source(const std::string &filename) {
     pthread_mutex_unlock(m_brain_mutex);
 }
 
-// remember to change GUI side to match...
+// remember to change GUI side to match in MainWindow.cpp
 void process_thread::load_session(const std::string &filename) {
     pthread_mutex_lock(m_brain_mutex);
     m_source.clear();
-    m_target.clear();
+    m_left_target.clear();
+    m_right_target.clear();
     ifstream ifs(filename.c_str(),ios::binary);
-    ifs||(*m_renderer);
+    u32 version=0;
+    ifs||version;
+    ifs||(*m_left_renderer);
+    ifs||(*m_right_renderer);
     ifs||m_source_block_size||m_source_overlap;
     ifs||m_target_block_size||m_target_overlap;
     ifs||m_window_type||m_target_window_type;
     ifs||m_source;
-    ifs||m_target;
+    ifs||m_left_target;
+    ifs||m_right_target;
     ifs.close();
     pthread_mutex_unlock(m_brain_mutex);
 }
@@ -158,12 +167,16 @@ void process_thread::load_session(const std::string &filename) {
 void process_thread::save_session(const std::string &filename) {
     pthread_mutex_lock(m_brain_mutex);
     ofstream ofs(filename.c_str(),ios::binary);
-    ofs||(*m_renderer);
+    u32 version=0;
+    ofs||version;
+    ofs||(*m_left_renderer);
+    ofs||(*m_right_renderer);
     ofs||m_source_block_size||m_source_overlap;
     ofs||m_target_block_size||m_target_overlap;
     ofs||m_window_type||m_target_window_type;
     ofs||m_source;
-    ofs||m_target;
+    ofs||m_left_target;
+    ofs||m_right_target;
     ofs.close();
     pthread_mutex_unlock(m_brain_mutex);
 }

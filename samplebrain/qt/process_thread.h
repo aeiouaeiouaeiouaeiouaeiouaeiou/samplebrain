@@ -30,7 +30,10 @@ public:
 
     pthread_mutex_t* m_brain_mutex;
 
-    void register_renderer(renderer *p) { m_renderer=p; }
+    void register_renderer(renderer *lr, renderer *rr) {
+      m_left_renderer=lr;
+      m_right_renderer=rr;
+    }
 
     void process();
 
@@ -41,7 +44,7 @@ public:
     void save_session(const std::string &filename);
 
     // only for use in mutex
-    brain m_source, m_target;
+    brain m_source, m_left_target, m_right_target;
 
 private:
 	OSC_server m_osc;
@@ -54,7 +57,8 @@ private:
     pthread_t *m_thread;
 
     // only use in mutex obvs...
-    renderer *m_renderer;
+    renderer *m_left_renderer;
+    renderer *m_right_renderer;
 };
 
 }

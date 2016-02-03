@@ -39,7 +39,7 @@ brain::brain() :
 
 // load, chop up and add to brain
 // todo: add tags
-void brain::load_sound(std::string filename) {
+void brain::load_sound(std::string filename, stereo_mode mode) {
     SF_INFO sfinfo;
     sfinfo.format=0;
     SNDFILE* f=sf_open(filename.c_str(), SFM_READ, &sfinfo);
@@ -47,13 +47,24 @@ void brain::load_sound(std::string filename) {
         sample s(sfinfo.frames);
         float *temp = new float[sfinfo.channels * sfinfo.frames];
         sf_readf_float(f, temp, sfinfo.channels * sfinfo.frames);
-        // mix down stereo to mono
-        for(u32 i=0; i<sfinfo.frames; i++) {
-          s[i]=0;
-          for(u32 j = 0; j < sfinfo.channels; j++) {
-            s[i]+=temp[i*sfinfo.channels + j];
+
+        if (mode==MIX) {
+          for(u32 i=0; i<sfinfo.frames; i++) {
+            s[i]=0;
+            // mix down stereo to mono
+            for(u32 j = 0; j < sfinfo.channels; j++) {
+              s[i]+=temp[i*sfinfo.channels + j];
+            }
+          }
+        } else {
+          // just take one channel (assume stereo, split if mono)
+          for(u32 i=0; i<sfinfo.frames; i++) {
+            u32 si=i*sfinfo.channels;
+            if (mode==RIGHT && sfinfo.channels>1) si++;
+            s[i]=temp[si];
           }
         }
+
         delete[] temp;
         m_samples.push_back(sound(filename,s));
         status::update("loaded %s",filename.c_str());
@@ -183,15 +194,15 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
     double err = m_average_error*thresh;
     u32 brain_size = m_blocks.size();
     u32 outer_index = 0;
-    for (auto i:m_blocks) {
+    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
         u32 index = 0;
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
-        for (auto j:m_blocks) {
+        for (vector<block>::iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
             if (index!=outer_index) {
                 // collect connections that are under threshold in closeness
-                double diff = i.compare(j,params);
+                double diff = i->compare(*j,params);
                 if (diff<err) {
-                    i.get_synapse().push_back(index);
+                    i->get_synapse().push_back(index);
                 }
             }
             ++index;
@@ -207,16 +218,16 @@ void brain::build_synapses_fixed(search_params &params) {
     u32 num_synapses = NUM_FIXED_SYNAPSES;
     if (num_synapses>=m_blocks.size()) num_synapses=m_blocks.size()-1;
 
-    for (auto i:m_blocks) {
+    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
         u32 index = 0;
         vector<pair<u32,double>> collect;
 
         // collect comparisons to all other blocks
-        for (auto j:m_blocks) {
+        for (vector<block>::iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
             assert(index<m_blocks.size());
             if (index!=outer_index) {
-              double diff = i.compare(j,params);
+              double diff = i->compare(*j,params);
               collect.push_back(pair<u32,double>(index,diff));
             }
             ++index;
@@ -229,11 +240,10 @@ void brain::build_synapses_fixed(search_params &params) {
                  return a.second<b.second;
              });
 
-
         // add the closest ones to the list
         for(u32 n=0; n<num_synapses; ++n) {
             assert(collect[n].first<m_blocks.size());
-            i.get_synapse().push_back(collect[n].first);
+            i->get_synapse().push_back(collect[n].first);
         }
 
         ++outer_index;
@@ -255,9 +265,10 @@ u32 brain::search_synapses(const block &target, search_params &params) {
     const block &current = get_block(m_current_block_index);
     double closest = DBL_MAX;
     u32 closest_index = 0;
+
     // find nearest in synaptic connections
     if (current.get_synapse_const().size()<params.m_num_synapses) {
-        params.m_num_synapses = current.get_synapse_const().size()-1;
+      params.m_num_synapses = current.get_synapse_const().size()-1;
     }
     //    assert(current.get_synapse_const().size()>params.m_num_synapses);
 
@@ -351,8 +362,8 @@ bool brain::unit_test() {
     assert(b.m_samples.size()==0);
     assert(b.m_blocks.size()==0);
 
-    b.load_sound("test_data/100f32.wav");
-    b.load_sound("test_data/100i16.wav");
+    b.load_sound("test_data/100f32.wav",MIX);
+    b.load_sound("test_data/100i16.wav",MIX);
     assert(b.m_samples.size()==2);
 
     b.init(10, 0, window::RECTANGLE);
@@ -367,9 +378,9 @@ bool brain::unit_test() {
 
     // replicate brains
     brain b2;
-    b2.load_sound("test_data/up.wav");
+    b2.load_sound("test_data/up.wav",MIX);
     brain b3;
-    b3.load_sound("test_data/up.wav");
+    b3.load_sound("test_data/up.wav",MIX);
 
     b2.init(512, 0, window::BLACKMAN);
     b3.init(512, 0, window::BLACKMAN);

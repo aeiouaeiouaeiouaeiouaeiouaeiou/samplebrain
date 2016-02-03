@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.12</string>
+   <string>samplebrain 0.14</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1122,6 +1122,13 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxStereo">
+            <property name="text">
+             <string>stereo mode</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer">
@@ -2673,6 +2680,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>checkBoxStereo</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>stereo_mode(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>594</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -2742,6 +2765,7 @@
   <slot>autotune(double)</slot>
   <slot>load_session()</slot>
   <slot>save_session()</slot>
+  <slot>stereo_mode(bool)</slot>
  </slots>
  <buttongroups>
   <buttongroup name="buttonGroup_2"/>

@@ -32,6 +32,8 @@ class brain {
 public:
     brain();
 
+    enum stereo_mode { MIX, LEFT, RIGHT };
+
     // rewrites whole brain
     void init(u32 block_size, u32 overlap, window::type t, bool ditchpcm=false);
 
@@ -53,7 +55,7 @@ public:
 
     // load, chop up and add to brain
     // todo: add tags
-    void load_sound(std::string filename);
+    void load_sound(std::string filename, stereo_mode mode);
     void delete_sound(std::string filename);
     void clear_sounds() { m_samples.clear(); }
     // take another brain and rebuild this brain from bits of that one

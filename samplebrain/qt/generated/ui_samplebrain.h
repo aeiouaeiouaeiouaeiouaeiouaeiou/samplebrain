@@ -1,18 +1,19 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainQ13021.ui'
+** Form generated from reading UI file 'samplebrainSm7172.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINQ13021_H
-#define SAMPLEBRAINQ13021_H
+#ifndef SAMPLEBRAINSM7172_H
+#define SAMPLEBRAINSM7172_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QDial>
 #include <QtGui/QDoubleSpinBox>
 #include <QtGui/QGridLayout>
@@ -122,6 +123,7 @@ public:
     QLabel *label_22;
     QSlider *sliderTargetMix;
     QDoubleSpinBox *doubleSpinBoxTargetMix;
+    QCheckBox *checkBoxStereo;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_3;
@@ -772,6 +774,11 @@ public:
 
         verticalLayout_6->addLayout(horizontalLayout_9);
 
+        checkBoxStereo = new QCheckBox(controlTab);
+        checkBoxStereo->setObjectName(QString::fromUtf8("checkBoxStereo"));
+
+        verticalLayout_6->addWidget(checkBoxStereo);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_6->addItem(verticalSpacer);
@@ -1110,6 +1117,7 @@ public:
         QObject::connect(doubleSpinBoxAutotune, SIGNAL(valueChanged(double)), MainWindow, SLOT(autotune(double)));
         QObject::connect(pushButtonLoadSession, SIGNAL(released()), MainWindow, SLOT(load_session()));
         QObject::connect(pushButtonSaveSession, SIGNAL(released()), MainWindow, SLOT(save_session()));
+        QObject::connect(checkBoxStereo, SIGNAL(clicked(bool)), MainWindow, SLOT(stereo_mode(bool)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -1119,7 +1127,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.12", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.14", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1236,6 +1244,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         sliderTargetMix->setToolTip(QApplication::translate("MainWindow", "mix in the original blocks", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
+        checkBoxStereo->setText(QApplication::translate("MainWindow", "stereo mode", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "brain contents", 0, QApplication::UnicodeUTF8));
         pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", 0, QApplication::UnicodeUTF8));
         pushButtonDeleteSound->setText(QApplication::translate("MainWindow", "delete selected", 0, QApplication::UnicodeUTF8));
@@ -1273,4 +1282,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINQ13021_H
+#endif // SAMPLEBRAINSM7172_H

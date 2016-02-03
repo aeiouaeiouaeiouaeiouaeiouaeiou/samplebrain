@@ -33,7 +33,8 @@ public:
     static void run_audio(void* c, unsigned int frames);
     audio_device *m_audio_device;
 
-    renderer *m_renderer;
+    renderer *m_left_renderer;
+    renderer *m_right_renderer;
 
 private:
     void start_audio();
@@ -41,7 +42,7 @@ private:
 	OSC_server m_osc;
     process_thread &m_process_thread;
     pthread_mutex_t* m_brain_mutex;
-
+    bool m_stereo_mode;
 };
 
 }

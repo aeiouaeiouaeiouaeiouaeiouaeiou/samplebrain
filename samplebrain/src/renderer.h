@@ -27,9 +27,9 @@ namespace spiralcore {
   public:
   renderer(brain &source, brain &target) :
     m_source(source),
-      m_target(target),
-      m_search_params(0,0,0,100,0)
-        { init(source,target); }
+    m_target(target),
+    m_search_params(0,0,0,100,0)
+    { init(source,target); }
 
     enum search_algo {
       BASIC = 0,
