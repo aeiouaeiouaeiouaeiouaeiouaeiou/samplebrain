@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.14</string>
+   <string>samplebrain 0.15</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -25,7 +25,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="controlTab">
        <attribute name="title">
@@ -1427,13 +1427,13 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="logTab">
+      <widget class="QWidget" name="netTab">
        <attribute name="title">
-        <string>log</string>
+        <string>net</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_15">
         <item>
-         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+         <layout class="QVBoxLayout" name="netContainer"/>
         </item>
        </layout>
       </widget>

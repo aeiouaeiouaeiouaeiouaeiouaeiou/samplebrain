@@ -46,7 +46,8 @@ void brain::load_sound(std::string filename, stereo_mode mode) {
     if (f!=NULL) {
         sample s(sfinfo.frames);
         float *temp = new float[sfinfo.channels * sfinfo.frames];
-        sf_readf_float(f, temp, sfinfo.channels * sfinfo.frames);
+
+        sf_read_float(f, temp, sfinfo.channels * sfinfo.frames);
 
         if (mode==MIX) {
           for(u32 i=0; i<sfinfo.frames; i++) {

@@ -31,8 +31,32 @@ MainWindow::MainWindow() :
     m_Ui.setupUi(this);
     setUnifiedTitleAndToolBarOnMac(true);
 
-    m_audio_address = lo_address_new_from_url("osc.udp://localhost:8888");
-    m_process_address = lo_address_new_from_url("osc.udp://localhost:8889");
+    // add default local dest
+    // turn on first one
+
+    QSignalMapper* enable_mapper = new QSignalMapper(this);
+    QSignalMapper* connect_mapper = new QSignalMapper(this);
+
+    for (int i=0; i<10; i++) {
+      osc_destination d;
+      d.m_id=i;
+      d.m_audio_address = lo_address_new_from_url("osc.udp://localhost:8888");
+      d.m_process_address = lo_address_new_from_url("osc.udp://localhost:8889");
+      if (i==0) d.m_enabled=true;
+      else d.m_enabled=false;
+      add_gui_address(d,enable_mapper,connect_mapper);
+
+      if (i==0) {
+        d.m_enable->setChecked(true);
+        d.m_address->setText("osc.udp://localhost");
+      }
+      m_destinations.push_back(d);
+    }
+
+    connect(enable_mapper, SIGNAL(mapped(int)), this, SLOT(net_enable(int)));
+    connect(connect_mapper, SIGNAL(mapped(int)), this, SLOT(net_connect(int)));
+
+    m_Ui.netContainer->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_status()));
@@ -41,6 +65,27 @@ MainWindow::MainWindow() :
 
     m_save_wav="";
     m_record_id=0;
+}
+
+void MainWindow::add_gui_address(osc_destination &dest,
+                                 QSignalMapper* enable_mapper,
+                                 QSignalMapper* connect_mapper) {
+  QHBoxLayout *h = new QHBoxLayout();
+  dest.m_enable = new QCheckBox();
+  dest.m_enable->setText("enable");
+  dest.m_enable->setChecked(false);
+  h->addWidget(dest.m_enable);
+  dest.m_address = new QLineEdit();
+  h->addWidget(dest.m_address);
+  //QPushButton *ping = new QPushButton();
+  //ping->setText("connect");
+  //h->addWidget(ping);
+  m_Ui.netContainer->addLayout(h);
+
+  QObject::connect(dest.m_enable, SIGNAL(clicked()), enable_mapper, SLOT(map()));
+  enable_mapper->setMapping(dest.m_enable, dest.m_id);
+  //QObject::connect(ping, SIGNAL(clicked()), connect_mapper, SLOT(map()));
+  //connect_mapper->setMapping(ping, dest.m_id);
 }
 
 void MainWindow::init_from_session(const string &filename) {
@@ -122,6 +167,7 @@ void MainWindow::init_from_session(const string &filename) {
   case window::HAMMING: m_Ui.radioButton_hammingTarget->setChecked(true); break;
   case window::HANN: m_Ui.radioButton_hannTarget->setChecked(true); break;
   case window::RECTANGLE:  m_Ui.radioButton_rectangleTarget->setChecked(true); break;
+  default: break;
   };
 
   // source
@@ -136,6 +182,7 @@ void MainWindow::init_from_session(const string &filename) {
   case window::HAMMING: m_Ui.radioButton_hamming->setChecked(true); break;
   case window::HANN: m_Ui.radioButton_hann->setChecked(true); break;
   case window::RECTANGLE:  m_Ui.radioButton_rectagle->setChecked(true); break;
+  default: break;
   };
 
   // brain samples

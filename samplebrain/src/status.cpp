@@ -7,7 +7,7 @@ using namespace std;
 lo_address status::m_address = lo_address_new_from_url("osc.udp://localhost:8890");
 
 void status::_update(std::string msg) {
-    cerr<<msg<<endl;
+  //cerr<<msg<<endl;
     lo_send(m_address,"/report","s",msg.c_str());
 }
 

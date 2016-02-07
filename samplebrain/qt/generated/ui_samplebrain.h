@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainSm7172.ui'
+** Form generated from reading UI file 'samplebrainZ17592.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINSM7172_H
-#define SAMPLEBRAINSM7172_H
+#ifndef SAMPLEBRAINZ17592_H
+#define SAMPLEBRAINZ17592_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -22,7 +22,6 @@
 #include <QtGui/QLabel>
 #include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
-#include <QtGui/QPlainTextEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QSlider>
@@ -153,9 +152,9 @@ public:
     QPushButton *pushButtonLoadBrain;
     QPushButton *pushButtonSaveBrain;
     QSpacerItem *verticalSpacer_2;
-    QWidget *logTab;
+    QWidget *netTab;
     QHBoxLayout *horizontalLayout_15;
-    QPlainTextEdit *plainTextEdit;
+    QVBoxLayout *netContainer;
     QHBoxLayout *horizontalLayout_12;
     QPushButton *pushButtonPlay;
     QPushButton *pushButtonStop;
@@ -951,16 +950,16 @@ public:
         horizontalLayout_5->addLayout(verticalLayout_2);
 
         tabWidget->addTab(controlTab, QString());
-        logTab = new QWidget();
-        logTab->setObjectName(QString::fromUtf8("logTab"));
-        horizontalLayout_15 = new QHBoxLayout(logTab);
+        netTab = new QWidget();
+        netTab->setObjectName(QString::fromUtf8("netTab"));
+        horizontalLayout_15 = new QHBoxLayout(netTab);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        plainTextEdit = new QPlainTextEdit(logTab);
-        plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
+        netContainer = new QVBoxLayout();
+        netContainer->setObjectName(QString::fromUtf8("netContainer"));
 
-        horizontalLayout_15->addWidget(plainTextEdit);
+        horizontalLayout_15->addLayout(netContainer);
 
-        tabWidget->addTab(logTab, QString());
+        tabWidget->addTab(netTab, QString());
 
         verticalLayout_4->addWidget(tabWidget);
 
@@ -1127,7 +1126,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.14", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.15", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1264,7 +1263,7 @@ public:
         pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", 0, QApplication::UnicodeUTF8));
         pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(logTab), QApplication::translate("MainWindow", "log", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(netTab), QApplication::translate("MainWindow", "net", 0, QApplication::UnicodeUTF8));
         pushButtonPlay->setText(QString());
         pushButtonStop->setText(QString());
         pushButtonRecord->setText(QString());
@@ -1282,4 +1281,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINSM7172_H
+#endif // SAMPLEBRAINZ17592_H

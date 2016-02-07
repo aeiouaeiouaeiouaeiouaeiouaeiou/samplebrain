@@ -25,8 +25,12 @@
 #include "block.h"
 #include "brain.h"
 #include "renderer.h"
+#include <pthread.h>
 
 using namespace std;
+
+pthread_mutex_t* m_fuz_mutex;
+
 
 void unit_test() {
     cerr<<"testing block"<<endl;
@@ -45,69 +49,85 @@ audio_device *a = NULL;
 void run_audio(void* c, unsigned int frames) {
     a->left_out.zero();
     renderer *rr = (renderer*)c;
+    pthread_mutex_lock(m_fuz_mutex);
     rr->process(frames,a->left_out.get_non_const_buffer());
+    pthread_mutex_unlock(m_fuz_mutex);
     a->right_out=a->left_out;
     a->maybe_record();
 
 //    sleep(1);
 }
 
-int main(int argc, char *argv[])
-{
-//    unit_test();
-    u32 len=1000;
+const char *fuz_samplefile() {
+  switch (rand()%20) {
+  case 0: return "../sound/source/KONG.WAV";
+  case 1: return "../sound/source/KONG.WAV";
+  case 2: return "../sound/source/CCBEGIN.WAV";
+  case 3: return "../sound/source/cc-end.wav";
+  case 4: return "../sound/source/cc-extra.wav";
+  case 5: return "../sound/source/cc-high.wav";
+  case 6: return "../sound/source/cc-magic.wav";
+  case 7: return "../sound/source/cc-start.wav";
+  case 8: return "../sound/source/cc-warp.wav";
+//    source.load_sound("../sound/source/shostakovich6.wav");
+  case 9: return "../sound/source/808.wav";
+  case 10: return "../sound/source/joey.wav";
+  case 11: return "../sound/source/pw2.wav";
+  case 12: return "../sound/source/pw3.wav";
+  case 13: return "../sound/source/claps.wav";
+  case 14: return "../sound/source/eagle.wav";
+  case 15: return "../sound/source/rise.wav";
+  case 16: return "../sound/source/totalsine.wav";
+  case 17: return "../sound/source/sailingbybit.wav";
+  case 18: return "../sound/source/dreambit.wav";
+  case 19: return "../sound/source/apache.wav";
+  }
+}
+
+float fuz_rr_f(float start, float end) {
+  float t=rand()%999999/9999999.0f;
+  return t*(end-start)+start;
+}
+
+int fuz_rr_i(int start, int end) {
+  return (int)fuz_rr_f(start,end);
+}
+
+void fuz_new_brain(search_params p) {
+  u32 len=fuz_rr_i(500,5000);
+  brain source;
+  for (int i=0; i<5; i++) {
+    cerr<<"loading sound..."<<endl;
+    source.load_sound(fuz_samplefile(),brain::MIX);
+  }
+
+  cerr<<"loaded sounds"<<endl;
+  cerr<<endl;
+  source.init(len,len-len,window::HANN);
+  source.build_synapses_fixed(p);
+  cerr<<"saving brain"<<endl;
+  ofstream of("fuz.brain",ios::binary);
+  of||source;
+  of.close();
+}
+
+
+void fuz() {
     search_params p(0.5,0,0,99,0);
 
     cerr<<"starting"<<endl;
-/*    {
-        brain source;
-//    source.load_sound("../sound/source/shostakovich6.wav");
-
-//    source.load_sound("../sound/source/808.wav");
-//    source.load_sound("../sound/source/joey.wav");
-//    source.load_sound("../sound/source/pw2.wav");
-//    source.load_sound("../sound/source/pw3.wav");
-//    source.load_sound("../sound/source/claps.wav");
-//    source.load_sound("../sound/source/eagle.wav");
-  // source.load_sound("../sound/source/rise.wav");
-//    source.load_sound("../sound/source/totalsine.wav");
-
-//    source.load_sound("../sound/source/sailingbybit.wav");
-//    source.load_sound("../sound/source/dreambit.wav");
-    source.load_sound("../sound/source/KONG.WAV");
-    source.load_sound("../sound/source/BIRD.WAV");
-    source.load_sound("../sound/source/CCBEGIN.WAV");
-    source.load_sound("../sound/source/cc-end.wav");
-    source.load_sound("../sound/source/cc-extra.wav");
-    source.load_sound("../sound/source/cc-high.wav");
-    source.load_sound("../sound/source/cc-magic.wav");
-    source.load_sound("../sound/source/cc-start.wav");
-    source.load_sound("../sound/source/cc-warp.wav");
-
-    cerr<<"loaded sounds"<<endl;
-    cerr<<endl;
-    source.init(len,len-len,window::HANN);
-
-    source.build_synapses_fixed(p);
-    source.set_usage_falloff(0.9);
-
-    ofstream of("8bit.brain",ios::binary);
-    of||source;
-    of.close();
-    }
-*/
+    fuz_new_brain(p);
+    cerr<<"reloading brain"<<endl;
 
     brain source;
-    ifstream ifs("mix.brain",ios::binary);
+    ifstream ifs("fuz.brain",ios::binary);
     ifs||source;
     ifs.close();
 
     brain target;
-    target.load_sound("../sound/source/apache.wav");
-    //target.load_sound("../sound/source/pw2.wav");
-    //target.load_sound("../sound/source/sailingbybit.wav");
-
-    target.init(len,len-len/8,window::HANN);
+    target.load_sound(fuz_samplefile(),brain::MIX);
+    u32 len=fuz_rr_i(500,5000);
+    target.init(len,len-len/fuz_rr_i(1,16),window::HANN);
 
     cerr<<"ready..."<<endl;
     cerr<<"we have "<<source.get_num_blocks()<<" brain blocks ("<<source.get_num_blocks()*len/44100.0<<" secs)"<<endl<<endl;
@@ -118,21 +138,68 @@ int main(int argc, char *argv[])
 
     renderer rr(source,target);
     rr.set_playing(true);
-    rr.get_params()->m_ratio=0;
-    rr.get_params()->m_usage_importance=0.6;
-    source.set_usage_falloff(0.9);
-    rr.get_params()->m_num_synapses=40;
-    rr.set_slide_error(3400.5);
-    rr.set_search_algo(renderer::SYNAPTIC);
-    rr.set_target_mix(0.9);
-    rr.set_stretch(10);
-    a->start_recording("debug");
+    //    a->start_recording("debug");
 	a->m_client.set_callback(run_audio, &rr);
 
     //target.resynth("shosta-dream-0.5.wav",source,0.5);
 
+    u32 counter=0;
 
+    while (true) {
+      if (counter>5) {
+        pthread_mutex_lock(m_fuz_mutex);
 
-    while (true) sleep(1);
+        switch (rand()%10) {
+        case 0: {
+          fuz_new_brain(*rr.get_params());
+          cerr<<"reloading brain"<<endl;
+          ifstream ifs("fuz.brain",ios::binary);
+          ifs||source;
+          ifs.close();
+        } break;
+        case 1: {
+          cerr<<"reloading target"<<endl;
+          target.clear();
+          target.load_sound(fuz_samplefile(),brain::MIX);
+          u32 len=fuz_rr_i(500,5000);
+          target.init(len,len-len/fuz_rr_i(1,16),window::HANN);
+        } break;
+        }
 
+        cerr<<"switch"<<endl;
+        rr.get_params()->m_ratio=fuz_rr_f(0,1);
+        rr.get_params()->m_n_ratio=fuz_rr_f(0,1);
+        rr.get_params()->m_fft1_start=fuz_rr_i(0,49);
+        rr.get_params()->m_fft1_end=fuz_rr_f(50,100);
+        rr.get_params()->m_stickyness=fuz_rr_f(0,1);
+        rr.get_params()->m_usage_importance=fuz_rr_f(0,1);
+        source.set_usage_falloff(fuz_rr_f(0,1));
+        rr.get_params()->m_num_synapses=fuz_rr_i(2,1000);
+        rr.set_slide_error(fuz_rr_i(100,10000));
+
+        switch(rand()%3) {
+        case 0: rr.set_search_algo(renderer::BASIC); break;
+        case 1: rr.set_search_algo(renderer::SYNAPTIC); break;
+        case 2: rr.set_search_algo(renderer::SYNAPTIC_SLIDE); break;
+        }
+
+        rr.set_target_mix(0.2);
+        rr.set_stretch(1);
+        counter=0;
+        pthread_mutex_unlock(m_fuz_mutex);
+
+      }
+      sleep(1);
+      cerr<<counter<<endl;
+      counter++;
+    }
+
+}
+
+int main(int argc, char *argv[])
+{
+    m_fuz_mutex = new pthread_mutex_t;
+    pthread_mutex_init(m_fuz_mutex,NULL);
+    //unit_test();
+    fuz();
 }
