@@ -128,11 +128,7 @@ private slots:
     }
 
     void volume_slot(int s) { send_audio_osc("/volume","f",s/100.0f); }
-
-    void algo_basic(bool s) { if (s) send_audio_osc("/search_algo","i",0); }
-    void algo_rev_basic(bool s) { if (s) send_audio_osc("/search_algo","i",1); }
-    void algo_synaptic(bool s) { if (s) send_audio_osc("/search_algo","i",2); }
-    void algo_synaptic_slide(bool s) { if (s) send_audio_osc("/search_algo","i",3); }
+    void algo(int n) {  send_audio_osc("/search_algo","i",n); }
 
     void run_slot() {}
     void load_target() {
@@ -160,40 +156,26 @@ private slots:
 
         send_process_osc("/load_sample","s",m_last_file.toStdString().c_str());
 
-        m_Ui.listWidgetSounds->addItem(m_last_file);
+        add_sound_item(m_last_file.toStdString());
+        //m_Ui.listWidgetSounds->addItem(m_last_file);
     }
     void delete_sound() {
-        QList<QListWidgetItem *> itemList = m_Ui.listWidgetSounds->selectedItems();
-        for (int i=0; i<itemList.size(); i++) {
-            send_process_osc("/delete_sample","s",itemList[i]->text().toStdString().c_str());
-        }
-        qDeleteAll(m_Ui.listWidgetSounds->selectedItems());
+      //QList<QListWidgetItem *> itemList = m_Ui.listWidgetSounds->selectedItems();
+      //for (int i=0; i<itemList.size(); i++) {
+      //  send_process_osc("/delete_sample","s",itemList[i]->text().toStdString().c_str());
+      //}
+      //qDeleteAll(m_Ui.listWidgetSounds->selectedItems());
     }
     void clear_brain() {
-        for (int i=0; i<m_Ui.listWidgetSounds->count(); i++) {
-            send_process_osc("/delete_sample","s",m_Ui.listWidgetSounds->item(i)->text().toStdString().c_str());
-        }
-        m_Ui.listWidgetSounds->clear();
+      //for (int i=0; i<m_Ui.listWidgetSounds->count(); i++) {
+      //  send_process_osc("/delete_sample","s",m_Ui.listWidgetSounds->item(i)->text().toStdString().c_str());
+      //}
+      //m_Ui.listWidgetSounds->clear();
     }
     void restart_audio() { send_audio_osc("/restart_audio",""); }
 
-    void window_dodgy(bool s) { if (s) send_process_osc("/window_type","i",window::DODGY); }
-    void window_bartlett(bool s) { if (s) send_process_osc("/window_type","i",window::BARTLETT); }
-    void window_blackman(bool s) { if (s) send_process_osc("/window_type","i",window::BLACKMAN); }
-    void window_flattop(bool s) { if (s) send_process_osc("/window_type","i",window::FLAT_TOP); }
-    void window_gaussian(bool s) { if (s) send_process_osc("/window_type","i",window::GAUSSIAN); }
-    void window_hamming(bool s) { if (s) send_process_osc("/window_type","i",window::HAMMING); }
-    void window_hann(bool s) { if (s) send_process_osc("/window_type","i",window::HANN); }
-    void window_rectangle(bool s) { if (s) send_process_osc("/window_type","i",window::RECTANGLE); }
-
-    void window_target_dodgy(bool s) { if (s) send_process_osc("/target_window_type","i",window::DODGY); }
-    void window_target_bartlett(bool s) { if (s) send_process_osc("/target_window_type","i",window::BARTLETT); }
-    void window_target_blackman(bool s) { if (s) send_process_osc("/target_window_type","i",window::BLACKMAN); }
-    void window_target_flattop(bool s) { if (s) send_process_osc("/target_window_type","i",window::FLAT_TOP); }
-    void window_target_gaussian(bool s) { if (s) send_process_osc("/target_window_type","i",window::GAUSSIAN); }
-    void window_target_hamming(bool s) { if (s) send_process_osc("/target_window_type","i",window::HAMMING); }
-    void window_target_hann(bool s) { if (s) send_process_osc("/target_window_type","i",window::HANN); }
-    void window_target_rectangle(bool s) { if (s) send_process_osc("/target_window_type","i",window::RECTANGLE); }
+    void brain_shape(int n) { send_process_osc("/window_type","i",n); }
+    void target_shape(int n) { send_process_osc("/target_window_type","i",n); }
 
     void record() {
         if (m_save_wav=="") {
@@ -271,7 +253,6 @@ private slots:
     }
 
     void net_enable(int id) {
-      cerr<<"enable "<<id<<endl;
       osc_destination &d = m_destinations[id];
 
       if (d.m_enable->isChecked()) {
@@ -290,12 +271,42 @@ private slots:
 
     }
 
-    void net_connect(int id) {
-      cerr<<"connect "<<id<<endl;
-
+    void sound_enable(int id) {
+      // search for this id...
+      for (auto si:m_sound_items) {
+        if (si.m_id==id) {
+          if (si.m_enable->isChecked()) {
+            send_process_osc("/activate_sound","s",si.m_filename.c_str());
+          } else {
+            send_process_osc("/deactivate_sound","s",si.m_filename.c_str());
+          }
+        }
+      }
     }
 
 private:
+
+    ///////////////////////////////////////////////
+
+    // we want to be able to send out to
+    // multiple addresses over the network
+    class sound_item {
+    public:
+      int m_id;
+      string m_filename;
+      // can't find a way to address these via qt
+      QCheckBox *m_enable;
+      QHBoxLayout *m_container;
+    };
+
+    vector<sound_item> m_sound_items;
+
+    void add_sound_item(const string &name);
+    void delete_sound_item(const string &name);
+    void clear_sound_items();
+
+    ////////////////////////////////////////////////
+
 
     // we want to be able to send out to
     // multiple addresses over the network
@@ -358,4 +369,7 @@ private:
     u32 m_record_id;
     Ui_MainWindow m_Ui;
     feedback m_feedback;
+
+    int m_current_sound_id;
+    QSignalMapper* m_sound_item_enable_mapper;
 };

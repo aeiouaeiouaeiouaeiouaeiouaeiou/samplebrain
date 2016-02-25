@@ -67,6 +67,19 @@ void process_thread::process() {
                 m_source.delete_sound(cmd.get_string(0));
                 pthread_mutex_unlock(m_brain_mutex);
             }
+            if (name=="/activate_sound") {
+              cerr<<"recieved activate"<<endl;
+              pthread_mutex_lock(m_brain_mutex);
+              m_source.activate_sound(cmd.get_string(0),1);
+              pthread_mutex_unlock(m_brain_mutex);
+            }
+            if (name=="/deactivate_sound") {
+              cerr<<"recieved deactivate"<<endl;
+
+                pthread_mutex_lock(m_brain_mutex);
+                m_source.activate_sound(cmd.get_string(0),0);
+                pthread_mutex_unlock(m_brain_mutex);
+            }
             if (name=="/source_block_size") {
                 m_source_block_size = cmd.get_int(0);
             }
@@ -157,6 +170,9 @@ void process_thread::load_session(const std::string &filename) {
     ifs||m_source_block_size||m_source_overlap;
     ifs||m_target_block_size||m_target_overlap;
     ifs||m_window_type||m_target_window_type;
+
+    cerr<<"loading window type session "<<m_target_window_type<<endl;
+
     ifs||m_source;
     ifs||m_left_target;
     ifs||m_right_target;
@@ -173,6 +189,9 @@ void process_thread::save_session(const std::string &filename) {
     ofs||(*m_right_renderer);
     ofs||m_source_block_size||m_source_overlap;
     ofs||m_target_block_size||m_target_overlap;
+
+    cerr<<"saving window type session "<<m_target_window_type<<endl;
+
     ofs||m_window_type||m_target_window_type;
     ofs||m_source;
     ofs||m_left_target;

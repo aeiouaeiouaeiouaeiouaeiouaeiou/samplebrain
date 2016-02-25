@@ -80,12 +80,24 @@ void brain::delete_sound(std::string filename) {
             return;
         }
     }
+    recompute_sample_sections();
 }
+
+void brain::activate_sound(std::string filename, bool active) {
+  for (vector<sample_section>::iterator i=m_sample_sections.begin();
+       i!=m_sample_sections.end(); ++i) {
+    if (filename==i->m_filename) {
+      i->m_enabled=active;
+    }
+  }
+}
+
 
 void brain::clear() {
    m_blocks.clear();
    m_samples.clear();
    m_active_sounds.clear();
+   m_sample_sections.clear();
 }
 
 // rewrites whole brain
@@ -103,16 +115,40 @@ void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     status::update("all samples processed");
 }
 
-void brain::chop_and_add(const sound &s, u32 count, bool ditchpcm) {
-    u32 pos=0;
-    if (m_overlap>=m_block_size) m_overlap=0;
-    while (pos+m_block_size-1<s.m_sample.get_length()) {
-        status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.m_sample.get_length()*100));
-        sample region;
-        s.m_sample.get_region(region,pos,pos+m_block_size-1);
-        m_blocks.push_back(block(m_blocks.size(),s.m_filename,region,44100,m_window,ditchpcm));
-        pos += (m_block_size-m_overlap);
-    }
+void brain::chop_and_add(sound &s, u32 count, bool ditchpcm) {
+  sample_section ss;
+  ss.m_filename = s.m_filename;
+  ss.m_enabled = true;
+  ss.m_start = m_blocks.size();
+  u32 pos=0;
+  if (m_overlap>=m_block_size) m_overlap=0;
+  while (pos+m_block_size-1<s.m_sample.get_length()) {
+    status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.m_sample.get_length()*100));
+    sample region;
+    s.m_sample.get_region(region,pos,pos+m_block_size-1);
+    m_blocks.push_back(block(m_blocks.size(),s.m_filename,region,44100,m_window,ditchpcm));
+    pos += (m_block_size-m_overlap);
+  }
+  ss.m_end = m_blocks.size()-1;
+  cerr<<"adding sample section "<<ss.m_start<<" "<<ss.m_end<<endl;
+  s.m_num_blocks = ss.m_end-ss.m_start;
+
+  m_sample_sections.push_back(ss);
+}
+
+// needed after we delete a sample from the brain
+void brain::recompute_sample_sections() {
+  m_sample_sections.clear();
+  u32 pos=0;
+  for (auto s : m_samples) {
+    sample_section ss;
+    ss.m_filename = s.m_filename;
+    ss.m_enabled = true;
+    ss.m_start = pos;
+    pos += s.m_num_blocks;
+    ss.m_end = pos;
+    m_sample_sections.push_back(ss);
+  }
 }
 
 const block &brain::get_block(u32 index) const {
@@ -143,14 +179,18 @@ u32 brain::stickify(const block &target, u32 closest_index, f32 dist, const sear
 u32 brain::search(const block &target, const search_params &params) {
     double closest = FLT_MAX;
     u32 closest_index = 0;
-    u32 index = 0;
-    for (auto b : m_blocks) {
-        double diff = target.compare(b,params);
-        if (diff<closest) {
+    // check each sample section
+    for (auto ss : m_sample_sections) {
+      if (ss.m_enabled) { // are we turned on?
+        // loop through indexes for this section
+        for (u32 i=ss.m_start; i<ss.m_end; ++i) {
+          double diff = target.compare(m_blocks[i],params);
+          if (diff<closest) {
             closest=diff;
-            closest_index = index;
+            closest_index = i;
+          }
         }
-        ++index;
+      }
     }
     deplete_usage();
     m_blocks[closest_index].get_usage()+=usage_factor;
@@ -161,16 +201,19 @@ u32 brain::search(const block &target, const search_params &params) {
 u32 brain::rev_search(const block &target, const search_params &params) {
     double furthest = 0;
     u32 furthest_index = 0;
-    u32 index = 0;
-    for (auto b:m_blocks) {
-        double diff = target.compare(b,params);
-        if (diff>furthest) {
+    // check each sample section
+    for (auto ss : m_sample_sections) {
+      if (ss.m_enabled) { // are we turned on?
+        // loop through indexes for this section
+        for (u32 i=ss.m_start; i<ss.m_end; ++i) {
+          double diff = target.compare(m_blocks[i],params);
+          if (diff>furthest) {
             furthest=diff;
-            furthest_index = index;
+            furthest_index = i;
+          }
         }
-        ++index;
+      }
     }
-
     deplete_usage();
     m_blocks[furthest_index].get_usage()+=usage_factor;
     m_current_block_index = furthest_index;
@@ -252,7 +295,7 @@ void brain::build_synapses_fixed(search_params &params) {
     status::update("Done: %d synapses grown for %d blocks",num_synapses*brain_size,brain_size);
 }
 
-
+// randomise the current block
 void brain::jiggle() {
     if (m_blocks.size()>0) {
         m_current_block_index=rand()%m_blocks.size();
@@ -261,6 +304,15 @@ void brain::jiggle() {
     }
 }
 
+bool brain::is_block_active(u32 index) {
+  // check each sample section
+  for (auto ss : m_sample_sections) {
+    if (index>=ss.m_start && index<ss.m_end && ss.m_enabled) {
+      return true;
+    }
+  }
+  return false;
+}
 
 u32 brain::search_synapses(const block &target, search_params &params) {
     const block &current = get_block(m_current_block_index);
@@ -281,14 +333,16 @@ u32 brain::search_synapses(const block &target, search_params &params) {
            synapse_count<params.m_num_synapses) {
       //assert(*i<m_blocks.size());
 
+      if (is_block_active(*i)) {
         const block &other = get_block(*i);
         double diff = target.compare(other,params);
         if (diff<closest) {
-            closest=diff;
-            closest_index = *i;
+          closest=diff;
+          closest_index = *i;
         }
-        ++i;
-        ++synapse_count;
+      }
+      ++i;
+      ++synapse_count;
     }
 
     deplete_usage();
@@ -338,15 +392,26 @@ void brain::deplete_usage() {
 */
 
 ios &spiralcore::operator||(ios &s, brain::sound &b) {
-    u32 version=0;
+    u32 version=1;
     string id("brain::sound");
     s||id||version;
     s||b.m_filename||b.m_sample;
+    if (version>0) {
+      s||b.m_num_blocks;
+    }
+    return s;
+}
+
+ios &spiralcore::operator||(ios &s, brain::sample_section &b) {
+    u32 version=1;
+    string id("sample_section");
+    s||id||version;
+    s||b.m_filename||b.m_enabled||b.m_start||b.m_end;
     return s;
 }
 
 ios &spiralcore::operator||(ios &s, brain &b) {
-    u32 version=0;
+    u32 version=1;
     string id("brain");
     // changes here need to be reflected in interface loading
     s||id||version;
@@ -355,6 +420,9 @@ ios &spiralcore::operator||(ios &s, brain &b) {
     s||b.m_block_size||b.m_overlap||b.m_window;
     s||b.m_current_block_index||b.m_current_error||
         b.m_average_error||b.m_usage_falloff;
+    if (version>0) {
+      stream_vector(s,b.m_sample_sections);
+    }
     return s;
 }
 

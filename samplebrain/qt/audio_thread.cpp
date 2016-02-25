@@ -175,6 +175,6 @@ void audio_thread::process(sample &s, sample &s2) {
     }
     pthread_mutex_unlock(m_brain_mutex);
   } else {
-    cerr<<"audio no lock..."<<endl;
+    //cerr<<"audio no lock..."<<endl;
   }
 }

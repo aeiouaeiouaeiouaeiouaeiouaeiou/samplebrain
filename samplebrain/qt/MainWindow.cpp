@@ -31,6 +31,15 @@ MainWindow::MainWindow() :
     m_Ui.setupUi(this);
     setUnifiedTitleAndToolBarOnMac(true);
 
+    m_sound_item_enable_mapper = new QSignalMapper(this);
+    m_Ui.brain_contents->setAlignment(Qt::AlignTop);
+    m_Ui.brain_contents->setSpacing(0);
+    m_Ui.brain_contents->setMargin(0);
+    m_Ui.brain_contents->setContentsMargins(0,0,0,0);
+    connect(m_sound_item_enable_mapper,
+            SIGNAL(mapped(int)), this, SLOT(sound_enable(int)));
+    m_current_sound_id=0;
+
     // add default local dest
     // turn on first one
 
@@ -108,9 +117,9 @@ void MainWindow::init_from_session(const string &filename) {
   float source_overlap;
   int t_int;
   // skip this...
-  ifs||target_windowsize||target_overlap;
   ifs||source_windowsize||source_overlap;
-  ifs||target_window||source_window;
+  ifs||target_windowsize||target_overlap;
+  ifs||source_window||target_window;
   // todo: probably don't need to load all the sample data too :/
   ifs||s;
   ifs||t;
@@ -133,12 +142,7 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.sliderSearchStretch->setValue(r.get_stretch());
   m_Ui.spinBoxSearchStretch->setValue(r.get_stretch());
 
-  switch(r.get_search_algo()) {
-  case renderer::BASIC: m_Ui.radioButtonAlgoBasic->setChecked(true); break;
-  case renderer::REV_BASIC: m_Ui.radioButtonAlgoRevBasic->setChecked(true); break;
-  case renderer::SYNAPTIC: m_Ui.radioButtonSynaptic->setChecked(true); break;
-  case renderer::SYNAPTIC_SLIDE: m_Ui.radioButtonSynapticSlide->setChecked(true); break;
-  };
+  m_Ui.comboBoxAlgorithm->setCurrentIndex(r.get_search_algo());
 
   m_Ui.sliderSynapses->setValue(p->m_num_synapses);
   m_Ui.spinBoxSynapses->setValue(p->m_num_synapses);
@@ -149,49 +153,21 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.spinBoxBlockSizeTarget->setValue(t.get_block_size());
   m_Ui.doubleSpinBoxBlockOverlapTarget->setValue(t.get_overlap()/(float)t.get_block_size());
 
-  m_Ui.radioButton_dodgyTarget->setChecked(false);
-  m_Ui.radioButton_bartlettTarget->setChecked(false);
-  m_Ui.radioButton_blackmanTarget->setChecked(false);
-  m_Ui.radioButton_flattopTarget->setChecked(false);
-  m_Ui.radioButton_gaussianTarget->setChecked(false);
-  m_Ui.radioButton_hammingTarget->setChecked(false);
-  m_Ui.radioButton_hannTarget->setChecked(false);
-  m_Ui.radioButton_rectangleTarget->setChecked(false);
-
-  switch(target_window) {
-  case window::DODGY: m_Ui.radioButton_dodgyTarget->setChecked(true); break;
-  case window::BARTLETT: m_Ui.radioButton_bartlettTarget->setChecked(true); break;
-  case window::BLACKMAN: m_Ui.radioButton_blackmanTarget->setChecked(true); break;
-  case window::FLAT_TOP: m_Ui.radioButton_flattopTarget->setChecked(true); break;
-  case window::GAUSSIAN: m_Ui.radioButton_gaussianTarget->setChecked(true); break;
-  case window::HAMMING: m_Ui.radioButton_hammingTarget->setChecked(true); break;
-  case window::HANN: m_Ui.radioButton_hannTarget->setChecked(true); break;
-  case window::RECTANGLE:  m_Ui.radioButton_rectangleTarget->setChecked(true); break;
-  default: break;
-  };
+  m_Ui.comboBoxTargetShape->setCurrentIndex(target_window);
 
   // source
   m_Ui.spinBoxBlockSize->setValue(s.get_block_size());
   m_Ui.doubleSpinBoxBlockOverlap->setValue(s.get_overlap()/(float)s.get_block_size());
-  switch(source_window) {
-  case window::DODGY: m_Ui.radioButton_dodgy->setChecked(true); break;
-  case window::BARTLETT: m_Ui.radioButton_bartlett->setChecked(true); break;
-  case window::BLACKMAN: m_Ui.radioButton_blackman->setChecked(true); break;
-  case window::FLAT_TOP: m_Ui.radioButton_flattop->setChecked(true); break;
-  case window::GAUSSIAN: m_Ui.radioButton_gaussian->setChecked(true); break;
-  case window::HAMMING: m_Ui.radioButton_hamming->setChecked(true); break;
-  case window::HANN: m_Ui.radioButton_hann->setChecked(true); break;
-  case window::RECTANGLE:  m_Ui.radioButton_rectagle->setChecked(true); break;
-  default: break;
-  };
+  m_Ui.comboBoxBrainShape->setCurrentIndex(source_window);
 
   // brain samples
-  m_Ui.listWidgetSounds->clear();
+  //  m_Ui.listWidgetSounds->clear();
   const std::list<brain::sound> samples = s.get_samples();
   for (std::list<brain::sound>::const_iterator i=samples.begin();
        i!=samples.end(); ++i) {
-    m_Ui.listWidgetSounds->addItem(QString::fromStdString(i->m_filename));
+        add_sound_item(i->m_filename);
   }
+
 
   // mix
   m_Ui.sliderTargetMix->setValue(r.get_target_mix()*100);
@@ -203,4 +179,54 @@ void MainWindow::init_from_session(const string &filename) {
 
 
 
+}
+
+
+void MainWindow::add_sound_item(const string &name) {
+  sound_item si;
+  si.m_filename = name;
+  si.m_id = m_current_sound_id++;
+  QString style("background-color:lightblue;");
+  if (m_sound_items.size()%2==0) style="background-color:pink;";
+
+  si.m_container = new QHBoxLayout();
+  si.m_enable = new QCheckBox();
+  si.m_enable->setChecked(true);
+  si.m_enable->setStyleSheet(style);
+  si.m_container->addWidget(si.m_enable);
+  QLabel *l = new QLabel();
+
+
+  QFileInfo fi(QString::fromStdString(name));
+  l->setText(fi.fileName());
+  l->setStyleSheet(style);
+  si.m_container->addWidget(l);
+
+  QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+  //spacer->setStyleSheet(style);
+  si.m_container->addItem(spacer);
+
+  QPushButton *del = new QPushButton();
+  del->setText("x");
+  del->setMaximumWidth(20);
+  del->setMaximumHeight(20);
+  si.m_container->addWidget(del);
+
+  m_Ui.brain_contents->addLayout(si.m_container);
+
+  QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
+  m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
+
+  m_sound_items.push_back(si);
+}
+
+void MainWindow::clear_sound_items() {
+  for (auto si:m_sound_items) {
+    delete si.m_container;
+  }
+  m_sound_items.clear();
+}
+
+
+void MainWindow::delete_sound_item(const string &name) {
 }

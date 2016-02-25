@@ -37,20 +37,6 @@ public:
     // rewrites whole brain
     void init(u32 block_size, u32 overlap, window::type t, bool ditchpcm=false);
 
-    // randomise the synaptic pointer
-    void jiggle();
-
-    class sound {
-    public:
-        sound(const std::string &name, const sample &sample) :
-            m_filename(name), m_sample(sample) {}
-
-        sound() {}; // needed for streaming
-
-        std::string m_filename;
-        sample m_sample;
-    };
-
     void clear();
 
     // load, chop up and add to brain
@@ -58,12 +44,9 @@ public:
     void load_sound(std::string filename, stereo_mode mode);
     void delete_sound(std::string filename);
     void clear_sounds() { m_samples.clear(); }
-    // take another brain and rebuild this brain from bits of that one
-    // (presumably this one is made from a single sample)
-    //void resynth(const std::string &filename, const brain &other, const search_params &params);
+    // turns on/off a sound in realtime without reprocessing
+    void activate_sound(std::string filename, bool active);
 
-
-    const std::list<sound> &get_samples() { return m_samples; }
     const sample &get_block_pcm(u32 index) const;
     const sample &get_block_n_pcm(u32 index) const;
     const block &get_block(u32 index) const;
@@ -84,20 +67,49 @@ public:
     void build_synapses_fixed(search_params &params);
     u32 search_synapses(const block &target, search_params &params);
     double get_current_error() { return m_current_error; }
+    // randomise the synaptic pointer
+    void jiggle();
 
     static bool unit_test();
 
-    friend ios &operator||(ios &s, brain &b);
+    class sound {
+    public:
+        sound(const std::string &name, const sample &sample) :
+              m_filename(name), m_sample(sample), m_num_blocks(0) {}
+        sound() {}; // needed for streaming
+        std::string m_filename;
+        sample m_sample;
+        // filled in during chop_and_add
+        u32 m_num_blocks;
+    };
+
+    const std::list<sound> &get_samples() { return m_samples; }
 
 private:
 
-    void chop_and_add(const sound &s, u32 count, bool ditchpcm=false);
+    void chop_and_add(sound &s, u32 count, bool ditchpcm=false);
     void deplete_usage();
     u32 stickify(const block &target, u32 closest_index, f32 dist, const search_params &params);
+    void recompute_sample_sections();
+    // checks sample sections
+    bool is_block_active(u32 index);
+
+    // we store the blocks in a flat list, so we can directly index
+    // them, but we need to filter them by source sound - so we need
+    // to be able to turn large contiguous sets of them on and off
+    // (without a big impact on the processing time)
+    class sample_section {
+    public:
+      std::string m_filename;
+      bool m_enabled;
+      u32 m_start,m_end;
+    };
 
     vector<block> m_blocks;
     std::list<sound> m_samples;
     vector<string> m_active_sounds;
+    vector<sample_section> m_sample_sections;
+
 
     u32 m_block_size;
     u32 m_overlap;
@@ -108,9 +120,15 @@ private:
     double m_current_error;
     double m_average_error;
     float m_usage_falloff;
+
+    friend ios &operator||(ios &s, brain &b);
+    friend ios &operator||(ios &s, sample_section &b);
+    friend ios &operator||(ios &s, sound &b);
+
 };
 
 ios &operator||(ios &s, brain::sound &b);
+ios &operator||(ios &s, brain::sample_section &b);
 ios &operator||(ios &s, brain &b);
 
 }

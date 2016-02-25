@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>910</width>
-    <height>795</height>
+    <height>659</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.15</string>
+   <string>samplebrain 0.16</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -25,7 +25,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="controlTab">
        <attribute name="title">
@@ -507,84 +507,41 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="label_27">
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>10</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>algorithm</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_18">
+           <layout class="QHBoxLayout" name="horizontalLayout_25">
             <item>
-             <widget class="QRadioButton" name="radioButtonAlgoBasic">
-              <property name="toolTip">
-               <string>full brain search</string>
+             <widget class="QLabel" name="label_32">
+              <property name="font">
+               <font>
+                <pointsize>9</pointsize>
+               </font>
               </property>
               <property name="text">
-               <string>basic</string>
+               <string>algorithm</string>
               </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_3</string>
-              </attribute>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="radioButtonAlgoRevBasic">
-              <property name="toolTip">
-               <string>full brain reverse search</string>
-              </property>
-              <property name="text">
-               <string>rev basic</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_3</string>
-              </attribute>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonSynaptic">
-              <property name="toolTip">
-               <string>search based on synapse connections</string>
-              </property>
-              <property name="text">
-               <string>synaptic</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_3</string>
-              </attribute>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonSynapticSlide">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="toolTip">
-               <string>search based on synapses and sonify search process</string>
-              </property>
-              <property name="text">
-               <string>synaptic slide</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_3</string>
-              </attribute>
+             <widget class="QComboBox" name="comboBoxAlgorithm">
+              <item>
+               <property name="text">
+                <string>basic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>reversed</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>synaptic</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>slide</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
@@ -722,14 +679,14 @@
            </layout>
           </item>
           <item>
-           <spacer name="horizontalSpacer_2">
+           <spacer name="verticalSpacer_3">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>21</width>
-              <height>20</height>
+              <width>20</width>
+              <height>40</height>
              </size>
             </property>
            </spacer>
@@ -827,95 +784,56 @@
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="3" column="0">
-             <widget class="QRadioButton" name="radioButton_bartlettTarget">
-              <property name="text">
-               <string>bartlett</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QRadioButton" name="radioButton_blackmanTarget">
-              <property name="text">
-               <string>blackman</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QRadioButton" name="radioButton_gaussianTarget">
-              <property name="text">
-               <string>gaussian</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QRadioButton" name="radioButton_hammingTarget">
-              <property name="text">
-               <string>hamming</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QRadioButton" name="radioButton_hannTarget">
-              <property name="text">
-               <string>hann</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QRadioButton" name="radioButton_flattopTarget">
-              <property name="text">
-               <string>flat top</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QRadioButton" name="radioButton_dodgyTarget">
-              <property name="text">
-               <string>dodgy</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QRadioButton" name="radioButton_rectangleTarget">
-              <property name="text">
-               <string>rectangle</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup_2</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_23">
+            <item>
              <widget class="QLabel" name="label_14">
               <property name="text">
                <string>window shape</string>
               </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxTargetShape">
+              <item>
+               <property name="text">
+                <string>dodgy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>bartlett</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>blackman</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>flat top</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>gaussian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hamming</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hann</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>rectangle</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
@@ -1019,7 +937,7 @@
                </font>
               </property>
               <property name="text">
-               <string>dynamic / normalised </string>
+               <string>normalised </string>
               </property>
              </widget>
             </item>
@@ -1163,7 +1081,32 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listWidgetSounds"/>
+           <widget class="QScrollArea" name="scrollArea">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>259</width>
+               <height>198</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <layout class="QVBoxLayout" name="brain_contents"/>
+              </item>
+             </layout>
+            </widget>
+           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1182,7 +1125,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonDeleteSound">
+             <widget class="QPushButton" name="pushButtonClearBrain">
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
@@ -1191,25 +1134,11 @@
                </font>
               </property>
               <property name="text">
-               <string>delete selected</string>
+               <string>clear brain</string>
               </property>
              </widget>
             </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonClearBrain">
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>clear brain</string>
-            </property>
-           </widget>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -1271,95 +1200,56 @@
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="3" column="1">
-             <widget class="QRadioButton" name="radioButton_gaussian">
-              <property name="text">
-               <string>gaussian</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QRadioButton" name="radioButton_hamming">
-              <property name="text">
-               <string>hamming</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QRadioButton" name="radioButton_dodgy">
-              <property name="text">
-               <string>dodgy</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QRadioButton" name="radioButton_blackman">
-              <property name="text">
-               <string>blackman</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="6" column="1">
-             <widget class="QRadioButton" name="radioButton_rectagle">
-              <property name="text">
-               <string>rectangle</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QRadioButton" name="radioButton_bartlett">
-              <property name="text">
-               <string>bartlett</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QRadioButton" name="radioButton_flattop">
-              <property name="text">
-               <string>flat top</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QRadioButton" name="radioButton_hann">
-              <property name="text">
-               <string>hann</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">buttonGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_4">
+           <layout class="QHBoxLayout" name="horizontalLayout_24">
+            <item>
+             <widget class="QLabel" name="label_15">
               <property name="text">
                <string>window shape</string>
               </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxBrainShape">
+              <item>
+               <property name="text">
+                <string>dodgy</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>bartlett</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>blackman</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>flat top</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>gaussian</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hamming</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>hann</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>rectangle</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
@@ -1689,38 +1579,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_dodgyTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_dodgy(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_blackmanTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_blackman(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>spinBoxFFT1End</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -1748,38 +1606,6 @@
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_hannTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_hann(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>319</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_gaussianTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_gaussian(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
      <y>301</y>
     </hint>
    </hints>
@@ -1881,54 +1707,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_hammingTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_hamming(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_flattopTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_flattop(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_bartlettTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_bartlett(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>doubleSpinBoxBlockOverlapTarget</sender>
    <signal>valueChanged(double)</signal>
    <receiver>MainWindow</receiver>
@@ -1937,22 +1715,6 @@
     <hint type="sourcelabel">
      <x>619</x>
      <y>196</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>361</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_rectangleTarget</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_rectangle(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>619</x>
-     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -2041,22 +1803,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_dodgy</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_dodgy(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>203</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>sliderTargetMix</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -2113,22 +1859,6 @@
     <hint type="sourcelabel">
      <x>615</x>
      <y>357</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonSynaptic</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_synaptic(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>215</x>
-     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2201,38 +1931,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_bartlett</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_bartlett(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_blackman</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_blackman(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>sliderSynapses</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -2241,22 +1939,6 @@
     <hint type="sourcelabel">
      <x>237</x>
      <y>289</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonSynapticSlide</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_synaptic_slide(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>314</x>
-     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2297,102 +1979,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>radioButton_gaussian</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_gaussian(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>728</x>
-     <y>203</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_flattop</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_flattop(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>615</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonAlgoBasic</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_basic(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>51</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonAlgoRevBasic</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>algo_rev_basic(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>129</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_rectagle</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_target_rectangle(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>728</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_hamming</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_hamming(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>728</x>
-     <y>232</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButtonSaveBrain</sender>
    <signal>released()</signal>
    <receiver>MainWindow</receiver>
@@ -2401,22 +1987,6 @@
     <hint type="sourcelabel">
      <x>728</x>
      <y>357</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonDeleteSound</sender>
-   <signal>released()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>delete_sound()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>951</x>
-     <y>550</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2465,22 +2035,6 @@
     <hint type="sourcelabel">
      <x>841</x>
      <y>550</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>566</x>
-     <y>345</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_hann</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>window_hann(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>728</x>
-     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2696,6 +2250,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>comboBoxAlgorithm</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>algo(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBoxTargetShape</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>target_shape(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>233</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBoxBrainShape</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>brain_shape(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>824</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -2721,22 +2323,6 @@
   <slot>generate_target_blocks()</slot>
   <slot>clear_brain()</slot>
   <slot>restart_audio()</slot>
-  <slot>window_dodgy(bool)</slot>
-  <slot>window_bartlett(bool)</slot>
-  <slot>window_blackman(bool)</slot>
-  <slot>window_flattop(bool)</slot>
-  <slot>window_gaussian(bool)</slot>
-  <slot>window_hamming(bool)</slot>
-  <slot>window_hann(bool)</slot>
-  <slot>window_rectangle(bool)</slot>
-  <slot>window_target_dodgy(bool)</slot>
-  <slot>window_target_bartlett(bool)</slot>
-  <slot>window_target_blackman(bool)</slot>
-  <slot>window_target_flattop(bool)</slot>
-  <slot>window_target_gaussian(bool)</slot>
-  <slot>window_target_hamming(bool)</slot>
-  <slot>window_target_hann(bool)</slot>
-  <slot>window_target_rectangle(bool)</slot>
   <slot>record()</slot>
   <slot>stop_record()</slot>
   <slot>n_ratio_slot(int)</slot>
@@ -2751,10 +2337,6 @@
   <slot>boredom_slot(int)</slot>
   <slot>boredom_slot(double)</slot>
   <slot>synapses(int)</slot>
-  <slot>algo_basic(bool)</slot>
-  <slot>algo_rev_basic(bool)</slot>
-  <slot>algo_synaptic(bool)</slot>
-  <slot>algo_synaptic_slide(bool)</slot>
   <slot>load_brain()</slot>
   <slot>save_brain()</slot>
   <slot>slide_error(int)</slot>
@@ -2766,6 +2348,9 @@
   <slot>load_session()</slot>
   <slot>save_session()</slot>
   <slot>stereo_mode(bool)</slot>
+  <slot>target_shape(int)</slot>
+  <slot>brain_shape(int)</slot>
+  <slot>algo(int)</slot>
  </slots>
  <buttongroups>
   <buttongroup name="buttonGroup_2"/>
