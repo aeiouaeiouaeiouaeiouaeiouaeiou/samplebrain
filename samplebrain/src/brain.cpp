@@ -106,10 +106,17 @@ void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     m_window.init(block_size);
     m_window.set_current_type(t);
     u32 count=0;
-    for (auto s=m_samples.begin(); s!=m_samples.end(); ++s) {
-        count++;
-        chop_and_add(*s, count, ditchpcm);
+    for (auto &s:m_samples) {
+      status::sound_item(s.m_filename,"lightgrey");
     }
+    for (auto &s:m_samples) {
+      status::sound_item(s.m_filename,"yellow");
+      count++;
+      chop_and_add(s, count, ditchpcm);
+      if (count%2==0) status::sound_item(s.m_filename,"lightblue");
+      else status::sound_item(s.m_filename,"pink");
+    }
+    status::sound_item_refresh();
     status::update("all samples processed");
 }
 
@@ -117,17 +124,27 @@ void brain::chop_and_add(sound &s, u32 count, bool ditchpcm) {
   s.m_start = m_blocks.size();
   u32 pos=0;
   if (m_overlap>=m_block_size) m_overlap=0;
-  while (pos+m_block_size-1<s.m_sample.get_length()) {
-    status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.m_sample.get_length()*100));
+  u32 len = s.m_sample.get_length();
+
+  // need to stop the progress updates flooding osc
+  u32 update_period = (len/m_block_size)/100;
+  u32 update_tick = 0;
+
+  while (pos+m_block_size-1<len) {
     sample region;
     s.m_sample.get_region(region,pos,pos+m_block_size-1);
     m_blocks.push_back(block(m_blocks.size(),s.m_filename,region,44100,m_window,ditchpcm));
     pos += (m_block_size-m_overlap);
+
+    // periodic progress update
+    if (update_tick>update_period) {
+      status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.m_sample.get_length()*100));
+      update_tick=0;
+    }
+    update_tick++;
   }
   s.m_end = m_blocks.size()-1;
   s.m_num_blocks = s.m_end-s.m_start;
-
-  cerr<<s.m_start<<" "<<s.m_end;
 }
 
 // needed after we delete a sample from the brain

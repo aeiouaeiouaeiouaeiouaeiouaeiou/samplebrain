@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Dave Griffiths
+// Copyright (C) 2016 Foam Kernow
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,23 +14,43 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#include <string>
 #include <QtGui>
-#include "jellyfish/fluxa/OSC_server.h"
+#include <iostream>
+#include <string>
+#include <list>
 
 #pragma once
 
 namespace spiralcore {
-class sound_items;
 
-class feedback {
-public:
-    feedback(std::string address);
-    void poll(QStatusBar *s, sound_items *sound_items);
+class sound_items {
+    public:
+  sound_items();
 
-private:
+  class sound_item {
+  public:
+    int m_id;
+    std::string m_filename;
+    // can't find a way to address these via qt
+    QCheckBox *m_enable;
+    QPushButton *m_del;
+    QLabel *m_label;
+    QHBoxLayout *m_container;
+  };
 
-	OSC_server m_osc;
+  // arg - need to return it to stitch up the mapper which needs
+  // to belong to the main window??
+  sound_item &add(QVBoxLayout *container, const std::string &name, bool enabled);
+  void remove(const std::string &name);
+  void clear();
+  void recolour();
+  void change_colour(const std::string &name, const std::string &colour);
+
+
+  std::vector<sound_item> m_sound_items;
+
+ private:
+  int m_current_sound_id;
 };
 
 }

@@ -23,6 +23,7 @@
 #include <list>
 #include "window.h"
 #include "feedback.h"
+#include "sound_items.h"
 
 using namespace std;
 using namespace spiralcore;
@@ -156,12 +157,17 @@ private slots:
 
         send_process_osc("/load_sample","s",m_last_file.toStdString().c_str());
 
-        add_sound_item(m_last_file.toStdString(),true);
+        sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents, m_last_file.toStdString(),true);
+
+        QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
+        m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
+        QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
+        m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
     }
 
     void sound_enable(int id) {
       // search for this id...
-      for (auto si:m_sound_items) {
+      for (auto si:m_sound_items.m_sound_items) {
         if (si.m_id==id) {
           if (si.m_enable->isChecked()) {
             send_process_osc("/activate_sound","s",si.m_filename.c_str());
@@ -174,10 +180,10 @@ private slots:
 
     void delete_sound(int id) {
       // search for this id...
-      for (auto &si:m_sound_items) {
+      for (auto &si:m_sound_items.m_sound_items) {
         if (si.m_id==id) {
           send_process_osc("/delete_sample","s",si.m_filename.c_str());
-          delete_sound_item(si.m_filename);
+          m_sound_items.remove(si.m_filename);
           // iterator is now invalidated...
           return;
         }
@@ -186,10 +192,10 @@ private slots:
     void clear_brain() {
       cerr<<"clear brain"<<endl;
 
-      for (auto &si:m_sound_items) {
+      for (auto &si:m_sound_items.m_sound_items) {
         send_process_osc("/delete_sample","s",si.m_filename.c_str());
       }
-      clear_sound_items();
+      m_sound_items.clear();
     }
     void restart_audio() { send_audio_osc("/restart_audio",""); }
 
@@ -264,7 +270,7 @@ private slots:
     }
 
     void update_status() {
-        m_feedback.poll(m_Ui.statusbar);
+      m_feedback.poll(m_Ui.statusbar,&m_sound_items);
     }
 
     void stereo_mode(bool s) {
@@ -297,23 +303,6 @@ private:
 
     // we want to be able to send out to
     // multiple addresses over the network
-    class sound_item {
-    public:
-      int m_id;
-      string m_filename;
-      // can't find a way to address these via qt
-      QCheckBox *m_enable;
-      QPushButton *m_del;
-      QLabel *m_label;
-      QHBoxLayout *m_container;
-    };
-
-    vector<sound_item> m_sound_items;
-
-    void add_sound_item(const string &name, bool enabled);
-    void delete_sound_item(const string &name);
-    void clear_sound_items();
-    void recolour_sound_items();
 
     ////////////////////////////////////////////////
 
@@ -378,8 +367,9 @@ private:
     u32 m_record_id;
     Ui_MainWindow m_Ui;
     feedback m_feedback;
-
-    int m_current_sound_id;
     QSignalMapper* m_sound_item_enable_mapper;
     QSignalMapper* m_sound_item_delete_mapper;
+    sound_items m_sound_items;
+
+
 };

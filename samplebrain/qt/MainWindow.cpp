@@ -28,25 +28,26 @@ MainWindow::MainWindow() :
     m_last_file("."),
     m_feedback("8890")
 {
-    m_Ui.setupUi(this);
-    setUnifiedTitleAndToolBarOnMac(true);
+  m_sound_item_enable_mapper = new QSignalMapper(this);
+  m_sound_item_delete_mapper = new QSignalMapper(this);
 
-    m_sound_item_enable_mapper = new QSignalMapper(this);
-    m_sound_item_delete_mapper = new QSignalMapper(this);
-    m_Ui.brain_contents->setAlignment(Qt::AlignTop);
-    m_Ui.brain_contents->setSpacing(0);
-    m_Ui.brain_contents->setMargin(0);
-    m_Ui.brain_contents->setContentsMargins(0,0,0,0);
-    connect(m_sound_item_enable_mapper,
-            SIGNAL(mapped(int)), this, SLOT(sound_enable(int)));
-    connect(m_sound_item_delete_mapper,
-            SIGNAL(mapped(int)), this, SLOT(delete_sound(int)));
-    m_current_sound_id=0;
+  connect(m_sound_item_enable_mapper,
+          SIGNAL(mapped(int)), this, SLOT(sound_enable(int)));
+  connect(m_sound_item_delete_mapper,
+          SIGNAL(mapped(int)), this, SLOT(delete_sound(int)));
+
+  m_Ui.setupUi(this);
+  setUnifiedTitleAndToolBarOnMac(true);
+
+  m_Ui.brain_contents->setAlignment(Qt::AlignTop);
+  m_Ui.brain_contents->setSpacing(0);
+  m_Ui.brain_contents->setMargin(0);
+  m_Ui.brain_contents->setContentsMargins(0,0,0,0);
 
     // add default local dest
     // turn on first one
 
-    QSignalMapper* enable_mapper = new QSignalMapper(this);
+  QSignalMapper* enable_mapper = new QSignalMapper(this);
 
     for (int i=0; i<10; i++) {
       osc_destination d;
@@ -156,11 +157,17 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.comboBoxBrainShape->setCurrentIndex(source_window);
 
   // brain samples
-  clear_sound_items();
+  m_sound_items.clear();
   for (auto &i:s.get_samples()) {
-    add_sound_item(i.m_filename,i.m_enabled);
-  }
+    sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents,i.m_filename,i.m_enabled);
 
+    QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
+    m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
+    QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
+    m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
+  }
+  // todo: might contain unprocessed samples in colour scheme
+  m_sound_items.recolour();
 
   // mix
   m_Ui.sliderTargetMix->setValue(r.get_target_mix()*100);
@@ -172,81 +179,4 @@ void MainWindow::init_from_session(const string &filename) {
 
 
 
-}
-
-
-void MainWindow::add_sound_item(const string &name, bool enabled) {
-  sound_item si;
-  si.m_filename = name;
-  si.m_id = m_current_sound_id++;
-  QString style("background-color:lightblue;");
-  if (m_sound_items.size()%2==0) style="background-color:pink;";
-
-  si.m_container = new QHBoxLayout();
-  si.m_enable = new QCheckBox();
-  si.m_enable->setChecked(enabled);
-  si.m_enable->setStyleSheet(style);
-  si.m_container->addWidget(si.m_enable);
-
-  si.m_label = new QLabel();
-  QFileInfo fi(QString::fromStdString(name));
-  si.m_label->setText(fi.fileName());
-  si.m_label->setStyleSheet(style);
-  si.m_label->setSizePolicy(QSizePolicy::MinimumExpanding,
-                            QSizePolicy::Minimum);
-  si.m_container->addWidget(si.m_label);
-
-  si.m_del = new QPushButton();
-  si.m_del->setText("x");
-  si.m_del->setMaximumWidth(20);
-  si.m_del->setMaximumHeight(20);
-  si.m_del->setStyleSheet(style);
-  si.m_container->addWidget(si.m_del);
-
-  m_Ui.brain_contents->addLayout(si.m_container);
-
-  QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
-  m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
-  QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
-  m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
-
-  m_sound_items.push_back(si);
-}
-
-void MainWindow::clear_sound_items() {
-  for (auto &si:m_sound_items) {
-    delete si.m_enable;
-    delete si.m_del;
-    delete si.m_label;
-    delete si.m_container;
-  }
-  m_sound_items.clear();
-}
-
-void MainWindow::recolour_sound_items() {
-  u32 c=0;
-  for (auto &si:m_sound_items) {
-    QString style("background-color:lightblue;");
-    if (c%2==0) style="background-color:pink;";
-    si.m_enable->setStyleSheet(style);
-    si.m_del->setStyleSheet(style);
-    si.m_label->setStyleSheet(style);
-    c++;
-  }
-}
-
-void MainWindow::delete_sound_item(const string &name) {
-  for (auto i=m_sound_items.begin(); i!=m_sound_items.end(); ++i) {
-    if (i->m_filename==name) {
-      // not sure why deleteLater-ing the container does not
-      // remove the children (like it does with delete)
-      i->m_container->deleteLater();
-      i->m_enable->deleteLater();
-      i->m_label->deleteLater();
-      i->m_del->deleteLater();
-      m_sound_items.erase(i);
-      recolour_sound_items();
-      return;
-    }
-  }
 }

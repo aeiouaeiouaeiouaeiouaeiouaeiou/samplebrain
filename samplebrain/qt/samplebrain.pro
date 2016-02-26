@@ -14,6 +14,7 @@ HEADERS += MainWindow.h \
            generated/ui_samplebrain.h \
 
 SOURCES += MainWindow.cpp \
+           sound_items.cpp \
            audio_thread.cpp \
            process_thread.cpp \
            feedback.cpp \

@@ -15,6 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include "feedback.h"
+#include "sound_items.h"
 #include <iostream>
 
 using namespace spiralcore;
@@ -27,13 +28,20 @@ feedback::feedback(string address) :
 }
 
 
-void feedback::poll(QStatusBar *s) {
+void feedback::poll(QStatusBar *s, sound_items *sound_items) {
     command_ring_buffer::command cmd;
 
     while (m_osc.get(cmd)) {
         string name = cmd.m_name;
         if (name=="/report") {
-            s->showMessage(QString(cmd.get_string(0)));
+          s->showMessage(QString(cmd.get_string(0)));
+        }
+        if (name=="/sound-item") {
+          sound_items->change_colour(cmd.get_string(0),
+                                     cmd.get_string(1));
+        }
+        if (name=="/sound-item-refresh") {
+          sound_items->recolour();
         }
     }
 }

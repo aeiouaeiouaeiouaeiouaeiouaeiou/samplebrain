@@ -8,8 +8,10 @@ namespace spiralcore {
 
 class status {
 public:
-    static void _update(std::string msg);
+    static void _update(const std::string &msg);
     static void update(const char *msg, ...);
+    static void sound_item(const std::string &name, const std::string &colour);
+    static void sound_item_refresh();
     static lo_address m_address;
 };
 
