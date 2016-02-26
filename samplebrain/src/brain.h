@@ -75,12 +75,20 @@ public:
     class sound {
     public:
         sound(const std::string &name, const sample &sample) :
-              m_filename(name), m_sample(sample), m_num_blocks(0) {}
+            m_filename(name), m_sample(sample), m_num_blocks(0),
+            m_enabled(true), m_start(0), m_end(0) {}
         sound() {}; // needed for streaming
         std::string m_filename;
         sample m_sample;
         // filled in during chop_and_add
         u32 m_num_blocks;
+        bool m_enabled;
+        // we store the blocks separately in a flat list, so we can
+        // directly index them, but we need to filter them by source
+        // sound - so we need to be able to turn large contiguous sets
+        // of them on and off (without a big impact on the processing
+        // time)
+        u32 m_start,m_end;
     };
 
     const std::list<sound> &get_samples() { return m_samples; }
@@ -94,22 +102,9 @@ private:
     // checks sample sections
     bool is_block_active(u32 index);
 
-    // we store the blocks in a flat list, so we can directly index
-    // them, but we need to filter them by source sound - so we need
-    // to be able to turn large contiguous sets of them on and off
-    // (without a big impact on the processing time)
-    class sample_section {
-    public:
-      std::string m_filename;
-      bool m_enabled;
-      u32 m_start,m_end;
-    };
-
     vector<block> m_blocks;
     std::list<sound> m_samples;
     vector<string> m_active_sounds;
-    vector<sample_section> m_sample_sections;
-
 
     u32 m_block_size;
     u32 m_overlap;
@@ -122,13 +117,11 @@ private:
     float m_usage_falloff;
 
     friend ios &operator||(ios &s, brain &b);
-    friend ios &operator||(ios &s, sample_section &b);
     friend ios &operator||(ios &s, sound &b);
 
 };
 
 ios &operator||(ios &s, brain::sound &b);
-ios &operator||(ios &s, brain::sample_section &b);
 ios &operator||(ios &s, brain &b);
 
 }

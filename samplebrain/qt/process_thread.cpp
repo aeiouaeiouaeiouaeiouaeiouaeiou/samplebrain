@@ -68,14 +68,11 @@ void process_thread::process() {
                 pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/activate_sound") {
-              cerr<<"recieved activate"<<endl;
               pthread_mutex_lock(m_brain_mutex);
               m_source.activate_sound(cmd.get_string(0),1);
               pthread_mutex_unlock(m_brain_mutex);
             }
             if (name=="/deactivate_sound") {
-              cerr<<"recieved deactivate"<<endl;
-
                 pthread_mutex_lock(m_brain_mutex);
                 m_source.activate_sound(cmd.get_string(0),0);
                 pthread_mutex_unlock(m_brain_mutex);

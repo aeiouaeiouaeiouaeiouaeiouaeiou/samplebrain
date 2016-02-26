@@ -156,21 +156,40 @@ private slots:
 
         send_process_osc("/load_sample","s",m_last_file.toStdString().c_str());
 
-        add_sound_item(m_last_file.toStdString());
-        //m_Ui.listWidgetSounds->addItem(m_last_file);
+        add_sound_item(m_last_file.toStdString(),true);
     }
-    void delete_sound() {
-      //QList<QListWidgetItem *> itemList = m_Ui.listWidgetSounds->selectedItems();
-      //for (int i=0; i<itemList.size(); i++) {
-      //  send_process_osc("/delete_sample","s",itemList[i]->text().toStdString().c_str());
-      //}
-      //qDeleteAll(m_Ui.listWidgetSounds->selectedItems());
+
+    void sound_enable(int id) {
+      // search for this id...
+      for (auto si:m_sound_items) {
+        if (si.m_id==id) {
+          if (si.m_enable->isChecked()) {
+            send_process_osc("/activate_sound","s",si.m_filename.c_str());
+          } else {
+            send_process_osc("/deactivate_sound","s",si.m_filename.c_str());
+          }
+        }
+      }
+    }
+
+    void delete_sound(int id) {
+      // search for this id...
+      for (auto &si:m_sound_items) {
+        if (si.m_id==id) {
+          send_process_osc("/delete_sample","s",si.m_filename.c_str());
+          delete_sound_item(si.m_filename);
+          // iterator is now invalidated...
+          return;
+        }
+      }
     }
     void clear_brain() {
-      //for (int i=0; i<m_Ui.listWidgetSounds->count(); i++) {
-      //  send_process_osc("/delete_sample","s",m_Ui.listWidgetSounds->item(i)->text().toStdString().c_str());
-      //}
-      //m_Ui.listWidgetSounds->clear();
+      cerr<<"clear brain"<<endl;
+
+      for (auto &si:m_sound_items) {
+        send_process_osc("/delete_sample","s",si.m_filename.c_str());
+      }
+      clear_sound_items();
     }
     void restart_audio() { send_audio_osc("/restart_audio",""); }
 
@@ -271,18 +290,6 @@ private slots:
 
     }
 
-    void sound_enable(int id) {
-      // search for this id...
-      for (auto si:m_sound_items) {
-        if (si.m_id==id) {
-          if (si.m_enable->isChecked()) {
-            send_process_osc("/activate_sound","s",si.m_filename.c_str());
-          } else {
-            send_process_osc("/deactivate_sound","s",si.m_filename.c_str());
-          }
-        }
-      }
-    }
 
 private:
 
@@ -296,14 +303,17 @@ private:
       string m_filename;
       // can't find a way to address these via qt
       QCheckBox *m_enable;
+      QPushButton *m_del;
+      QLabel *m_label;
       QHBoxLayout *m_container;
     };
 
     vector<sound_item> m_sound_items;
 
-    void add_sound_item(const string &name);
+    void add_sound_item(const string &name, bool enabled);
     void delete_sound_item(const string &name);
     void clear_sound_items();
+    void recolour_sound_items();
 
     ////////////////////////////////////////////////
 
@@ -361,8 +371,7 @@ private:
 
     void init_from_session(const string &filename);
     void add_gui_address(osc_destination &dest,
-                         QSignalMapper* enable_mapper,
-                         QSignalMapper* connect_mapper);
+                         QSignalMapper* enable_mapper);
 
     string m_save_wav;
     QString m_last_file;
@@ -372,4 +381,5 @@ private:
 
     int m_current_sound_id;
     QSignalMapper* m_sound_item_enable_mapper;
+    QSignalMapper* m_sound_item_delete_mapper;
 };

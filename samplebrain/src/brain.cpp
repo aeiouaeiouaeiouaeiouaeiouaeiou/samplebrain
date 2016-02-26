@@ -84,8 +84,7 @@ void brain::delete_sound(std::string filename) {
 }
 
 void brain::activate_sound(std::string filename, bool active) {
-  for (vector<sample_section>::iterator i=m_sample_sections.begin();
-       i!=m_sample_sections.end(); ++i) {
+  for (auto i=m_samples.begin(); i!=m_samples.end(); ++i) {
     if (filename==i->m_filename) {
       i->m_enabled=active;
     }
@@ -97,7 +96,6 @@ void brain::clear() {
    m_blocks.clear();
    m_samples.clear();
    m_active_sounds.clear();
-   m_sample_sections.clear();
 }
 
 // rewrites whole brain
@@ -108,18 +106,15 @@ void brain::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
     m_window.init(block_size);
     m_window.set_current_type(t);
     u32 count=0;
-    for (auto s : m_samples) {
+    for (auto s=m_samples.begin(); s!=m_samples.end(); ++s) {
         count++;
-        chop_and_add(s, count, ditchpcm);
+        chop_and_add(*s, count, ditchpcm);
     }
     status::update("all samples processed");
 }
 
 void brain::chop_and_add(sound &s, u32 count, bool ditchpcm) {
-  sample_section ss;
-  ss.m_filename = s.m_filename;
-  ss.m_enabled = true;
-  ss.m_start = m_blocks.size();
+  s.m_start = m_blocks.size();
   u32 pos=0;
   if (m_overlap>=m_block_size) m_overlap=0;
   while (pos+m_block_size-1<s.m_sample.get_length()) {
@@ -129,25 +124,19 @@ void brain::chop_and_add(sound &s, u32 count, bool ditchpcm) {
     m_blocks.push_back(block(m_blocks.size(),s.m_filename,region,44100,m_window,ditchpcm));
     pos += (m_block_size-m_overlap);
   }
-  ss.m_end = m_blocks.size()-1;
-  cerr<<"adding sample section "<<ss.m_start<<" "<<ss.m_end<<endl;
-  s.m_num_blocks = ss.m_end-ss.m_start;
+  s.m_end = m_blocks.size()-1;
+  s.m_num_blocks = s.m_end-s.m_start;
 
-  m_sample_sections.push_back(ss);
+  cerr<<s.m_start<<" "<<s.m_end;
 }
 
 // needed after we delete a sample from the brain
 void brain::recompute_sample_sections() {
-  m_sample_sections.clear();
   u32 pos=0;
-  for (auto s : m_samples) {
-    sample_section ss;
-    ss.m_filename = s.m_filename;
-    ss.m_enabled = true;
-    ss.m_start = pos;
+  for (auto &s : m_samples) {
+    s.m_start = pos;
     pos += s.m_num_blocks;
-    ss.m_end = pos;
-    m_sample_sections.push_back(ss);
+    s.m_end = pos+1;
   }
 }
 
@@ -180,10 +169,10 @@ u32 brain::search(const block &target, const search_params &params) {
     double closest = FLT_MAX;
     u32 closest_index = 0;
     // check each sample section
-    for (auto ss : m_sample_sections) {
-      if (ss.m_enabled) { // are we turned on?
+    for (auto &s : m_samples) {
+      if (s.m_enabled) { // are we turned on?
         // loop through indexes for this section
-        for (u32 i=ss.m_start; i<ss.m_end; ++i) {
+        for (u32 i=s.m_start; i<s.m_end; ++i) {
           double diff = target.compare(m_blocks[i],params);
           if (diff<closest) {
             closest=diff;
@@ -202,10 +191,10 @@ u32 brain::rev_search(const block &target, const search_params &params) {
     double furthest = 0;
     u32 furthest_index = 0;
     // check each sample section
-    for (auto ss : m_sample_sections) {
-      if (ss.m_enabled) { // are we turned on?
+    for (auto &s : m_samples) {
+      if (s.m_enabled) { // are we turned on?
         // loop through indexes for this section
-        for (u32 i=ss.m_start; i<ss.m_end; ++i) {
+        for (u32 i=s.m_start; i<s.m_end; ++i) {
           double diff = target.compare(m_blocks[i],params);
           if (diff>furthest) {
             furthest=diff;
@@ -224,8 +213,8 @@ u32 brain::rev_search(const block &target, const search_params &params) {
 // really slow - every to every comparison of blocks calculating average distance
 double brain::calc_average_diff(search_params &params) {
     double diff=0;
-    for (auto i:m_blocks) {
-      for (auto j:m_blocks) {
+    for (auto &i:m_blocks) {
+      for (auto &j:m_blocks) {
             diff += j.compare(i,params);
         }
         diff/=(double)m_blocks.size();
@@ -238,15 +227,15 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
     double err = m_average_error*thresh;
     u32 brain_size = m_blocks.size();
     u32 outer_index = 0;
-    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+    for (auto &i : m_blocks) {
         u32 index = 0;
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
-        for (vector<block>::iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
+        for (auto &j : m_blocks) {
             if (index!=outer_index) {
                 // collect connections that are under threshold in closeness
-                double diff = i->compare(*j,params);
+                double diff = i.compare(j,params);
                 if (diff<err) {
-                    i->get_synapse().push_back(index);
+                    i.get_synapse().push_back(index);
                 }
             }
             ++index;
@@ -262,16 +251,16 @@ void brain::build_synapses_fixed(search_params &params) {
     u32 num_synapses = NUM_FIXED_SYNAPSES;
     if (num_synapses>=m_blocks.size()) num_synapses=m_blocks.size()-1;
 
-    for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
+    for (auto &i:m_blocks) {
         status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
         u32 index = 0;
         vector<pair<u32,double>> collect;
 
         // collect comparisons to all other blocks
-        for (vector<block>::iterator j=m_blocks.begin(); j!=m_blocks.end(); ++j) {
+        for (auto &j:m_blocks) {
             assert(index<m_blocks.size());
             if (index!=outer_index) {
-              double diff = i->compare(*j,params);
+              double diff = i.compare(j,params);
               collect.push_back(pair<u32,double>(index,diff));
             }
             ++index;
@@ -287,7 +276,7 @@ void brain::build_synapses_fixed(search_params &params) {
         // add the closest ones to the list
         for(u32 n=0; n<num_synapses; ++n) {
             assert(collect[n].first<m_blocks.size());
-            i->get_synapse().push_back(collect[n].first);
+            i.get_synapse().push_back(collect[n].first);
         }
 
         ++outer_index;
@@ -306,8 +295,8 @@ void brain::jiggle() {
 
 bool brain::is_block_active(u32 index) {
   // check each sample section
-  for (auto ss : m_sample_sections) {
-    if (index>=ss.m_start && index<ss.m_end && ss.m_enabled) {
+  for (auto &s:m_samples) {
+    if (index>=s.m_start && index<s.m_end && s.m_enabled) {
       return true;
     }
   }
@@ -397,16 +386,8 @@ ios &spiralcore::operator||(ios &s, brain::sound &b) {
     s||id||version;
     s||b.m_filename||b.m_sample;
     if (version>0) {
-      s||b.m_num_blocks;
+      s||b.m_num_blocks||b.m_start||b.m_end||b.m_enabled;
     }
-    return s;
-}
-
-ios &spiralcore::operator||(ios &s, brain::sample_section &b) {
-    u32 version=1;
-    string id("sample_section");
-    s||id||version;
-    s||b.m_filename||b.m_enabled||b.m_start||b.m_end;
     return s;
 }
 
@@ -420,9 +401,6 @@ ios &spiralcore::operator||(ios &s, brain &b) {
     s||b.m_block_size||b.m_overlap||b.m_window;
     s||b.m_current_block_index||b.m_current_error||
         b.m_average_error||b.m_usage_falloff;
-    if (version>0) {
-      stream_vector(s,b.m_sample_sections);
-    }
     return s;
 }
 

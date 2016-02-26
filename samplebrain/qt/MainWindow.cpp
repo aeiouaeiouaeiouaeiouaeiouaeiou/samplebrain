@@ -32,19 +32,21 @@ MainWindow::MainWindow() :
     setUnifiedTitleAndToolBarOnMac(true);
 
     m_sound_item_enable_mapper = new QSignalMapper(this);
+    m_sound_item_delete_mapper = new QSignalMapper(this);
     m_Ui.brain_contents->setAlignment(Qt::AlignTop);
     m_Ui.brain_contents->setSpacing(0);
     m_Ui.brain_contents->setMargin(0);
     m_Ui.brain_contents->setContentsMargins(0,0,0,0);
     connect(m_sound_item_enable_mapper,
             SIGNAL(mapped(int)), this, SLOT(sound_enable(int)));
+    connect(m_sound_item_delete_mapper,
+            SIGNAL(mapped(int)), this, SLOT(delete_sound(int)));
     m_current_sound_id=0;
 
     // add default local dest
     // turn on first one
 
     QSignalMapper* enable_mapper = new QSignalMapper(this);
-    QSignalMapper* connect_mapper = new QSignalMapper(this);
 
     for (int i=0; i<10; i++) {
       osc_destination d;
@@ -53,7 +55,7 @@ MainWindow::MainWindow() :
       d.m_process_address = lo_address_new_from_url("osc.udp://localhost:8889");
       if (i==0) d.m_enabled=true;
       else d.m_enabled=false;
-      add_gui_address(d,enable_mapper,connect_mapper);
+      add_gui_address(d,enable_mapper);
 
       if (i==0) {
         d.m_enable->setChecked(true);
@@ -63,7 +65,6 @@ MainWindow::MainWindow() :
     }
 
     connect(enable_mapper, SIGNAL(mapped(int)), this, SLOT(net_enable(int)));
-    connect(connect_mapper, SIGNAL(mapped(int)), this, SLOT(net_connect(int)));
 
     m_Ui.netContainer->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
@@ -77,8 +78,7 @@ MainWindow::MainWindow() :
 }
 
 void MainWindow::add_gui_address(osc_destination &dest,
-                                 QSignalMapper* enable_mapper,
-                                 QSignalMapper* connect_mapper) {
+                                 QSignalMapper* enable_mapper) {
   QHBoxLayout *h = new QHBoxLayout();
   dest.m_enable = new QCheckBox();
   dest.m_enable->setText("enable");
@@ -86,15 +86,10 @@ void MainWindow::add_gui_address(osc_destination &dest,
   h->addWidget(dest.m_enable);
   dest.m_address = new QLineEdit();
   h->addWidget(dest.m_address);
-  //QPushButton *ping = new QPushButton();
-  //ping->setText("connect");
-  //h->addWidget(ping);
   m_Ui.netContainer->addLayout(h);
 
   QObject::connect(dest.m_enable, SIGNAL(clicked()), enable_mapper, SLOT(map()));
   enable_mapper->setMapping(dest.m_enable, dest.m_id);
-  //QObject::connect(ping, SIGNAL(clicked()), connect_mapper, SLOT(map()));
-  //connect_mapper->setMapping(ping, dest.m_id);
 }
 
 void MainWindow::init_from_session(const string &filename) {
@@ -161,11 +156,9 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.comboBoxBrainShape->setCurrentIndex(source_window);
 
   // brain samples
-  //  m_Ui.listWidgetSounds->clear();
-  const std::list<brain::sound> samples = s.get_samples();
-  for (std::list<brain::sound>::const_iterator i=samples.begin();
-       i!=samples.end(); ++i) {
-        add_sound_item(i->m_filename);
+  clear_sound_items();
+  for (auto &i:s.get_samples()) {
+    add_sound_item(i.m_filename,i.m_enabled);
   }
 
 
@@ -182,7 +175,7 @@ void MainWindow::init_from_session(const string &filename) {
 }
 
 
-void MainWindow::add_sound_item(const string &name) {
+void MainWindow::add_sound_item(const string &name, bool enabled) {
   sound_item si;
   si.m_filename = name;
   si.m_id = m_current_sound_id++;
@@ -191,42 +184,69 @@ void MainWindow::add_sound_item(const string &name) {
 
   si.m_container = new QHBoxLayout();
   si.m_enable = new QCheckBox();
-  si.m_enable->setChecked(true);
+  si.m_enable->setChecked(enabled);
   si.m_enable->setStyleSheet(style);
   si.m_container->addWidget(si.m_enable);
-  QLabel *l = new QLabel();
 
-
+  si.m_label = new QLabel();
   QFileInfo fi(QString::fromStdString(name));
-  l->setText(fi.fileName());
-  l->setStyleSheet(style);
-  si.m_container->addWidget(l);
+  si.m_label->setText(fi.fileName());
+  si.m_label->setStyleSheet(style);
+  si.m_label->setSizePolicy(QSizePolicy::MinimumExpanding,
+                            QSizePolicy::Minimum);
+  si.m_container->addWidget(si.m_label);
 
-  QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-  //spacer->setStyleSheet(style);
-  si.m_container->addItem(spacer);
-
-  QPushButton *del = new QPushButton();
-  del->setText("x");
-  del->setMaximumWidth(20);
-  del->setMaximumHeight(20);
-  si.m_container->addWidget(del);
+  si.m_del = new QPushButton();
+  si.m_del->setText("x");
+  si.m_del->setMaximumWidth(20);
+  si.m_del->setMaximumHeight(20);
+  si.m_del->setStyleSheet(style);
+  si.m_container->addWidget(si.m_del);
 
   m_Ui.brain_contents->addLayout(si.m_container);
 
   QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
   m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
+  QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
+  m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
 
   m_sound_items.push_back(si);
 }
 
 void MainWindow::clear_sound_items() {
-  for (auto si:m_sound_items) {
+  for (auto &si:m_sound_items) {
+    delete si.m_enable;
+    delete si.m_del;
+    delete si.m_label;
     delete si.m_container;
   }
   m_sound_items.clear();
 }
 
+void MainWindow::recolour_sound_items() {
+  u32 c=0;
+  for (auto &si:m_sound_items) {
+    QString style("background-color:lightblue;");
+    if (c%2==0) style="background-color:pink;";
+    si.m_enable->setStyleSheet(style);
+    si.m_del->setStyleSheet(style);
+    si.m_label->setStyleSheet(style);
+    c++;
+  }
+}
 
 void MainWindow::delete_sound_item(const string &name) {
+  for (auto i=m_sound_items.begin(); i!=m_sound_items.end(); ++i) {
+    if (i->m_filename==name) {
+      // not sure why deleteLater-ing the container does not
+      // remove the children (like it does with delete)
+      i->m_container->deleteLater();
+      i->m_enable->deleteLater();
+      i->m_label->deleteLater();
+      i->m_del->deleteLater();
+      m_sound_items.erase(i);
+      recolour_sound_items();
+      return;
+    }
+  }
 }
