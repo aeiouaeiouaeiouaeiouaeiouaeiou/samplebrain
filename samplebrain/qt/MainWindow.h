@@ -15,6 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <QtGui>
+#include <QDirIterator>
 #include "generated/ui_samplebrain.h"
 
 #include <iostream>
@@ -151,7 +152,7 @@ private slots:
     void load_sound() {
         m_last_file=QFileDialog::getOpenFileName(
             this,
-            QString("Select an wav file"),
+            QString("Select a wav file"),
             m_last_file,
             QString("Sounds (*.wav)"));
 
@@ -165,9 +166,48 @@ private slots:
         m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
     }
 
+
+   void load_sounds() {
+     m_last_file=QFileDialog::getExistingDirectory(this,
+                                                   QString("Select a directory"),
+                                                   m_last_file);
+
+
+     QDirIterator dirIt(m_last_file,QDirIterator::Subdirectories);
+     while (dirIt.hasNext()) {
+       dirIt.next();
+       if (QFileInfo(dirIt.filePath()).isFile() &&
+           QFileInfo(dirIt.filePath()).suffix() == "wav") {
+         send_process_osc("/load_sample","s",dirIt.filePath().toStdString().c_str());
+
+         sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents, dirIt.filePath().toStdString(),true);
+
+         QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
+         m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
+         QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
+         m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
+
+       }
+     }
+   }
+
+   void select_all() {
+     for (auto &si:m_sound_items.m_sound_items) {
+       si.m_enable->setChecked(true);
+       send_process_osc("/activate_sound","s",si.m_filename.c_str());
+     }
+   }
+
+   void select_none() {
+     for (auto &si:m_sound_items.m_sound_items) {
+       si.m_enable->setChecked(false);
+       send_process_osc("/deactivate_sound","s",si.m_filename.c_str());
+     }
+   }
+
     void sound_enable(int id) {
       // search for this id...
-      for (auto si:m_sound_items.m_sound_items) {
+      for (auto &si:m_sound_items.m_sound_items) {
         if (si.m_id==id) {
           if (si.m_enable->isChecked()) {
             send_process_osc("/activate_sound","s",si.m_filename.c_str());
@@ -190,8 +230,6 @@ private slots:
       }
     }
     void clear_brain() {
-      cerr<<"clear brain"<<endl;
-
       for (auto &si:m_sound_items.m_sound_items) {
         send_process_osc("/delete_sample","s",si.m_filename.c_str());
       }
@@ -253,7 +291,7 @@ private slots:
             this,
             QString("Select a session file"),
             m_last_file,
-            QString("Sessions (*.samplebrain)"));
+            QString("Sessions *.samplebrain (*.samplebrain)"));
 
         send_process_osc("/load_session","s",m_last_file.toStdString().c_str());
         init_from_session(m_last_file.toStdString());
@@ -264,7 +302,7 @@ private slots:
             this,
             QString("Select a session file"),
             m_last_file,
-            QString("Sessions (*.samplebrain)"));
+            QString("Sessions *.samplebrain (*.samplebrain)"));
 
         send_process_osc("/save_session","s",m_last_file.toStdString().c_str());
     }

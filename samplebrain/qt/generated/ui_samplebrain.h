@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainu19467.ui'
+** Form generated from reading UI file 'samplebrainE24659.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINU19467_H
-#define SAMPLEBRAINU19467_H
+#ifndef SAMPLEBRAINE24659_H
+#define SAMPLEBRAINE24659_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -28,6 +28,7 @@
 #include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
+#include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
@@ -114,13 +115,17 @@ public:
     QCheckBox *checkBoxStereo;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_18;
     QLabel *label_3;
+    QToolButton *toolButtonAll;
+    QToolButton *toolButtonNone;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout_5;
     QVBoxLayout *brain_contents;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButtonLoadSound;
+    QPushButton *pushButtonLoadSounds;
     QPushButton *pushButtonClearBrain;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label;
@@ -151,15 +156,12 @@ public:
     QSpacerItem *horizontalSpacer;
     QLabel *label_13;
     QStatusBar *statusbar;
-    QButtonGroup *buttonGroup_2;
-    QButtonGroup *buttonGroup_3;
-    QButtonGroup *buttonGroup;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(910, 659);
+        MainWindow->resize(910, 669);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -538,6 +540,7 @@ public:
 
         spinBoxBlockSizeTarget = new QSpinBox(controlTab);
         spinBoxBlockSizeTarget->setObjectName(QString::fromUtf8("spinBoxBlockSizeTarget"));
+        spinBoxBlockSizeTarget->setMinimum(10);
         spinBoxBlockSizeTarget->setMaximum(99999);
         spinBoxBlockSizeTarget->setValue(3000);
 
@@ -556,9 +559,9 @@ public:
 
         doubleSpinBoxBlockOverlapTarget = new QDoubleSpinBox(controlTab);
         doubleSpinBoxBlockOverlapTarget->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlapTarget"));
-        doubleSpinBoxBlockOverlapTarget->setMaximum(1);
+        doubleSpinBoxBlockOverlapTarget->setMaximum(0.99);
         doubleSpinBoxBlockOverlapTarget->setSingleStep(0.01);
-        doubleSpinBoxBlockOverlapTarget->setValue(0);
+        doubleSpinBoxBlockOverlapTarget->setValue(0.8);
 
         horizontalLayout_14->addWidget(doubleSpinBoxBlockOverlapTarget);
 
@@ -697,19 +700,36 @@ public:
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout_18 = new QHBoxLayout();
+        horizontalLayout_18->setObjectName(QString::fromUtf8("horizontalLayout_18"));
         label_3 = new QLabel(controlTab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setFont(font1);
 
-        verticalLayout_2->addWidget(label_3);
+        horizontalLayout_18->addWidget(label_3);
+
+        toolButtonAll = new QToolButton(controlTab);
+        toolButtonAll->setObjectName(QString::fromUtf8("toolButtonAll"));
+
+        horizontalLayout_18->addWidget(toolButtonAll);
+
+        toolButtonNone = new QToolButton(controlTab);
+        toolButtonNone->setObjectName(QString::fromUtf8("toolButtonNone"));
+
+        horizontalLayout_18->addWidget(toolButtonNone);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_18);
 
         scrollArea = new QScrollArea(controlTab);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
         scrollArea->setMinimumSize(QSize(0, 200));
+        scrollArea->setFrameShape(QFrame::StyledPanel);
+        scrollArea->setFrameShadow(QFrame::Sunken);
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 259, 198));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 284, 198));
         verticalLayout_5 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         brain_contents = new QVBoxLayout();
@@ -728,6 +748,11 @@ public:
         pushButtonLoadSound->setFont(font);
 
         horizontalLayout_2->addWidget(pushButtonLoadSound);
+
+        pushButtonLoadSounds = new QPushButton(controlTab);
+        pushButtonLoadSounds->setObjectName(QString::fromUtf8("pushButtonLoadSounds"));
+
+        horizontalLayout_2->addWidget(pushButtonLoadSounds);
 
         pushButtonClearBrain = new QPushButton(controlTab);
         pushButtonClearBrain->setObjectName(QString::fromUtf8("pushButtonClearBrain"));
@@ -748,6 +773,7 @@ public:
 
         spinBoxBlockSize = new QSpinBox(controlTab);
         spinBoxBlockSize->setObjectName(QString::fromUtf8("spinBoxBlockSize"));
+        spinBoxBlockSize->setMinimum(10);
         spinBoxBlockSize->setMaximum(99999);
         spinBoxBlockSize->setValue(3000);
 
@@ -766,7 +792,7 @@ public:
 
         doubleSpinBoxBlockOverlap = new QDoubleSpinBox(controlTab);
         doubleSpinBoxBlockOverlap->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlap"));
-        doubleSpinBoxBlockOverlap->setMaximum(1);
+        doubleSpinBoxBlockOverlap->setMaximum(0.99);
         doubleSpinBoxBlockOverlap->setSingleStep(0.01);
         doubleSpinBoxBlockOverlap->setValue(0);
 
@@ -970,6 +996,9 @@ public:
         QObject::connect(comboBoxAlgorithm, SIGNAL(currentIndexChanged(int)), MainWindow, SLOT(algo(int)));
         QObject::connect(comboBoxTargetShape, SIGNAL(currentIndexChanged(int)), MainWindow, SLOT(target_shape(int)));
         QObject::connect(comboBoxBrainShape, SIGNAL(currentIndexChanged(int)), MainWindow, SLOT(brain_shape(int)));
+        QObject::connect(pushButtonLoadSounds, SIGNAL(released()), MainWindow, SLOT(load_sounds()));
+        QObject::connect(toolButtonAll, SIGNAL(released()), MainWindow, SLOT(select_all()));
+        QObject::connect(toolButtonNone, SIGNAL(released()), MainWindow, SLOT(select_none()));
 
         tabWidget->setCurrentIndex(0);
 
@@ -1092,8 +1121,11 @@ public:
 #endif // QT_NO_TOOLTIP
         checkBoxStereo->setText(QApplication::translate("MainWindow", "stereo mode", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "brain contents", 0, QApplication::UnicodeUTF8));
+        toolButtonAll->setText(QApplication::translate("MainWindow", "all", 0, QApplication::UnicodeUTF8));
+        toolButtonNone->setText(QApplication::translate("MainWindow", "none", 0, QApplication::UnicodeUTF8));
         pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", 0, QApplication::UnicodeUTF8));
-        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear brain", 0, QApplication::UnicodeUTF8));
+        pushButtonLoadSounds->setText(QApplication::translate("MainWindow", "directory", 0, QApplication::UnicodeUTF8));
+        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("MainWindow", "window shape", 0, QApplication::UnicodeUTF8));
@@ -1130,4 +1162,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINU19467_H
+#endif // SAMPLEBRAINE24659_H

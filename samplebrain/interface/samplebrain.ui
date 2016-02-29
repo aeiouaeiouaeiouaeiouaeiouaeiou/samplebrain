@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>910</width>
-    <height>659</height>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -742,6 +742,9 @@
             </item>
             <item>
              <widget class="QSpinBox" name="spinBoxBlockSizeTarget">
+              <property name="minimum">
+               <number>10</number>
+              </property>
               <property name="maximum">
                <number>99999</number>
               </property>
@@ -771,13 +774,13 @@
             <item>
              <widget class="QDoubleSpinBox" name="doubleSpinBoxBlockOverlapTarget">
               <property name="maximum">
-               <double>1.000000000000000</double>
+               <double>0.990000000000000</double>
               </property>
               <property name="singleStep">
                <double>0.010000000000000</double>
               </property>
               <property name="value">
-               <double>0.000000000000000</double>
+               <double>0.800000000000000</double>
               </property>
              </widget>
             </item>
@@ -1066,19 +1069,37 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="label_3">
-            <property name="font">
-             <font>
-              <family>Comic Sans MS</family>
-              <pointsize>20</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>brain contents</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_18">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <pointsize>20</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>brain contents</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="toolButtonAll">
+              <property name="text">
+               <string>all</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="toolButtonNone">
+              <property name="text">
+               <string>none</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QScrollArea" name="scrollArea">
@@ -1088,6 +1109,12 @@
               <height>200</height>
              </size>
             </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
+            </property>
             <property name="widgetResizable">
              <bool>true</bool>
             </property>
@@ -1096,7 +1123,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>259</width>
+               <width>284</width>
                <height>198</height>
               </rect>
              </property>
@@ -1125,6 +1152,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QPushButton" name="pushButtonLoadSounds">
+              <property name="text">
+               <string>directory</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="pushButtonClearBrain">
               <property name="font">
                <font>
@@ -1134,7 +1168,7 @@
                </font>
               </property>
               <property name="text">
-               <string>clear brain</string>
+               <string>clear</string>
               </property>
              </widget>
             </item>
@@ -1158,6 +1192,9 @@
             </item>
             <item>
              <widget class="QSpinBox" name="spinBoxBlockSize">
+              <property name="minimum">
+               <number>10</number>
+              </property>
               <property name="maximum">
                <number>99999</number>
               </property>
@@ -1187,7 +1224,7 @@
             <item>
              <widget class="QDoubleSpinBox" name="doubleSpinBoxBlockOverlap">
               <property name="maximum">
-               <double>1.000000000000000</double>
+               <double>0.990000000000000</double>
               </property>
               <property name="singleStep">
                <double>0.010000000000000</double>
@@ -2298,6 +2335,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButtonLoadSounds</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_sounds()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>754</x>
+     <y>321</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButtonAll</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>select_all()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>813</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButtonNone</sender>
+   <signal>released()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>select_none()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>862</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -2351,10 +2436,8 @@
   <slot>target_shape(int)</slot>
   <slot>brain_shape(int)</slot>
   <slot>algo(int)</slot>
+  <slot>load_sounds()</slot>
+  <slot>select_all()</slot>
+  <slot>select_none()</slot>
  </slots>
- <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
 </ui>
