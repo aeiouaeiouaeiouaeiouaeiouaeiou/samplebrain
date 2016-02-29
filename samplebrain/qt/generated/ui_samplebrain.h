@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainE24659.ui'
+** Form generated from reading UI file 'samplebrainr24659.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINE24659_H
-#define SAMPLEBRAINE24659_H
+#ifndef SAMPLEBRAINR24659_H
+#define SAMPLEBRAINR24659_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -433,9 +433,7 @@ public:
         horizontalLayout_25->setObjectName(QString::fromUtf8("horizontalLayout_25"));
         label_32 = new QLabel(controlTab);
         label_32->setObjectName(QString::fromUtf8("label_32"));
-        QFont font3;
-        font3.setPointSize(9);
-        label_32->setFont(font3);
+        label_32->setFont(font2);
 
         horizontalLayout_25->addWidget(label_32);
 
@@ -572,6 +570,7 @@ public:
         horizontalLayout_23->setObjectName(QString::fromUtf8("horizontalLayout_23"));
         label_14 = new QLabel(controlTab);
         label_14->setObjectName(QString::fromUtf8("label_14"));
+        label_14->setFont(font);
 
         horizontalLayout_23->addWidget(label_14);
 
@@ -751,6 +750,7 @@ public:
 
         pushButtonLoadSounds = new QPushButton(controlTab);
         pushButtonLoadSounds->setObjectName(QString::fromUtf8("pushButtonLoadSounds"));
+        pushButtonLoadSounds->setFont(font);
 
         horizontalLayout_2->addWidget(pushButtonLoadSounds);
 
@@ -805,6 +805,7 @@ public:
         horizontalLayout_24->setObjectName(QString::fromUtf8("horizontalLayout_24"));
         label_15 = new QLabel(controlTab);
         label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setFont(font);
 
         horizontalLayout_24->addWidget(label_15);
 
@@ -1162,4 +1163,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINE24659_H
+#endif // SAMPLEBRAINR24659_H

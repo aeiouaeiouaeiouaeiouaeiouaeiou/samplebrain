@@ -512,7 +512,10 @@
              <widget class="QLabel" name="label_32">
               <property name="font">
                <font>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
                </font>
               </property>
               <property name="text">
@@ -790,6 +793,13 @@
            <layout class="QHBoxLayout" name="horizontalLayout_23">
             <item>
              <widget class="QLabel" name="label_14">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
               <property name="text">
                <string>window shape</string>
               </property>
@@ -1153,6 +1163,13 @@
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonLoadSounds">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
               <property name="text">
                <string>directory</string>
               </property>
@@ -1240,6 +1257,13 @@
            <layout class="QHBoxLayout" name="horizontalLayout_24">
             <item>
              <widget class="QLabel" name="label_15">
+              <property name="font">
+               <font>
+                <family>Comic Sans MS</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
               <property name="text">
                <string>window shape</string>
               </property>
