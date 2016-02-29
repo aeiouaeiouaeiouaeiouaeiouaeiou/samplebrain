@@ -36,9 +36,15 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   QString style("background-color:lightgrey;");
 
   si.m_container = new QHBoxLayout();
+  si.m_container->setSpacing(10);
+  si.m_container->setMargin(0);
+  si.m_container->setContentsMargins(0,0,0,0);
+  
   si.m_enable = new QCheckBox();
   si.m_enable->setChecked(enabled);
   si.m_enable->setStyleSheet(style);
+  si.m_enable->setContentsMargins(0,0,0,0);
+
   si.m_container->addWidget(si.m_enable);
 
   si.m_label = new QLabel();
@@ -47,6 +53,13 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   si.m_label->setStyleSheet(style);
   si.m_label->setSizePolicy(QSizePolicy::MinimumExpanding,
                             QSizePolicy::Minimum);
+  QFont font;
+  font.setFamily(QString::fromUtf8("Comic Sans MS"));
+  font.setBold(true);
+  font.setWeight(75);
+  si.m_label->setFont(font);
+  si.m_label->setContentsMargins(0,0,0,0);
+
   si.m_container->addWidget(si.m_label);
 
   si.m_del = new QPushButton();
@@ -54,6 +67,8 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   si.m_del->setMaximumWidth(20);
   si.m_del->setMaximumHeight(20);
   si.m_del->setStyleSheet(style);
+  si.m_del->setContentsMargins(0,0,0,0);
+
   si.m_container->addWidget(si.m_del);
 
   container->addLayout(si.m_container);

@@ -39,11 +39,15 @@ MainWindow::MainWindow() :
   m_Ui.setupUi(this);
   setUnifiedTitleAndToolBarOnMac(true);
 
+  m_Ui.verticalLayout_5->setSpacing(0);
+  m_Ui.verticalLayout_5->setMargin(0);
+  m_Ui.verticalLayout_5->setContentsMargins(0,0,0,0);
+  
   m_Ui.brain_contents->setAlignment(Qt::AlignTop);
   m_Ui.brain_contents->setSpacing(0);
   m_Ui.brain_contents->setMargin(0);
   m_Ui.brain_contents->setContentsMargins(0,0,0,0);
-
+  
     // add default local dest
     // turn on first one
 
