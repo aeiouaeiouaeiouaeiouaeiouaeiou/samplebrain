@@ -32,6 +32,8 @@ int main( int argc , char *argv[] ){
     MainWindow mainWin;
     mainWin.show();
 
+    cerr<<"Qt version: "<<qVersion()<<endl;
+
     //pitchshift::init(44100);
 
     process_thread pt;

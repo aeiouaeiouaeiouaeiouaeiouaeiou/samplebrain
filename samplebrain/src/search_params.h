@@ -17,8 +17,8 @@
 #ifndef SEARCH_PARAMS
 #define SEARCH_PARAMS
 
-#include "jellyfish/core/types.h"
-#include "jellyfish/core/stream.h"
+#include "jellyfish/types.h"
+#include "jellyfish/stream.h"
 #include <iostream>
 
 #pragma once

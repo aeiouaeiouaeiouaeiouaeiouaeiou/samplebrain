@@ -15,7 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <list>
-#include <jellyfish/fluxa/sample.h>
+#include <jellyfish/sample.h>
 #include "brain.h"
 
 #ifndef SB_RENDERER

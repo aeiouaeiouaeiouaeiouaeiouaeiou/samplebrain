@@ -30,14 +30,14 @@ SOURCES += MainWindow.cpp \
            ../src/aquila/filter/MelFilterBank.cpp \
            ../src/aquila/filter/MelFilter.cpp \
            ../src/aquila/transform/Dct.cpp \
-           ../../../jellyfish/src/fluxa/sample.cpp \
-           ../../../jellyfish/src/fluxa/ring_buffer.cpp \
-           ../../../jellyfish/src/fluxa/command_ring_buffer.cpp \
-           ../../../jellyfish/src/audio/portaudio_client.cpp \
-           ../../../jellyfish/src/audio.cpp \
-           ../../../jellyfish/src/fluxa/OSC_server.cpp \
-           ../../../jellyfish/src/fluxa/allocator.cpp \
-           ../../../jellyfish/src/core/stream.cpp
+           ../src/jellyfish/sample.cpp \
+           ../src/jellyfish/ring_buffer.cpp \
+           ../src/jellyfish/command_ring_buffer.cpp \
+           ../src/jellyfish/portaudio_client.cpp \
+           ../src/jellyfish/audio.cpp \
+           ../src/jellyfish/OSC_server.cpp \
+           ../src/jellyfish/allocator.cpp \
+           ../src/jellyfish/stream.cpp
 
 INCLUDEPATH += ../src
 LIBS += -L.. -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm

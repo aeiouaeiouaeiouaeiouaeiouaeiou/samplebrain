@@ -16,8 +16,8 @@
 
 #include <string>
 #include <vector>
-#include "jellyfish/fluxa/sample.h"
-#include "jellyfish/core/types.h"
+#include "jellyfish/sample.h"
+#include "jellyfish/types.h"
 
 #ifndef WINDOW
 #define WINDOW

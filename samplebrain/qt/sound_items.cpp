@@ -17,7 +17,7 @@
 #include <QtGui>
 #include <iostream>
 #include <list>
-#include "jellyfish/core/types.h"
+#include "jellyfish/types.h"
 
 #include "sound_items.h"
 
@@ -39,7 +39,7 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   si.m_container->setSpacing(10);
   si.m_container->setMargin(0);
   si.m_container->setContentsMargins(0,0,0,0);
-  
+
   si.m_enable = new QCheckBox();
   si.m_enable->setChecked(enabled);
   si.m_enable->setStyleSheet(style);

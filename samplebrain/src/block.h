@@ -16,13 +16,13 @@
 
 #include <string>
 #include <vector>
-#include "jellyfish/fluxa/sample.h"
-#include "jellyfish/core/types.h"
+#include "jellyfish/sample.h"
+#include "jellyfish/types.h"
 #include "fft.h"
 #include "mfcc.h"
 #include "search_params.h"
 #include "window.h"
-#include "jellyfish/core/stream.h"
+#include "jellyfish/stream.h"
 
 #ifndef BLOCK
 #define BLOCK

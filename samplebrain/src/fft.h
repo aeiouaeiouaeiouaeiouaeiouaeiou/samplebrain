@@ -15,7 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <fftw3.h>
-#include <jellyfish/core/types.h>
+#include <jellyfish/types.h>
 
 #ifndef SPIRALCORE_FFT
 #define SPIRALCORE_FFT

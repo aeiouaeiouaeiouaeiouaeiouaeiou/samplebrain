@@ -17,8 +17,8 @@
 #include <list>
 #include <vector>
 #include <string>
-#include "jellyfish/core/types.h"
-#include "jellyfish/fluxa/sample.h"
+#include "jellyfish/types.h"
+#include "jellyfish/sample.h"
 #include "block.h"
 #include "search_params.h"
 #include "window.h"
