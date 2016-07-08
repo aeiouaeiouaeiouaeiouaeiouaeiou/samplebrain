@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>910</width>
-    <height>669</height>
+    <height>671</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.16</string>
+   <string>samplebrain 0.17</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -866,6 +866,18 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="mic">
+            <property name="font">
+             <font>
+              <family>Comic Sans MS</family>
+             </font>
+            </property>
+            <property name="text">
+             <string>use mic input</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label_23">
             <property name="font">
              <font>
@@ -1384,7 +1396,24 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_15">
         <item>
-         <layout class="QVBoxLayout" name="netContainer"/>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <layout class="QVBoxLayout" name="netContainer"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>This program is free software made in Cornwall by &lt;a href=&quot;http://fo.am/kernow&quot;&gt;FoAM Kernow&lt;/a&gt;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -2407,6 +2436,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>mic</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>mic(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>601</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>454</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>play_slot()</slot>
@@ -2463,5 +2508,6 @@
   <slot>load_sounds()</slot>
   <slot>select_all()</slot>
   <slot>select_none()</slot>
+  <slot>mic(bool)</slot>
  </slots>
 </ui>

@@ -89,6 +89,7 @@ block::block(u64 id, const string &filename, const sample &pcm, u32 rate, const 
   w.run(m_n_pcm);
   process(m_n_pcm,m_n_fft,m_n_mfcc,m_n_dominant_freq);
 
+  // don't need to keep pcm for the target
   if (ditchpcm) {
     m_pcm.clear();
     m_n_pcm.clear();
@@ -96,8 +97,7 @@ block::block(u64 id, const string &filename, const sample &pcm, u32 rate, const 
 }
 
 
-void block::init_fft(u32 block_size)
-{
+void block::init_fft(u32 block_size) {
   if (m_fftw == NULL || m_fftw->m_length!=block_size) {
     if (m_fftw == NULL) delete m_fftw;
     m_fftw = new FFT(block_size,100);
@@ -148,6 +148,7 @@ double block::_compare(const sample &fft_a, const sample &mfcc_a,
   u32 fft_start = params.m_fft1_start;
   u32 fft_end = fmin(params.m_fft1_end,m_fft.get_length());
 
+  // first check for only fft
   if (params.m_ratio==0) {
     for (u32 i=fft_start; i<fft_end; ++i) {
       fft_acc+=square(fft_a[i]-fft_b[i]);
@@ -155,6 +156,7 @@ double block::_compare(const sample &fft_a, const sample &mfcc_a,
     return (fft_acc/(float)fft_a.get_length())*FFT_BIAS;
   }
 
+  // only mfcc
   if (params.m_ratio==1) {
     for (u32 i=0; i<MFCC_FILTERS; ++i) {
       mfcc_acc+=square(mfcc_a[i]-mfcc_b[i]);
@@ -162,7 +164,7 @@ double block::_compare(const sample &fft_a, const sample &mfcc_a,
     return mfcc_acc/(float)MFCC_FILTERS;
   }
 
-  // calculate both
+  // calculate mix of em both
   for (u32 i=fft_start; i<fft_end; ++i) {
     fft_acc+=square(fft_a[i]-fft_b[i]);
   }
@@ -170,19 +172,20 @@ double block::_compare(const sample &fft_a, const sample &mfcc_a,
     mfcc_acc+=square(mfcc_a[i]-mfcc_b[i]);
   }
 
+  // weight them based on ratio
   return blend(fft_acc/(float)fft_a.get_length(),
                mfcc_acc/(float)MFCC_FILTERS,
                params.m_ratio);
 }
 
 double block::compare(const block &other, const search_params &params) const {
-  return blend(
-               blend(_compare(m_fft, m_mfcc, other.m_fft, other.m_mfcc, params),
+  return blend(blend(_compare(m_fft, m_mfcc, other.m_fft, other.m_mfcc, params),
                      _compare(m_n_fft, m_n_mfcc, other.m_n_fft, other.m_n_mfcc, params),
                      params.m_n_ratio),
                other.m_usage, params.m_usage_importance);
 }
 
+// serialise in/out to file
 ios &spiralcore::operator||(ios &s, block &b) {
   u32 version=3;
   string id("block");

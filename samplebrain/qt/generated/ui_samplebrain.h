@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainr24659.ui'
+** Form generated from reading UI file 'samplebrainr15646.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINR24659_H
-#define SAMPLEBRAINR24659_H
+#ifndef SAMPLEBRAINR15646_H
+#define SAMPLEBRAINR15646_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -99,6 +99,7 @@ public:
     QLabel *label_14;
     QComboBox *comboBoxTargetShape;
     QPushButton *pushButtonGenerateTarget;
+    QCheckBox *mic;
     QLabel *label_23;
     QHBoxLayout *horizontalLayout_22;
     QLabel *label_31;
@@ -143,7 +144,9 @@ public:
     QSpacerItem *verticalSpacer_2;
     QWidget *netTab;
     QHBoxLayout *horizontalLayout_15;
+    QVBoxLayout *verticalLayout_7;
     QVBoxLayout *netContainer;
+    QLabel *label_4;
     QHBoxLayout *horizontalLayout_12;
     QPushButton *pushButtonPlay;
     QPushButton *pushButtonStop;
@@ -161,7 +164,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(910, 669);
+        MainWindow->resize(910, 671);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -588,6 +591,14 @@ public:
 
         verticalLayout_6->addWidget(pushButtonGenerateTarget);
 
+        mic = new QCheckBox(controlTab);
+        mic->setObjectName(QString::fromUtf8("mic"));
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("Comic Sans MS"));
+        mic->setFont(font3);
+
+        verticalLayout_6->addWidget(mic);
+
         label_23 = new QLabel(controlTab);
         label_23->setObjectName(QString::fromUtf8("label_23"));
         label_23->setFont(font1);
@@ -852,10 +863,25 @@ public:
         netTab->setObjectName(QString::fromUtf8("netTab"));
         horizontalLayout_15 = new QHBoxLayout(netTab);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         netContainer = new QVBoxLayout();
         netContainer->setObjectName(QString::fromUtf8("netContainer"));
 
-        horizontalLayout_15->addLayout(netContainer);
+        verticalLayout_7->addLayout(netContainer);
+
+        label_4 = new QLabel(netTab);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy3);
+
+        verticalLayout_7->addWidget(label_4);
+
+
+        horizontalLayout_15->addLayout(verticalLayout_7);
 
         tabWidget->addTab(netTab, QString());
 
@@ -1000,6 +1026,7 @@ public:
         QObject::connect(pushButtonLoadSounds, SIGNAL(released()), MainWindow, SLOT(load_sounds()));
         QObject::connect(toolButtonAll, SIGNAL(released()), MainWindow, SLOT(select_all()));
         QObject::connect(toolButtonNone, SIGNAL(released()), MainWindow, SLOT(select_none()));
+        QObject::connect(mic, SIGNAL(clicked(bool)), MainWindow, SLOT(mic(bool)));
 
         tabWidget->setCurrentIndex(0);
 
@@ -1009,7 +1036,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.16", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.17", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1107,6 +1134,7 @@ public:
          << QApplication::translate("MainWindow", "rectangle", 0, QApplication::UnicodeUTF8)
         );
         pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "(re)generate blocks", 0, QApplication::UnicodeUTF8));
+        mic->setText(QApplication::translate("MainWindow", "use mic input", 0, QApplication::UnicodeUTF8));
         label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
         label_31->setText(QApplication::translate("MainWindow", "autotune", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -1145,6 +1173,7 @@ public:
         pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", 0, QApplication::UnicodeUTF8));
         pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("MainWindow", "This program is free software made in Cornwall by <a href=\"http://fo.am/kernow\">FoAM Kernow</a>", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(netTab), QApplication::translate("MainWindow", "net", 0, QApplication::UnicodeUTF8));
         pushButtonPlay->setText(QString());
         pushButtonStop->setText(QString());
@@ -1163,4 +1192,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINR24659_H
+#endif // SAMPLEBRAINR15646_H

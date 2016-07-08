@@ -28,6 +28,7 @@
 #include <pthread.h>
 
 using namespace std;
+using namespace spiralcore;
 
 pthread_mutex_t* m_fuz_mutex;
 
@@ -116,7 +117,7 @@ void fuz() {
     search_params p(0.5,0,0,99,0);
 
     cerr<<"starting"<<endl;
-    fuz_new_brain(p);
+    //fuz_new_brain(p);
     cerr<<"reloading brain"<<endl;
 
     brain source;
@@ -166,7 +167,6 @@ void fuz() {
         } break;
         }
 
-        cerr<<"switch"<<endl;
         rr.get_params()->m_ratio=fuz_rr_f(0,1);
         rr.get_params()->m_n_ratio=fuz_rr_f(0,1);
         rr.get_params()->m_fft1_start=fuz_rr_i(0,49);
@@ -190,7 +190,6 @@ void fuz() {
 
       }
       sleep(1);
-      cerr<<counter<<endl;
       counter++;
     }
 
@@ -200,6 +199,6 @@ int main(int argc, char *argv[])
 {
     m_fuz_mutex = new pthread_mutex_t;
     pthread_mutex_init(m_fuz_mutex,NULL);
-    //unit_test();
+    unit_test();
     fuz();
 }

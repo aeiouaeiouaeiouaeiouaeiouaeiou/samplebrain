@@ -25,12 +25,14 @@ audio_thread::audio_thread(process_thread &p) :
   m_osc("8888"),
   m_process_thread(p),
   m_brain_mutex(p.m_brain_mutex),
-  m_stereo_mode(false)
+  m_stereo_mode(false),
+  m_mic_mode(false)
 {
   start_audio();
   pthread_mutex_lock(m_brain_mutex);
   m_left_renderer = new renderer(p.m_source,p.m_left_target);
   m_right_renderer = new renderer(p.m_source,p.m_right_target);
+  m_block_stream = new block_stream();
   pthread_mutex_unlock(m_brain_mutex);
   m_osc.run();
 }
@@ -54,13 +56,15 @@ void audio_thread::run_audio(void* c, unsigned int frames) {
   if (state) {
     audio_thread *at = (audio_thread*)c;
     at->m_audio_device->left_out.zero();
-    at->process(at->m_audio_device->left_out,
+    at->process(at->m_audio_device->left_in,
+		at->m_audio_device->right_in,
+		at->m_audio_device->left_out,
                 at->m_audio_device->right_out);
     at->m_audio_device->maybe_record();
   }
 }
 
-void audio_thread::process(sample &s, sample &s2) {
+void audio_thread::process(sample &left_in, sample &right_in, sample &left_out, sample &right_out) {
 
   command_ring_buffer::command cmd;
   while (m_osc.get(cmd)) {
@@ -162,16 +166,31 @@ void audio_thread::process(sample &s, sample &s2) {
       m_left_renderer->reset();
       m_right_renderer->reset();
     }
+    if (name=="/mic") {
+      m_mic_mode = cmd.get_int(0);
+    }
   }
 
-  s.zero();
-  s2.zero();
+  left_out.zero();
+  right_out.zero();
   if (!pthread_mutex_trylock(m_brain_mutex)) {
-    m_left_renderer->process(s.get_length(),s.get_non_const_buffer());
+
+    block_stream *bs=NULL;
+
+    if (m_mic_mode) {
+      m_block_stream->process(left_in,right_in);      
+      bs = m_block_stream;
+    }
+
+    m_left_renderer->process(left_out.get_length(),
+			     left_out.get_non_const_buffer(),
+			     bs);
     if (m_stereo_mode) {
-      m_right_renderer->process(s2.get_length(),s2.get_non_const_buffer());
+      m_right_renderer->process(right_out.get_length(),
+				right_out.get_non_const_buffer(),
+				bs);
     } else {
-      s2=s;
+      right_out=left_out;
     }
     pthread_mutex_unlock(m_brain_mutex);
   } else {

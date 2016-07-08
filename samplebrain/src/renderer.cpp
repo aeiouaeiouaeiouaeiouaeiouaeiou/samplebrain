@@ -52,11 +52,28 @@ void renderer::reset() {
 }
 
 
-void renderer::process(u32 nframes, float *buf) {
-  if (!m_playing) return;
-  if (!find_render_blocks(nframes)) return;
+void renderer::process(u32 nframes, float *buf, const block_stream *bs) {
+  // we can get blocks from the preprocessed target brain
+  // or the realtime block stream
+  const block_source *source = (block_source*)bs;
+  if (source==NULL) {
+    cerr<<"not using block stream..."<<endl;
+    source = &m_target;
+  } else {
+    if (m_target_index<bs->last_block_index()-10) {
+      cerr<<"catch up..."<<endl;
+      m_target_index = bs->last_block_index();
+    }
+    if (m_target_index>bs->last_block_index()) {
+      cerr<<"catch down..."<<endl;
+      m_target_index = bs->last_block_index();
+    }
+  }
 
-  render(nframes,buf);
+  if (!m_playing) return;
+  if (!find_render_blocks(*source,nframes)) return;
+
+  render(*source,nframes,buf);
 
   clean_up();
 
@@ -67,19 +84,20 @@ void renderer::process(u32 nframes, float *buf) {
 // target_time = samples time into target stream
 // render_time = position in output stream, updated per process - used for offsets
 
-bool renderer::find_render_blocks(u32 nframes) {
+bool renderer::find_render_blocks(const block_source &target, u32 nframes) {
   // get new blocks from source for the current buffer
 
-  // where are we phase?
-  u32 tgt_shift = m_target.get_block_size()-m_target.get_overlap();
+  // figure out where are in the target blocks
+  u32 tgt_shift = target.get_block_size()-target.get_overlap();
   m_target_index = m_target_time/(float)tgt_shift;
   u32 tgt_end = (m_target_time+nframes)/(float)tgt_shift;
+  // render end
   u32 rnd_end = (m_render_time+nframes)/(float)tgt_shift;
 
-
-  // stuff has changed - recompute and abort
+  // when stuff has changed, or we have fallen off the end
+  // then recompute and abort
   if (tgt_shift!=m_last_tgt_shift ||
-      tgt_end>=m_target.get_num_blocks() ||
+      tgt_end>=target.get_num_blocks() ||
       m_source.get_num_blocks()==0) {
     reset();
     m_last_tgt_shift = tgt_shift;
@@ -87,7 +105,7 @@ bool renderer::find_render_blocks(u32 nframes) {
     return false;
   }
 
-  /*
+  
     cerr<<"-----------------"<<endl;
     cerr<<"tgt start:"<<m_target_index<<endl;
     cerr<<"tgt end:"<<tgt_end<<endl;
@@ -99,7 +117,7 @@ bool renderer::find_render_blocks(u32 nframes) {
     cerr<<"render time (index) "<<m_render_index*tgt_shift<<endl;
     cerr<<"real vs index = "<<(s32)m_render_time-(s32)(m_render_index*tgt_shift)<<endl;
     cerr<<m_render_blocks.size()<<endl;
-  */
+  
 
   // search phase
   // get indices for current buffer
@@ -109,22 +127,25 @@ bool renderer::find_render_blocks(u32 nframes) {
     u32 time=m_render_index*tgt_shift;
     u32 src_index=0;
 
+    // which algo are we using today?
     switch (m_search_algo) {
     case BASIC:
-      src_index = m_source.search(m_target.get_block(m_target_index), m_search_params);
+      src_index = m_source.search(target.get_block(m_target_index), m_search_params);
       break;
     case REV_BASIC:
-      src_index = m_source.rev_search(m_target.get_block(m_target_index), m_search_params);
+      src_index = m_source.rev_search(target.get_block(m_target_index), m_search_params);
       break;
     case SYNAPTIC:
     case SYNAPTIC_SLIDE:
-      src_index = m_source.search_synapses(m_target.get_block(m_target_index), m_search_params);
+      src_index = m_source.search_synapses(target.get_block(m_target_index), m_search_params);
       break;
     }
 
     if (m_search_algo==SYNAPTIC_SLIDE) {
       m_render_blocks.push_back(render_block(src_index,m_target_index,time));
 
+      // synaptic slide blocks progression of the target until
+      // a good enough source block is found
       if (m_source.get_current_error()<m_slide_error &&
           m_render_index%m_stretch==0) {
         m_target_index++;
@@ -145,15 +166,16 @@ bool renderer::find_render_blocks(u32 nframes) {
   return true;
 }
 
-void renderer::render(u32 nframes, float *buf) {
+void renderer::render(const block_source &target, u32 nframes, float *buf) {
   sample render_pcm(m_source.get_block_size());
 
   // render phase
   // render all blocks in list
   for (std::list<render_block>::iterator i=m_render_blocks.begin(); i!=m_render_blocks.end(); ++i) {
+    // get all the pcm data now
     const sample &pcm=m_source.get_block(i->m_index).get_pcm();
     const sample &n_pcm=m_source.get_block(i->m_index).get_n_pcm();
-    const sample &target_pcm=m_target.get_block(i->m_tgt_index).get_pcm();
+    const sample &target_pcm=target.get_block(i->m_tgt_index).get_pcm();
     // get the sample offset into the buffer
     s32 offset = i->m_time-m_render_time;
 
@@ -163,6 +185,7 @@ void renderer::render(u32 nframes, float *buf) {
     u32 block_start = offset;
     u32 buffer_start = 0;
     if (offset<0) {
+      // it was running before this buffer
       block_start=-offset;
       if (block_start>=block_length &&
           i->m_position>=block_length) {
@@ -177,20 +200,22 @@ void renderer::render(u32 nframes, float *buf) {
     //        cerr<<"block start:"<<block_start<<endl;
     //        cerr<<"buffer start:"<<buffer_start<<endl;
 
-
     // fade in/out autotune
     //pitch_scale = pitch_scale*m_autotune + 1.0f*(1-m_autotune);
 
     float pitch_scale = 1;
 
     if (m_autotune>0) {
-      pitch_scale = m_target.get_block(i->m_tgt_index).get_freq() /
+      // scale by ratio between target and source
+      pitch_scale = target.get_block(i->m_tgt_index).get_freq() /
         m_source.get_block(i->m_index).get_freq();
+      // restrict min/max pitch bend
       float max = 1+(m_autotune*m_autotune)*100.0f;
       if (pitch_scale>(max)) pitch_scale=max;
       if (pitch_scale<(1/max)) pitch_scale=1/max;
     }
 
+    // pitchshifting sounded rubbish with such small clips
     //pitchshift::process(pcm,pitch_scale,render_pcm);
 
     if (!i->m_finished) {
@@ -234,7 +259,7 @@ void renderer::render(u32 nframes, float *buf) {
 
 void renderer::clean_up() {
   // cleanup phase
-  // delete old ones
+  // delete old render blocks that have finished
   std::list<render_block>::iterator i=m_render_blocks.begin();
   std::list<render_block>::iterator ni=m_render_blocks.begin();
   while(i!=m_render_blocks.end()) {

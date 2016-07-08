@@ -17,6 +17,7 @@
 #include "jellyfish/OSC_server.h"
 #include "brain.h"
 #include "renderer.h"
+#include "block_stream.h"
 #include <pthread.h>
 
 #pragma once
@@ -30,9 +31,11 @@ public:
 
     pthread_mutex_t* m_brain_mutex;
 
-    void register_renderer(renderer *lr, renderer *rr) {
+    void register_renderer(renderer *lr, renderer *rr, block_stream *bs) {
       m_left_renderer=lr;
       m_right_renderer=rr;
+      m_block_stream=bs;
+      m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
     }
 
     void process();
@@ -59,6 +62,7 @@ private:
     // only use in mutex obvs...
     renderer *m_left_renderer;
     renderer *m_right_renderer;
+    block_stream *m_block_stream;
 };
 
 }

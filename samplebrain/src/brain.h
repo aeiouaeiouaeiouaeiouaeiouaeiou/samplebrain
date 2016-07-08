@@ -19,6 +19,7 @@
 #include <string>
 #include "jellyfish/types.h"
 #include "jellyfish/sample.h"
+#include "block_source.h"
 #include "block.h"
 #include "search_params.h"
 #include "window.h"
@@ -28,7 +29,7 @@
 
 namespace spiralcore {
 
-class brain {
+class brain : public block_source {
 public:
     brain();
 
@@ -49,10 +50,9 @@ public:
 
     const sample &get_block_pcm(u32 index) const;
     const sample &get_block_n_pcm(u32 index) const;
-    const block &get_block(u32 index) const;
-    u32 get_num_blocks() const { return m_blocks.size(); }
-    u32 get_block_size() const { return m_block_size; }
-    u32 get_overlap() const { return m_overlap; }
+
+    virtual const block &get_block(u32 index) const;
+    virtual u32 get_num_blocks() const { return m_blocks.size(); }
 
     void set_usage_falloff(float s) { m_usage_falloff=s; }
     float get_usage_falloff() { return m_usage_falloff; }
@@ -105,9 +105,6 @@ private:
     vector<block> m_blocks;
     std::list<sound> m_samples;
     vector<string> m_active_sounds;
-
-    u32 m_block_size;
-    u32 m_overlap;
 
     window m_window;
 

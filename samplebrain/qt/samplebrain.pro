@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET =
+TARGET = samplebrain
 DEPENDPATH += . 2
 INCLUDEPATH += . 2
 
@@ -27,6 +27,7 @@ SOURCES += MainWindow.cpp \
            ../src/search_params.cpp \
            ../src/status.cpp \
            ../src/window.cpp \
+           ../src/block_stream.cpp \
            ../src/aquila/filter/MelFilterBank.cpp \
            ../src/aquila/filter/MelFilter.cpp \
            ../src/aquila/transform/Dct.cpp \
@@ -41,7 +42,7 @@ SOURCES += MainWindow.cpp \
 
 INCLUDEPATH += ../src
 LIBS += -L.. -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
-#CONFIG+=debug
+CONFIG+=debug
 
 QMAKE_CXXFLAGS += -Wall -Wno-unused -std=c++11 -DDONT_USE_FLUXA_GRAPH
 

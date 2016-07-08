@@ -17,6 +17,7 @@
 #include <list>
 #include <jellyfish/sample.h>
 #include "brain.h"
+#include "block_stream.h"
 
 #ifndef SB_RENDERER
 #define SB_RENDERER
@@ -42,8 +43,8 @@ namespace spiralcore {
 
     void reset();
 
-    void process(u32 nframes, float *buf);
-    void old_process(u32 nframes, float *buf);
+    // block stream should be NULL if we are reading the target brain instead
+    void process(u32 nframes, float *buf, const block_stream *bs=NULL);
 
     void set_search_algo(search_algo s) { m_search_algo=s; }
     void set_playing(bool s) { m_playing=s; }
@@ -71,8 +72,8 @@ namespace spiralcore {
 
   private:
 
-    bool find_render_blocks(u32 nframes);
-    void render(u32 nframes, float *buf);
+    bool find_render_blocks(const block_source &target, u32 nframes);
+    void render(const block_source &target, u32 nframes, float *buf);
     void clean_up();
 
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Dave Griffiths
+// Copyright (C) 2016 Foam Kernow
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,38 +14,32 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#include "jellyfish/OSC_server.h"
-#include "process_thread.h"
-#include "renderer.h"
-#include "block_stream.h"
-#include "jellyfish/audio.h"
+#include "block.h"
 
-#pragma once
+#ifndef BLOCK_SOURCE
+#define BLOCK_SOURCE
 
 namespace spiralcore {
 
-class audio_thread {
-public:
-    audio_thread(process_thread &p);
-    ~audio_thread();
+// base class for brain or block_stream - a source of audio blocks
+class block_source {
+ public:
+  block_source() {}
+  ~block_source() {}
 
-    void process(sample &left_in, sample &right_in, sample &left_out, sample &right_out);
+  virtual const block &get_block(u32 index) const=0;
 
-    static void run_audio(void* c, unsigned int frames);
-    audio_device *m_audio_device;
+  u32 get_block_size() const { return m_block_size; } 
+  u32 get_overlap() const { return m_overlap; }
+  virtual u32 get_num_blocks() const=0;
 
-    renderer *m_left_renderer;
-    renderer *m_right_renderer;
-    block_stream *m_block_stream;
+ protected:
 
-private:
-    void start_audio();
-
-	OSC_server m_osc;
-    process_thread &m_process_thread;
-    pthread_mutex_t* m_brain_mutex;
-    bool m_stereo_mode;
-    bool m_mic_mode;
+  u32 m_block_size;
+  u32 m_overlap;
+  
 };
 
 }
+
+#endif

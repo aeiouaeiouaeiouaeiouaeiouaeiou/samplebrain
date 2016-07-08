@@ -239,6 +239,7 @@ private slots:
 
     void brain_shape(int n) { send_process_osc("/window_type","i",n); }
     void target_shape(int n) { send_process_osc("/target_window_type","i",n); }
+    void mic(bool n) { send_audio_osc("/mic","i",(int)n); }
 
     void record() {
         if (m_save_wav=="") {

@@ -38,7 +38,7 @@ int main( int argc , char *argv[] ){
 
     process_thread pt;
     audio_thread at(pt);
-    pt.register_renderer(at.m_left_renderer, at.m_right_renderer);
+    pt.register_renderer(at.m_left_renderer, at.m_right_renderer, at.m_block_stream);
 
     return app.exec();
 }
