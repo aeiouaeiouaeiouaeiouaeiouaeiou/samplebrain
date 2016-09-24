@@ -21,6 +21,10 @@
 using namespace std;
 using namespace spiralcore;
 
+#ifndef M_PI
+#define M_PI 3.141592653589
+#endif
+
 window::window() :
     m_current_type(RECTANGLE)
 {

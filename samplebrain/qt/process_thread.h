@@ -18,6 +18,7 @@
 #include "brain.h"
 #include "renderer.h"
 #include "block_stream.h"
+#define HAVE_STRUCT_TIMESPEC
 #include <pthread.h>
 
 #pragma once

@@ -19,6 +19,10 @@
 #include <unistd.h>
 #include "status.h"
 
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 using namespace spiralcore;
 using namespace std;
 
@@ -136,7 +140,11 @@ void process_thread::process() {
 	save_session(cmd.get_string(0));
       }
     }
+#ifdef WIN32 
+    Sleep(1);
+#else
     usleep(500);
+#endif 
   }
 }
 
