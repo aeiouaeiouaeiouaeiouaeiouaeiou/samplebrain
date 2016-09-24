@@ -55,8 +55,14 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
     fprintf( stderr, "error message: %s\n", Pa_GetErrorText( err ) );
   }
 
+  PaDeviceIndex output_device_num = Pa_GetDefaultOutputDevice(); 
+  PaDeviceIndex input_device_num = Pa_GetDefaultInputDevice(); 
+
+  //output_device_num = 4;
+  //input_device_num = 4;
+
   PaStreamParameters output_parameters;
-  output_parameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
+  output_parameters.device = output_device_num;
   if (output_parameters.device == paNoDevice) {
     cerr<<"error: no default output device."<<endl;
   }
@@ -65,8 +71,10 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
   output_parameters.suggestedLatency = Pa_GetDeviceInfo( output_parameters.device )->defaultLowOutputLatency;
   output_parameters.hostApiSpecificStreamInfo = NULL;
 
+  cerr<<"Connecting to "<<Pa_GetDeviceInfo( output_parameters.device )->name<<" for output"<<endl;
+
   PaStreamParameters input_parameters;
-  input_parameters.device = Pa_GetDefaultInputDevice(); /* default output device */
+  input_parameters.device = input_device_num;
   if (input_parameters.device == paNoDevice) {
     cerr<<"error: no default input device."<<endl;
   }
@@ -74,6 +82,8 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
   input_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
   input_parameters.suggestedLatency = Pa_GetDeviceInfo( input_parameters.device )->defaultLowInputLatency;
   input_parameters.hostApiSpecificStreamInfo = NULL;
+
+  cerr<<"Connecting to "<<Pa_GetDeviceInfo( input_parameters.device )->name<<" for input"<<endl;
 
   PaStream *stream;
 

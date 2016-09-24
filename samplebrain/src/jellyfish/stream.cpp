@@ -26,8 +26,8 @@ template<>ios &spiralcore::operator||(ios &s, string &v) {
     ofstream *pos=dynamic_cast<ofstream*>(&s);
     if (pos!=NULL) {
         ofstream &os = *pos;
-        size_t len = v.length();
-        os.write((char *)&len,sizeof(size_t));
+        u64 len = v.length();
+        os.write((char *)&len,sizeof(u64));
         os.write((char*)(v.c_str()),v.length());
         return os;
     }
@@ -36,8 +36,8 @@ template<>ios &spiralcore::operator||(ios &s, string &v) {
         ifstream *pis=dynamic_cast<ifstream*>(&s);
         assert(pis!=NULL);
         ifstream &is = *pis;
-        size_t len=0;
-        is.read((char *)&len,sizeof(size_t));
+        u64 len=0;
+        is.read((char *)&len,sizeof(u64));
         if (len>0) {
             char *str = new char[len+1];
             is.read(str,len);

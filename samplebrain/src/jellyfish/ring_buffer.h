@@ -22,25 +22,25 @@
 
 class ring_buffer
 {
-public:
-	ring_buffer(unsigned int size);
-	~ring_buffer();
+ public:
+  ring_buffer(unsigned int size);
+  ~ring_buffer();
 
-	//bool lock();
-	//bool unlock();
-	bool write(char *src, unsigned int size);
-	bool read(char *dest, unsigned int size);
-	void dump();
+  //bool lock();
+  //bool unlock();
+  bool write(char *src, unsigned int size);
+  bool read(char *dest, unsigned int size);
+  void dump();
 
-private:
-	unsigned int write_space();
-	unsigned int read_space();
+ private:
+  unsigned int write_space();
+  unsigned int read_space();
 
-	unsigned int m_read_pos;
-	unsigned int m_write_pos;
-	unsigned int m_size;
-	unsigned int m_size_mask;
-	char *m_buffer;
+  unsigned int m_read_pos;
+  unsigned int m_write_pos;
+  unsigned int m_size;
+  unsigned int m_size_mask;
+  char *m_buffer;
 };
 
 #endif

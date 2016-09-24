@@ -17,6 +17,7 @@
 #include <vector>
 #include "window.h"
 #include "block.h"
+#include "jellyfish/sample.h"
 #include "block_source.h"
 
 #ifndef BLOCK_STREAM
@@ -39,9 +40,32 @@ class block_stream : public block_source {
   virtual const block &get_block(u32 index) const;
   virtual u32 get_num_blocks() const { return UINT_MAX; } 
 
-  u32 last_block_index() const { return m_block_index_offset+m_blocks.size(); }
+  u32 last_block_index() const { return m_block_index_offset+m_blocks.size()-1; }
+
+  class worker {
+  public:
+    worker(u32 id, window *w);
+
+    enum worker_status { READY=0, ACTIVATE, WORKING, FINISHED };
+
+    void run();
+    
+    u32 m_id;
+    worker_status m_status;
+    pthread_mutex_t* m_worker_mutex;
+    sample m_region;
+    block *m_output;
+    window *m_window;
+    u32 m_block_index;
+
+    pthread_t *m_thread;
+  };
 
  private:
+
+  void scatter_gather(u32 block_index, const sample &region);
+
+  vector<worker*> m_workers;
 
   bool m_ready;
 
@@ -54,6 +78,10 @@ class block_stream : public block_source {
 
   u32 m_block_index_offset;
   vector<block> m_blocks;
+
+  mutable s32 m_sent_block_index;
+
+  block *m_dummy_block;
 
 };
 

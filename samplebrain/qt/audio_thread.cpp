@@ -48,7 +48,8 @@ audio_thread::~audio_thread() {
 
 void audio_thread::start_audio() {
   if (m_audio_device!=NULL) delete m_audio_device;
-  m_audio_device = new audio_device("samplebrain",44100,2048);
+  m_audio_device = new audio_device("samplebrain",48000,2048);
+  //m_audio_device = new audio_device("samplebrain",48000,2048*4);
   m_audio_device->m_client.set_callback(run_audio, this);
 }
 

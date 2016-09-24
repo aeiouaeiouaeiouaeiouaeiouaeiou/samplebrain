@@ -57,15 +57,14 @@ void renderer::process(u32 nframes, float *buf, const block_stream *bs) {
   // or the realtime block stream
   const block_source *source = (block_source*)bs;
   if (source==NULL) {
-    cerr<<"not using block stream..."<<endl;
     source = &m_target;
   } else {
-    if (m_target_index<bs->last_block_index()-10) {
-      cerr<<"catch up..."<<endl;
+    if ((s32)m_target_index<(s32)(bs->last_block_index()-100)) {
+      //cerr<<"catch up... "<<(s32)m_target_index<<" "<<(s32)bs->last_block_index()<<endl;
       m_target_index = bs->last_block_index();
     }
     if (m_target_index>bs->last_block_index()) {
-      cerr<<"catch down..."<<endl;
+      //cerr<<"catch down..."<<endl;
       m_target_index = bs->last_block_index();
     }
   }
@@ -106,7 +105,7 @@ bool renderer::find_render_blocks(const block_source &target, u32 nframes) {
   }
 
   
-    cerr<<"-----------------"<<endl;
+  /*    cerr<<"-----------------"<<endl;
     cerr<<"tgt start:"<<m_target_index<<endl;
     cerr<<"tgt end:"<<tgt_end<<endl;
     cerr<<":"<<tgt_end-m_target_index<<endl;
@@ -117,7 +116,7 @@ bool renderer::find_render_blocks(const block_source &target, u32 nframes) {
     cerr<<"render time (index) "<<m_render_index*tgt_shift<<endl;
     cerr<<"real vs index = "<<(s32)m_render_time-(s32)(m_render_index*tgt_shift)<<endl;
     cerr<<m_render_blocks.size()<<endl;
-  
+  */
 
   // search phase
   // get indices for current buffer

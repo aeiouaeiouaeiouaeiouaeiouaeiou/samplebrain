@@ -25,6 +25,7 @@
 #include "block.h"
 #include "brain.h"
 #include "renderer.h"
+#include "block_stream.h"
 #include <pthread.h>
 
 using namespace std;
@@ -46,12 +47,23 @@ void unit_test() {
 }
 
 audio_device *a = NULL;
+block_stream *m_block_stream = NULL;
+bool m_mic_mode = true;
 
 void run_audio(void* c, unsigned int frames) {
     a->left_out.zero();
     renderer *rr = (renderer*)c;
     pthread_mutex_lock(m_fuz_mutex);
-    rr->process(frames,a->left_out.get_non_const_buffer());
+
+    block_stream *bs=NULL;
+
+    if (m_mic_mode) {
+      m_block_stream->process(a->left_in,a->right_in);      
+      bs = m_block_stream;
+    }
+
+    rr->process(frames,a->left_out.get_non_const_buffer(),bs);
+    
     pthread_mutex_unlock(m_fuz_mutex);
     a->right_out=a->left_out;
     a->maybe_record();
@@ -127,8 +139,15 @@ void fuz() {
 
     brain target;
     target.load_sound(fuz_samplefile(),brain::MIX);
-    u32 len=fuz_rr_i(500,5000);
-    target.init(len,len-len/fuz_rr_i(1,16),window::HANN);
+    //    u32 len=fuz_rr_i(500,5000);
+    //u32 overlap = len-len/fuz_rr_i(1,16);
+
+    u32 len=5000;
+    u32 overlap=len/2;
+    target.init(len,overlap,window::HANN);
+
+    m_block_stream = new block_stream();
+    m_block_stream->init(len,overlap,window::HANN);
 
     cerr<<"ready..."<<endl;
     cerr<<"we have "<<source.get_num_blocks()<<" brain blocks ("<<source.get_num_blocks()*len/44100.0<<" secs)"<<endl<<endl;
@@ -140,8 +159,8 @@ void fuz() {
     renderer rr(source,target);
     rr.set_playing(true);
     //    a->start_recording("debug");
-	a->m_client.set_callback(run_audio, &rr);
-
+    a->m_client.set_callback(run_audio, &rr);
+	
     //target.resynth("shosta-dream-0.5.wav",source,0.5);
 
     u32 counter=0;
@@ -199,6 +218,8 @@ int main(int argc, char *argv[])
 {
     m_fuz_mutex = new pthread_mutex_t;
     pthread_mutex_init(m_fuz_mutex,NULL);
-    unit_test();
+    //unit_test();
+
+
     fuz();
 }

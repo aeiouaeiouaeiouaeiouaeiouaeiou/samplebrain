@@ -114,7 +114,7 @@ void block::process(const sample &pcm, sample &fft, sample &mfcc, float &freq) {
   std::vector<std::complex<double> > mfspec;
   for (u32 i=0; i<m_block_size; ++i) {
     mfspec.push_back(std::complex<double>(m_fftw->m_spectrum[i][0],
-                                          m_fftw->m_spectrum[i][1]));
+					  m_fftw->m_spectrum[i][1]));
   }
 
   freq = m_fftw->calculate_dominant_freq();
