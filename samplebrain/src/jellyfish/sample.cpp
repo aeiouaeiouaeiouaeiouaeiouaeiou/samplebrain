@@ -315,8 +315,8 @@ ios &spiralcore::operator||(ios &s, sample &sa) {
   ofstream *pos=dynamic_cast<ofstream*>(&s);
   if (pos!=NULL) {
     ofstream &os = *pos;
-    size_t len = sa.m_length;
-    os.write((char*)&len,sizeof(size_t));
+    u64 len = sa.m_length;
+    os.write((char*)&len,sizeof(u64));
     os.write((char*)sa.m_data,sa.m_length*sizeof(audio_type));
     return os;
   }
@@ -325,8 +325,8 @@ ios &spiralcore::operator||(ios &s, sample &sa) {
       ifstream *pis=dynamic_cast<ifstream*>(&s);
       assert(pis!=NULL);
       ifstream &is = *pis;
-      size_t len=0;
-      is.read((char *)&len,sizeof(size_t));
+      u64 len=0;
+      is.read((char *)&len,sizeof(u64));
       float *data = new float[len];
       is.read((char*)data,len*sizeof(audio_type));
       sa.m_data = data;

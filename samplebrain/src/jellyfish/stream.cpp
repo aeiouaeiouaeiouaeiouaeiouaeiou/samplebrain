@@ -25,84 +25,37 @@ using namespace std;
 template<>ios &spiralcore::operator||(ios &s, string &v) {
     ofstream *pos=dynamic_cast<ofstream*>(&s);
     if (pos!=NULL) {
-        ofstream &os = *pos;
-        u64 len = v.length();
-        os.write((char *)&len,sizeof(u64));
-        os.write((char*)(v.c_str()),v.length());
-        return os;
-    }
-    else
-    {
-        ifstream *pis=dynamic_cast<ifstream*>(&s);
-        assert(pis!=NULL);
-        ifstream &is = *pis;
-        u64 len=0;
-        is.read((char *)&len,sizeof(u64));
-        if (len>0) {
-            char *str = new char[len+1];
-            is.read(str,len);
-            str[len]='\0';
-            v = string(str);
-            delete[] str;
-        }
-        else {
-            //v=string("");
-        }
-        return is;
+      #ifdef DEBUG_STREAM
+      cerr<<"streaming out string "<<v<<endl;
+      #endif
+      ofstream &os = *pos;
+      u64 len = v.length();
+      os.write((char *)&len,sizeof(u64));
+      os.write((char*)(v.c_str()),v.length());
+      return os;
+    } else {
+      ifstream *pis=dynamic_cast<ifstream*>(&s);
+      assert(pis!=NULL);
+      ifstream &is = *pis;
+      u64 len=0;
+      is.read((char *)&len,sizeof(u64));
+      if (len>0) {
+	char *str = new char[len+1];
+	is.read(str,len);
+	str[len]='\0';
+	v = string(str);
+	delete[] str;
+      } else {
+	//v=string("");
+      }
+
+      #ifdef DEBUG_STREAM
+      cerr<<"streamed in string "<<v<<endl;
+      #endif
+
+      return is;
     }
 }
-
-
-/*ios &operator||(ios &s, vector<U> &v) {
-    ofstream *pos=dynamic_cast<ofstream*>(&s);
-    if (pos!=NULL) {
-        ofstream &os = *pos;
-        size_t len = v.length();
-        os.write((char *)&len,sizeof(size_t));
-        return os.write((char*)(&v[0]),v.length()*sizeof(U));
-    }
-    else
-    {
-        ifstream *pis=dynamic_cast<ifstream*>(&s);
-        assert(pis);
-        ifstream &is = *pis;
-        size_t len=0;
-        is.read((char *)&len,sizeof(size_t));
-        v.reserve(len);
-        is.read((char*)&v[0],len);
-        return is;
-    }
-
-
-    }*/
-/*
-template<class U>ios &operator||(ios &s, vector<U> &v) {
-    ofstream *pos=dynamic_cast<ofstream*>(&s);
-    if (pos!=NULL) {
-        ofstream &os = *pos;
-        size_t len = v.length();
-        for (size_t i=0; i<len; ++i) {
-            os||v[i];
-        }
-        return os;
-    }
-    else
-    {
-        ifstream *pis=dynamic_cast<ifstream*>(&s);
-        assert(pis);
-        ifstream &is = *pis;
-        size_t len=0;
-        is.read((char *)&len,sizeof(size_t));
-        v.reserve(len);
-        for (size_t i=0; i<len; ++i) {
-            is||v[i];
-        }
-        return is;
-    }
-
-
-}
-*/
 
 void spiralcore::stream_unit_test() {
 

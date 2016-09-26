@@ -20,8 +20,15 @@
 #include <list>
 #include <assert.h>
 #include <iostream>
+#include "types.h"
 
 #pragma once
+
+//#define DEBUG_STREAM
+
+#ifdef DEBUG_STREAM
+#include <typeinfo>
+#endif
 
 namespace spiralcore {
 
@@ -29,6 +36,11 @@ namespace spiralcore {
 // saw this years ago at computer artworks, not seen it since...
 
 template<typename T>std::ios &operator||(std::ios &s, T &v) {
+
+#ifdef DEBUG_STREAM
+  std::cerr<<"streaming a "<<typeid(v).name()<<std::endl;
+#endif
+  
     std::ofstream *pos=dynamic_cast<std::ofstream*>(&s);
     if (pos!=NULL) {
         std::ofstream &os = *pos;
@@ -47,34 +59,18 @@ template<typename T>std::ios &operator||(std::ios &s, T &v) {
 
 template<>std::ios &operator||(std::ios &s, std::string &v);
 
-/*
-template<typename T, typename U>T *stream_array(std::ios &s, T *v, U &len) {
-    std::ofstream *pos=dynamic_cast<std::ofstream*>(&s);
-    if (pos!=NULL) {
-        std::ofstream &os = *pos;
-        os||len;
-        os.write((char*)v,sizeof(T)*len);
-        return v;
-    } else  {
-        std::ifstream *pis=dynamic_cast<std::ifstream*>(&s);
-        assert(pis);
-        std::ifstream &is = *pis;
-        is||len;
-        if (v!=NULL) delete[] v;
-        T* t = new T[len];
-        is.read((char *)t,sizeof(T)*len);
-        return t;
-    }
-}
-*/
-
 template<typename T>std::ios &stream_vector(std::ios &s, std::vector<T> &v) {
     std::ofstream *pos=dynamic_cast<std::ofstream*>(&s);
+
+#ifdef DEBUG_STREAM
+    std::cerr<<"streaming a vector "<<std::endl;
+#endif
+
     if (pos!=NULL) {
         std::ofstream &os = *pos;
-        size_t len = v.size();
+        u64 len = v.size();
         os||len;
-        for (size_t i=0; i<len; ++i) {
+        for (u64 i=0; i<len; ++i) {
             os||v[i];
         }
         return os;
@@ -84,11 +80,11 @@ template<typename T>std::ios &stream_vector(std::ios &s, std::vector<T> &v) {
         std::ifstream *pis=dynamic_cast<std::ifstream*>(&s);
         assert(pis);
         std::ifstream &is = *pis;
-        size_t len=0;
+        u64 len=0;
         is||len;
         //v.reserve(len);
         v.clear();
-        for (size_t i=0; i<len; ++i) {
+        for (u64 i=0; i<len; ++i) {
             T t;
             is||t;
             v.push_back(t);
@@ -99,9 +95,12 @@ template<typename T>std::ios &stream_vector(std::ios &s, std::vector<T> &v) {
 
 // skip a vector when loading
 template<typename T>std::ios &skip_vector(std::ifstream &is) {
-  size_t len=0;
+#ifdef DEBUG_STREAM
+    std::cerr<<"skipping a vector"<<std::endl;
+#endif
+  u64 len=0;
   is||len;
-  for (size_t i=0; i<len; ++i) {
+  for (u64 i=0; i<len; ++i) {
     T t;
     is||t;
   }
@@ -111,9 +110,12 @@ template<typename T>std::ios &skip_vector(std::ifstream &is) {
 
 template<typename T>std::ios &stream_list(std::ios &s, std::list<T> &v) {
     std::ofstream *pos=dynamic_cast<std::ofstream*>(&s);
+#ifdef DEBUG_STREAM
+    std::cerr<<"streaming a list"<<std::endl;
+#endif
     if (pos!=NULL) {
         std::ofstream &os = *pos;
-        size_t len = v.size();
+        u64 len = v.size();
         os||len;
         for (typename std::list<T>::iterator i=v.begin(); i!=v.end(); ++i) {
             os||*i;
@@ -125,9 +127,9 @@ template<typename T>std::ios &stream_list(std::ios &s, std::list<T> &v) {
         std::ifstream *pis=dynamic_cast<std::ifstream*>(&s);
         assert(pis);
         std::ifstream &is = *pis;
-        size_t len=0;
+        u64 len=0;
         is||len;
-        for (size_t i=0; i<len; ++i) {
+        for (u64 i=0; i<len; ++i) {
             T t;
             is||t;
             v.push_back(t);
@@ -137,9 +139,12 @@ template<typename T>std::ios &stream_list(std::ios &s, std::list<T> &v) {
 }
 
 template<typename T>std::ios &skip_list(std::istream &is) {
-  size_t len=0;
+#ifdef DEBUG_STREAM
+  std::cerr<<"skipping a list"<<std::endl;
+#endif
+  u64 len=0;
   is||len;
-  for (size_t i=0; i<len; ++i) {
+  for (u64 i=0; i<len; ++i) {
     T t;
     is||t;
   }
