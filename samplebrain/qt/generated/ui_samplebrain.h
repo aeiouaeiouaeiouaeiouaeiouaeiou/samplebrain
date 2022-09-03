@@ -1,36 +1,34 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainr15646.ui'
+** Form generated from reading UI file 'samplebrainKYyZZB.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINR15646_H
-#define SAMPLEBRAINR15646_H
+#ifndef SAMPLEBRAINKYYZZB_H
+#define SAMPLEBRAINKYYZZB_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QDial>
-#include <QtGui/QDoubleSpinBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMainWindow>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QSlider>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QSpinBox>
-#include <QtGui/QStatusBar>
-#include <QtGui/QTabWidget>
-#include <QtGui/QToolButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtGui/QIcon>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDial>
+#include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -164,7 +162,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(910, 671);
+        MainWindow->resize(955, 832);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -226,9 +224,9 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(doubleSpinBoxRatio->sizePolicy().hasHeightForWidth());
         doubleSpinBoxRatio->setSizePolicy(sizePolicy1);
-        doubleSpinBoxRatio->setMaximum(1);
-        doubleSpinBoxRatio->setSingleStep(0.01);
-        doubleSpinBoxRatio->setValue(0.5);
+        doubleSpinBoxRatio->setMaximum(1.000000000000000);
+        doubleSpinBoxRatio->setSingleStep(0.010000000000000);
+        doubleSpinBoxRatio->setValue(0.500000000000000);
 
         horizontalLayout_16->addWidget(doubleSpinBoxRatio);
 
@@ -257,9 +255,9 @@ public:
         doubleSpinBoxNRatio->setObjectName(QString::fromUtf8("doubleSpinBoxNRatio"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxNRatio->sizePolicy().hasHeightForWidth());
         doubleSpinBoxNRatio->setSizePolicy(sizePolicy1);
-        doubleSpinBoxNRatio->setMaximum(1);
-        doubleSpinBoxNRatio->setSingleStep(0.01);
-        doubleSpinBoxNRatio->setValue(0);
+        doubleSpinBoxNRatio->setMaximum(1.000000000000000);
+        doubleSpinBoxNRatio->setSingleStep(0.010000000000000);
+        doubleSpinBoxNRatio->setValue(0.000000000000000);
 
         horizontalLayout->addWidget(doubleSpinBoxNRatio);
 
@@ -329,9 +327,9 @@ public:
         doubleSpinBoxNovelty->setObjectName(QString::fromUtf8("doubleSpinBoxNovelty"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxNovelty->sizePolicy().hasHeightForWidth());
         doubleSpinBoxNovelty->setSizePolicy(sizePolicy1);
-        doubleSpinBoxNovelty->setMaximum(1);
-        doubleSpinBoxNovelty->setSingleStep(0.01);
-        doubleSpinBoxNovelty->setValue(0);
+        doubleSpinBoxNovelty->setMaximum(1.000000000000000);
+        doubleSpinBoxNovelty->setSingleStep(0.010000000000000);
+        doubleSpinBoxNovelty->setValue(0.000000000000000);
 
         horizontalLayout_10->addWidget(doubleSpinBoxNovelty);
 
@@ -360,9 +358,9 @@ public:
         doubleSpinBoxBoredom->setObjectName(QString::fromUtf8("doubleSpinBoxBoredom"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxBoredom->sizePolicy().hasHeightForWidth());
         doubleSpinBoxBoredom->setSizePolicy(sizePolicy1);
-        doubleSpinBoxBoredom->setMaximum(1);
-        doubleSpinBoxBoredom->setSingleStep(0.01);
-        doubleSpinBoxBoredom->setValue(0);
+        doubleSpinBoxBoredom->setMaximum(1.000000000000000);
+        doubleSpinBoxBoredom->setSingleStep(0.010000000000000);
+        doubleSpinBoxBoredom->setValue(0.000000000000000);
 
         horizontalLayout_11->addWidget(doubleSpinBoxBoredom);
 
@@ -391,9 +389,9 @@ public:
         doubleSpinBoxStickyness->setObjectName(QString::fromUtf8("doubleSpinBoxStickyness"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxStickyness->sizePolicy().hasHeightForWidth());
         doubleSpinBoxStickyness->setSizePolicy(sizePolicy1);
-        doubleSpinBoxStickyness->setMaximum(1);
-        doubleSpinBoxStickyness->setSingleStep(0.01);
-        doubleSpinBoxStickyness->setValue(0);
+        doubleSpinBoxStickyness->setMaximum(1.000000000000000);
+        doubleSpinBoxStickyness->setSingleStep(0.010000000000000);
+        doubleSpinBoxStickyness->setValue(0.000000000000000);
 
         horizontalLayout_21->addWidget(doubleSpinBoxStickyness);
 
@@ -441,6 +439,10 @@ public:
         horizontalLayout_25->addWidget(label_32);
 
         comboBoxAlgorithm = new QComboBox(controlTab);
+        comboBoxAlgorithm->addItem(QString());
+        comboBoxAlgorithm->addItem(QString());
+        comboBoxAlgorithm->addItem(QString());
+        comboBoxAlgorithm->addItem(QString());
         comboBoxAlgorithm->setObjectName(QString::fromUtf8("comboBoxAlgorithm"));
 
         horizontalLayout_25->addWidget(comboBoxAlgorithm);
@@ -560,9 +562,9 @@ public:
 
         doubleSpinBoxBlockOverlapTarget = new QDoubleSpinBox(controlTab);
         doubleSpinBoxBlockOverlapTarget->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlapTarget"));
-        doubleSpinBoxBlockOverlapTarget->setMaximum(0.99);
-        doubleSpinBoxBlockOverlapTarget->setSingleStep(0.01);
-        doubleSpinBoxBlockOverlapTarget->setValue(0.8);
+        doubleSpinBoxBlockOverlapTarget->setMaximum(0.990000000000000);
+        doubleSpinBoxBlockOverlapTarget->setSingleStep(0.010000000000000);
+        doubleSpinBoxBlockOverlapTarget->setValue(0.800000000000000);
 
         horizontalLayout_14->addWidget(doubleSpinBoxBlockOverlapTarget);
 
@@ -578,6 +580,14 @@ public:
         horizontalLayout_23->addWidget(label_14);
 
         comboBoxTargetShape = new QComboBox(controlTab);
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
+        comboBoxTargetShape->addItem(QString());
         comboBoxTargetShape->setObjectName(QString::fromUtf8("comboBoxTargetShape"));
 
         horizontalLayout_23->addWidget(comboBoxTargetShape);
@@ -626,9 +636,9 @@ public:
         doubleSpinBoxAutotune->setObjectName(QString::fromUtf8("doubleSpinBoxAutotune"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxAutotune->sizePolicy().hasHeightForWidth());
         doubleSpinBoxAutotune->setSizePolicy(sizePolicy1);
-        doubleSpinBoxAutotune->setMaximum(1);
-        doubleSpinBoxAutotune->setSingleStep(0.01);
-        doubleSpinBoxAutotune->setValue(0);
+        doubleSpinBoxAutotune->setMaximum(1.000000000000000);
+        doubleSpinBoxAutotune->setSingleStep(0.010000000000000);
+        doubleSpinBoxAutotune->setValue(0.000000000000000);
 
         horizontalLayout_22->addWidget(doubleSpinBoxAutotune);
 
@@ -656,9 +666,9 @@ public:
         doubleSpinBoxNMix->setObjectName(QString::fromUtf8("doubleSpinBoxNMix"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxNMix->sizePolicy().hasHeightForWidth());
         doubleSpinBoxNMix->setSizePolicy(sizePolicy1);
-        doubleSpinBoxNMix->setMaximum(1);
-        doubleSpinBoxNMix->setSingleStep(0.01);
-        doubleSpinBoxNMix->setValue(0);
+        doubleSpinBoxNMix->setMaximum(1.000000000000000);
+        doubleSpinBoxNMix->setSingleStep(0.010000000000000);
+        doubleSpinBoxNMix->setValue(0.000000000000000);
 
         horizontalLayout_8->addWidget(doubleSpinBoxNMix);
 
@@ -687,9 +697,9 @@ public:
         doubleSpinBoxTargetMix->setObjectName(QString::fromUtf8("doubleSpinBoxTargetMix"));
         sizePolicy1.setHeightForWidth(doubleSpinBoxTargetMix->sizePolicy().hasHeightForWidth());
         doubleSpinBoxTargetMix->setSizePolicy(sizePolicy1);
-        doubleSpinBoxTargetMix->setMaximum(1);
-        doubleSpinBoxTargetMix->setSingleStep(0.01);
-        doubleSpinBoxTargetMix->setValue(0);
+        doubleSpinBoxTargetMix->setMaximum(1.000000000000000);
+        doubleSpinBoxTargetMix->setSingleStep(0.010000000000000);
+        doubleSpinBoxTargetMix->setValue(0.000000000000000);
 
         horizontalLayout_9->addWidget(doubleSpinBoxTargetMix);
 
@@ -739,7 +749,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 284, 198));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 322, 198));
         verticalLayout_5 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         brain_contents = new QVBoxLayout();
@@ -803,9 +813,9 @@ public:
 
         doubleSpinBoxBlockOverlap = new QDoubleSpinBox(controlTab);
         doubleSpinBoxBlockOverlap->setObjectName(QString::fromUtf8("doubleSpinBoxBlockOverlap"));
-        doubleSpinBoxBlockOverlap->setMaximum(0.99);
-        doubleSpinBoxBlockOverlap->setSingleStep(0.01);
-        doubleSpinBoxBlockOverlap->setValue(0);
+        doubleSpinBoxBlockOverlap->setMaximum(0.990000000000000);
+        doubleSpinBoxBlockOverlap->setSingleStep(0.010000000000000);
+        doubleSpinBoxBlockOverlap->setValue(0.000000000000000);
 
         horizontalLayout_6->addWidget(doubleSpinBoxBlockOverlap);
 
@@ -821,6 +831,14 @@ public:
         horizontalLayout_24->addWidget(label_15);
 
         comboBoxBrainShape = new QComboBox(controlTab);
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
+        comboBoxBrainShape->addItem(QString());
         comboBoxBrainShape->setObjectName(QString::fromUtf8("comboBoxBrainShape"));
 
         horizontalLayout_24->addWidget(comboBoxBrainShape);
@@ -1036,151 +1054,145 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.17", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("MainWindow", "brain tweaks", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.17", nullptr));
+        label_19->setText(QApplication::translate("MainWindow", "brain tweaks", nullptr));
+        label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderRatio->setToolTip(QApplication::translate("MainWindow", "plain fft match vs mfcc values ", 0, QApplication::UnicodeUTF8));
+        sliderRatio->setToolTip(QApplication::translate("MainWindow", "plain fft match vs mfcc values ", nullptr));
 #endif // QT_NO_TOOLTIP
-        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics / freq only", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("MainWindow", "freq & dynamics / freq only", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderNRatio->setToolTip(QApplication::translate("MainWindow", "match original or normalised blocks", 0, QApplication::UnicodeUTF8));
+        sliderNRatio->setToolTip(QApplication::translate("MainWindow", "match original or normalised blocks", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_7->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_7->setText(QApplication::translate("MainWindow", "fft subsection", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "Start", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("MainWindow", "fft subsection", nullptr));
+        label_9->setText(QApplication::translate("MainWindow", "Start", nullptr));
 #ifndef QT_NO_TOOLTIP
-        spinBoxFFT1Start->setToolTip(QApplication::translate("MainWindow", "start frequency to use for fft match", 0, QApplication::UnicodeUTF8));
+        spinBoxFFT1Start->setToolTip(QApplication::translate("MainWindow", "start frequency to use for fft match", nullptr));
 #endif // QT_NO_TOOLTIP
-        label_10->setText(QApplication::translate("MainWindow", "End", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("MainWindow", "End", nullptr));
 #ifndef QT_NO_TOOLTIP
-        spinBoxFFT1End->setToolTip(QApplication::translate("MainWindow", "end frequency to use for fft match", 0, QApplication::UnicodeUTF8));
+        spinBoxFFT1End->setToolTip(QApplication::translate("MainWindow", "end frequency to use for fft match", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_24->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_24->setText(QApplication::translate("MainWindow", "novelty", 0, QApplication::UnicodeUTF8));
+        label_24->setText(QApplication::translate("MainWindow", "novelty", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderNovelty->setToolTip(QApplication::translate("MainWindow", "use new blocks rather than similar ones", 0, QApplication::UnicodeUTF8));
+        sliderNovelty->setToolTip(QApplication::translate("MainWindow", "use new blocks rather than similar ones", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_25->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_25->setText(QApplication::translate("MainWindow", "boredom", 0, QApplication::UnicodeUTF8));
+        label_25->setText(QApplication::translate("MainWindow", "boredom", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderBoredom->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", 0, QApplication::UnicodeUTF8));
+        sliderBoredom->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_30->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_30->setText(QApplication::translate("MainWindow", "stickyness", 0, QApplication::UnicodeUTF8));
+        label_30->setText(QApplication::translate("MainWindow", "stickyness", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderStickyness->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", 0, QApplication::UnicodeUTF8));
+        sliderStickyness->setToolTip(QApplication::translate("MainWindow", "how long it takes for the novelty to wear off", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_28->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_28->setText(QApplication::translate("MainWindow", "search stretch", 0, QApplication::UnicodeUTF8));
+        label_28->setText(QApplication::translate("MainWindow", "search stretch", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderSearchStretch->setToolTip(QApplication::translate("MainWindow", "repeat search (set novelty to 0 for dodgy jungle timessssstretch)", 0, QApplication::UnicodeUTF8));
+        sliderSearchStretch->setToolTip(QApplication::translate("MainWindow", "repeat search (set novelty to 0 for dodgy jungle timessssstretch)", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        spinBoxSearchStretch->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+        spinBoxSearchStretch->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", nullptr));
 #endif // QT_NO_TOOLTIP
-        label_32->setText(QApplication::translate("MainWindow", "algorithm", 0, QApplication::UnicodeUTF8));
-        comboBoxAlgorithm->clear();
-        comboBoxAlgorithm->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "basic", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "reversed", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "synaptic", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "slide", 0, QApplication::UnicodeUTF8)
-        );
+        label_32->setText(QApplication::translate("MainWindow", "algorithm", nullptr));
+        comboBoxAlgorithm->setItemText(0, QApplication::translate("MainWindow", "basic", nullptr));
+        comboBoxAlgorithm->setItemText(1, QApplication::translate("MainWindow", "reversed", nullptr));
+        comboBoxAlgorithm->setItemText(2, QApplication::translate("MainWindow", "synaptic", nullptr));
+        comboBoxAlgorithm->setItemText(3, QApplication::translate("MainWindow", "slide", nullptr));
+
 #ifndef QT_NO_TOOLTIP
         label_26->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_26->setText(QApplication::translate("MainWindow", "num synpases", 0, QApplication::UnicodeUTF8));
+        label_26->setText(QApplication::translate("MainWindow", "num synpases", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+        sliderSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        spinBoxSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+        spinBoxSynapses->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         label_29->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_29->setText(QApplication::translate("MainWindow", "synaptic slide error", 0, QApplication::UnicodeUTF8));
+        label_29->setText(QApplication::translate("MainWindow", "synaptic slide error", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderSlideError->setToolTip(QApplication::translate("MainWindow", "block difference higher than this causes a new search, skipping the target", 0, QApplication::UnicodeUTF8));
+        sliderSlideError->setToolTip(QApplication::translate("MainWindow", "block difference higher than this causes a new search, skipping the target", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        spinBoxSlideError->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", 0, QApplication::UnicodeUTF8));
+        spinBoxSlideError->setToolTip(QApplication::translate("MainWindow", "how many connections to search (ordered in closeness)", nullptr));
 #endif // QT_NO_TOOLTIP
-        label_16->setText(QApplication::translate("MainWindow", "target sound", 0, QApplication::UnicodeUTF8));
-        pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", 0, QApplication::UnicodeUTF8));
-        label_17->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
-        label_18->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "window shape", 0, QApplication::UnicodeUTF8));
-        comboBoxTargetShape->clear();
-        comboBoxTargetShape->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "dodgy", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "bartlett", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "blackman", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "flat top", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "gaussian", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "hamming", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "hann", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "rectangle", 0, QApplication::UnicodeUTF8)
-        );
-        pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "(re)generate blocks", 0, QApplication::UnicodeUTF8));
-        mic->setText(QApplication::translate("MainWindow", "use mic input", 0, QApplication::UnicodeUTF8));
-        label_23->setText(QApplication::translate("MainWindow", "mix", 0, QApplication::UnicodeUTF8));
-        label_31->setText(QApplication::translate("MainWindow", "autotune", 0, QApplication::UnicodeUTF8));
+        label_16->setText(QApplication::translate("MainWindow", "target sound", nullptr));
+        pushButtonLoadTarget->setText(QApplication::translate("MainWindow", "load target", nullptr));
+        label_17->setText(QApplication::translate("MainWindow", "block size", nullptr));
+        label_18->setText(QApplication::translate("MainWindow", "block overlap", nullptr));
+        label_14->setText(QApplication::translate("MainWindow", "window shape", nullptr));
+        comboBoxTargetShape->setItemText(0, QApplication::translate("MainWindow", "dodgy", nullptr));
+        comboBoxTargetShape->setItemText(1, QApplication::translate("MainWindow", "bartlett", nullptr));
+        comboBoxTargetShape->setItemText(2, QApplication::translate("MainWindow", "blackman", nullptr));
+        comboBoxTargetShape->setItemText(3, QApplication::translate("MainWindow", "flat top", nullptr));
+        comboBoxTargetShape->setItemText(4, QApplication::translate("MainWindow", "gaussian", nullptr));
+        comboBoxTargetShape->setItemText(5, QApplication::translate("MainWindow", "hamming", nullptr));
+        comboBoxTargetShape->setItemText(6, QApplication::translate("MainWindow", "hann", nullptr));
+        comboBoxTargetShape->setItemText(7, QApplication::translate("MainWindow", "rectangle", nullptr));
+
+        pushButtonGenerateTarget->setText(QApplication::translate("MainWindow", "(re)generate blocks", nullptr));
+        mic->setText(QApplication::translate("MainWindow", "use mic input", nullptr));
+        label_23->setText(QApplication::translate("MainWindow", "mix", nullptr));
+        label_31->setText(QApplication::translate("MainWindow", "autotune", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderAutotune->setToolTip(QApplication::translate("MainWindow", "amount to match the frequency", 0, QApplication::UnicodeUTF8));
+        sliderAutotune->setToolTip(QApplication::translate("MainWindow", "amount to match the frequency", nullptr));
 #endif // QT_NO_TOOLTIP
-        label_21->setText(QApplication::translate("MainWindow", "normalised ", 0, QApplication::UnicodeUTF8));
+        label_21->setText(QApplication::translate("MainWindow", "normalised ", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderNMix->setToolTip(QApplication::translate("MainWindow", "mix in the normalised blocks", 0, QApplication::UnicodeUTF8));
+        sliderNMix->setToolTip(QApplication::translate("MainWindow", "mix in the normalised blocks", nullptr));
 #endif // QT_NO_TOOLTIP
-        label_22->setText(QApplication::translate("MainWindow", "brain / target", 0, QApplication::UnicodeUTF8));
+        label_22->setText(QApplication::translate("MainWindow", "brain / target", nullptr));
 #ifndef QT_NO_TOOLTIP
-        sliderTargetMix->setToolTip(QApplication::translate("MainWindow", "mix in the original blocks", 0, QApplication::UnicodeUTF8));
+        sliderTargetMix->setToolTip(QApplication::translate("MainWindow", "mix in the original blocks", nullptr));
 #endif // QT_NO_TOOLTIP
-        checkBoxStereo->setText(QApplication::translate("MainWindow", "stereo mode", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "brain contents", 0, QApplication::UnicodeUTF8));
-        toolButtonAll->setText(QApplication::translate("MainWindow", "all", 0, QApplication::UnicodeUTF8));
-        toolButtonNone->setText(QApplication::translate("MainWindow", "none", 0, QApplication::UnicodeUTF8));
-        pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", 0, QApplication::UnicodeUTF8));
-        pushButtonLoadSounds->setText(QApplication::translate("MainWindow", "directory", 0, QApplication::UnicodeUTF8));
-        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "block size", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "block overlap", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "window shape", 0, QApplication::UnicodeUTF8));
-        comboBoxBrainShape->clear();
-        comboBoxBrainShape->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "dodgy", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "bartlett", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "blackman", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "flat top", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "gaussian", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "hamming", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "hann", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "rectangle", 0, QApplication::UnicodeUTF8)
-        );
-        pushButtonGenerate->setText(QApplication::translate("MainWindow", "(re)generate brain", 0, QApplication::UnicodeUTF8));
-        pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", 0, QApplication::UnicodeUTF8));
-        pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "This program is free software made in Cornwall by <a href=\"http://fo.am/kernow\">FoAM Kernow</a>", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(netTab), QApplication::translate("MainWindow", "net", 0, QApplication::UnicodeUTF8));
+        checkBoxStereo->setText(QApplication::translate("MainWindow", "stereo mode", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "brain contents", nullptr));
+        toolButtonAll->setText(QApplication::translate("MainWindow", "all", nullptr));
+        toolButtonNone->setText(QApplication::translate("MainWindow", "none", nullptr));
+        pushButtonLoadSound->setText(QApplication::translate("MainWindow", "load sound", nullptr));
+        pushButtonLoadSounds->setText(QApplication::translate("MainWindow", "directory", nullptr));
+        pushButtonClearBrain->setText(QApplication::translate("MainWindow", "clear", nullptr));
+        label->setText(QApplication::translate("MainWindow", "block size", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "block overlap", nullptr));
+        label_15->setText(QApplication::translate("MainWindow", "window shape", nullptr));
+        comboBoxBrainShape->setItemText(0, QApplication::translate("MainWindow", "dodgy", nullptr));
+        comboBoxBrainShape->setItemText(1, QApplication::translate("MainWindow", "bartlett", nullptr));
+        comboBoxBrainShape->setItemText(2, QApplication::translate("MainWindow", "blackman", nullptr));
+        comboBoxBrainShape->setItemText(3, QApplication::translate("MainWindow", "flat top", nullptr));
+        comboBoxBrainShape->setItemText(4, QApplication::translate("MainWindow", "gaussian", nullptr));
+        comboBoxBrainShape->setItemText(5, QApplication::translate("MainWindow", "hamming", nullptr));
+        comboBoxBrainShape->setItemText(6, QApplication::translate("MainWindow", "hann", nullptr));
+        comboBoxBrainShape->setItemText(7, QApplication::translate("MainWindow", "rectangle", nullptr));
+
+        pushButtonGenerate->setText(QApplication::translate("MainWindow", "(re)generate brain", nullptr));
+        pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", nullptr));
+        pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "This program is free software made in Cornwall by <a href=\"http://fo.am/kernow\">FoAM Kernow</a>", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(netTab), QApplication::translate("MainWindow", "net", nullptr));
         pushButtonPlay->setText(QString());
         pushButtonStop->setText(QString());
         pushButtonRecord->setText(QString());
         pushButtonStopRecord->setText(QString());
-        pushButtonLoadSession->setText(QApplication::translate("MainWindow", "load session", 0, QApplication::UnicodeUTF8));
-        pushButtonSaveSession->setText(QApplication::translate("MainWindow", "save session", 0, QApplication::UnicodeUTF8));
+        pushButtonLoadSession->setText(QApplication::translate("MainWindow", "load session", nullptr));
+        pushButtonSaveSession->setText(QApplication::translate("MainWindow", "save session", nullptr));
         label_13->setText(QString());
     } // retranslateUi
 
@@ -1192,4 +1204,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINR15646_H
+#endif // SAMPLEBRAINKYYZZB_H

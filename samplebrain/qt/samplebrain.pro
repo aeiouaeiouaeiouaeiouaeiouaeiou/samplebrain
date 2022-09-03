@@ -7,7 +7,7 @@ TARGET = samplebrain
 DEPENDPATH += . 2
 INCLUDEPATH += . 2
 
-QT += core gui
+QT += core gui widgets
 
 # Input
 HEADERS += MainWindow.h \

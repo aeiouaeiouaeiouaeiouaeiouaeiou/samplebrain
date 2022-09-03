@@ -16,6 +16,7 @@
 
 #include <string>
 #include <QtGui>
+#include <QStatusBar>
 #include "jellyfish/OSC_server.h"
 
 #pragma once
