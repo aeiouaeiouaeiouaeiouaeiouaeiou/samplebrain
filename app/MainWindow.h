@@ -24,7 +24,6 @@
 #include <lo/lo.h>
 #include <string>
 #include <list>
-#include "window.h"
 #include "feedback.h"
 #include "sound_items.h"
 
@@ -405,7 +404,7 @@ private:
 
     string m_save_wav;
     QString m_last_file;
-    u32 m_record_id;
+    unsigned int m_record_id;
     Ui_MainWindow m_Ui;
     feedback m_feedback;
     QSignalMapper* m_sound_item_enable_mapper;

@@ -17,7 +17,7 @@
 #include <vector>
 #include "window.h"
 #include "block.h"
-#include "jellyfish/sample.h"
+#include "spiralcore/sample.h"
 #include "block_source.h"
 
 #ifndef BLOCK_STREAM

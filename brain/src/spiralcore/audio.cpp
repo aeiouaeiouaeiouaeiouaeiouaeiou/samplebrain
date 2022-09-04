@@ -82,21 +82,5 @@ void audio_device::maybe_record() {
     }
 }
 
-#ifndef DONT_USE_FLUXA_GRAPH
-void run_graph(void *c, unsigned int size) {
-#ifndef DONT_USE_FLUXA_GRAPH
-    audio_device *a=(audio_device *)c;
-    a->left_out.zero();
-    a->right_out.zero();
-    a->m_graph->process(size, a->left_out, a->right_out);
-    a->maybe_record();
-#endif
-}
-#endif
-
 void audio_device::start_graph(graph *graph) {
-#ifndef DONT_USE_FLUXA_GRAPH
-    m_graph = graph;
-    m_client.set_callback(run_graph,this);
-#endif
 }

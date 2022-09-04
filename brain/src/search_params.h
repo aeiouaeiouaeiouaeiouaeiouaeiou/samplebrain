@@ -14,48 +14,39 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#include <string>
-#include <vector>
-#include "jellyfish/sample.h"
-#include "jellyfish/types.h"
+#ifndef SEARCH_PARAMS
+#define SEARCH_PARAMS
 
-#ifndef WINDOW
-#define WINDOW
+#include "spiralcore/types.h"
+#include "spiralcore/stream.h"
+#include <iostream>
+
+#pragma once
 
 namespace spiralcore {
 
-class window {
+class search_params {
 public:
-    window();
-    void init(u32 length);
+    search_params(float ratio, float n_ratio, int s1, int e1, float usage_importance) :
+    m_ratio(ratio),
+        m_n_ratio(n_ratio),
+        m_fft1_start(s1),
+        m_fft1_end(e1),
+        m_usage_importance(usage_importance),
+        m_num_synapses(20),
+        m_stickyness(0)
+        {}
 
-    enum type {
-        DODGY = 0,
-        BARTLETT,
-        BLACKMAN,
-        FLAT_TOP,
-        GAUSSIAN,
-        HAMMING,
-        HANN,
-        RECTANGLE,
-        MAX_TYPES
-    };
-
-    void set_current_type(type t) { m_current_type=t; }
-    void run(const sample &sample) const;
-
-    friend ios &operator||(ios &s, window &b);
-
-private:
-    void clear();
-
-    type m_current_type;
-
-    std::vector<sample*> m_windows;
-
+    float m_ratio;
+    float m_n_ratio;
+    u32 m_fft1_start;
+    u32 m_fft1_end;
+    float m_usage_importance;
+    u32 m_num_synapses;
+    f32 m_stickyness;
 };
 
-ios &operator||(ios &s, window &b);
+ std::ios &operator||(std::ios &s, search_params &b);
 
 }
 

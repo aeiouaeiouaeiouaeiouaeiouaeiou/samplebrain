@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Dave Griffiths
+// Copyright (C) 2015 Foam Kernow
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,23 +15,48 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <string>
-#include <QtGui>
-#include <QStatusBar>
-#include "jellyfish/OSC_server.h"
+#include <vector>
+#include "spiralcore/sample.h"
+#include "spiralcore/types.h"
 
-#pragma once
+#ifndef WINDOW
+#define WINDOW
 
 namespace spiralcore {
-class sound_items;
 
-class feedback {
+class window {
 public:
-    feedback(std::string address);
-    void poll(QStatusBar *s, sound_items *sound_items);
+    window();
+    void init(u32 length);
+
+    enum type {
+        DODGY = 0,
+        BARTLETT,
+        BLACKMAN,
+        FLAT_TOP,
+        GAUSSIAN,
+        HAMMING,
+        HANN,
+        RECTANGLE,
+        MAX_TYPES
+    };
+
+    void set_current_type(type t) { m_current_type=t; }
+    void run(const sample &sample) const;
+
+    friend ios &operator||(ios &s, window &b);
 
 private:
+    void clear();
 
-	OSC_server m_osc;
+    type m_current_type;
+
+    std::vector<sample*> m_windows;
+
 };
 
+ios &operator||(ios &s, window &b);
+
 }
+
+#endif

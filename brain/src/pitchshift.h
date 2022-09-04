@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Dave Griffiths
+// Copyright (C) 2015 Foam Kernow
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,38 +14,22 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#include "jellyfish/OSC_server.h"
-#include "process_thread.h"
-#include "renderer.h"
-#include "block_stream.h"
-#include "jellyfish/audio.h"
+#ifndef SPIRALCORE_PITCHSHIFT
+#define SPIRALCORE_PITCHSHIFT
 
-#pragma once
+#include <spiralcore/core/types.h>
+#include <spiralcore/fluxa/sample.h>
+#include <rubberband/RubberBandStretcher.h>
 
 namespace spiralcore {
 
-class audio_thread {
-public:
-    audio_thread(process_thread &p);
-    ~audio_thread();
+  class pitchshift {
+  public:
+    static void init(u32 srate);
+    static void process(const sample &in, float freq_change, sample &out);
 
-    void process(sample &left_in, sample &right_in, sample &left_out, sample &right_out);
-
-    static void run_audio(void* c, unsigned int frames);
-    audio_device *m_audio_device;
-
-    renderer *m_left_renderer;
-    renderer *m_right_renderer;
-    block_stream *m_block_stream;
-
-private:
-    void start_audio();
-
-	OSC_server m_osc;
-    process_thread &m_process_thread;
-    pthread_mutex_t* m_brain_mutex;
-    bool m_stereo_mode;
-    bool m_mic_mode;
-};
+    static RubberBand::RubberBandStretcher *m_stretcher;
+  };
 
 }
+#endif

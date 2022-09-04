@@ -3,6 +3,7 @@ AC_INIT(samplebrain, version-0.1)
 AC_PROG_CC
 
 AC_CHECK_LIB(m, cos)
+AC_CHECK_LIB(pthread, main)
 AC_CHECK_LIB(fftw3, main)
 AC_CHECK_LIB(portaudio, main)
 AC_CHECK_LIB(jellyfish, main)

@@ -17,7 +17,7 @@
 #include <QtGui>
 #include <iostream>
 #include <list>
-#include "jellyfish/types.h"
+#include "spiralcore/types.h"
 
 #include "sound_items.h"
 

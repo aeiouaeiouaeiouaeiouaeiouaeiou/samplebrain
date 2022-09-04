@@ -15,7 +15,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include <list>
-#include <jellyfish/sample.h>
+#include <spiralcore/sample.h>
 #include "brain.h"
 #include "block_stream.h"
 

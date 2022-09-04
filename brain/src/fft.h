@@ -14,22 +14,33 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#ifndef SPIRALCORE_PITCHSHIFT
-#define SPIRALCORE_PITCHSHIFT
+#include <fftw3.h>
+#include <spiralcore/types.h>
 
-#include <jellyfish/core/types.h>
-#include <jellyfish/fluxa/sample.h>
-#include <rubberband/RubberBandStretcher.h>
+#ifndef SPIRALCORE_FFT
+#define SPIRALCORE_FFT
+
+//#define __FFTWFLOAT__
 
 namespace spiralcore {
 
-  class pitchshift {
+  class FFT
+  {
   public:
-    static void init(u32 srate);
-    static void process(const sample &in, float freq_change, sample &out);
+    FFT(u32 length, u32 num_bins);
+    ~FFT();
+	void impulse2freq(const float *imp);
+    void calculate_bins();
+    float calculate_dominant_freq();
 
-    static RubberBand::RubberBandStretcher *m_stretcher;
+	fftw_plan m_plan;
+	u32 m_length;
+    u32 m_num_bins;
+	double *m_in;
+	fftw_complex *m_spectrum;
+    float *m_bin;
   };
 
 }
+
 #endif

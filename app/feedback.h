@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Foam Kernow
+// Copyright (C) 2015 Dave Griffiths
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,33 +14,24 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#include <fftw3.h>
-#include <jellyfish/types.h>
+#include <string>
+#include <QtGui>
+#include <QStatusBar>
+#include "spiralcore/OSC_server.h"
 
-#ifndef SPIRALCORE_FFT
-#define SPIRALCORE_FFT
-
-//#define __FFTWFLOAT__
+#pragma once
 
 namespace spiralcore {
+class sound_items;
 
-  class FFT
-  {
-  public:
-    FFT(u32 length, u32 num_bins);
-    ~FFT();
-	void impulse2freq(const float *imp);
-    void calculate_bins();
-    float calculate_dominant_freq();
+class feedback {
+public:
+    feedback(std::string address);
+    void poll(QStatusBar *s, sound_items *sound_items);
 
-	fftw_plan m_plan;
-	u32 m_length;
-    u32 m_num_bins;
-	double *m_in;
-	fftw_complex *m_spectrum;
-    float *m_bin;
-  };
+private:
+
+	OSC_server m_osc;
+};
 
 }
-
-#endif

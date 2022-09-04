@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>955</width>
-    <height>832</height>
+    <width>1188</width>
+    <height>898</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1145,7 +1145,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>322</width>
+               <width>424</width>
                <height>198</height>
               </rect>
              </property>
@@ -1409,7 +1409,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>This program is free software made in Cornwall by &lt;a href=&quot;http://fo.am/kernow&quot;&gt;FoAM Kernow&lt;/a&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This program is free software made in Cornwall by Dave Griffiths at &lt;a href=&quot;https://thentrythis.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Then Try This&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>

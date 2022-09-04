@@ -1,17 +1,28 @@
 TARGET  := samplebrain
 TARGET_LIB := libsamplebrain.a
 
-SRCS :=   	src/fft.cpp \
-		   	src/brain.cpp \
-		   	src/block.cpp \
-		   	src/main.cpp \
-		    src/mfcc.cpp \
+SRCS :=   	src/block.cpp \
+			src/block_stream.cpp \
+			src/brain.cpp \
+			src/fft.cpp \
+			src/main.cpp \
+			src/mfcc.cpp \
 			src/renderer.cpp \
-			src/window.cpp \
+			src/search_params.cpp \
 			src/status.cpp \
+			src/window.cpp \
 			src/aquila/filter/MelFilterBank.cpp \
 			src/aquila/filter/MelFilter.cpp \
 			src/aquila/transform/Dct.cpp \
+			src/spiralcore/allocator.cpp \
+			src/spiralcore/audio.cpp \
+			src/spiralcore/command_ring_buffer.cpp \
+			src/spiralcore/OSC_server.cpp \
+			src/spiralcore/portaudio_client.cpp \
+			src/spiralcore/ring_buffer.cpp \
+			src/spiralcore/sample.cpp \
+			src/spiralcore/stream.cpp 
+
 
 TARGET_SRCS    := src/main.cpp
 

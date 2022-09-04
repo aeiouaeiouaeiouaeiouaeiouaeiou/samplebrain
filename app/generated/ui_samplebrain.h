@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainKYyZZB.ui'
+** Form generated from reading UI file 'samplebrainMnOjFX.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINKYYZZB_H
-#define SAMPLEBRAINKYYZZB_H
+#ifndef SAMPLEBRAINMNOJFX_H
+#define SAMPLEBRAINMNOJFX_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -162,7 +162,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(955, 832);
+        MainWindow->resize(1188, 898);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_4 = new QVBoxLayout(centralwidget);
@@ -749,7 +749,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 322, 198));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 424, 198));
         verticalLayout_5 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         brain_contents = new QVBoxLayout();
@@ -1185,7 +1185,7 @@ public:
         pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", nullptr));
         pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "This program is free software made in Cornwall by <a href=\"http://fo.am/kernow\">FoAM Kernow</a>", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "<html><head/><body><p>This program is free software made in Cornwall by Dave Griffiths at <a href=\"https://thentrythis.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Then Try This</span></a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(netTab), QApplication::translate("MainWindow", "net", nullptr));
         pushButtonPlay->setText(QString());
         pushButtonStop->setText(QString());
@@ -1204,4 +1204,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINKYYZZB_H
+#endif // SAMPLEBRAINMNOJFX_H

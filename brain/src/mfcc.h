@@ -20,7 +20,7 @@
 
 #include "aquila/global.h"
 //#include "aquila/transform/FftFactory.h"
-#include <jellyfish/sample.h>
+#include <spiralcore/sample.h>
 #include <cstddef>
 #include <vector>
 

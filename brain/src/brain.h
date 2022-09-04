@@ -17,8 +17,8 @@
 #include <list>
 #include <vector>
 #include <string>
-#include "jellyfish/types.h"
-#include "jellyfish/sample.h"
+#include "spiralcore/types.h"
+#include "spiralcore/sample.h"
 #include "block_source.h"
 #include "block.h"
 #include "search_params.h"

@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <float.h>
 
-#include "jellyfish/audio.h"
+#include "spiralcore/audio.h"
 
 #include "block.h"
 #include "brain.h"

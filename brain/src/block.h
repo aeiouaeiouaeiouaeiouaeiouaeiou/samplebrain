@@ -16,13 +16,13 @@
 
 #include <string>
 #include <vector>
-#include "jellyfish/sample.h"
-#include "jellyfish/types.h"
+#include "spiralcore/sample.h"
+#include "spiralcore/types.h"
 #include "fft.h"
 #include "mfcc.h"
 #include "search_params.h"
 #include "window.h"
-#include "jellyfish/stream.h"
+#include "spiralcore/stream.h"
 
 #ifndef BLOCK
 #define BLOCK

@@ -18,7 +18,7 @@
 #include <algorithm>
 #include <sndfile.h>
 #include <float.h>
-#include <jellyfish/audio.h>
+#include <spiralcore/audio.h>
 #include "brain.h"
 #include "status.h"
 
