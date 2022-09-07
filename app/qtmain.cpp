@@ -23,7 +23,6 @@
 
 #include "process_thread.h"
 #include "audio_thread.h"
-//#include "pitchshift.h"
 
 using namespace std;
 
@@ -33,8 +32,6 @@ int main( int argc , char *argv[] ){
     mainWin.show();
 
     cerr<<"Qt version: "<<qVersion()<<endl;
-
-    //pitchshift::init(44100);
 
     process_thread pt;
     audio_thread at(pt);
