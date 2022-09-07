@@ -101,7 +101,8 @@ void MainWindow::init_from_session(const string &filename) {
   // pull the bits out of the file to set the interface...
   // is this easier than direct access? no idea??
   ifstream ifs(filename.c_str(),ios::binary);
-
+  if (!ifs) return;
+  
   brain s,t;
   u32 version=0;
   ifs||version;
