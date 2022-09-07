@@ -77,13 +77,13 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
   input_parameters.device = input_device_num;
   if (input_parameters.device == paNoDevice) {
     cerr<<"error: no default input device."<<endl;
-  }
-  input_parameters.channelCount = 2;       /* stereo output */
-  input_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
-  input_parameters.suggestedLatency = Pa_GetDeviceInfo( input_parameters.device )->defaultLowInputLatency;
-  input_parameters.hostApiSpecificStreamInfo = NULL;
-
-  cerr<<"Connecting to "<<Pa_GetDeviceInfo( input_parameters.device )->name<<" for input"<<endl;
+  } else {
+    input_parameters.channelCount = 2;       /* stereo output */
+     input_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+     input_parameters.suggestedLatency = Pa_GetDeviceInfo( input_parameters.device )->defaultLowInputLatency;
+     input_parameters.hostApiSpecificStreamInfo = NULL;
+     cerr<<"Connecting to "<<Pa_GetDeviceInfo( input_parameters.device )->name<<" for input"<<endl;
+  }		  
 
   PaStream *stream;
 
