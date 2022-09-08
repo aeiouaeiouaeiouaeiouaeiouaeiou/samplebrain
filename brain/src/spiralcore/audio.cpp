@@ -1,4 +1,4 @@
-// Copyright (C) 2015 David Griffiths <dave@pawfal.org>
+// Copyright (C) 2022 Then Try This
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

@@ -1,4 +1,4 @@
-// Copyright (C) 2015 Foam Kernow
+// Copyright (C) 2022 Then Try This
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 
 #include "renderer.h"
 #include <iostream>
-//#include "pitchshift.h"
 
 using namespace spiralcore;
 using namespace std;
