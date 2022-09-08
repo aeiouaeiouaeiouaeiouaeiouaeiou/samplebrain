@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainMnOjFX.ui'
+** Form generated from reading UI file 'samplebrainqyBmgj.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINMNOJFX_H
-#define SAMPLEBRAINMNOJFX_H
+#ifndef SAMPLEBRAINQYBMGJ_H
+#define SAMPLEBRAINQYBMGJ_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -1054,7 +1054,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.17", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.18", nullptr));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", nullptr));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", nullptr));
 #ifndef QT_NO_TOOLTIP
@@ -1204,4 +1204,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINMNOJFX_H
+#endif // SAMPLEBRAINQYBMGJ_H
