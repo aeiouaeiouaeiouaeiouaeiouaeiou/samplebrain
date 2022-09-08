@@ -58,37 +58,37 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
   PaDeviceIndex output_device_num = Pa_GetDefaultOutputDevice(); 
   PaDeviceIndex input_device_num = Pa_GetDefaultInputDevice(); 
 
-  //output_device_num = 4;
-  //input_device_num = 4;
-
   PaStreamParameters output_parameters;
   output_parameters.device = output_device_num;
   if (output_parameters.device == paNoDevice) {
     cerr<<"error: no default output device."<<endl;
+  } else {
+    output_parameters.channelCount = 2;       /* stereo output */
+    output_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+    output_parameters.suggestedLatency = Pa_GetDeviceInfo( output_parameters.device )->defaultLowOutputLatency;
+    output_parameters.hostApiSpecificStreamInfo = NULL;
+    cerr<<"Connecting to "<<Pa_GetDeviceInfo( output_parameters.device )->name<<" for output"<<endl;
   }
-  output_parameters.channelCount = 2;       /* stereo output */
-  output_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
-  output_parameters.suggestedLatency = Pa_GetDeviceInfo( output_parameters.device )->defaultLowOutputLatency;
-  output_parameters.hostApiSpecificStreamInfo = NULL;
 
-  cerr<<"Connecting to "<<Pa_GetDeviceInfo( output_parameters.device )->name<<" for output"<<endl;
-
+  
   PaStreamParameters input_parameters;
+  PaStreamParameters *input_p=&input_parameters;
   input_parameters.device = input_device_num;
   if (input_parameters.device == paNoDevice) {
     cerr<<"error: no default input device."<<endl;
-  }
-  input_parameters.channelCount = 2;       /* stereo output */
-  input_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
-  input_parameters.suggestedLatency = Pa_GetDeviceInfo( input_parameters.device )->defaultLowInputLatency;
-  input_parameters.hostApiSpecificStreamInfo = NULL;
-
-  cerr<<"Connecting to "<<Pa_GetDeviceInfo( input_parameters.device )->name<<" for input"<<endl;
+    input_p=0;
+  } else {
+     input_parameters.channelCount = 2;       /* stereo output */
+     input_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+     input_parameters.suggestedLatency = Pa_GetDeviceInfo( input_parameters.device )->defaultLowInputLatency;
+     input_parameters.hostApiSpecificStreamInfo = NULL;
+     cerr<<"Connecting to "<<Pa_GetDeviceInfo( input_parameters.device )->name<<" for input"<<endl;
+  }		  
 
   PaStream *stream;
 
   err = Pa_OpenStream(&stream,
-		      &input_parameters,
+		      input_p,
 		      &output_parameters,
 		      dopt.samplerate,
 		      dopt.buffer_size,
@@ -147,7 +147,7 @@ int portaudio_client::process(const void *input_buffer, void *output_buffer,
     }
   }
 
-  if (m_right_in_data && m_left_in_data) {
+  if (input_buffer && m_right_in_data && m_left_in_data) {  
     float *in = (float*)input_buffer;
     for (unsigned int n=0; n<m_buffer_size; n++) {
       m_left_in_data[n]=*in;
