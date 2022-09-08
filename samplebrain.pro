@@ -43,13 +43,12 @@ SOURCES += app/MainWindow.cpp \
 INCLUDEPATH += brain/src
 INCLUDEPATH += /usr/local/include
 LIBS += -L.. -L/usr/local/lib -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
-CONFIG+=debug
-QMAKE_CXXFLAGS += -Wall -Wno-unused -std=c++11
+
+QMAKE_CXXFLAGS += -O3 -Wall -Wno-unused -std=c++11
 
 # assets
 RESOURCES     = app/samplebrain.qrc
 
-target.path = /usr/local/bin/
 INSTALLS += target
 
 

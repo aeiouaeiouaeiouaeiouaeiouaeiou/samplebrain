@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.17</string>
+   <string>samplebrain 0.18</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1434,7 +1434,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../qt/samplebrain.qrc">
+         <iconset resource="../app/samplebrain.qrc">
           <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
         </property>
         <property name="iconSize">
@@ -1461,7 +1461,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../qt/samplebrain.qrc">
+         <iconset resource="../app/samplebrain.qrc">
           <normaloff>:/images/images/pause.png</normaloff>:/images/images/pause.png</iconset>
         </property>
         <property name="iconSize">
@@ -1481,7 +1481,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../qt/samplebrain.qrc">
+         <iconset resource="../app/samplebrain.qrc">
           <normaloff>:/images/images/record.png</normaloff>:/images/images/record.png</iconset>
         </property>
         <property name="iconSize">
@@ -1501,7 +1501,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../qt/samplebrain.qrc">
+         <iconset resource="../app/samplebrain.qrc">
           <normaloff>:/images/images/stop.png</normaloff>:/images/images/stop.png</iconset>
         </property>
         <property name="iconSize">
@@ -1573,7 +1573,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../qt/samplebrain.qrc">:/images/images/at.png</pixmap>
+         <pixmap resource="../app/samplebrain.qrc">:/images/images/at.png</pixmap>
         </property>
        </widget>
       </item>
@@ -1584,7 +1584,8 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../qt/samplebrain.qrc"/>
+  <include location="../app/samplebrain.qrc"/>
+  <include location="../app/samplebrain.qrc"/>
   <include location="../qt/samplebrain.qrc"/>
  </resources>
  <connections>

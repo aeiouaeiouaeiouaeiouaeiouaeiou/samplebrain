@@ -1,5 +1,6 @@
-samplebrain (18.0-1ubuntu0) focal; urgency=medium
+samplebrain (0.18rc1-1ubuntu0) focal; urgency=medium
 
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+  * Initial release
 
- -- Dave Griffiths <dave@thentrythis.org>  Thu, 08 Sep 2022 11:40:29 +0100
+ -- Dave Griffiths <dave@thentrythis.org>  Thu, 08 Sep 2022 13:08:26 +0100
+
