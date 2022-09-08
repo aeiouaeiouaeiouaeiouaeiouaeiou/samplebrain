@@ -41,7 +41,8 @@ SOURCES += app/MainWindow.cpp \
            brain/src/spiralcore/stream.cpp
 
 INCLUDEPATH += brain/src
-LIBS += -L.. -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
+INCLUDEPATH += /usr/local/include
+LIBS += -L.. -L/usr/local/lib -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 CONFIG+=debug
 QMAKE_CXXFLAGS += -Wall -Wno-unused -std=c++11
 
