@@ -1,0 +1,14 @@
+Source: samplebrain
+Section: audio
+Priority: optional
+Maintainer: Dave Griffiths <dave@thentrythis.org>
+Build-Depends: debhelper-compat (= 12), texinfo, libsndfile1-dev, portaudio19-dev, liblo-dev, libfftw3-dev, qtbase5-dev, qt5-qmake, qtbase5-dev-tools
+Standards-Version: 4.4.1
+Homepage: http://thentrythis.org/projects/samplebrain
+Vcs-Git: https://gitlab.com/nebogeo/samplebrain.git
+
+Package: samplebrain
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A custom sample smashing app designed by Aphex Twin    
+    Samplebrain chops samples up into a 'brain' of interconnected small sections (blocks) connected into a network by similarity. It reads a target sample, chops it up into blocks in the same way, and tries to match each one with one of the blocks in it's brain to play in realtime. This (in theory) allows you to interpret one type of sound with another. Over time we gradually added more and more controls until it became slightly out of control and increasingly difficult to explain.
