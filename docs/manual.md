@@ -71,17 +71,17 @@ attempts to find a closer match in the network.
         
 ### algorithm
 
-* basic
+_basic_
 
 Searches all sample blocks. Not usable with large brains.
     
-* reversed
+_reversed_
 
 Searches all samples in the brain, but selects the least closest match
 instead of the closest. In practice this needs work, as silent or very
 quiet blocks tend to be the least similar.
 
-* synaptic
+_synaptic_
 
 As brains get larger with more blocks, they get slower to search. This
 mode provides a constant search time over arbitrarily large brains. To
@@ -94,7 +94,7 @@ gradually, or at least more gradually than the smaller block lengths.
 This can leads to the output changing with each repetition of the
 target, as we wander around the synapse network.
         
-* slide
+_slide_
 
 Similar to synaptic mode above but if we can't find a close enough
 match (based on synaptic slide error) we repeat the target block
@@ -165,7 +165,7 @@ purposes.
     
 ### stereo mode
 
-Run separate searches for left and again for right speaker.
+Run separate searches for left and right speaker.
     
 ## Brain contents
 
