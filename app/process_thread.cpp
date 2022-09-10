@@ -26,9 +26,10 @@
 using namespace spiralcore;
 using namespace std;
 
-static void _process(void *c) {
+static void* _process(void *c) {
   process_thread *p=(process_thread*)c;
   p->process();
+  return NULL;
 }
 
 process_thread::process_thread() :

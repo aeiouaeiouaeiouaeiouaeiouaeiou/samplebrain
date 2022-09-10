@@ -113,8 +113,9 @@ const block &block_stream::get_block(u32 index) const {
 
 //-----------------------------------------------------------
 
-void _run_worker(void *p) {
+void *_run_worker(void *p) {
   ((block_stream::worker *)p)->run();
+  return NULL;
 }
 
 block_stream::worker::worker(u32 id, window *w) :

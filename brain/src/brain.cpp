@@ -53,7 +53,7 @@ void brain::load_sound(std::string filename, stereo_mode mode) {
       for(u32 i=0; i<sfinfo.frames; i++) {
 	s[i]=0;
 	// mix down stereo to mono
-	for(u32 j = 0; j < sfinfo.channels; j++) {
+	for(s32 j = 0; j < sfinfo.channels; j++) {
 	  s[i]+=temp[i*sfinfo.channels + j];
 	}
       }
@@ -135,7 +135,7 @@ void brain::chop_and_add(sound &s, u32 count, bool ditchpcm) {
     m_blocks.push_back(block(m_blocks.size(),s.m_filename,region,44100,m_window,ditchpcm));
     pos += (m_block_size-m_overlap);
 
-    // periodic progress update
+     // periodic progress update
     if (update_tick>update_period) {
       status::update("processing sample %d: %d%%",count,(int)(pos/(float)s.m_sample.get_length()*100));
       update_tick=0;
@@ -248,16 +248,16 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
     status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
     for (auto &j : m_blocks) {
       if (index!=outer_index) {
-	// collect connections that are under threshold in closeness
-	double diff = i.compare(j,params);
-	if (diff<err) {
-	  i.get_synapse().push_back(index);
-	}
+        // collect connections that are under threshold in closeness
+        double diff = i.compare(j,params);
+        if (diff<err) {
+          i.get_synapse().push_back(index);
+        }
       }
       ++index;
     }
     ++outer_index;
-  }
+  }  
 }
 
 void brain::build_synapses_fixed(search_params &params) {
@@ -267,8 +267,17 @@ void brain::build_synapses_fixed(search_params &params) {
   u32 num_synapses = NUM_FIXED_SYNAPSES;
   if (num_synapses>=m_blocks.size()) num_synapses=m_blocks.size()-1;
 
+  // need to stop the progress updates flooding osc
+  u32 update_period = 100;
+  u32 update_tick = 0;
+
   for (auto &i:m_blocks) {
-    status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
+    if (update_tick>update_period) {
+      status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));     
+      update_tick=0;
+    }
+    update_tick++;
+ 
     u32 index = 0;
     vector<pair<u32,double>> collect;
 
