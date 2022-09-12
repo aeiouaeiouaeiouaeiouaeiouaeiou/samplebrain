@@ -49,6 +49,12 @@ QMAKE_CXXFLAGS += -O3 -Wall -Wno-unused -std=c++11
 # assets
 RESOURCES     = app/samplebrain.qrc
 
-INSTALLS += target
+unix:desktopfile.path = /usr/share/applications/
+unix:desktopfile.files = desktop/samplebrain.desktop
+unix:iconfile.path = /usr/share/icons/hicolor/scalable/apps
+unix:iconfile.files = desktop/samplebrain.svg
+
+target.path = /usr/bin
+INSTALLS += target desktopfile iconfile
 
 
