@@ -1,18 +1,16 @@
 # s a m p l e   b r a i n
 
-## What is this?
-
-A custom sample smashing/re-aggregating app designed by Aphex Twin
+A custom sample mashing app designed by Aphex Twin.
 
 Samplebrain chops samples up into a 'brain' of interconnected small
-sections (blocks) connected into a network by similarity. It reads a
-target sample, chops it up into blocks in the same way, and tries to
-match each one with one of the blocks in it's brain to play in
-realtime.
+sections called blocks which are connected into a network by
+similarity. It processes a target sample, chopping it up into blocks
+in the same way, and tries to match each block with one in it's brain
+to play in realtime.
 
-This (in theory) allows you to interpret one type of sound with
-another. Over time we gradually added more and more controls until it
-became slightly out of control and increasingly difficult to explain.
+This allows you to interpret a sound with a different one. Over time
+developing it, we gradually added more and more tweakable parameters
+until it became slightly out of control.    
 
 Quick start:
 
@@ -22,13 +20,14 @@ Quick start:
 4. Click (re)generate target
 5. Press play
 
+# [Demo brain]()
 # [Manual](docs/manual.md)
     
 # Binaries
 
 * [Windows]()
 * [Mac]()
-* Linux - see building below
+* Linux
         
 # Installing/building
      
