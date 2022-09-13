@@ -1409,7 +1409,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This program is free software made in Cornwall by Dave Griffiths at &lt;a href=&quot;https://thentrythis.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Then Try This&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Free software designed by Richard D. James and made by Dave Griffiths at &lt;a href=&quot;https://thentrythis.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Then Try This&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -1586,7 +1586,7 @@
  <resources>
   <include location="../app/samplebrain.qrc"/>
   <include location="../app/samplebrain.qrc"/>
-  <include location="../qt/samplebrain.qrc"/>
+  <include location="../app/samplebrain.qrc"/>
  </resources>
  <connections>
   <connection>

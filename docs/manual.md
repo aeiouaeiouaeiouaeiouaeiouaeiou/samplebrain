@@ -131,8 +131,10 @@ Proportion to overlap the block generation.
      
 ### window shape
 
-The windowing function for the target blocks, the volume shape given
-to them before use - "dodgy" is actually rectangle, so no shaping.
+The windowing function for the target blocks, the volume envelope
+applied to them before analysis. Dodgy is a kind of linear fade in and
+out, which was left in for legacy compatibility with prototype
+versions.
 
 ### (re)generate blocks
 
@@ -195,8 +197,10 @@ Proportion to overlap the block generation.
      
 ### window shape
 
-The windowing function for the brain blocks, the volume shape given
-to them before use - "dodgy" is actually rectangle, so no shaping.
+The windowing function for the brain blocks, the volume envelope
+applied to them before analysis. Dodgy is a kind of linear fade in and
+out, which was left in for legacy compatibility with prototype
+versions.
 
 ### (re)generate blocks
 
