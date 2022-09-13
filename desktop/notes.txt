@@ -1,0 +1,4 @@
+mac:
+* run macdeplyqt to add everything to the bundle
+* copy samplebrain.icns to Resources directory
+* edit Info.plist to add samplebrain.icns to CFBundleIconFile
