@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainqyBmgj.ui'
+** Form generated from reading UI file 'samplebrainroEYjX.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINQYBMGJ_H
-#define SAMPLEBRAINQYBMGJ_H
+#ifndef SAMPLEBRAINROEYJX_H
+#define SAMPLEBRAINROEYJX_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -1185,7 +1185,7 @@ public:
         pushButtonLoadBrain->setText(QApplication::translate("MainWindow", "load brain", nullptr));
         pushButtonSaveBrain->setText(QApplication::translate("MainWindow", "save brain", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "search", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "<html><head/><body><p>This program is free software made in Cornwall by Dave Griffiths at <a href=\"https://thentrythis.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Then Try This</span></a></p></body></html>", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Free software designed by Richard D. James and made by Dave Griffiths at <a href=\"https://thentrythis.org\"><span style=\" text-decoration: underline; color:#0000ff;\">Then Try This</span></a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(netTab), QApplication::translate("MainWindow", "net", nullptr));
         pushButtonPlay->setText(QString());
         pushButtonStop->setText(QString());
@@ -1204,4 +1204,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINQYBMGJ_H
+#endif // SAMPLEBRAINROEYJX_H
