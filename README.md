@@ -2,15 +2,15 @@
 
 A custom sample mashing app designed by Aphex Twin.
 
-Samplebrain (made in 2015) chops samples up into a 'brain' of
-interconnected small sections called blocks which are connected into a
-network by similarity. It processes a target sample, chopping it up
-into blocks in the same way, and tries to match each block with one in
-it's brain to play in realtime.
+Samplebrain chops samples up into a 'brain' of interconnected small
+sections called blocks which are connected into a network by
+similarity. It processes a target sample, chopping it up into blocks
+in the same way, and tries to match each block with one in it's brain
+to play in realtime.
 
 This allows you to interpret a sound with a different one. Over time
-developing it, we gradually added more and more tweakable parameters
-until it became slightly out of control.    
+developing it during 2015 and 2016, we gradually added more and more
+tweakable parameters until it became slightly out of control.
 
 ![](docs/pics/screenshot.png)
     
