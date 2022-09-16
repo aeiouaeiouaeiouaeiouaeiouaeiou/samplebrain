@@ -12,6 +12,8 @@ This allows you to interpret a sound with a different one. Over time
 developing it, we gradually added more and more tweakable parameters
 until it became slightly out of control.    
 
+![](docs/pics/screenshot.png)
+    
 Quick start:
 
 1. Load a bunch of samples into the brain
