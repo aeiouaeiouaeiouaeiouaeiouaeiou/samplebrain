@@ -21,7 +21,11 @@ Quick start:
 3. Load a loop sample into the target
 4. Click (re)generate target
 5. Press play
+6. Tweak brain
 
+The default block size (3000) is really high to prevent CPU glitches -
+500 to 1000 is a better range.
+    
 # [Demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain)    
 # [Manual](docs/manual.md)
     
@@ -44,7 +48,7 @@ Contribution of a universal or apple silicon binary gratefully received (see bui
 If you'd like the right font, optionally:
 
     $ sudo apt install ttf-mscorefonts-installer
-                
+    
 # Building from source:
 
 Install libraries for the sample engine (use brew on mac, MinGW on win):
