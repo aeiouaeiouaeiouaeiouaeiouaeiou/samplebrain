@@ -26,8 +26,12 @@ Quick start:
 The default block size (3000) is really high to prevent CPU glitches -
 500 to 1000 is a better range.
     
-# [Demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain)    
 # [Manual](docs/manual.md)
+        
+# [Demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain)    
+
+Load this using "load session" not "load brain" - sessions contain
+both the target and brain samples.
     
 # Windows
 
