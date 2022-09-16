@@ -96,4 +96,4 @@ To make a mac app bundle:
     
 This program is free software licenced under GNU General Public
 License version 2 (see LICENCE). Written by [Dave
-Griffiths](http://https://thentrythis.org/about/dave/).
+Griffiths](http://thentrythis.org).
