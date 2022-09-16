@@ -63,7 +63,7 @@ Install dependancies for the interface:
         
     $ sudo apt install build-essential qtcreator qt5-default
 
-Build $ run it:
+Build & run it:
 
     $ cd app
     $ qmake
