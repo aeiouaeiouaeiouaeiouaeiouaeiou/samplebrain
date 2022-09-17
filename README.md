@@ -53,7 +53,7 @@ If you'd like the right font, optionally:
 
     $ sudo apt install ttf-mscorefonts-installer
     
-# Building from source:
+# Building from source
 
 Install libraries for the sample engine (use brew on mac, MinGW on win):
     
@@ -71,7 +71,7 @@ Build & run it:
     $ sudo make install
     $ samplebrain
 
-# Mac build additions:
+# Mac build additions
 
 To make a mac app bundle:
     
