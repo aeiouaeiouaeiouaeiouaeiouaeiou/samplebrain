@@ -38,8 +38,8 @@ behind it.
         
 # Binaries
 
-* Windows: [samplebrain_0.18_win.zip](http://static.thentrythis.org/samplebrain/https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
-* Mac: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
+* **Windows**: [samplebrain_0.18_win.zip](http://static.thentrythis.org/samplebrain/https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
+* **Mac**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
 
 Contribution of a universal or apple silicon binary gratefully received (see building instructions below)
 
