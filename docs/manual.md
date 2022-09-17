@@ -8,9 +8,9 @@ similarity. It processes a target sample, chopping it up into blocks
 in the same way, and tries to match each block with one in it's brain
 to play in realtime.
 
-This allows you to interpret a sound with a different one. Over time
-developing it, we gradually added more and more tweakable parameters
-until it became slightly out of control.    
+This allows you to interpret a sound with a different one. As we
+worked on it (during 2015 and 2016) we gradually added more and more
+tweakable parameters until it became slightly out of control.
             
 ## Brain tweaks:
 
