@@ -43,7 +43,7 @@ behind it.
 
 Contribution of a universal or apple silicon binary gratefully received (see building instructions below)
 
-* Linux
+*Linux*
     
     $ sudo add-apt-repository ppa:thentrythis/samplebrain
     $ sudo apt update
