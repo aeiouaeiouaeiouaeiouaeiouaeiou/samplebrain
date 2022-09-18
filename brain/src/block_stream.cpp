@@ -36,7 +36,9 @@ block_stream::block_stream() :
 {
   for (u32 i=0; i<NUM_WORKERS; ++i) {
     m_workers.push_back(new worker(i,&m_window));
+#ifndef WIN32
     usleep(1);  
+#endif
   }
 }
 
@@ -141,7 +143,9 @@ void block_stream::worker::run() {
       cerr<<"ending "<<m_id<<endl;
     }
     pthread_mutex_unlock(m_worker_mutex);
+#ifndef WIN32
     usleep(5);
+#endif
   }
 }
 

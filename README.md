@@ -96,4 +96,7 @@ To make a mac app bundle:
     
 This program is free software licenced under GNU General Public
 License version 2 (see LICENCE). Written by [Dave
-Griffiths at Then Try This](http://thentrythis.org).
+Griffiths at Then Try This](http://thentrythis.org) dave@thentrythis.org.
+
+MFCC algo courtesy of the Aquila library by Zbigniew Siciarz MIT/X11
+licence 2007-2014 (see brain/src/aquila/LICENCE)
