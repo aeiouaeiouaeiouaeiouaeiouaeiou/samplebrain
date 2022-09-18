@@ -88,15 +88,16 @@ To make a mac app bundle:
 3. gui:
     * qt designer project files
 4. desktop:
-    * various icon file etc
+    * various icon files etc
 4. cooking:
-    * sketches and ideas
+    * some sketches and ideas
     * proof of concept written in python
-    * initial (abandoned) attempt at clojure version 
+    * brief initial (abandoned) attempt at clojure version 
+    
+MFCC algo courtesy of the Aquila library by Zbigniew Siciarz MIT/X11
+licence 2007-2014 (see brain/src/aquila/LICENCE)
     
 This program is free software licenced under GNU General Public
 License version 2 (see LICENCE). Written by [Dave
-Griffiths at Then Try This](http://thentrythis.org) dave@thentrythis.org.
+Griffiths at Then Try This](http://thentrythis.org) (dave@thentrythis.org).
 
-MFCC algo courtesy of the Aquila library by Zbigniew Siciarz MIT/X11
-licence 2007-2014 (see brain/src/aquila/LICENCE)
