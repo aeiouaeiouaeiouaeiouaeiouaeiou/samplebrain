@@ -39,15 +39,14 @@ behind it.
 # Binaries
 
 * **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
-* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
+* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip
+* **Mac (m1)**: [samplebrain_0.18_m1.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1.dmg) (thank you to [nik gaffney](http://fo.am) for building)
 
-Mac note 1: As this software is not on the apple store, to run this
-binary you need to tell your mac it's ok: Go to System Preferences >
-Security & Privacy > General. At the bottom of the window, select
-"Allow apps to be downloaded from Anywhere".
+Mac note: As this software is not on the apple store, to run
+this binary you need to tell your mac it's ok: Go to System
+Preferences > Security & Privacy > General. At the bottom of the
+window, select "Allow apps to be downloaded from Anywhere".
 
-Mac note 2: Contribution of a universal or apple silicon binary
-gratefully received (see building instructions below)
     
 **Linux install (Ubuntu)**
     
