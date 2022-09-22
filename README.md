@@ -42,11 +42,10 @@ behind it.
 * **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
 * **Mac (m1)**: [samplebrain_0.18_m1.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1.dmg) (thank you to [Nik Gaffney](http://fo.am) for building)
 
-Mac note: As this software is not on the apple store, to run
-this binary you need to tell your mac it's ok: Go to System
-Preferences > Security & Privacy > General. At the bottom of the
-window, select "Allow apps to be downloaded from Anywhere".
-
+Mac note: As this software is not on the apple store, to run the
+binary you need to tell your mac it's ok: Go to System Preferences >
+Security & Privacy > General. At the bottom of the window, select
+"Allow apps to be downloaded from Anywhere".
     
 **Linux install (Ubuntu)**
     
@@ -103,6 +102,7 @@ MFCC algo courtesy of the Aquila library by Zbigniew Siciarz MIT/X11
 licence 2007-2014 (see brain/src/aquila/LICENCE)
     
 This program is free software licenced under GNU General Public
-License version 2 (see LICENCE). Written by [Dave
-Griffiths at Then Try This](http://thentrythis.org) (dave@thentrythis.org).
+License version 2 (see LICENCE).
+
+Written by [Dave Griffiths at Then Try This](http://thentrythis.org).
 
