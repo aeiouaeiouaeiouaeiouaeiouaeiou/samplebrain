@@ -18,7 +18,7 @@
 #include <QDirIterator>
 #include <QFileDialog>
 #include <QLineEdit>
-#include "generated/ui_samplebrain.h"
+#include "ui_samplebrain.h"
 
 #include <iostream>
 #include <lo/lo.h>

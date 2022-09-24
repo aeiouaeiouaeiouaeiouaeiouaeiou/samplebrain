@@ -10,8 +10,9 @@ INCLUDEPATH += . 2
 QT += core gui widgets
 
 # Input
-HEADERS += app/MainWindow.h \
-           app/generated/ui_samplebrain.h \
+HEADERS += app/MainWindow.h
+
+FORMS += gui/samplebrain.ui
 
 SOURCES += app/MainWindow.cpp \
            app/sound_items.cpp \
