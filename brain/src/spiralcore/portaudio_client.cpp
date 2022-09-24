@@ -74,7 +74,7 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
   PaStreamParameters input_parameters;
   PaStreamParameters *input_p=&input_parameters;
   input_parameters.device = input_device_num;
-  if (input_parameters.device == paNoDevice) {
+  if (true || input_parameters.device == paNoDevice) {
     cerr<<"error: no default input device."<<endl;
     input_p=0;
   } else {
