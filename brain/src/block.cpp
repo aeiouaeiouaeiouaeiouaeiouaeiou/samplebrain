@@ -36,7 +36,7 @@ double square(double a) {
   return a*a;
 }
 
-void normalise(sample &in) {
+void normalise(spiralcore::sample &in) {
   // find min/max
   float max = 0;
   float min = FLT_MAX;

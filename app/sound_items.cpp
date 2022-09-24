@@ -37,7 +37,6 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
 
   si.m_container = new QHBoxLayout();
   si.m_container->setSpacing(10);
-  si.m_container->setMargin(0);
   si.m_container->setContentsMargins(0,0,0,0);
 
   si.m_enable = new QCheckBox();
@@ -56,7 +55,7 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   QFont font;
   font.setFamily(QString::fromUtf8("Comic Sans MS"));
   font.setBold(true);
-  font.setWeight(75);
+  font.setWeight(QFont::Bold);
   si.m_label->setFont(font);
   si.m_label->setContentsMargins(0,0,0,0);
 
