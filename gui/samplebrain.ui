@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.18</string>
+   <string>samplebrain 0.18.1</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -867,6 +867,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="mic">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
@@ -874,6 +877,9 @@
             </property>
             <property name="text">
              <string>use mic input</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

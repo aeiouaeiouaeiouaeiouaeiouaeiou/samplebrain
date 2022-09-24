@@ -41,11 +41,15 @@ class block_stream : public block_source {
   virtual const block &get_block(u32 index) const;
   virtual u32 get_num_blocks() const { return UINT_MAX; } 
 
+  void start(); 
+  void stop();
+  
   u32 last_block_index() const { return m_block_index_offset+m_blocks.size()-1; }
 
   class worker {
   public:
     worker(u32 id, window *w);
+    ~worker();
 
     enum worker_status { READY=0, ACTIVATE, WORKING, FINISHED };
 

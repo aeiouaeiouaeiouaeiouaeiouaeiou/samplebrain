@@ -168,7 +168,9 @@ void audio_thread::process(sample &left_in, sample &right_in, sample &left_out, 
       m_right_renderer->reset();
     }
     if (name=="/mic") {
-      m_mic_mode = cmd.get_int(0);
+      //m_mic_mode = cmd.get_int(0);
+      //if (m_mic_mode==1) m_block_stream->start();
+      //else m_block_stream->stop();
     }
   }
 

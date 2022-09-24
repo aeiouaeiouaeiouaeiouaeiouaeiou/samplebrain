@@ -16,6 +16,7 @@
 
 #include <unistd.h>
 #include <iostream>
+#include <signal.h>
 #include "block_stream.h"
 
 using namespace spiralcore;
@@ -34,15 +35,36 @@ block_stream::block_stream() :
   m_block_index_offset(0),
   m_sent_block_index(0)
 {
+}
+
+block_stream::~block_stream() {}
+
+void block_stream::start() {
+  cerr<<"block stream starting up"<<endl;
   for (u32 i=0; i<NUM_WORKERS; ++i) {
     m_workers.push_back(new worker(i,&m_window));
+    // ????
 #ifndef WIN32
     usleep(1);  
 #endif
   }
 }
 
-block_stream::~block_stream() {}
+void block_stream::stop() {
+  cerr<<"block stream ending"<<endl;
+
+  bool killcount = 0;
+  for (auto &w : m_workers) {
+    pthread_join(*w->m_thread,NULL);
+  }
+
+  usleep(500);
+  
+  for (u32 i=0; i<NUM_WORKERS; ++i) {
+    delete m_workers[i];
+  }
+  m_workers.clear();
+}
 
 void block_stream::init(u32 block_size, u32 overlap, window::type t, bool ditchpcm) {
   m_block_size=block_size;
@@ -82,7 +104,7 @@ void block_stream::process(const sample &left, const sample &right) {
       // with the buffer wrapping...      
       //cerr<<(s32)(m_buffer_position-m_block_size)<<" to "<<m_buffer_position<<endl;
       m_buffer.get_region(region,(s32)(m_buffer_position-m_block_size),
-			  m_buffer_position);
+                          m_buffer_position);
 
       //cerr<<"starting block "<<m_block_index<<endl;
       scatter_gather(m_block_index,region);
@@ -93,10 +115,9 @@ void block_stream::process(const sample &left, const sample &right) {
       
       m_block_position=0;
       
-
       if (m_blocks.size()>MAX_BLOCKS) {
-	m_blocks.erase(m_blocks.begin());
-	m_block_index_offset++;
+        m_blocks.erase(m_blocks.begin());
+        m_block_index_offset++;
       }
     }
     
@@ -131,8 +152,12 @@ block_stream::worker::worker(u32 id, window *w) :
   pthread_create(m_thread,NULL,(void*(*)(void*))_run_worker,this);
 }
 
+block_stream::worker::~worker() {
+  delete m_worker_mutex;
+  delete m_thread;
+}
+
 void block_stream::worker::run() {
-  //cerr<<"worker "<<m_id<<" started..."<<endl;
   while (true) {
     pthread_mutex_lock(m_worker_mutex);
     if (m_status==ACTIVATE) {
@@ -142,6 +167,7 @@ void block_stream::worker::run() {
       m_status=FINISHED;
       cerr<<"ending "<<m_id<<endl;
     }
+
     pthread_mutex_unlock(m_worker_mutex);
 #ifndef WIN32
     usleep(5);
@@ -149,24 +175,24 @@ void block_stream::worker::run() {
   }
 }
 
-
 void block_stream::scatter_gather(u32 block_index, const sample &region) {
   while(true) {
     for (auto &w : m_workers) {
-      if (pthread_mutex_trylock(w->m_worker_mutex)) {
-	if (w->m_status == worker::FINISHED) {
-	  //cerr<<"adding finished block "<<w->m_block_index<<endl;
-	  m_blocks[w->m_block_index]=*w->m_output;      
-	  w->m_status = worker::READY;
-	}
+      if (pthread_mutex_trylock(w->m_worker_mutex)==0) {
+        if (w->m_status == worker::FINISHED) {
+          //cerr<<"adding finished block "<<w->m_block_index<<endl;
+          m_blocks[w->m_block_index]=*w->m_output;      
+          w->m_status = worker::READY;
+        }
 
-	if (w->m_status == worker::READY) {
-	  w->m_region = region;
-	  w->m_status = worker::ACTIVATE;
-	  w->m_block_index = block_index;
-	  return;
-	}
-	pthread_mutex_unlock(w->m_worker_mutex);
+        if (w->m_status == worker::READY) {
+          w->m_region = region;
+          w->m_status = worker::ACTIVATE;
+          w->m_block_index = block_index;
+          return;
+        }
+
+        pthread_mutex_unlock(w->m_worker_mutex);
       }    
     }
   }

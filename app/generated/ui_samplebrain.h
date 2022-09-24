@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'samplebrainroEYjX.ui'
+** Form generated from reading UI file 'samplebrainMIzspU.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SAMPLEBRAINROEYJX_H
-#define SAMPLEBRAINROEYJX_H
+#ifndef SAMPLEBRAINMIZSPU_H
+#define SAMPLEBRAINMIZSPU_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -603,9 +603,11 @@ public:
 
         mic = new QCheckBox(controlTab);
         mic->setObjectName(QString::fromUtf8("mic"));
+        mic->setEnabled(false);
         QFont font3;
         font3.setFamily(QString::fromUtf8("Comic Sans MS"));
         mic->setFont(font3);
+        mic->setCheckable(true);
 
         verticalLayout_6->addWidget(mic);
 
@@ -1054,7 +1056,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.18", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "samplebrain 0.18.1", nullptr));
         label_19->setText(QApplication::translate("MainWindow", "brain tweaks", nullptr));
         label_6->setText(QApplication::translate("MainWindow", "fft / mfcc", nullptr));
 #ifndef QT_NO_TOOLTIP
@@ -1204,4 +1206,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SAMPLEBRAINROEYJX_H
+#endif // SAMPLEBRAINMIZSPU_H
