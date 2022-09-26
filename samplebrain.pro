@@ -48,7 +48,8 @@ LIBS += -L.. -L/usr/local/lib -L/opt/local/lib -lportaudio -lfftw3 -lsndfile -ll
 QMAKE_CXXFLAGS += -O3 -march=core2 -Wall -Wno-unused -std=c++11
 
 # assets
-RESOURCES     = app/samplebrain.qrc
+RESOURCES = app/samplebrain.qrc
+ICON      = desktop/samplebrain.icns
 
 unix:desktopfile.path = /usr/share/applications/
 unix:desktopfile.files = desktop/samplebrain.desktop
