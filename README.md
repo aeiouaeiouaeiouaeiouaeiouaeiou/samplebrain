@@ -37,18 +37,25 @@ Full description of all the parameters and a bit of the thinking
 behind it.
 
 # Binaries
-    
-* **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
-* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
-* **Mac (m1 VERSION 2!)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
 
-Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds.
-        
+* **Windows**: (new fix for ridiculous CPU usage) [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
+* **Mac (new fix for silence/should work on m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.zip)
+
+Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
+
 Mac note: As this software is not on the apple store, to run the
 binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
 
+Windows note: Some people are reporting problems with windows 11.
+          
+# Old/broken/spurious binaries
+    
+* **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
+* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
+* **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
+            
 **Linux install (Ubuntu)**
 
     $ sudo add-apt-repository ppa:thentrythis/samplebrain
