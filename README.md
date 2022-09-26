@@ -88,7 +88,7 @@ Build & run it:
 ## Mac
 Install libraries for sample engine:
 
-    $ brew install fftw portaudio
+    $ brew install fftw portaudio liblo
 
 Install dependancies for the interface:
 
