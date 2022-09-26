@@ -49,13 +49,13 @@ Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
 
 Windows note: Some people are reporting problems with windows 11.
-          
+
 # Old/broken/spurious binaries
-    
-* **Windows* *: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
+
+* **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
 * **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
 * **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
-            
+
 **Linux install (Ubuntu)**
 
     $ sudo add-apt-repository ppa:thentrythis/samplebrain
@@ -88,7 +88,7 @@ Build & run it:
 ## Mac
 Install libraries for sample engine:
 
-    $ brew install fftw portaudio liblo
+    $ brew install fftw portaudio liblo libsndfile
 
 Install dependancies for the interface:
 
@@ -123,6 +123,10 @@ Edit Info.plist to add samplebrain.icns to CFBundleIconFile. Key `CFBundleIconFi
 
 	<key>CFBundleIconFile</key>
 	<string>samplebrain.icns</string>
+
+You might also need to resign the app bundle
+
+    $ codesign --force --deep --sign - samplebrain.app
 
 ## What's here
 
