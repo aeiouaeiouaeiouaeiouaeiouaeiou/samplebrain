@@ -18,29 +18,29 @@
 
 # see also https://docs.gitlab.com/ee/ci/runners/saas/macos_saas_runner.html
 
-.macos_saas_runners:
-  tags:
-    - shared-macos-amd64
-  image: macos-11-xcode-12
+# .macos_saas_runners:
+#   tags:
+#     - shared-macos-amd64
+#   image: macos-11-xcode-12
 
-stages:
-  - build
-  - test
+# stages:
+#   - build
+#   - test
 
-before_script:
-  - echo "started by ${GITLAB_USER_NAME}"
+# before_script:
+#   - echo "started by ${GITLAB_USER_NAME}"
 
-build:
-  extends:
-    - .macos_saas_runners
-  stage: build
-  script:
-    - echo "running scripts in the build job"
+# build:
+#   extends:
+#     - .macos_saas_runners
+#   stage: build
+#   script:
+#     - echo "running scripts in the build job"
 
-test:
-  extends:
-    - .macos_saas_runners
-  stage: test
-  script:
-    - echo "running scripts in the test job"
+# test:
+#   extends:
+#     - .macos_saas_runners
+#   stage: test
+#   script:
+#     - echo "running scripts in the test job"
 
