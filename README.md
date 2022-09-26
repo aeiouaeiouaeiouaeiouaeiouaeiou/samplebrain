@@ -39,7 +39,7 @@ behind it.
 # Binaries
 
 * **Windows**: (new fix for ridiculous CPU usage) [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
-* **Mac (new fix for silence/should work on m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.zip)
+* **Mac (new fix for silence/should work on m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.app.zip)
 
 Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
 
@@ -52,7 +52,7 @@ Windows note: Some people are reporting problems with windows 11.
           
 # Old/broken/spurious binaries
     
-* **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
+* **Windows* *: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
 * **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
 * **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
             
