@@ -49,7 +49,8 @@ LIBS += -L.. -L/usr/local/lib -L/opt/homebrew/lib -lportaudio -lfftw3 -lsndfile 
 QMAKE_CXXFLAGS += -O3 -Wall -Wno-unused -std=c++11
 
 # assets
-RESOURCES     = app/samplebrain.qrc
+RESOURCES = app/samplebrain.qrc
+ICON      = desktop/samplebrain.icns
 
 PREFIX = $$(PREFIX)
 isEmpty(PREFIX) {
