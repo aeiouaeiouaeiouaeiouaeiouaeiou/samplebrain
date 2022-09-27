@@ -40,7 +40,7 @@ testing](https://static.thentrythis.org/samplebrain/samples/).
 Full description of all the parameters and a bit of the thinking
 behind it.
 
-# Binaries
+# Download
 
 As this is experimental non-commercial software (only originally
 written to run on a couple of computers!) you will have to bear with
@@ -108,8 +108,8 @@ Build & run it:
     $ cd build
     $ qmake ..
     $ make
-    $ sudo make install
-    $ samplebrain
+
+`samplebrain.app` should then be in the app folder for you to run.
 
 # Mac build additions
 
