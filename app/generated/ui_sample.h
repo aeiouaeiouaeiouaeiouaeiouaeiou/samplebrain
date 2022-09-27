@@ -42,7 +42,7 @@ public:
         checkBox = new QCheckBox(FormSample);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
         QFont font;
-        font.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font.setFamily(QString::fromUtf8("Helvetica"));
         font.setBold(true);
         font.setWeight(75);
         checkBox->setFont(font);

@@ -170,7 +170,7 @@ public:
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         QFont font;
-        font.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font.setFamily(QString::fromUtf8("Helvetica"));
         font.setBold(true);
         font.setWeight(75);
         tabWidget->setFont(font);
@@ -183,7 +183,7 @@ public:
         label_19 = new QLabel(controlTab);
         label_19->setObjectName(QString::fromUtf8("label_19"));
         QFont font1;
-        font1.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font1.setFamily(QString::fromUtf8("Helvetica"));
         font1.setPointSize(20);
         font1.setBold(true);
         font1.setWeight(75);
@@ -196,7 +196,7 @@ public:
         label_6 = new QLabel(controlTab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         QFont font2;
-        font2.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font2.setFamily(QString::fromUtf8("Helvetica"));
         font2.setPointSize(9);
         font2.setBold(true);
         font2.setWeight(75);
@@ -605,7 +605,7 @@ public:
         mic->setObjectName(QString::fromUtf8("mic"));
         mic->setEnabled(false);
         QFont font3;
-        font3.setFamily(QString::fromUtf8("Comic Sans MS"));
+        font3.setFamily(QString::fromUtf8("Helvetica"));
         mic->setFont(font3);
         mic->setCheckable(true);
 

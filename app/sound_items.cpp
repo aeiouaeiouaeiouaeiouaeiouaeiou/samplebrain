@@ -54,7 +54,7 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   si.m_label->setSizePolicy(QSizePolicy::MinimumExpanding,
                             QSizePolicy::Minimum);
   QFont font;
-  font.setFamily(QString::fromUtf8("Comic Sans MS"));
+  font.setFamily(QString::fromUtf8("Helvetica"));
   font.setBold(true);
   font.setWeight(75);
   si.m_label->setFont(font);

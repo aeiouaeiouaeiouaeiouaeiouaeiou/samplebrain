@@ -18,7 +18,7 @@
     <widget class="QCheckBox" name="checkBox">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -32,7 +32,7 @@
     <widget class="QLabel" name="labelSampleName">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -46,7 +46,7 @@
     <widget class="QLabel" name="labelSampleInfo">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -60,7 +60,7 @@
     <widget class="QPushButton" name="pushButton">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
