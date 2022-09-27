@@ -16,20 +16,24 @@ tweakable parameters until it became slightly out of control.
 
 Quick start:
 
-1. Load a bunch of samples into the brain
+1. Load a bunch of short wav files into the brain
 2. Click (re)generate brain
-3. Load a loop sample into the target
+3. Load a short loop sample into the target
 4. Click (re)generate blocks
 5. Press play
 6. Tweak brain
 
 The default block size (3000) is really high to prevent CPU glitches -
-500 to 1000 is a better range.
+500 to 1000 is a better range. Larger wav files like whole tracks can
+be used, but take a long time to process, after which they can be
+saved as "brain" files and instantly reloaded.
 
 # [Demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain)
 
 Load this file using "load session" not "load brain" (sessions contain
-both the target and brain samples).
+both the target and brain samples). The original samples used to
+create the demo session [can be found here for
+testing](https://static.thentrythis.org/samplebrain/samples/).
 
 # [Manual](docs/manual.md)
 
@@ -38,8 +42,13 @@ behind it.
 
 # Binaries
 
-* **Windows**: (new fix for ridiculous CPU usage) [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
-* **Mac (new fix for silence/should work on m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.app.zip)
+As this is experimental non-commercial software (only originally
+written to run on a couple of computers!) you will have to bear with
+us as we gradually stabilise things based on your feedback. There
+might currently be problems running it on 64bit Windows.
+    
+* **Windows**: [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
+* **Mac (intel/m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.app.zip)
 
 Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
 
@@ -48,14 +57,6 @@ binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
 
-Windows note: Some people are reporting problems with windows 11.
-          
-# Old/broken/spurious binaries
-    
-* **Windows* *: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
-* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
-* **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
-            
 **Linux install (Ubuntu)**
 
     $ sudo add-apt-repository ppa:thentrythis/samplebrain
@@ -66,6 +67,12 @@ If you'd like the right font, optionally:
 
     $ sudo apt install ttf-mscorefonts-installer
 
+# Old/broken/spurious binaries
+    
+* **Windows* *: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
+* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
+* **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
+                
 # Building from source
 ## Linux (Ubuntu)
 Install libraries for the sample engine (use brew on mac, MinGW on win):
