@@ -42,9 +42,10 @@ SOURCES += app/MainWindow.cpp \
 
 INCLUDEPATH += brain/src
 INCLUDEPATH += /usr/local/include
-LIBS += -L.. -L/usr/local/lib -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
+INCLUDEPATH += /opt/local/include
+LIBS += -L.. -L/usr/local/lib -L/opt/local/lib -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm
 
-QMAKE_CXXFLAGS += -O3 -Wall -Wno-unused -std=c++11
+QMAKE_CXXFLAGS += -O3 -march=core2 -Wall -Wno-unused -std=c++11
 
 # assets
 RESOURCES     = app/samplebrain.qrc
