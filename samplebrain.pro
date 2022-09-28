@@ -61,6 +61,8 @@ unix:desktopfile.path = $$PREFIX/share/applications/
 unix:desktopfile.files = desktop/samplebrain.desktop
 unix:iconfile.path = $$PREFIX/share/icons/hicolor/scalable/apps
 unix:iconfile.files = desktop/samplebrain.svg
+unix:metainfofile.path = $$PREFIX/share/metainfo
+unix:metainfofile.files = desktop/org.thentrythis.Samplebrain.metainfo.xml
 
 target.path = $$PREFIX/bin
-INSTALLS += target desktopfile iconfile
+INSTALLS += target desktopfile iconfile metainfofile
