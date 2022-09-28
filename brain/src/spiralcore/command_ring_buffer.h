@@ -19,7 +19,7 @@
 #ifndef COMMAND_RING_BUFFER
 #define COMMAND_RING_BUFFER
 
-static const unsigned int COMMAND_DATA_SIZE = 128;
+static const unsigned int COMMAND_DATA_SIZE = 1024;
 
 class command_ring_buffer : public ring_buffer
 {
