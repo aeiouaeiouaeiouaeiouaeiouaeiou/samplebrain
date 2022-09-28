@@ -1,0 +1,26 @@
+on:
+  schedule:
+  - cron:  "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: sync main branch
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: "https://gitlab.com/then-try-this/samplebrain.git"
+        source_branch: "main"
+        destination_branch: "main"
+        github_token: ${{ secrets.PAT }}
+    - name: sync development branch
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: "https://gitlab.com/then-try-this/samplebrain.git"
+        source_branch: "development"
+        destination_branch: "development"
+        github_token: ${{ secrets.PAT }}
