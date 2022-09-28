@@ -69,8 +69,8 @@ If you'd like the right font, optionally:
 
 # Old/broken/spurious binaries
     
-* **Windows* *: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
 * **Windows**: [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
+* **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
 * **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
 * **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
                 
