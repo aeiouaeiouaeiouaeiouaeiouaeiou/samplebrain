@@ -157,3 +157,6 @@ License version 2 (see LICENCE).
 
 Written by [Dave Griffiths at Then Try This](http://thentrythis.org).
 
+## Links
+
+To find related tech like [CataRT](http://imtr.ircam.fr/imtr/CataRT) and [sCrAmBlEd?HaCkZ!](https://www.youtube.com/watch?v=eRlhKaxcKpA) search up [granular synthesis](http://granularsynthesis.com/guide.php), [concatenative synthesis](https://hal.archives-ouvertes.fr/hal-01161337), [neural audio synthesis](https://github.com/acids-ircam/RAVE), [sinewave speech](http://www.lifesci.sussex.ac.uk/home/Chris_Darwin/SWS/), audio mosaicing and plundermatics.
