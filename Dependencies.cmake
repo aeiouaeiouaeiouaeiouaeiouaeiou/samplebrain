@@ -27,3 +27,13 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(liblo)
 
 add_subdirectory(${liblo_SOURCE_DIR}/cmake)
+
+################################################################################
+# PortAudio
+################################################################################
+
+FetchContent_Declare(
+  portaudio
+  URL       http://files.portaudio.com/archives/pa_stable_v190700_20210406.tgz
+  URL_HASH  MD5=ad319249932c6794b551d954b8844402)
+FetchContent_MakeAvailable(portaudio)

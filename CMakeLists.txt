@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(samplebrain VERSION 1.0 LANGUAGES CXX)
+project(samplebrain VERSION 1.0 LANGUAGES C CXX)
 
 include(Dependencies.cmake)
 
