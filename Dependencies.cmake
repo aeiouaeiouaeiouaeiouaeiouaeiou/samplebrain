@@ -37,3 +37,13 @@ FetchContent_Declare(
   URL       http://files.portaudio.com/archives/pa_stable_v190700_20210406.tgz
   URL_HASH  MD5=ad319249932c6794b551d954b8844402)
 FetchContent_MakeAvailable(portaudio)
+
+################################################################################
+# libsndfile
+################################################################################
+
+FetchContent_Declare(
+  libsndfile
+  GIT_REPOSITORY https://github.com/libsndfile/libsndfile
+  GIT_TAG        1.1.0)
+FetchContent_MakeAvailable(libsndfile)
