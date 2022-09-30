@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.18.1</string>
+   <string>samplebrain 0.18.3</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -20,6 +20,7 @@
       <property name="font">
        <font>
         <family>Comic Sans MS</family>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -39,6 +40,7 @@
              <font>
               <family>Comic Sans MS</family>
               <pointsize>20</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -55,6 +57,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -114,6 +117,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -173,6 +177,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -195,6 +200,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -221,6 +227,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -249,6 +256,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -311,6 +319,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -373,6 +382,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -435,6 +445,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -503,6 +514,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -545,6 +557,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -607,6 +620,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -690,6 +704,7 @@
              <font>
               <family>Comic Sans MS</family>
               <pointsize>20</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -703,6 +718,7 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -718,6 +734,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -748,6 +765,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -778,6 +796,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -837,6 +856,7 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -853,6 +873,7 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -870,6 +891,7 @@
              <font>
               <family>Comic Sans MS</family>
               <pointsize>20</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -886,6 +908,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -942,6 +965,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -998,6 +1022,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1081,6 +1106,7 @@
                <font>
                 <family>Comic Sans MS</family>
                 <pointsize>20</pointsize>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1127,7 +1153,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>600</width>
+               <width>424</width>
                <height>198</height>
               </rect>
              </property>
@@ -1146,6 +1172,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1159,6 +1186,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1172,6 +1200,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1189,6 +1218,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1219,6 +1249,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1249,6 +1280,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1308,6 +1340,7 @@
             <property name="font">
              <font>
               <family>Comic Sans MS</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1323,6 +1356,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1336,6 +1370,7 @@
               <property name="font">
                <font>
                 <family>Comic Sans MS</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1399,6 +1434,7 @@
         <property name="font">
          <font>
           <family>Comic Sans MS</family>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -1425,6 +1461,7 @@
         <property name="font">
          <font>
           <family>Comic Sans MS</family>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -1500,6 +1537,7 @@
           <property name="font">
            <font>
             <family>Comic Sans MS</family>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -1513,6 +1551,7 @@
           <property name="font">
            <font>
             <family>Comic Sans MS</family>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
