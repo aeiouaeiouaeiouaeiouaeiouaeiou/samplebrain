@@ -63,7 +63,7 @@ target_link_libraries(samplebrain PRIVATE
     Qt::Widgets
     dl
     fftw3
-    lo
+    lo_shared
     m
     portaudio
     pthread
