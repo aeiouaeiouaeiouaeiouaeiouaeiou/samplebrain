@@ -57,8 +57,10 @@ binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
 
-**Linux install (Ubuntu)**
+### Linux
+<a href='https://flathub.org/apps/details/org.thentrythis.Samplebrain'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
+#### Ubuntu
     $ sudo add-apt-repository ppa:thentrythis/samplebrain
     $ sudo apt update
     $ sudo apt install samplebrain
