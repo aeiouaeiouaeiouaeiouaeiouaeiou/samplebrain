@@ -46,16 +46,18 @@ As this is experimental non-commercial software (only originally
 written to run on a couple of computers!) you will have to bear with
 us as we gradually stabilise things based on your feedback. There
 might currently be problems running it on 64bit Windows.
+            
+* **Windows**: [samplebrain_0.18.3_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.3_win.zip)
+* **Mac (intel/m1)**: [samplebrain_0.18.3_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.3_macintel.app.zip)
+
+(New 0.18.3 release fixes loading samples from paths longer than 255 characters)
     
-* **Windows**: [samplebrain_0.18.2_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.2_win.zip)
-* **Mac (intel/m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.app.zip)
-
-Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
-
 Mac note: As this software is not on the apple store, to run the
 binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
+
+Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
 
 ### Linux
 <a href='https://flathub.org/apps/details/org.thentrythis.Samplebrain'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
@@ -70,9 +72,12 @@ If you'd like the right font, optionally:
     $ sudo apt install ttf-mscorefonts-installer
 
 # Old/broken/spurious binaries
-    
+
+* **Windows**: [samplebrain_0.18.2_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.2_win.zip)    
 * **Windows**: [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
 * **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
+
+* **Mac (intel/m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.app.zip)
 * **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
 * **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
                 
