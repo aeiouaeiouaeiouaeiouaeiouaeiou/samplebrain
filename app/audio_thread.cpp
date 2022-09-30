@@ -26,7 +26,9 @@ audio_thread::audio_thread(process_thread &p) :
   m_process_thread(p),
   m_brain_mutex(p.m_brain_mutex),
   m_stereo_mode(false),
-  m_mic_mode(false)
+  m_mic_mode(false),
+  m_bufsize(2048),
+  m_samplerate(44100)
 {
   start_audio();
   pthread_mutex_lock(m_brain_mutex);
@@ -48,8 +50,7 @@ audio_thread::~audio_thread() {
 
 void audio_thread::start_audio() {
   if (m_audio_device!=NULL) delete m_audio_device;
-  m_audio_device = new audio_device("samplebrain",48000,2048);
-  //m_audio_device = new audio_device("samplebrain",48000,2048*4);
+  m_audio_device = new audio_device("samplebrain",m_samplerate,m_bufsize);
   m_audio_device->m_client.set_callback(run_audio, this);
 }
 

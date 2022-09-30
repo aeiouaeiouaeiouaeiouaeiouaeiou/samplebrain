@@ -38,7 +38,7 @@ namespace spiralcore {
     // returns distance based on ratio of fft-mfcc values
     double compare(const block &other, const search_params &params) const;
 
-    static void init_fft(u32 block_size);
+    static void init_fft(u32 block_size, u32 rate);
     static bool unit_test();
 
     const sample &get_pcm() const { return m_pcm; }

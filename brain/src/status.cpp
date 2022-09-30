@@ -34,6 +34,10 @@ void status::sound_item_refresh() {
   lo_send(m_address,"/sound-item-refresh","");
 }
 
+void status::add_audio_device(const std::string &name) {
+  lo_send(m_address,"/add_audio_device",name.c_str());
+}
+
 void status::update(const char *msg, ...) {
     va_list args;
     va_start(args, msg);

@@ -77,7 +77,7 @@ block::block(u64 id, const string &filename, const sample &pcm, u32 rate, const 
   m_orig_filename(filename),
   m_usage(0)
 {
-  init_fft(m_pcm.get_length());
+  init_fft(m_pcm.get_length(),rate);
   assert(m_mfcc_proc!=NULL);
   assert(m_fftw!=NULL);
 
@@ -97,12 +97,12 @@ block::block(u64 id, const string &filename, const sample &pcm, u32 rate, const 
 }
 
 
-void block::init_fft(u32 block_size) {
+void block::init_fft(u32 block_size, u32 rate) {
   if (m_fftw == NULL || m_fftw->m_length!=block_size) {
     if (m_fftw == NULL) delete m_fftw;
-    m_fftw = new FFT(block_size,100);
+    m_fftw = new FFT(block_size,rate,100);
     if (m_mfcc_proc == NULL) delete m_mfcc_proc;
-    m_mfcc_proc = new Aquila::Mfcc(block_size);
+    m_mfcc_proc = new Aquila::Mfcc(block_size,rate);
   }
 }
 

@@ -27,7 +27,8 @@ audio_device::audio_device(const string &clientname, u32 samplerate, u32 buffer_
     left_in(buffer_size),
     right_in(buffer_size),
     m_recording(false),
-    m_record_filename("")
+    m_record_filename(""),
+    m_samplerate(samplerate)
 {
     portaudio_client::device_options opt;
     opt.buffer_size = buffer_size;
@@ -46,7 +47,7 @@ void audio_device::save_sample(const string &filename, const sample s) {
     SF_INFO sfinfo;
     sfinfo.format=SF_FORMAT_WAV | SF_FORMAT_FLOAT;
     sfinfo.frames=s.get_length();
-    sfinfo.samplerate=44100;
+    sfinfo.samplerate=m_samplerate;
     sfinfo.channels=1;
     sfinfo.sections=1;
     sfinfo.seekable=0;

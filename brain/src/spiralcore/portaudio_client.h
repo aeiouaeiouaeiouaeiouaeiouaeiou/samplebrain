@@ -42,6 +42,7 @@ class portaudio_client
     unsigned int out_channels;
   };
 
+  vector<string> sniff_devices();
   bool   attach(const string &client_name, const device_options &dopt);
   void   detach();
   bool   is_attached()                   { return m_attached; }
@@ -60,7 +61,6 @@ class portaudio_client
  private:
 
   static long unsigned int  m_buffer_size;
-  static long unsigned int  m_sample_rate;
   static bool               m_attached;
 
   static const float *m_right_data;

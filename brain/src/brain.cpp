@@ -377,34 +377,6 @@ void brain::deplete_usage() {
   }
 }
 
-
-// take another brain and rebuild this brain from bits of that one
-// (presumably this one is made from a single sample)
-/*void brain::resynth(const string &filename, const brain &other, const search_params &params){
-  sample out((m_block_size-m_overlap)*m_blocks.size());
-  out.zero();
-  u32 pos = 0;
-  u32 count = 0;
-  cerr<<other.m_blocks.size()<<" brain blocks..."<<endl;
-  cerr<<endl;
-  for (vector<block>::iterator i=m_blocks.begin(); i!=m_blocks.end(); ++i) {
-  cerr<<'\r';
-  cerr<<"searching: "<<count/float(m_blocks.size())*100;
-  u32 index = other.search(*i, params);
-  //cerr<<index<<endl;
-  out.mul_mix(other.get_block_pcm(index),pos,0.2);
-
-  if (count%1000==0) {
-  audio_device::save_sample(filename,out);
-  }
-
-  ++count;
-  pos += (m_block_size-m_overlap);
-  }
-  audio_device::save_sample(filename,out);
-  }
-*/
-
 ios &spiralcore::operator||(ios &s, brain::sound &b) {
   u32 version=1;
   string id("brain::sound");

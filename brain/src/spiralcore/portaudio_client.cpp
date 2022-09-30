@@ -21,7 +21,6 @@
 
 bool              portaudio_client::m_attached   = false;
 long unsigned int portaudio_client::m_buffer_size = 0;
-long unsigned int portaudio_client::m_sample_rate = 44100;
 void            (*portaudio_client::run_callback)(void*, unsigned int buf_size)=NULL;
 void             *portaudio_client::run_context   = NULL;
 const float *portaudio_client::m_right_data=NULL;
@@ -38,6 +37,23 @@ portaudio_client::portaudio_client() {
 
 portaudio_client::~portaudio_client() {
   detach();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+vector<string> portaudio_client::sniff_devices() {
+  vector<string> ret;
+  int numDevices = Pa_GetDeviceCount();
+  if(numDevices < 0) {
+    // this is an error I guess
+    return ret;
+  } 
+  const   PaDeviceInfo *deviceInfo;
+  for(int i=0; i<numDevices; i++) {
+    deviceInfo = Pa_GetDeviceInfo(i);
+    ret.push_back(deviceInfo->name);
+  }
+  return ret;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

@@ -26,7 +26,7 @@ namespace Aquila
     {
         //auto spectrum = m_fft->fft(source);
 
-        Aquila::MelFilterBank bank(44100, m_inputSize);
+        Aquila::MelFilterBank bank(m_sampleRate, m_inputSize);
         auto filterOutput = bank.applyAll(spectrum);
 
         Aquila::Dct dct;
