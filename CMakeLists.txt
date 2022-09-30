@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(samplebrain VERSION 1.0 LANGUAGES CXX)
 
+include(Dependencies.cmake)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Set up AUTOMOC and some sensible defaults for runtime execution
