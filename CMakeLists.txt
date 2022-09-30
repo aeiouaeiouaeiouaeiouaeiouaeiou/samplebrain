@@ -68,7 +68,7 @@ target_link_libraries(samplebrain PRIVATE
     sndfile
 )
 
-target_compile_options(samplebrain
+target_compile_options(samplebrain PUBLIC
     -O3
     -Wall
     -Wno-unused
