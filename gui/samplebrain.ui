@@ -403,7 +403,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>how long it takes for the novelty to wear off</string>
+               <string>likelihood of playing the next block rather than the closest</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -752,7 +752,7 @@
                <number>99999</number>
               </property>
               <property name="value">
-               <number>3000</number>
+               <number>1000</number>
               </property>
              </widget>
             </item>
@@ -783,7 +783,7 @@
                <double>0.010000000000000</double>
               </property>
               <property name="value">
-               <double>0.800000000000000</double>
+               <double>0.750000000000000</double>
               </property>
              </widget>
             </item>
@@ -1236,7 +1236,7 @@
                <number>99999</number>
               </property>
               <property name="value">
-               <number>3000</number>
+               <number>1000</number>
               </property>
              </widget>
             </item>
@@ -1267,7 +1267,7 @@
                <double>0.010000000000000</double>
               </property>
               <property name="value">
-               <double>0.000000000000000</double>
+               <double>0.750000000000000</double>
               </property>
              </widget>
             </item>
@@ -1563,6 +1563,20 @@
        </layout>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>settings</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -1604,8 +1618,8 @@
    <slot>play_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>64</x>
-     <y>62</y>
+     <x>78</x>
+     <y>830</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1620,8 +1634,8 @@
    <slot>stop_slot()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>155</x>
-     <y>62</y>
+     <x>180</x>
+     <y>830</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1636,8 +1650,8 @@
    <slot>volume_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>189</x>
-     <y>480</y>
+     <x>465</x>
+     <y>852</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1652,8 +1666,8 @@
    <slot>stop_record()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>328</x>
-     <y>543</y>
+     <x>356</x>
+     <y>840</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1668,8 +1682,8 @@
    <slot>record()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>543</y>
+     <x>268</x>
+     <y>840</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1684,8 +1698,8 @@
    <slot>fft1_end_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>154</x>
-     <y>310</y>
+     <x>421</x>
+     <y>293</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1700,8 +1714,8 @@
    <slot>ratio_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>109</x>
-     <y>223</y>
+     <x>421</x>
+     <y>185</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1716,12 +1730,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>289</y>
+     <x>319</x>
+     <y>603</y>
     </hint>
     <hint type="destinationlabel">
-     <x>341</x>
-     <y>289</y>
+     <x>421</x>
+     <y>614</y>
     </hint>
    </hints>
   </connection>
@@ -1732,8 +1746,8 @@
    <slot>target_mix_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
-     <y>446</y>
+     <x>720</x>
+     <y>669</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1748,8 +1762,8 @@
    <slot>generate_target_blocks()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>277</x>
-     <y>202</y>
+     <x>670</x>
+     <y>395</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1764,8 +1778,8 @@
    <slot>target_block_size(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>313</x>
-     <y>136</y>
+     <x>720</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1780,8 +1794,8 @@
    <slot>load_target()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>277</x>
-     <y>103</y>
+     <x>670</x>
+     <y>184</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1796,8 +1810,8 @@
    <slot>fft1_start_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>154</x>
-     <y>277</y>
+     <x>298</x>
+     <y>293</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1812,8 +1826,8 @@
    <slot>target_block_overlap(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>619</x>
-     <y>196</y>
+     <x>720</x>
+     <y>291</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1828,12 +1842,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>341</x>
-     <y>289</y>
+     <x>421</x>
+     <y>614</y>
     </hint>
     <hint type="destinationlabel">
-     <x>237</x>
-     <y>289</y>
+     <x>319</x>
+     <y>603</y>
     </hint>
    </hints>
   </connection>
@@ -1844,8 +1858,8 @@
    <slot>synapses(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>341</x>
-     <y>289</y>
+     <x>421</x>
+     <y>614</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -1860,8 +1874,8 @@
    <slot>ratio_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>189</x>
-     <y>141</y>
+     <x>323</x>
+     <y>174</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1876,8 +1890,8 @@
    <slot>n_ratio_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>159</x>
-     <y>211</y>
+     <x>323</x>
+     <y>228</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1892,8 +1906,8 @@
    <slot>n_ratio_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
-     <y>211</y>
+     <x>421</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1908,8 +1922,8 @@
    <slot>target_mix_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>159</x>
-     <y>446</y>
+     <x>622</x>
+     <y>658</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1924,8 +1938,8 @@
    <slot>n_mix_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>159</x>
-     <y>386</y>
+     <x>622</x>
+     <y>604</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1940,8 +1954,8 @@
    <slot>n_mix_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
-     <y>386</y>
+     <x>720</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>361</x>
@@ -1956,8 +1970,8 @@
    <slot>load_brain()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>615</x>
-     <y>357</y>
+     <x>941</x>
+     <y>661</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -1972,8 +1986,8 @@
    <slot>boredom_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>411</x>
-     <y>253</y>
+     <x>421</x>
+     <y>401</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
@@ -1988,8 +2002,8 @@
    <slot>novelty_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>411</x>
-     <y>217</y>
+     <x>421</x>
+     <y>347</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
@@ -2004,8 +2018,8 @@
    <slot>novelty_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
-     <y>217</y>
+     <x>323</x>
+     <y>336</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
@@ -2020,8 +2034,8 @@
    <slot>boredom_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
-     <y>253</y>
+     <x>323</x>
+     <y>390</y>
     </hint>
     <hint type="destinationlabel">
      <x>321</x>
@@ -2036,8 +2050,8 @@
    <slot>synapses(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>289</y>
+     <x>319</x>
+     <y>603</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2052,8 +2066,8 @@
    <slot>block_size(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>728</x>
-     <y>109</y>
+     <x>1157</x>
+     <y>450</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2068,8 +2082,8 @@
    <slot>block_overlap(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>728</x>
-     <y>145</y>
+     <x>1157</x>
+     <y>504</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2084,8 +2098,8 @@
    <slot>save_brain()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>728</x>
-     <y>357</y>
+     <x>1157</x>
+     <y>661</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2100,8 +2114,8 @@
    <slot>clear_brain()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1061</x>
-     <y>550</y>
+     <x>1157</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2116,8 +2130,8 @@
    <slot>generate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>671</x>
-     <y>322</y>
+     <x>1158</x>
+     <y>608</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2132,8 +2146,8 @@
    <slot>load_sound()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>841</x>
-     <y>550</y>
+     <x>868</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2148,12 +2162,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>241</x>
-     <y>282</y>
+     <x>346</x>
+     <y>498</y>
     </hint>
     <hint type="destinationlabel">
-     <x>343</x>
-     <y>282</y>
+     <x>421</x>
+     <y>509</y>
     </hint>
    </hints>
   </connection>
@@ -2164,12 +2178,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>343</x>
-     <y>282</y>
+     <x>421</x>
+     <y>509</y>
     </hint>
     <hint type="destinationlabel">
-     <x>241</x>
-     <y>282</y>
+     <x>346</x>
+     <y>498</y>
     </hint>
    </hints>
   </connection>
@@ -2180,8 +2194,8 @@
    <slot>search_stretch(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>241</x>
-     <y>282</y>
+     <x>346</x>
+     <y>498</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2196,12 +2210,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>410</y>
+     <x>305</x>
+     <y>657</y>
     </hint>
     <hint type="destinationlabel">
-     <x>337</x>
-     <y>410</y>
+     <x>421</x>
+     <y>668</y>
     </hint>
    </hints>
   </connection>
@@ -2212,12 +2226,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
-     <y>410</y>
+     <x>421</x>
+     <y>668</y>
     </hint>
     <hint type="destinationlabel">
-     <x>231</x>
-     <y>410</y>
+     <x>305</x>
+     <y>657</y>
     </hint>
    </hints>
   </connection>
@@ -2228,8 +2242,8 @@
    <slot>slide_error(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>410</y>
+     <x>305</x>
+     <y>657</y>
     </hint>
     <hint type="destinationlabel">
      <x>566</x>
@@ -2244,8 +2258,8 @@
    <slot>stickyness_slot(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>385</x>
-     <y>296</y>
+     <x>421</x>
+     <y>455</y>
     </hint>
     <hint type="destinationlabel">
      <x>609</x>
@@ -2260,8 +2274,8 @@
    <slot>stickyness_slot(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>266</x>
-     <y>296</y>
+     <x>323</x>
+     <y>444</y>
     </hint>
     <hint type="destinationlabel">
      <x>609</x>
@@ -2276,8 +2290,8 @@
    <slot>autotune(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>531</x>
-     <y>477</y>
+     <x>622</x>
+     <y>550</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2292,8 +2306,8 @@
    <slot>autotune(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>616</x>
-     <y>477</y>
+     <x>720</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2308,8 +2322,8 @@
    <slot>load_session()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>535</x>
-     <y>707</y>
+     <x>616</x>
+     <y>799</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2324,8 +2338,8 @@
    <slot>save_session()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>535</x>
-     <y>744</y>
+     <x>616</x>
+     <y>851</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2340,8 +2354,8 @@
    <slot>stereo_mode(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>539</x>
-     <y>594</y>
+     <x>721</x>
+     <y>717</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2356,8 +2370,8 @@
    <slot>algo(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>273</x>
-     <y>395</y>
+     <x>421</x>
+     <y>560</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2372,8 +2386,8 @@
    <slot>target_shape(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>557</x>
-     <y>233</y>
+     <x>720</x>
+     <y>342</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2388,8 +2402,8 @@
    <slot>brain_shape(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>824</x>
-     <y>432</y>
+     <x>1157</x>
+     <y>555</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2404,8 +2418,8 @@
    <slot>load_sounds()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>754</x>
-     <y>321</y>
+     <x>1013</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2420,8 +2434,8 @@
    <slot>select_all()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>813</x>
-     <y>74</y>
+     <x>1073</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2436,8 +2450,8 @@
    <slot>select_none()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>862</x>
-     <y>74</y>
+     <x>1157</x>
+     <y>124</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -2452,12 +2466,28 @@
    <slot>mic(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>404</x>
-     <y>601</y>
+     <x>721</x>
+     <y>442</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
      <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>settings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>680</x>
+     <y>809</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>776</x>
+     <y>849</y>
     </hint>
    </hints>
   </connection>
@@ -2518,5 +2548,6 @@
   <slot>select_all()</slot>
   <slot>select_none()</slot>
   <slot>mic(bool)</slot>
+  <slot>settings()</slot>
  </slots>
 </ui>

@@ -16,6 +16,7 @@
 
 #include "feedback.h"
 #include "sound_items.h"
+#include "SettingsDialog.h"
 #include <iostream>
 
 using namespace spiralcore;
@@ -28,7 +29,7 @@ feedback::feedback(string address) :
 }
 
 
-void feedback::poll(QStatusBar *s, sound_items *sound_items) {
+void feedback::poll(QStatusBar *s, sound_items *sound_items, SettingsDialog *settings) {
     command_ring_buffer::command cmd;
 
     while (m_osc.get(cmd)) {

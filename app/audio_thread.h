@@ -29,6 +29,9 @@ namespace spiralcore {
     audio_thread(process_thread &p);
     ~audio_thread();
 
+    void start_audio();
+    void restart_audio(const string device, unsigned int samplerate, unsigned int bufsize);
+
     void process(sample &left_in, sample &right_in, sample &left_out, sample &right_out);
 
     static void run_audio(void* c, unsigned int frames);
@@ -39,7 +42,6 @@ namespace spiralcore {
     block_stream *m_block_stream;
 
   private:
-    void start_audio();
 
 	OSC_server m_osc;
     process_thread &m_process_thread;
@@ -48,6 +50,7 @@ namespace spiralcore {
     bool m_mic_mode;
     u32 m_bufsize;
     u32 m_samplerate;
+    string m_device;
   };
 
 }

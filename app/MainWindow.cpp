@@ -14,6 +14,9 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+#ifndef MAIN_WINDOW
+#define MAIN_WINDOW
+
 #include <QtGui>
 #include <iostream>
 #include <list>
@@ -45,7 +48,9 @@ MainWindow::MainWindow() :
   m_Ui.brain_contents->setAlignment(Qt::AlignTop);
   m_Ui.brain_contents->setSpacing(0);
   m_Ui.brain_contents->setContentsMargins(0,0,0,0);
-  
+
+  m_settings_dialog = new SettingsDialog(this);
+
     // add default local dest
     // turn on first one
 
@@ -183,3 +188,5 @@ void MainWindow::init_from_session(const string &filename) {
 
 
 }
+
+#endif

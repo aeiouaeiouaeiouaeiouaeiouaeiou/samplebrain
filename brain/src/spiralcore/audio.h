@@ -28,7 +28,7 @@ namespace spiralcore {
   public:
     audio_device(const string &clientname, u32 samplerate, u32 buffer_size);
 
-    void start_graph(graph *graph);
+    void connect(const string &output_device, const string &clientname, u32 samplerate, u32 buffer_size);
 
     void start_recording(std::string filename);
     void stop_recording();
@@ -39,7 +39,7 @@ namespace spiralcore {
     sample left_in;
     sample right_in;
     graph *m_graph;
-
+    
     portaudio_client m_client;
 
     void save_sample(const std::string &filename, const sample s);

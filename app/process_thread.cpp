@@ -34,9 +34,9 @@ static void* _process(void *c) {
 
 process_thread::process_thread() :
   m_osc("8889"),
-  m_source_block_size(3000),
+  m_source_block_size(1000),
   m_source_overlap(0.75),
-  m_target_block_size(3000),
+  m_target_block_size(1000),
   m_target_overlap(0.75),
   m_window_type(window::DODGY),
   m_target_window_type(window::DODGY)

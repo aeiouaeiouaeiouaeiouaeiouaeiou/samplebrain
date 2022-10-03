@@ -30,9 +30,9 @@ class portaudio_client
  public:
   portaudio_client();
   ~portaudio_client();
+  bool init();
 
-  class device_options
-  {
+  class device_options {
   public:
     enum type {READ,WRITE,READWRITE};
     unsigned int buffer_size;
@@ -42,14 +42,25 @@ class portaudio_client
     unsigned int out_channels;
   };
 
-  vector<string> sniff_devices();
-  bool   attach(const string &client_name, const device_options &dopt);
+  class device_desc {
+  public:
+    string name;
+    int id;
+    bool default_input;
+    bool default_output;
+  };
+
+  vector<portaudio_client::device_desc> m_devices;
+
+  bool   attach(const string &requested_output_device, const string &client_name, const device_options &dopt);
   void   detach();
-  bool   is_attached()                   { return m_attached; }
+  bool   is_attached()  { return m_attached_device!=-1; }
   void   set_callback(void(*run)(void*, unsigned int),void *context) { run_callback=run; run_context=context; }
   void   set_outputs(const float *l, const float *r) { m_left_data=l; m_right_data=r; }
   void   set_inputs(float *l, float *r) { m_left_in_data=l; m_right_in_data=r; }
 
+  string m_status;
+  
  protected:
 
   static int  process(const void *input_buffer, void *output_buffer,
@@ -60,16 +71,21 @@ class portaudio_client
 
  private:
 
+  int device_name_to_id(const string &name);
+  
   static long unsigned int  m_buffer_size;
-  static bool               m_attached;
-
+  static bool               m_initialised;
+  static int                m_attached_device;
+  
   static const float *m_right_data;
   static const float *m_left_data;
   static float *m_right_in_data;
   static float *m_left_in_data;
-
+  
   static void(*run_callback)(void *, unsigned int);
   static void *run_context;
+  static PaStream *m_stream;
+
 };
 
 #endif
