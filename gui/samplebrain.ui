@@ -96,6 +96,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>plain fft match vs mfcc values </string>
+              </property>
               <property name="maximum">
                <double>1.000000000000000</double>
               </property>
@@ -155,6 +158,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>match original or normalised blocks</string>
               </property>
               <property name="maximum">
                <double>1.000000000000000</double>
@@ -298,6 +304,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>use new blocks rather than similar ones</string>
+              </property>
               <property name="maximum">
                <double>1.000000000000000</double>
               </property>
@@ -361,6 +370,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>how long it takes for the novelty to wear off</string>
+              </property>
               <property name="maximum">
                <double>1.000000000000000</double>
               </property>
@@ -423,6 +435,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>likelihood of playing the next block rather than the closest</string>
               </property>
               <property name="maximum">
                <double>1.000000000000000</double>
@@ -491,7 +506,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>how many connections to search (ordered in closeness)</string>
+               <string>repeat search (set novelty to 0 for dodgy jungle timessssstretch)</string>
               </property>
               <property name="minimum">
                <number>1</number>
@@ -666,7 +681,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>how many connections to search (ordered in closeness)</string>
+               <string>block difference higher than this causes a new search, skipping the target</string>
               </property>
               <property name="maximum">
                <number>10000</number>
@@ -944,6 +959,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>amount to match the frequency</string>
+              </property>
               <property name="maximum">
                <double>1.000000000000000</double>
               </property>
@@ -1000,6 +1018,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>mix in the normalised blocks</string>
               </property>
               <property name="maximum">
                <double>1.000000000000000</double>
@@ -1060,6 +1081,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>mix in the original blocks</string>
               </property>
               <property name="maximum">
                <double>1.000000000000000</double>
