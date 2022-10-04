@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.18.3</string>
+   <string>samplebrain 0.18.4</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1572,7 +1572,20 @@
          </font>
         </property>
         <property name="text">
-         <string>settings</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../app/samplebrain.qrc">
+          <normaloff>:/images/images/settings.png</normaloff>:/images/images/settings.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -1606,8 +1619,6 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../app/samplebrain.qrc"/>
-  <include location="../app/samplebrain.qrc"/>
   <include location="../app/samplebrain.qrc"/>
  </resources>
  <connections>
