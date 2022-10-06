@@ -14,7 +14,7 @@ tweakable parameters until it became slightly out of control.
 
 ![](docs/pics/screenshot.png)
 
-Quick start:
+# Quick start:
 
 1. Load a bunch of short wav files into the brain
 2. Click (re)generate brain
@@ -27,17 +27,15 @@ Larger wav files like whole tracks can be used, but take a long time
 to process, after which they can be saved as "brain" files and
 instantly reloaded.
 
-# [Demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain)
+# How do I use this thing?
 
-Load this file using "load session" not "load brain" (sessions contain
+Check the [Manual](docs/manual.md) here for the details on all the
+parameters and try out the [demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain).
+
+Load the demo using "load session" not "load brain" (sessions contain
 both the target and brain samples). The original samples used to
 create the demo session [can be found here for
 testing](https://static.thentrythis.org/samplebrain/samples/).
-
-# [Manual](docs/manual.md)
-
-Full description of all the parameters and a bit of the thinking
-behind it.
 
 # Download
 
