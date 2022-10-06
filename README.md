@@ -76,12 +76,9 @@ If you'd like the right font, optionally:
 # [Building from source](building.md)                
 
 MFCC algo courtesy of the Aquila library by Zbigniew Siciarz MIT/X11
-licence 2007-2014 (see brain/src/aquila/LICENCE)
-
-This program is free software licenced under GNU General Public
-License version 2 (see LICENCE).
-
-Written by [Dave Griffiths at Then Try This](http://thentrythis.org).
+licence 2007-2014 (see brain/src/aquila/LICENCE). This program is free
+software licenced under GNU General Public License version 2 (see
+LICENCE). Written by [Dave Griffiths at Then Try This](http://thentrythis.org).
 
 ## Links
 
