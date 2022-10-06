@@ -23,10 +23,9 @@ Quick start:
 5. Press play
 6. Tweak brain
 
-The default block size (3000) is really high to prevent CPU glitches -
-500 to 1000 is a better range. Larger wav files like whole tracks can
-be used, but take a long time to process, after which they can be
-saved as "brain" files and instantly reloaded.
+Larger wav files like whole tracks can be used, but take a long time
+to process, after which they can be saved as "brain" files and
+instantly reloaded.
 
 # [Demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain)
 
@@ -47,11 +46,13 @@ written to run on a couple of computers!) you will have to bear with
 us as we gradually stabilise things based on your feedback. There
 might currently be problems running it on 64bit Windows.
             
-* **Windows**: [samplebrain_0.18.3_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.3_win.zip)
-* **Mac (intel/m1)**: [samplebrain_0.18.3_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.3_macintel.app.zip)
+* **Windows**: [samplebrain_0.18.4_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.4_win.zip)
+* **Mac (intel/m1)**: [samplebrain_0.18.4_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.4_macintel.app.zip)
 
-(New 0.18.3 release fixes loading samples from paths longer than 255 characters)
-    
+Changes in 0.18.4: New audio device settings window and updated
+windows build. Better default block size, tool tip tweaks and fixes
+for dark themes by [Claude Heiland-Allen](https://mathr.co.uk/).
+
 Mac note: As this software is not on the apple store, to run the
 binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
@@ -59,6 +60,8 @@ Security & Privacy > General. At the bottom of the window, select
 
 Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
 
+For old versions see the [changelog](changelog.md)
+    
 ### Linux
 <a href='https://flathub.org/apps/details/org.thentrythis.Samplebrain'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
@@ -71,90 +74,7 @@ If you'd like the right font, optionally:
 
     $ sudo apt install ttf-mscorefonts-installer
 
-# Old/broken/spurious binaries
-
-* **Windows**: [samplebrain_0.18.2_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.2_win.zip)    
-* **Windows**: [samplebrain_0.18.1_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_win.zip)
-* **Windows**: [samplebrain_0.18_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_win.zip)
-
-* **Mac (intel/m1)**: [samplebrain_0.18.1_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.1_macintel.app.zip)
-* **Mac (intel)**: [samplebrain_0.18_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18_macintel.zip)
-* **Mac (m1)**: [samplebrain_0.18_m1_v2.dmg](https://static.thentrythis.org/samplebrain/samplebrain_0.18_m1_v2.dmg) 
-                
-# Building from source
-## Linux (Ubuntu)
-Install libraries for the sample engine (use brew on mac, MinGW on win):
-
-    $ sudo apt install libsndfile1-dev portaudio19-dev liblo-dev libfftw3-dev
-
-Install dependencies for the interface:
-
-    $ sudo apt install build-essential qtcreator qt5-default
-
-Build & run it:
-
-    $ mkdir build
-    $ cd build
-    $ qmake ..
-    $ make
-    $ sudo make install
-    $ samplebrain
-
-## Mac
-Install libraries for sample engine:
-
-    $ brew install fftw portaudio liblo libsndfile
-
-Install dependencies for the interface:
-
-    $ brew install qt
-    $ brew link qt
-
-Build & run it:
-
-    $ mkdir build
-    $ cd build
-    $ qmake ..
-    $ make
-
-`samplebrain.app` should then be in the app folder for you to run.
-
-# Mac build additions
-
-To make a mac app bundle:
-
-Run `macdeployqt` which copies all dependencies inside the app.
-
-    $ cd build
-    $ macdeployqt
-
-If the icon is not visible, you might need to copy desktop/samplebrain.icns (the icon) to the Resources directory in the app bundle.
-
-    $ cp ../desktop/samplebrain.icns samplebrain.app/Contents/Resources
-
-Then edit Info.plist to add samplebrain.icns to CFBundleIconFile. Key `CFBundleIconFile` should match:
-
-	<key>CFBundleIconFile</key>
-	<string>samplebrain.icns</string>
-
-You might also need to resign the app bundle after making any changes
-
-    $ codesign --force --deep --sign - samplebrain.app
-
-## What's here
-
-1. brain:
-    * samplebrain engine code
-2. app:
-    * code to build the Qt GUI app
-3. gui:
-    * qt designer project files
-4. desktop:
-    * various icon files etc
-4. cooking:
-    * some sketches and ideas
-    * proof of concept written in python
-    * brief initial (abandoned) attempt at clojure version
+# [Building from source](building.md)                
 
 MFCC algo courtesy of the Aquila library by Zbigniew Siciarz MIT/X11
 licence 2007-2014 (see brain/src/aquila/LICENCE)
