@@ -14,7 +14,7 @@ tweakable parameters until it became slightly out of control.
 
 ![](docs/pics/screenshot.png)
 
-# Quick start:
+# How do I use this thing?
 
 1. Load a bunch of short wav files into the brain
 2. Click (re)generate brain
@@ -26,8 +26,6 @@ tweakable parameters until it became slightly out of control.
 Larger wav files like whole tracks can be used, but take a long time
 to process, after which they can be saved as "brain" files and
 instantly reloaded.
-
-# How do I use this thing?
 
 Check the [Manual](docs/manual.md) here for the details on all the
 parameters and try out the [demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain).
