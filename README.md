@@ -58,11 +58,10 @@ binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
 
-Thank you to [Nik Gaffney](http://fo.am) for help with the Apple builds
-
-For old versions see the [changelog](changelog.md)
-    
-### Linux
+Thank you to [Nik Gaffney](http://fo.am) for help with the Apple
+builds. For old versions see the [changelog](changelog.md)
+        
+# Linux install
 <a href='https://flathub.org/apps/details/org.thentrythis.Samplebrain'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 #### Ubuntu
