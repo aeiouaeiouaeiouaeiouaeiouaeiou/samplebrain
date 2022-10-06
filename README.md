@@ -29,7 +29,6 @@ instantly reloaded.
 
 Check the [Manual](docs/manual.md) here for the details on all the
 parameters and try out the [demo brain session](https://static.thentrythis.org/samplebrain/demo.samplebrain).
-
 Load the demo using "load session" not "load brain" (sessions contain
 both the target and brain samples). The original samples used to
 create the demo session [can be found here for
