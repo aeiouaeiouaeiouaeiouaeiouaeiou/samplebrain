@@ -53,13 +53,15 @@ Changes in 0.18.4: New audio device settings window and updated
 windows build. Better default block size, tool tip tweaks and fixes
 for dark themes by [Claude Heiland-Allen](https://mathr.co.uk/).
 
+For old versions see the [changelog](changelog.md)
+    
 Mac note: As this software is not on the apple store, to run the
 binary you need to tell your mac it's ok: Go to System Preferences >
 Security & Privacy > General. At the bottom of the window, select
 "Allow apps to be downloaded from Anywhere".
 
 Thank you to [Nik Gaffney](http://fo.am) for help with the Apple
-builds. For old versions see the [changelog](changelog.md)
+builds. 
         
 # Linux install
 <a href='https://flathub.org/apps/details/org.thentrythis.Samplebrain'><img width='200' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
