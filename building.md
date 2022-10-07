@@ -8,6 +8,10 @@ Install dependencies for the interface:
 
     $ sudo apt install build-essential qtcreator qt5-default
 
+On ubuntu 22.04 it's:
+
+    $ apt install build-essential qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
+    
 Build & run it:
 
     $ mkdir build
@@ -57,3 +61,12 @@ Then edit Info.plist to add samplebrain.icns to CFBundleIconFile. Key `CFBundleI
 You might also need to resign the app bundle after making any changes
 
     $ codesign --force --deep --sign - samplebrain.app
+
+# Windows (Work in progress)
+
+* Install [MSYS2](https://www.msys2.org/)
+* Install dependances via pacman
+* Build with qmake as usual
+* Run `windeployqt` and copy missing .dll files into release directory
+
+ 
