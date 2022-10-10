@@ -1,8 +1,8 @@
 # Building from source
 ## Linux (Ubuntu)
-Install libraries for the sample engine (use brew on mac, MinGW on win):
+Install cmake:
 
-    $ sudo apt install libsndfile1-dev portaudio19-dev liblo-dev libfftw3-dev
+    $ sudo apt install cmake
 
 Install dependencies for the interface:
 
@@ -16,15 +16,14 @@ Build & run it:
 
     $ mkdir build
     $ cd build
-    $ qmake ..
-    $ make
-    $ sudo make install
-    $ samplebrain
+    $ cmake ..
+    $ cmake --build .
+    $ ./samplebrain
 
 ## Mac
-Install libraries for sample engine:
+Install cmake:
 
-    $ brew install fftw portaudio liblo libsndfile
+    $ brew install cmake
 
 Install dependencies for the interface:
 
@@ -35,10 +34,10 @@ Build & run it:
 
     $ mkdir build
     $ cd build
-    $ qmake ..
-    $ make
+    $ cmake ..
+    $ cmake --build .
 
-`samplebrain.app` should then be in the app folder for you to run.
+`samplebrain.app` should then be in the build folder for you to run.
 
 # Mac build additions
 
