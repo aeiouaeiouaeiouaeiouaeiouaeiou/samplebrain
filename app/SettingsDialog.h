@@ -20,7 +20,7 @@
 #include <QtGui>
 #include <QDialog>
 #include <QLineEdit>
-#include "ui_settings.h"
+#include "../gui/ui_settings.h"
 
 #include <iostream>
 #include <lo/lo.h>
