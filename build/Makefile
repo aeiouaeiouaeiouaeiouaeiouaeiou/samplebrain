@@ -14,8 +14,8 @@ CC            = /opt/local/bin/clang-mp-14
 CXX           = /opt/local/bin/clang++-mp-14
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.8 -O3 -march=core2 -Wall -W -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.8 -O3 -march=core2 -fopenmp -Wall -Wno-unused -std=c++11 -std=gnu++11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../../samplebrain -I. -I../../samplebrain -I2 -I../brain/src -I/usr/local/include -I/opt/local/include -I/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers -I/opt/local/libexec/qt5/lib/QtGui.framework/Headers -I/opt/local/libexec/qt5/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I/opt/local/libexec/qt5/mkspecs/macx-clang -F/opt/local/libexec/qt5/lib
+CXXFLAGS      = -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.8 -O3 -march=core2 -Wall -Wno-unused -std=c++11 -std=gnu++11 -Wall -W -fPIC $(DEFINES)
+INCPATH       = -I../../samplebrain -I. -I../../samplebrain -I2 -I../brain/src -I/usr/local/include -I/opt/local/include -I/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers -I/opt/local/libexec/qt5/lib/QtGui.framework/Headers -I/opt/local/libexec/qt5/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/opt/local/libexec/qt5/mkspecs/macx-clang -F/opt/local/libexec/qt5/lib
 QMAKE         = /opt/local/libexec/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = samplebrain1.0.0
 DISTDIR = /Users/user/samplebrain/build/.tmp/samplebrain1.0.0
 LINK          = /opt/local/bin/clang++-mp-14
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.8
-LIBS          = $(SUBLIBS) -F/opt/local/libexec/qt5/lib -L.. -L/usr/local/lib -L/opt/local/lib -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm -fopenmp -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/opt/local/libexec/qt5/lib -L.. -L/usr/local/lib -L/opt/local/lib -lportaudio -lfftw3 -lsndfile -llo -ldl -lpthread -lm -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
 AR            = /opt/local/bin/ar cq
 RANLIB        = /opt/local/bin/ranlib -s
 SED           = sed
@@ -49,6 +49,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../app/MainWindow.cpp \
+		../app/SettingsDialog.cpp \
 		../app/sound_items.cpp \
 		../app/audio_thread.cpp \
 		../app/process_thread.cpp \
@@ -74,8 +75,10 @@ SOURCES       = ../app/MainWindow.cpp \
 		../brain/src/spiralcore/OSC_server.cpp \
 		../brain/src/spiralcore/allocator.cpp \
 		../brain/src/spiralcore/stream.cpp qrc_samplebrain.cpp \
-		moc_MainWindow.cpp
+		moc_MainWindow.cpp \
+		moc_SettingsDialog.cpp
 OBJECTS       = MainWindow.o \
+		SettingsDialog.o \
 		sound_items.o \
 		audio_thread.o \
 		process_thread.o \
@@ -102,7 +105,8 @@ OBJECTS       = MainWindow.o \
 		allocator.o \
 		stream.o \
 		qrc_samplebrain.o \
-		moc_MainWindow.o
+		moc_MainWindow.o \
+		moc_SettingsDialog.o
 DIST          = /opt/local/libexec/qt5/mkspecs/features/spec_pre.prf \
 		/opt/local/libexec/qt5/mkspecs/qdevice.pri \
 		/opt/local/libexec/qt5/mkspecs/features/device_config.prf \
@@ -241,7 +245,8 @@ DIST          = /opt/local/libexec/qt5/mkspecs/features/spec_pre.prf \
 		/opt/local/libexec/qt5/mkspecs/features/yacc.prf \
 		/opt/local/libexec/qt5/mkspecs/features/lex.prf \
 		../../samplebrain.pro ../app/MainWindow.h \
-		../app/generated/ui_samplebrain.h ../app/MainWindow.cpp \
+		../app/SettingsDialog.h ../app/MainWindow.cpp \
+		../app/SettingsDialog.cpp \
 		../app/sound_items.cpp \
 		../app/audio_thread.cpp \
 		../app/process_thread.cpp \
@@ -275,7 +280,7 @@ TARGET        = samplebrain.app/Contents/MacOS/samplebrain
 first: all
 ####### Build rules
 
-$(TARGET):  $(OBJECTS)  
+$(TARGET): ui_samplebrain.h ui_settings.h $(OBJECTS)  
 	@test -d samplebrain.app/Contents/MacOS/ || mkdir -p samplebrain.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -580,12 +585,17 @@ samplebrain.app/Contents/Resources/empty.lproj:
 samplebrain.app/Contents/Info.plist: 
 	@test -d samplebrain.app/Contents || mkdir -p samplebrain.app/Contents
 	@$(DEL_FILE) samplebrain.app/Contents/Info.plist
-	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.samplebrain,g" -e "s,@ICON@,,g" -e "s,@EXECUTABLE@,samplebrain,g" -e "s,@LIBRARY@,samplebrain,g" -e "s,@TYPEINFO@,????,g" /opt/local/libexec/qt5/mkspecs/macx-clang/Info.plist.app >samplebrain.app/Contents/Info.plist
+	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.samplebrain,g" -e "s,@ICON@,samplebrain.icns,g" -e "s,@EXECUTABLE@,samplebrain,g" -e "s,@LIBRARY@,samplebrain,g" -e "s,@TYPEINFO@,????,g" /opt/local/libexec/qt5/mkspecs/macx-clang/Info.plist.app >samplebrain.app/Contents/Info.plist
+samplebrain.app/Contents/Resources/samplebrain.icns: ../desktop/samplebrain.icns
+	@test -d samplebrain.app/Contents/Resources/ || mkdir -p samplebrain.app/Contents/Resources/
+	@$(DEL_FILE) samplebrain.app/Contents/Resources/samplebrain.icns
+	@$(COPY_FILE) ../desktop/samplebrain.icns samplebrain.app/Contents/Resources/samplebrain.icns
 
 all: Makefile \
 		samplebrain.app/Contents/PkgInfo \
 		samplebrain.app/Contents/Resources/empty.lproj \
-		samplebrain.app/Contents/Info.plist $(TARGET)
+		samplebrain.app/Contents/Info.plist \
+		samplebrain.app/Contents/Resources/samplebrain.icns $(TARGET)
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -594,8 +604,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../app/samplebrain.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../app/MainWindow.h ../app/generated/ui_samplebrain.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../app/MainWindow.cpp ../app/sound_items.cpp ../app/audio_thread.cpp ../app/process_thread.cpp ../app/feedback.cpp ../app/qtmain.cpp ../brain/src/block.cpp ../brain/src/brain.cpp ../brain/src/fft.cpp ../brain/src/mfcc.cpp ../brain/src/renderer.cpp ../brain/src/search_params.cpp ../brain/src/status.cpp ../brain/src/window.cpp ../brain/src/block_stream.cpp ../brain/src/aquila/filter/MelFilterBank.cpp ../brain/src/aquila/filter/MelFilter.cpp ../brain/src/aquila/transform/Dct.cpp ../brain/src/spiralcore/sample.cpp ../brain/src/spiralcore/ring_buffer.cpp ../brain/src/spiralcore/command_ring_buffer.cpp ../brain/src/spiralcore/portaudio_client.cpp ../brain/src/spiralcore/audio.cpp ../brain/src/spiralcore/OSC_server.cpp ../brain/src/spiralcore/allocator.cpp ../brain/src/spiralcore/stream.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../app/MainWindow.h ../app/SettingsDialog.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../app/MainWindow.cpp ../app/SettingsDialog.cpp ../app/sound_items.cpp ../app/audio_thread.cpp ../app/process_thread.cpp ../app/feedback.cpp ../app/qtmain.cpp ../brain/src/block.cpp ../brain/src/brain.cpp ../brain/src/fft.cpp ../brain/src/mfcc.cpp ../brain/src/renderer.cpp ../brain/src/search_params.cpp ../brain/src/status.cpp ../brain/src/window.cpp ../brain/src/block_stream.cpp ../brain/src/aquila/filter/MelFilterBank.cpp ../brain/src/aquila/filter/MelFilter.cpp ../brain/src/aquila/transform/Dct.cpp ../brain/src/spiralcore/sample.cpp ../brain/src/spiralcore/ring_buffer.cpp ../brain/src/spiralcore/command_ring_buffer.cpp ../brain/src/spiralcore/portaudio_client.cpp ../brain/src/spiralcore/audio.cpp ../brain/src/spiralcore/OSC_server.cpp ../brain/src/spiralcore/allocator.cpp ../brain/src/spiralcore/stream.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../gui/samplebrain.ui ../gui/settings.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -627,12 +638,13 @@ qrc_samplebrain.cpp: ../app/samplebrain.qrc \
 		../app/images/stop.png \
 		../app/images/play.png \
 		../app/images/record.png \
-		../app/images/pause.png
+		../app/images/pause.png \
+		../app/images/settings.png
 	/opt/local/libexec/qt5/bin/rcc -name samplebrain ../app/samplebrain.qrc -o qrc_samplebrain.cpp
 
-compiler_moc_header_make_all: moc_MainWindow.cpp
+compiler_moc_header_make_all: moc_MainWindow.cpp moc_SettingsDialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_MainWindow.cpp
+	-$(DEL_FILE) moc_MainWindow.cpp moc_SettingsDialog.cpp
 moc_MainWindow.cpp: /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessible.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessiblebridge.h \
@@ -690,7 +702,6 @@ moc_MainWindow.cpp: /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
 		/opt/local/include/GLES2/gl2.h \
 		/opt/local/include/GLES2/gl2platform.h \
 		/opt/local/include/GL/gl.h \
-		/opt/local/include/GL/gl_mangle.h \
 		/opt/local/include/GL/glext.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
@@ -750,7 +761,11 @@ moc_MainWindow.cpp: /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlineedit.h \
-		../app/generated/ui_samplebrain.h \
+		ui_samplebrain.h \
+		../app/SettingsDialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_settings.h \
 		/opt/local/include/lo/lo.h \
 		/opt/local/include/lo/lo_endian.h \
 		/opt/local/include/lo/lo_types.h \
@@ -774,14 +789,171 @@ moc_MainWindow.cpp: /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QHBoxLayout \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../app/audio_thread.h \
+		../brain/src/spiralcore/audio.h \
+		../brain/src/spiralcore/types.h \
+		../brain/src/spiralcore/fixed.h \
+		../brain/src/spiralcore/sample.h \
+		../brain/src/spiralcore/allocator.h \
+		../brain/src/spiralcore/stream.h \
+		../brain/src/spiralcore/portaudio_client.h \
+		/opt/local/include/portaudio.h \
+		../app/process_thread.h \
+		../brain/src/brain.h \
+		../brain/src/block_source.h \
+		../brain/src/block.h \
+		../brain/src/fft.h \
+		/opt/local/include/fftw3.h \
+		../brain/src/mfcc.h \
+		../brain/src/aquila/global.h \
+		../brain/src/search_params.h \
+		../brain/src/window.h \
+		../brain/src/renderer.h \
+		../brain/src/block_stream.h \
 		../app/MainWindow.h \
 		/opt/local/libexec/qt5/bin/moc
 	/opt/local/libexec/qt5/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/opt/local/libexec/qt5/mkspecs/macx-clang -I/Users/user/samplebrain -I/Users/user/samplebrain -I/Users/user/samplebrain/2 -I/Users/user/samplebrain/brain/src -I/usr/local/include -I/opt/local/include -I/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers -I/opt/local/libexec/qt5/lib/QtGui.framework/Headers -I/opt/local/libexec/qt5/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include -F/opt/local/libexec/qt5/lib ../app/MainWindow.h -o moc_MainWindow.cpp
 
+moc_SettingsDialog.cpp: /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessible.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessiblebridge.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessibleobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessibleplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qbitmap.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qicon.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qiconengine.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qiconengineplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimage.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimageiohandler.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimagereader.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimagewriter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qmovie.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpicture.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpictureformatplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpixmap.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpixmapcache.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qstandarditemmodel.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qclipboard.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qcursor.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qdrag.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qevent.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qgenericplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qgenericpluginfactory.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qguiapplication.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qinputmethod.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qkeysequence.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qoffscreensurface.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglcontext.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglwindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpaintdevicewindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpalette.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpixelformat.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrasterwindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qscreen.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsessionmanager.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qstylehints.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsurface.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsurfaceformat.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtouchdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qwindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qwindowdefs.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qmatrix4x4.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qquaternion.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvector2d.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvector3d.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvector4d.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengl.h \
+		/opt/local/include/GLES3/gl31.h \
+		/opt/local/include/GLES3/gl3platform.h \
+		/opt/local/include/KHR/khrplatform.h \
+		/opt/local/include/GLES3/gl3.h \
+		/opt/local/include/GLES2/gl2.h \
+		/opt/local/include/GLES2/gl2platform.h \
+		/opt/local/include/GL/gl.h \
+		/opt/local/include/GL/glext.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglextrafunctions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglframebufferobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglpaintdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglpixeltransferoptions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengltexture.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengltimerquery.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglversionfunctions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglvertexarrayobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qbackingstore.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qbrush.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qcolor.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qmatrix.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpagedpaintdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpagelayout.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpagesize.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpaintdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpaintengine.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpainter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpainterpath.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpdfwriter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpen.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpolygon.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qregion.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrgb.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrgba64.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtransform.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qabstracttextdocumentlayout.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfont.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfontdatabase.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfontinfo.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfontmetrics.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qglyphrun.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrawfont.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qstatictext.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextcursor.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextdocument.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextdocumentfragment.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextdocumentwriter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextformat.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextlayout.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextlist.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextoption.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtexttable.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qdesktopservices.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvalidator.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtguiversion.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qdialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLineEdit \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlineedit.h \
+		ui_settings.h \
+		/opt/local/include/lo/lo.h \
+		/opt/local/include/lo/lo_endian.h \
+		/opt/local/include/lo/lo_types.h \
+		/opt/local/include/lo/lo_osc_types.h \
+		/opt/local/include/lo/lo_errors.h \
+		/opt/local/include/lo/lo_lowlevel.h \
+		/opt/local/include/lo/lo_serverthread.h \
+		/opt/local/include/lo/lo_macros.h \
+		../app/SettingsDialog.h \
+		/opt/local/libexec/qt5/bin/moc
+	/opt/local/libexec/qt5/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/opt/local/libexec/qt5/mkspecs/macx-clang -I/Users/user/samplebrain -I/Users/user/samplebrain -I/Users/user/samplebrain/2 -I/Users/user/samplebrain/brain/src -I/usr/local/include -I/opt/local/include -I/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers -I/opt/local/libexec/qt5/lib/QtGui.framework/Headers -I/opt/local/libexec/qt5/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include -F/opt/local/libexec/qt5/lib ../app/SettingsDialog.h -o moc_SettingsDialog.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all:
+compiler_uic_make_all: ui_samplebrain.h ui_settings.h
 compiler_uic_clean:
+	-$(DEL_FILE) ui_samplebrain.h ui_settings.h
+ui_samplebrain.h: ../gui/samplebrain.ui \
+		/opt/local/libexec/qt5/bin/uic
+	/opt/local/libexec/qt5/bin/uic ../gui/samplebrain.ui -o ui_samplebrain.h
+
+ui_settings.h: ../gui/settings.ui \
+		/opt/local/libexec/qt5/bin/uic
+	/opt/local/libexec/qt5/bin/uic ../gui/settings.ui -o ui_settings.h
+
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -790,7 +962,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -851,7 +1023,6 @@ MainWindow.o: ../app/MainWindow.cpp /opt/local/libexec/qt5/lib/QtGui.framework/H
 		/opt/local/include/GLES2/gl2.h \
 		/opt/local/include/GLES2/gl2platform.h \
 		/opt/local/include/GL/gl.h \
-		/opt/local/include/GL/gl_mangle.h \
 		/opt/local/include/GL/glext.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
@@ -912,7 +1083,11 @@ MainWindow.o: ../app/MainWindow.cpp /opt/local/libexec/qt5/lib/QtGui.framework/H
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlineedit.h \
-		../app/generated/ui_samplebrain.h \
+		ui_samplebrain.h \
+		../app/SettingsDialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_settings.h \
 		/opt/local/include/lo/lo.h \
 		/opt/local/include/lo/lo_endian.h \
 		/opt/local/include/lo/lo_types.h \
@@ -936,12 +1111,16 @@ MainWindow.o: ../app/MainWindow.cpp /opt/local/libexec/qt5/lib/QtGui.framework/H
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QHBoxLayout \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qboxlayout.h \
-		../brain/src/renderer.h \
-		../brain/src/spiralcore/sample.h \
+		../app/audio_thread.h \
+		../brain/src/spiralcore/audio.h \
 		../brain/src/spiralcore/types.h \
 		../brain/src/spiralcore/fixed.h \
+		../brain/src/spiralcore/sample.h \
 		../brain/src/spiralcore/allocator.h \
 		../brain/src/spiralcore/stream.h \
+		../brain/src/spiralcore/portaudio_client.h \
+		/opt/local/include/portaudio.h \
+		../app/process_thread.h \
 		../brain/src/brain.h \
 		../brain/src/block_source.h \
 		../brain/src/block.h \
@@ -951,8 +1130,177 @@ MainWindow.o: ../app/MainWindow.cpp /opt/local/libexec/qt5/lib/QtGui.framework/H
 		../brain/src/aquila/global.h \
 		../brain/src/search_params.h \
 		../brain/src/window.h \
+		../brain/src/renderer.h \
 		../brain/src/block_stream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o ../app/MainWindow.cpp
+
+SettingsDialog.o: ../app/SettingsDialog.cpp /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessible.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessiblebridge.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessibleobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessibleplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qbitmap.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qicon.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qiconengine.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qiconengineplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimage.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimageiohandler.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimagereader.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qimagewriter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qmovie.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpicture.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpictureformatplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpixmap.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpixmapcache.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qstandarditemmodel.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qclipboard.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qcursor.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qdrag.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qevent.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qgenericplugin.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qgenericpluginfactory.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qguiapplication.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qinputmethod.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qkeysequence.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qoffscreensurface.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglcontext.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglwindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpaintdevicewindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpalette.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpixelformat.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrasterwindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qscreen.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsessionmanager.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qstylehints.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsurface.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsurfaceformat.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtouchdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qwindow.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qwindowdefs.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qmatrix4x4.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qquaternion.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvector2d.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvector3d.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvector4d.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengl.h \
+		/opt/local/include/GLES3/gl31.h \
+		/opt/local/include/GLES3/gl3platform.h \
+		/opt/local/include/KHR/khrplatform.h \
+		/opt/local/include/GLES3/gl3.h \
+		/opt/local/include/GLES2/gl2.h \
+		/opt/local/include/GLES2/gl2platform.h \
+		/opt/local/include/GL/gl.h \
+		/opt/local/include/GL/glext.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglextrafunctions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglframebufferobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglpaintdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglpixeltransferoptions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengltexture.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengltimerquery.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglversionfunctions.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglvertexarrayobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qbackingstore.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qbrush.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qcolor.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qmatrix.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpagedpaintdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpagelayout.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpagesize.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpaintdevice.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpaintengine.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpainter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpainterpath.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpdfwriter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpen.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qpolygon.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qregion.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrgb.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrgba64.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtransform.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qabstracttextdocumentlayout.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfont.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfontdatabase.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfontinfo.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qfontmetrics.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qglyphrun.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qrawfont.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qstatictext.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextcursor.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextdocument.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextdocumentfragment.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextdocumentwriter.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextformat.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextlayout.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextlist.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextobject.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtextoption.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtexttable.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qdesktopservices.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qvalidator.h \
+		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtguiversion.h \
+		../app/MainWindow.h \
+		/opt/local/libexec/qt5/lib/QtCore.framework/Headers/QDirIterator \
+		/opt/local/libexec/qt5/lib/QtCore.framework/Headers/qdiriterator.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QFileDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLineEdit \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlineedit.h \
+		ui_samplebrain.h \
+		../app/SettingsDialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_settings.h \
+		/opt/local/include/lo/lo.h \
+		/opt/local/include/lo/lo_endian.h \
+		/opt/local/include/lo/lo_types.h \
+		/opt/local/include/lo/lo_osc_types.h \
+		/opt/local/include/lo/lo_errors.h \
+		/opt/local/include/lo/lo_lowlevel.h \
+		/opt/local/include/lo/lo_serverthread.h \
+		/opt/local/include/lo/lo_macros.h \
+		../app/feedback.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QStatusBar \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qstatusbar.h \
+		../brain/src/spiralcore/OSC_server.h \
+		../brain/src/spiralcore/command_ring_buffer.h \
+		../brain/src/spiralcore/ring_buffer.h \
+		../app/sound_items.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QCheckBox \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLabel \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlabel.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../app/audio_thread.h \
+		../brain/src/spiralcore/audio.h \
+		../brain/src/spiralcore/types.h \
+		../brain/src/spiralcore/fixed.h \
+		../brain/src/spiralcore/sample.h \
+		../brain/src/spiralcore/allocator.h \
+		../brain/src/spiralcore/stream.h \
+		../brain/src/spiralcore/portaudio_client.h \
+		/opt/local/include/portaudio.h \
+		../app/process_thread.h \
+		../brain/src/brain.h \
+		../brain/src/block_source.h \
+		../brain/src/block.h \
+		../brain/src/fft.h \
+		/opt/local/include/fftw3.h \
+		../brain/src/mfcc.h \
+		../brain/src/aquila/global.h \
+		../brain/src/search_params.h \
+		../brain/src/window.h \
+		../brain/src/renderer.h \
+		../brain/src/block_stream.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SettingsDialog.o ../app/SettingsDialog.cpp
 
 sound_items.o: ../app/sound_items.cpp /opt/local/libexec/qt5/lib/QtGui.framework/Headers/QtGui \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qaccessible.h \
@@ -1011,7 +1359,6 @@ sound_items.o: ../app/sound_items.cpp /opt/local/libexec/qt5/lib/QtGui.framework
 		/opt/local/include/GLES2/gl2.h \
 		/opt/local/include/GLES2/gl2platform.h \
 		/opt/local/include/GL/gl.h \
-		/opt/local/include/GL/gl_mangle.h \
 		/opt/local/include/GL/glext.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
@@ -1201,7 +1548,6 @@ feedback.o: ../app/feedback.cpp ../app/feedback.h \
 		/opt/local/include/GLES2/gl2.h \
 		/opt/local/include/GLES2/gl2platform.h \
 		/opt/local/include/GL/gl.h \
-		/opt/local/include/GL/gl_mangle.h \
 		/opt/local/include/GL/glext.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
@@ -1257,7 +1603,12 @@ feedback.o: ../app/feedback.cpp ../app/feedback.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qtguiversion.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QStatusBar \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qstatusbar.h \
-		../brain/src/spiralcore/OSC_server.h \
+		../app/SettingsDialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qdialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLineEdit \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlineedit.h \
+		ui_settings.h \
 		/opt/local/include/lo/lo.h \
 		/opt/local/include/lo/lo_endian.h \
 		/opt/local/include/lo/lo_types.h \
@@ -1266,6 +1617,7 @@ feedback.o: ../app/feedback.cpp ../app/feedback.h \
 		/opt/local/include/lo/lo_lowlevel.h \
 		/opt/local/include/lo/lo_serverthread.h \
 		/opt/local/include/lo/lo_macros.h \
+		../brain/src/spiralcore/OSC_server.h \
 		../brain/src/spiralcore/command_ring_buffer.h \
 		../brain/src/spiralcore/ring_buffer.h \
 		../app/sound_items.h \
@@ -1336,7 +1688,6 @@ qtmain.o: ../app/qtmain.cpp /opt/local/libexec/qt5/lib/QtGui.framework/Headers/Q
 		/opt/local/include/GLES2/gl2.h \
 		/opt/local/include/GLES2/gl2platform.h \
 		/opt/local/include/GL/gl.h \
-		/opt/local/include/GL/gl_mangle.h \
 		/opt/local/include/GL/glext.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopenglbuffer.h \
 		/opt/local/libexec/qt5/lib/QtGui.framework/Headers/qopengldebug.h \
@@ -1397,7 +1748,11 @@ qtmain.o: ../app/qtmain.cpp /opt/local/libexec/qt5/lib/QtGui.framework/Headers/Q
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlineedit.h \
-		../app/generated/ui_samplebrain.h \
+		ui_samplebrain.h \
+		../app/SettingsDialog.h \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_settings.h \
 		/opt/local/include/lo/lo.h \
 		/opt/local/include/lo/lo_endian.h \
 		/opt/local/include/lo/lo_types.h \
@@ -1421,13 +1776,17 @@ qtmain.o: ../app/qtmain.cpp /opt/local/libexec/qt5/lib/QtGui.framework/Headers/Q
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/QHBoxLayout \
 		/opt/local/libexec/qt5/lib/QtWidgets.framework/Headers/qboxlayout.h \
-		../app/process_thread.h \
-		../brain/src/brain.h \
+		../app/audio_thread.h \
+		../brain/src/spiralcore/audio.h \
 		../brain/src/spiralcore/types.h \
 		../brain/src/spiralcore/fixed.h \
 		../brain/src/spiralcore/sample.h \
 		../brain/src/spiralcore/allocator.h \
 		../brain/src/spiralcore/stream.h \
+		../brain/src/spiralcore/portaudio_client.h \
+		/opt/local/include/portaudio.h \
+		../app/process_thread.h \
+		../brain/src/brain.h \
 		../brain/src/block_source.h \
 		../brain/src/block.h \
 		../brain/src/fft.h \
@@ -1437,11 +1796,7 @@ qtmain.o: ../app/qtmain.cpp /opt/local/libexec/qt5/lib/QtGui.framework/Headers/Q
 		../brain/src/search_params.h \
 		../brain/src/window.h \
 		../brain/src/renderer.h \
-		../brain/src/block_stream.h \
-		../app/audio_thread.h \
-		../brain/src/spiralcore/audio.h \
-		../brain/src/spiralcore/portaudio_client.h \
-		/opt/local/include/portaudio.h
+		../brain/src/block_stream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qtmain.o ../app/qtmain.cpp
 
 block.o: ../brain/src/block.cpp ../brain/src/block.h \
@@ -1633,6 +1988,9 @@ qrc_samplebrain.o: qrc_samplebrain.cpp
 moc_MainWindow.o: moc_MainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MainWindow.o moc_MainWindow.cpp
 
+moc_SettingsDialog.o: moc_SettingsDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SettingsDialog.o moc_SettingsDialog.cpp
+
 ####### Install
 
 install_target: first FORCE
@@ -1665,9 +2023,18 @@ uninstall_iconfile: FORCE
 	-$(DEL_DIR) $(INSTALL_ROOT)/usr/share/icons/hicolor/scalable/apps/ 
 
 
-install: install_target install_desktopfile install_iconfile  FORCE
+install_metainfofile: first FORCE
+	@test -d $(INSTALL_ROOT)/usr/share/metainfo || mkdir -p $(INSTALL_ROOT)/usr/share/metainfo
+	-$(INSTALL_FILE) /Users/user/samplebrain/desktop/org.thentrythis.Samplebrain.metainfo.xml $(INSTALL_ROOT)/usr/share/metainfo/
 
-uninstall: uninstall_target uninstall_desktopfile uninstall_iconfile  FORCE
+uninstall_metainfofile: FORCE
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/metainfo/org.thentrythis.Samplebrain.metainfo.xml
+	-$(DEL_DIR) $(INSTALL_ROOT)/usr/share/metainfo/ 
+
+
+install: install_target install_desktopfile install_iconfile install_metainfofile  FORCE
+
+uninstall: uninstall_target uninstall_desktopfile uninstall_iconfile uninstall_metainfofile  FORCE
 
 FORCE:
 
