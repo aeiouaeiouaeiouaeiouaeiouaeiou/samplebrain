@@ -24,10 +24,13 @@
 
 namespace spiralcore {
 
-class audio_thread {
-public:
+  class audio_thread {
+  public:
     audio_thread(process_thread &p);
     ~audio_thread();
+
+    void start_audio();
+    void restart_audio(const string device, unsigned int samplerate, unsigned int bufsize);
 
     void process(sample &left_in, sample &right_in, sample &left_out, sample &right_out);
 
@@ -38,14 +41,16 @@ public:
     renderer *m_right_renderer;
     block_stream *m_block_stream;
 
-private:
-    void start_audio();
+  private:
 
 	OSC_server m_osc;
     process_thread &m_process_thread;
     pthread_mutex_t* m_brain_mutex;
     bool m_stereo_mode;
     bool m_mic_mode;
-};
+    u32 m_bufsize;
+    u32 m_samplerate;
+    string m_device;
+  };
 
 }

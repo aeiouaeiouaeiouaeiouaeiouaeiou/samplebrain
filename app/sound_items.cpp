@@ -33,11 +33,10 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   sound_item si;
   si.m_filename = name;
   si.m_id = m_current_sound_id++;
-  QString style("background-color:lightgrey;");
+  QString style("color:black;background-color:lightgrey;");
 
   si.m_container = new QHBoxLayout();
   si.m_container->setSpacing(10);
-  si.m_container->setMargin(0);
   si.m_container->setContentsMargins(0,0,0,0);
 
   si.m_enable = new QCheckBox();
@@ -56,7 +55,7 @@ sound_items::sound_item &sound_items::add(QVBoxLayout *container, const string &
   QFont font;
   font.setFamily(QString::fromUtf8("Helvetica"));
   font.setBold(true);
-  font.setWeight(75);
+  font.setWeight(QFont::Bold);
   si.m_label->setFont(font);
   si.m_label->setContentsMargins(0,0,0,0);
 
@@ -90,8 +89,8 @@ void sound_items::clear() {
 void sound_items::recolour() {
   u32 c=0;
   for (auto &si:m_sound_items) {
-    QString style("background-color:lightblue;");
-    if (c%2==0) style="background-color:pink;";
+    QString style("color:black;background-color:lightblue;");
+    if (c%2==0) style="color:black;background-color:pink;";
     si.m_enable->setStyleSheet(style);
     si.m_del->setStyleSheet(style);
     si.m_label->setStyleSheet(style);
@@ -102,7 +101,7 @@ void sound_items::recolour() {
 void sound_items::change_colour(const std::string &name, const std::string &colour) {
   for (auto &si:m_sound_items) {
     if (si.m_filename==name) {
-      QString style("background-color:"+QString::fromStdString(colour)+";");
+      QString style("color:black;background-color:"+QString::fromStdString(colour)+";");
       si.m_enable->setStyleSheet(style);
       si.m_del->setStyleSheet(style);
       si.m_label->setStyleSheet(style);

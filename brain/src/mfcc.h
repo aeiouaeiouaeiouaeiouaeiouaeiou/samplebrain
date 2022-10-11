@@ -59,8 +59,9 @@ namespace Aquila
          *
          * @param inputSize input length (common to all inputs)
          */
-        Mfcc(std::size_t inputSize):
-        m_inputSize(inputSize)//, m_fft(FftFactory::getFft(inputSize))
+        Mfcc(std::size_t inputSize, unsigned int sampleRate):
+        m_inputSize(inputSize), // m_fft(FftFactory::getFft(inputSize))
+        m_sampleRate(sampleRate)
         {
         }
 
@@ -71,7 +72,8 @@ namespace Aquila
          * Number of samples in each processed input.
          */
         const std::size_t m_inputSize;
-
+        const unsigned int m_sampleRate;
+        
         /**
          * FFT calculator.
          */

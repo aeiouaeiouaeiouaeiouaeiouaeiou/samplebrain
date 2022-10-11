@@ -18,7 +18,8 @@
 #include <QDirIterator>
 #include <QFileDialog>
 #include <QLineEdit>
-#include "generated/ui_samplebrain.h"
+#include "ui_samplebrain.h"
+#include "SettingsDialog.h"
 
 #include <iostream>
 #include <lo/lo.h>
@@ -26,6 +27,7 @@
 #include <list>
 #include "feedback.h"
 #include "sound_items.h"
+#include "audio_thread.h"
 
 using namespace std;
 using namespace spiralcore;
@@ -37,7 +39,65 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
 
+  // all this to work around liblo's use of varargs...
+  void send_audio_osc(const char *name, const char *types) {
+    for (auto dest:m_destinations) {
+      if (dest.m_enabled) {
+        lo_send(dest.m_audio_address,name,types);
+      }
+    }
+  }
 
+  template <class T>
+  void send_audio_osc(const char *name, const char *types, T val) {
+    for (auto dest:m_destinations) {
+      if (dest.m_enabled) {
+        lo_send(dest.m_audio_address,name,types,val);
+      }
+    }
+  }
+
+  void send_process_osc(const char *name, const char *types) {
+    for (auto dest:m_destinations) {
+      if (dest.m_enabled) {
+        lo_send(dest.m_process_address,name,types);
+      }
+    }
+  }
+
+  template <class T>
+  void send_process_osc(const char *name, const char *types, T val) {
+    for (auto dest:m_destinations) {
+      if (dest.m_enabled) {
+        lo_send(dest.m_process_address,name,types,val);
+      }
+    }
+  }
+
+  void set_audio_thread(audio_thread *at) {
+    m_audio_thread=at;
+    m_audio_thread->start_audio();
+
+    for (auto &d:m_audio_thread->m_audio_device->m_client.m_devices) {
+      if (d.id==0) {
+        m_settings_dialog->m_Ui.deviceComboBox->clear();
+      } 
+      m_settings_dialog->m_Ui.deviceComboBox->addItem(d.name.c_str());
+      
+      if (d.default_output==1) {
+        m_settings_dialog->m_device=d.name;
+        m_settings_dialog->m_Ui.deviceComboBox->setCurrentText(d.name.c_str());
+      }
+      
+    }
+    
+    m_settings_dialog->m_Ui.messagesLabel->setText(m_audio_thread->m_audio_device->m_client.m_status.c_str());
+  }
+
+  audio_thread *get_audio_thread() {
+    return m_audio_thread;
+  }
+  
 protected:
 
 private slots:
@@ -310,7 +370,7 @@ private slots:
     }
 
     void update_status() {
-      m_feedback.poll(m_Ui.statusbar,&m_sound_items);
+      m_feedback.poll(m_Ui.statusbar,&m_sound_items,m_settings_dialog);
     }
 
     void stereo_mode(bool s) {
@@ -336,7 +396,10 @@ private slots:
 
     }
 
-
+  void settings() {        
+    m_settings_dialog->show();
+  }
+  
 private:
 
     ///////////////////////////////////////////////
@@ -362,41 +425,6 @@ private:
 
     vector<osc_destination> m_destinations;
 
-    // all this to work around liblo's use of varargs...
-    void send_audio_osc(const char *name, const char *types) {
-      for (auto dest:m_destinations) {
-        if (dest.m_enabled) {
-          lo_send(dest.m_audio_address,name,types);
-        }
-      }
-    }
-
-    template <class T>
-    void send_audio_osc(const char *name, const char *types, T val) {
-      for (auto dest:m_destinations) {
-        if (dest.m_enabled) {
-          lo_send(dest.m_audio_address,name,types,val);
-        }
-      }
-    }
-
-    void send_process_osc(const char *name, const char *types) {
-      for (auto dest:m_destinations) {
-        if (dest.m_enabled) {
-          lo_send(dest.m_process_address,name,types);
-        }
-      }
-    }
-
-    template <class T>
-    void send_process_osc(const char *name, const char *types, T val) {
-      for (auto dest:m_destinations) {
-        if (dest.m_enabled) {
-          lo_send(dest.m_process_address,name,types,val);
-        }
-      }
-    }
-
 
     void init_from_session(const string &filename);
     void add_gui_address(osc_destination &dest,
@@ -411,5 +439,7 @@ private:
     QSignalMapper* m_sound_item_delete_mapper;
     sound_items m_sound_items;
 
+    SettingsDialog *m_settings_dialog;
+  audio_thread *m_audio_thread;
 
 };

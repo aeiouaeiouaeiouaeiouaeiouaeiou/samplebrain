@@ -1,10 +1,8 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Application
 Name=Samplebrain
-Comment=A sample masher designed by Aphex Twin
-Exec=/usr/bin/samplebrain
-Icon=/usr/share/icons/hicolor/scalable/apps/samplebrain.svg
-Terminal=false
-Categories=GNOME;Application;
+Comment=A custom sample mashing app designed by Aphex Twin
+Icon=samplebrain
+Exec=samplebrain
+Categories=AudioVideo;Music
 StartupNotify=true

@@ -26,15 +26,20 @@ audio_thread::audio_thread(process_thread &p) :
   m_process_thread(p),
   m_brain_mutex(p.m_brain_mutex),
   m_stereo_mode(false),
-  m_mic_mode(false)
+  m_mic_mode(false),
+  m_bufsize(2048),
+  m_samplerate(44100),
+  m_device("")
 {
-  start_audio();
+  //  start_audio();
   pthread_mutex_lock(m_brain_mutex);
   m_left_renderer = new renderer(p.m_source,p.m_left_target);
   m_right_renderer = new renderer(p.m_source,p.m_right_target);
   m_block_stream = new block_stream();
   pthread_mutex_unlock(m_brain_mutex);
   m_osc.run();
+  // it this threadsafe? 
+  //  m_audio_device->report_devices();
 }
 
 static bool state = 1;
@@ -48,18 +53,28 @@ audio_thread::~audio_thread() {
 
 void audio_thread::start_audio() {
   if (m_audio_device!=NULL) delete m_audio_device;
-  m_audio_device = new audio_device("samplebrain",48000,2048);
-  //m_audio_device = new audio_device("samplebrain",48000,2048*4);
+  m_audio_device = new audio_device("samplebrain",m_samplerate,m_bufsize);
   m_audio_device->m_client.set_callback(run_audio, this);
 }
+
+void audio_thread::restart_audio(const string device, unsigned int samplerate, unsigned int bufsize) {
+  m_samplerate = samplerate;
+  m_bufsize = bufsize;
+  m_device = device;      
+  m_audio_device->connect(m_device,
+                          "samplebrain",
+                          m_samplerate,
+                          m_bufsize);
+}
+    
 
 void audio_thread::run_audio(void* c, unsigned int frames) {
   if (state) {
     audio_thread *at = (audio_thread*)c;
     at->m_audio_device->left_out.zero();
     at->process(at->m_audio_device->left_in,
-		at->m_audio_device->right_in,
-		at->m_audio_device->left_out,
+                at->m_audio_device->right_in,
+                at->m_audio_device->left_out,
                 at->m_audio_device->right_out);
     at->m_audio_device->maybe_record();
   }
@@ -186,12 +201,12 @@ void audio_thread::process(sample &left_in, sample &right_in, sample &left_out, 
     }
 
     m_left_renderer->process(left_out.get_length(),
-			     left_out.get_non_const_buffer(),
-			     bs);
+                             left_out.get_non_const_buffer(),
+                             bs);
     if (m_stereo_mode) {
       m_right_renderer->process(right_out.get_length(),
-				right_out.get_non_const_buffer(),
-				bs);
+                                right_out.get_non_const_buffer(),
+                                bs);
     } else {
       right_out=left_out;
     }

@@ -14,23 +14,26 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-#include <lo/lo.h>
-#include <string>
+#include <QtGui>
 #include <iostream>
+#include <list>
 
-#pragma once
+#include "MainWindow.h"
+#include "SettingsDialog.h"
+#include "feedback.h"
 
-namespace spiralcore {
+using namespace std;
 
-class status {
-public:
-  static void _update(const std::string &msg);
-  static void update(const char *msg, ...);
-  static void sound_item(const std::string &name, const std::string &colour);
-  static void sound_item_refresh();
-  static void add_audio_device(int id, const std::string &name, bool default_output);
-  static void audio_device_status(const std::string &status);
-  static lo_address m_address;
-};
+SettingsDialog::SettingsDialog(MainWindow *parent):
+  m_device(""),
+  m_parent(parent),
+  m_buffersize(2048),
+  m_samplerate(44100) {
+  m_Ui.setupUi(this);
+}
 
+void SettingsDialog::connect() {
+  audio_thread *at = m_parent->get_audio_thread();
+  at->restart_audio(m_device,m_samplerate,m_buffersize);
+  m_Ui.messagesLabel->setText(at->m_audio_device->m_client.m_status.c_str());
 }

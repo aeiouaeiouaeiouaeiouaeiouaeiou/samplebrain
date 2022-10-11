@@ -30,12 +30,11 @@ int main( int argc , char *argv[] ){
     QApplication app(argc, argv);
     MainWindow mainWin;
     mainWin.show();
-
-    cerr<<"Qt version: "<<qVersion()<<endl;
-
     process_thread pt;
     audio_thread at(pt);
     pt.register_renderer(at.m_left_renderer, at.m_right_renderer, at.m_block_stream);
+
+    mainWin.set_audio_thread(&at);
 
     return app.exec();
 }

@@ -34,9 +34,9 @@ static void* _process(void *c) {
 
 process_thread::process_thread() :
   m_osc("8889"),
-  m_source_block_size(3000),
+  m_source_block_size(1000),
   m_source_overlap(0.75),
-  m_target_block_size(3000),
+  m_target_block_size(1000),
   m_target_overlap(0.75),
   m_window_type(window::DODGY),
   m_target_window_type(window::DODGY)
@@ -63,82 +63,82 @@ void process_thread::process() {
       string name = cmd.m_name;
       //cerr<<name<<endl;
       if (name=="/load_sample") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_source.load_sound(cmd.get_string(0),brain::MIX);
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_source.load_sound(cmd.get_string(0),brain::MIX);
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/delete_sample") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_source.delete_sound(cmd.get_string(0));
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_source.delete_sound(cmd.get_string(0));
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/activate_sound") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_source.activate_sound(cmd.get_string(0),1);
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_source.activate_sound(cmd.get_string(0),1);
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/deactivate_sound") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_source.activate_sound(cmd.get_string(0),0);
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_source.activate_sound(cmd.get_string(0),0);
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/source_block_size") {
-	m_source_block_size = cmd.get_int(0);
+        m_source_block_size = cmd.get_int(0);
       }
       if (name=="/source_overlap") {
-	m_source_overlap = m_source_block_size*cmd.get_float(0);
+        m_source_overlap = m_source_block_size*cmd.get_float(0);
       }
       if (name=="/generate_brain") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_source.init(m_source_block_size, m_source_overlap, m_window_type);
-	search_params p(1,0,0,100,0);
-	m_source.build_synapses_fixed(p);
-	m_left_renderer->reset();
-	m_right_renderer->reset();
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_source.init(m_source_block_size, m_source_overlap, m_window_type);
+        search_params p(1,0,0,100,0);
+        m_source.build_synapses_fixed(p);
+        m_left_renderer->reset();
+        m_right_renderer->reset();
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/load_target") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_left_target.clear_sounds();
-	m_left_target.load_sound(cmd.get_string(0),brain::LEFT);
-	m_right_target.clear_sounds();
-	m_right_target.load_sound(cmd.get_string(0),brain::RIGHT);
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_left_target.clear_sounds();
+        m_left_target.load_sound(cmd.get_string(0),brain::LEFT);
+        m_right_target.clear_sounds();
+        m_right_target.load_sound(cmd.get_string(0),brain::RIGHT);
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/target_block_size") {
-	m_target_block_size = cmd.get_int(0);
-	m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
+        m_target_block_size = cmd.get_int(0);
+        m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
       }
       if (name=="/target_overlap") {
-	m_target_overlap = m_target_block_size*cmd.get_float(0);
-	m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
+        m_target_overlap = m_target_block_size*cmd.get_float(0);
+        m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
       }
       if (name=="/generate_target") {
-	pthread_mutex_lock(m_brain_mutex);
-	m_left_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
-	m_right_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
-	// probably elsewhere
-	m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
-	pthread_mutex_unlock(m_brain_mutex);
+        pthread_mutex_lock(m_brain_mutex);
+        m_left_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
+        m_right_target.init(m_target_block_size, m_target_overlap, m_target_window_type);
+        // probably elsewhere
+        m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
+        pthread_mutex_unlock(m_brain_mutex);
       }
       if (name=="/window_type") {
-	m_window_type=(window::type)cmd.get_int(0);
+        m_window_type=(window::type)cmd.get_int(0);
       }
       if (name=="/target_window_type") {
-	m_target_window_type=(window::type)cmd.get_int(0);
-	m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
+        m_target_window_type=(window::type)cmd.get_int(0);
+        m_block_stream->init(m_target_block_size, m_target_overlap, m_target_window_type);
       }
       if (name=="/load_brain") {
-	load_source(cmd.get_string(0));
+        load_source(cmd.get_string(0));
       }
       if (name=="/save_brain") {
-	save_source(cmd.get_string(0));
+        save_source(cmd.get_string(0));
       }
       if (name=="/load_session") {
-	load_session(cmd.get_string(0));
+        load_session(cmd.get_string(0));
       }
       if (name=="/save_session") {
-	save_session(cmd.get_string(0));
+        save_session(cmd.get_string(0));
       }
     }
 #ifdef WIN32 
@@ -181,9 +181,6 @@ void process_thread::load_session(const std::string &filename) {
   ifs||m_source_block_size||m_source_overlap;
   ifs||m_target_block_size||m_target_overlap;
   ifs||m_window_type||m_target_window_type;
-
-  cerr<<"loading window type session "<<m_target_window_type<<endl;
-
   ifs||m_source;
   ifs||m_left_target;
   ifs||m_right_target;
@@ -200,9 +197,6 @@ void process_thread::save_session(const std::string &filename) {
   ofs||(*m_right_renderer);
   ofs||m_source_block_size||m_source_overlap;
   ofs||m_target_block_size||m_target_overlap;
-
-  cerr<<"saving window type session "<<m_target_window_type<<endl;
-
   ofs||m_window_type||m_target_window_type;
   ofs||m_source;
   ofs||m_left_target;

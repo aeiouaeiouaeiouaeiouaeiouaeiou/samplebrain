@@ -11,9 +11,13 @@ QT += core gui widgets
 
 # Input
 HEADERS += app/MainWindow.h \
-           app/generated/ui_samplebrain.h \
+           app/SettingsDialog.h
+
+FORMS += gui/samplebrain.ui \
+         gui/settings.ui
 
 SOURCES += app/MainWindow.cpp \
+           app/SettingsDialog.cpp \
            app/sound_items.cpp \
            app/audio_thread.cpp \
            app/process_thread.cpp \
@@ -51,12 +55,17 @@ QMAKE_CXXFLAGS += -O3 -march=core2 -Wall -Wno-unused -std=c++11
 RESOURCES = app/samplebrain.qrc
 ICON      = desktop/samplebrain.icns
 
-unix:desktopfile.path = /usr/share/applications/
+PREFIX = $$(PREFIX)
+isEmpty(PREFIX) {
+    PREFIX = /usr
+}
+
+unix:desktopfile.path = $$PREFIX/share/applications/
 unix:desktopfile.files = desktop/samplebrain.desktop
-unix:iconfile.path = /usr/share/icons/hicolor/scalable/apps
+unix:iconfile.path = $$PREFIX/share/icons/hicolor/scalable/apps
 unix:iconfile.files = desktop/samplebrain.svg
+unix:metainfofile.path = $$PREFIX/share/metainfo
+unix:metainfofile.files = desktop/org.thentrythis.Samplebrain.metainfo.xml
 
-target.path = /usr/bin
-INSTALLS += target desktopfile iconfile
-
-
+target.path = $$PREFIX/bin
+INSTALLS += target desktopfile iconfile metainfofile
