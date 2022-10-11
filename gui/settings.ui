@@ -22,7 +22,7 @@
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
-           <family>Comic Sans MS</family>
+           <family>Helvetica Neue</family>
            <pointsize>13</pointsize>
           </font>
          </property>
@@ -35,7 +35,7 @@
         <widget class="QComboBox" name="deviceComboBox">
          <property name="font">
           <font>
-           <family>Comic Sans MS</family>
+           <family>Helvetica Neue</family>
            <pointsize>13</pointsize>
           </font>
          </property>
@@ -49,7 +49,7 @@
         <widget class="QLabel" name="label_2">
          <property name="font">
           <font>
-           <family>Comic Sans MS</family>
+           <family>Helvetica Neue</family>
            <pointsize>13</pointsize>
           </font>
          </property>
@@ -68,7 +68,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Comic Sans MS</family>
+           <family>Helvetica Neue</family>
            <pointsize>13</pointsize>
           </font>
          </property>
@@ -83,7 +83,7 @@
       <widget class="QLabel" name="label_5">
        <property name="font">
         <font>
-         <family>Comic Sans MS</family>
+         <family>Helvetica Neue</family>
          <pointsize>9</pointsize>
         </font>
        </property>
@@ -103,7 +103,7 @@
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
-         <family>Comic Sans MS</family>
+         <family>Helvetica Neue</family>
          <pointsize>13</pointsize>
         </font>
        </property>
@@ -116,7 +116,7 @@
       <widget class="QComboBox" name="buffersizeComboBox">
        <property name="font">
         <font>
-         <family>Comic Sans MS</family>
+         <family>Helvetica Neue</family>
         </font>
        </property>
        <property name="currentIndex">
@@ -165,7 +165,7 @@
     <widget class="QLabel" name="label_4">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica Neue</family>
        <pointsize>13</pointsize>
       </font>
      </property>
@@ -184,7 +184,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica Neue</family>
        <pointsize>8</pointsize>
       </font>
      </property>
@@ -206,7 +206,7 @@
     <widget class="QPushButton" name="applyPushButton">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica Neue</family>
       </font>
      </property>
      <property name="text">
@@ -218,7 +218,7 @@
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="font">
       <font>
-       <family>Comic Sans MS</family>
+       <family>Helvetica Neue</family>
       </font>
      </property>
      <property name="orientation">

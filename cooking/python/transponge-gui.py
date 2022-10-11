@@ -193,7 +193,7 @@ class win:
         self.window_size=3000
 
 
-        self.debug = Text(self.root, font = "Helvetica 24 bold", height=10, width=60)
+        self.debug = Text(self.root, font = "Helvetica Neue 24 bold", height=10, width=60)
         self.debug.pack()
         self.debug.insert(END, "ready...\n")
 
