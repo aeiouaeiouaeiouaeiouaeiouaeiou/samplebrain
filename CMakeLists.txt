@@ -12,6 +12,9 @@ set(CMAKE_AUTOMOC ON)
 include(GNUInstallDirs)
 set(CMAKE_AUTOUIC ON)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
 
@@ -48,35 +51,18 @@ qt_add_executable(samplebrain WIN32 MACOSX_BUNDLE
 )
 target_include_directories(samplebrain PRIVATE
     .
-    /opt/homebrew/include
-    /usr/local/include
-    2
     brain/src
 )
 
 target_link_libraries(samplebrain PRIVATE
-    # Remove: L..
-    # Remove: L/opt/homebrew/lib
-    # Remove: L/usr/local/lib
     Qt::Core
     Qt::Gui
     Qt::Widgets
-    dl
     fftw3
     lo_shared
-    m
     portaudio
-    pthread
     sndfile
 )
-
-target_compile_options(samplebrain PUBLIC
-    -O3
-    -Wall
-    -Wno-unused
-    -std=c++11
-)
-
 
 # Resources:
 set(samplebrain_resource_files
