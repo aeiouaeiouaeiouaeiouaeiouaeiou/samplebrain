@@ -20,26 +20,23 @@
 using namespace spiralcore;
 using namespace std;
 
-audio_thread::audio_thread(process_thread &p) :
+audio_thread::audio_thread(const string &port, process_thread &p) :
   m_audio_device(NULL),
-  m_osc("8888"),
+  m_osc(port),
   m_process_thread(p),
   m_brain_mutex(p.m_brain_mutex),
   m_stereo_mode(false),
   m_mic_mode(false),
   m_bufsize(2048),
   m_samplerate(44100),
-  m_device("")
-{
-  //  start_audio();
+  m_device("") {
+
   pthread_mutex_lock(m_brain_mutex);
   m_left_renderer = new renderer(p.m_source,p.m_left_target);
   m_right_renderer = new renderer(p.m_source,p.m_right_target);
   m_block_stream = new block_stream();
   pthread_mutex_unlock(m_brain_mutex);
   m_osc.run();
-  // it this threadsafe? 
-  //  m_audio_device->report_devices();
 }
 
 static bool state = 1;

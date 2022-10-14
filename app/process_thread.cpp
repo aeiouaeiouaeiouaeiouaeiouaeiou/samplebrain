@@ -32,8 +32,8 @@ static void* _process(void *c) {
   return NULL;
 }
 
-process_thread::process_thread() :
-  m_osc("8889"),
+process_thread::process_thread(const string &port) :
+  m_osc(port),
   m_source_block_size(1000),
   m_source_overlap(0.75),
   m_target_block_size(1000),

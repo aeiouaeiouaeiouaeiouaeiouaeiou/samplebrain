@@ -26,12 +26,12 @@ namespace spiralcore {
 
   class audio_thread {
   public:
-    audio_thread(process_thread &p);
+    audio_thread(const string &port, process_thread &p);
     ~audio_thread();
 
     void start_audio();
     void restart_audio(const string device, unsigned int samplerate, unsigned int bufsize);
-
+    bool ok() { return m_osc.ok(); }
     void process(sample &left_in, sample &right_in, sample &left_out, sample &right_out);
 
     static void run_audio(void* c, unsigned int frames);

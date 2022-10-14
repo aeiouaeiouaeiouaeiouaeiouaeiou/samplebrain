@@ -27,9 +27,11 @@
 
 using namespace std;
 
-MainWindow::MainWindow() :
+MainWindow::MainWindow(const string &port, const string &audio_port, const string &process_port) :
     m_last_file("."),
-    m_feedback("8890")
+    m_feedback(port),
+    m_audio_port(audio_port),
+    m_process_port(process_port)
 {
   m_sound_item_enable_mapper = new QSignalMapper(this);
   m_sound_item_delete_mapper = new QSignalMapper(this);
@@ -59,8 +61,8 @@ MainWindow::MainWindow() :
     for (int i=0; i<10; i++) {
       osc_destination d;
       d.m_id=i;
-      d.m_audio_address = lo_address_new_from_url("osc.udp://localhost:8888");
-      d.m_process_address = lo_address_new_from_url("osc.udp://localhost:8889");
+      d.m_audio_address = lo_address_new_from_url(string("osc.udp://localhost:"+m_audio_port).c_str());
+      d.m_process_address = lo_address_new_from_url(string("osc.udp://localhost:"+m_process_port).c_str());
       if (i==0) d.m_enabled=true;
       else d.m_enabled=false;
       add_gui_address(d,enable_mapper);

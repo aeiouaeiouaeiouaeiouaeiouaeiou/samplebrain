@@ -31,117 +31,105 @@ extern "C" {
 #endif
 
 OSC_server::OSC_server(const string &port) :
-m_port(port),
-m_exit(false),
-m_command_ring_buffer(262144)
-{
-        //cerr<<"using port: ["<<port<<"]"<<endl;
-    m_server = lo_server_thread_new(port.c_str(), error_handler);
+  m_port(port),
+  m_exit(false),
+  m_command_ring_buffer(262144) {
+  //cerr<<"using port: ["<<port<<"]"<<endl;
+  m_server = lo_server_thread_new(port.c_str(), error_handler);
+  if (m_server) {
+    cerr<<m_server<<endl;
     lo_server_thread_add_method(m_server, NULL, NULL, default_handler, this);
+  }
 }
 
-OSC_server::~OSC_server()
-{
-    m_exit=true;
-    lo_server_thread_stop(m_server);
+OSC_server::~OSC_server() {
+  m_exit=true;
+  lo_server_thread_stop(m_server);
 }
 
-void OSC_server::run()
-{
-    lo_server_thread_start(m_server);
-//    while (!m_exit) usleep(1000);
+void OSC_server::run() {
+  if (!m_server) return;
+  lo_server_thread_start(m_server);
+  //    while (!m_exit) usleep(1000);
 }
 
-void OSC_server::error_handler(int num, const char *msg, const char *path)
-{
-    //cerr<<"liblo server error "<<num<<" in path "<<path<<": "<<msg<<endl;
-    cerr<<"liblo server error "<<num<<endl;
+void OSC_server::error_handler(int num, const char *msg, const char *path) {
+  //cerr<<"liblo server error "<<num<<" in path "<<path<<": "<<msg<<endl;
+  cerr<<"liblo server error "<<num<<endl;
 }
 
 int OSC_server::default_handler(const char *path, const char *types, lo_arg **argv,
-                    int argc, void *data, void *user_data)
-{
-        OSC_server *server = (OSC_server*)user_data;
+                                int argc, void *data, void *user_data) {
+  OSC_server *server = (OSC_server*)user_data;
+  if (!server) return -1;
 
-        unsigned int size = 0;
-        for (int i=0; i<argc; i++)
-        {
-                size+=lo_arg_size((lo_type)types[i],argv[i]);
-                // add one for the null terminator
-                if (types[i]=='s') size++;
-        }
+  unsigned int size = 0;
+  for (int i=0; i<argc; i++) {
+    size+=lo_arg_size((lo_type)types[i],argv[i]);
+    // add one for the null terminator
+    if (types[i]=='s') size++;
+  }
 
-        char *newdata=new char[size];
-        unsigned int pos=0;
-        for (int i=0; i<argc; i++)
-        {
-                switch (types[i])
-                {
-                        case LO_INT32:
-                        {
-                                if (pos+4>COMMAND_DATA_SIZE)
-                                {
-                                        cerr<<"osc data too big for ringbuffer command"<<endl;
-                                        delete[] newdata;
-                                        return 1;
-                                }
-
-                                memcpy(newdata+pos,(char*)argv[i],4);
-                                pos+=4;
-                        }
-                        break;
-                        case LO_FLOAT:
-                        {
-                                if (pos+4>COMMAND_DATA_SIZE)
-                                {
-                                        cerr<<"osc data too big for ringbuffer command"<<endl;
-                                        delete[] newdata;
-                                        return 1;
-                                }
-
-                                memcpy(newdata+pos,(char*)argv[i],4);
-                                pos+=4;
-                        }
-                        break;
-                        case LO_STRING:
-                        {
-                                int size=strlen(&argv[i]->s);
-
-                                if (pos+size+1>COMMAND_DATA_SIZE)
-                                {
-                                        cerr<<"osc data too big for ringbuffer command"<<endl;
-                                        delete[] newdata;
-                                        return 1;
-                                }
-
-                                memcpy(newdata+pos,&argv[i]->s,size);
-                                newdata[pos+size]='\0';
-                                pos+=size+1;
-                        }
-                        break;
-                        default:
-                        {
-                                cerr<<"unsupported type: "<<types[i]<<endl;
-                                delete[] newdata;
-                                return 1;
-                        }
-                        break;
-                }
-        }
-
-        if (1)//pos==size) hmm
-        {
-                command_ring_buffer::command command(path,types,newdata,pos);
-                if (!server->m_command_ring_buffer.send(command))
-                {
-                        //cerr<<"OSC_server - ringbuffer full!"<<endl;
-                }
-        }
-        else
-        {
-                cerr<<"OSC_server::default_handler: size mismatch ["<<pos<<":"<<size<<"], not sending message"<<endl;
-        }
-
+  char *newdata=new char[size];
+  unsigned int pos=0;
+  for (int i=0; i<argc; i++) {
+    switch (types[i]) {
+    case LO_INT32: {
+      if (pos+4>COMMAND_DATA_SIZE) {
+        cerr<<"osc data too big for ringbuffer command"<<endl;
         delete[] newdata;
-    return 1;
+        return 1;
+      }
+
+      memcpy(newdata+pos,(char*)argv[i],4);
+      pos+=4;
+    }
+      break;
+    case LO_FLOAT: {
+      if (pos+4>COMMAND_DATA_SIZE) {
+        cerr<<"osc data too big for ringbuffer command"<<endl;
+        delete[] newdata;
+        return 1;
+      }
+
+      memcpy(newdata+pos,(char*)argv[i],4);
+      pos+=4;
+    }
+      break;
+    case LO_STRING: {
+      int size=strlen(&argv[i]->s);
+
+      if (pos+size+1>COMMAND_DATA_SIZE) {
+        cerr<<"osc data too big for ringbuffer command"<<endl;
+        delete[] newdata;
+        return 1;
+      }
+
+      memcpy(newdata+pos,&argv[i]->s,size);
+      newdata[pos+size]='\0';
+      pos+=size+1;
+    }
+      break;
+    default: {
+      cerr<<"unsupported type: "<<types[i]<<endl;
+      delete[] newdata;
+      return 1;
+    }
+      break;
+    }
+  }
+
+  if (1) { //pos==size) hmm
+    
+    command_ring_buffer::command command(path,types,newdata,pos);
+    if (!server->m_command_ring_buffer.send(command))  {
+      //cerr<<"OSC_server - ringbuffer full!"<<endl;
+    }
+  }
+  else {
+    cerr<<"OSC_server::default_handler: size mismatch ["<<pos<<":"<<size<<"], not sending message"<<endl;
+  }
+
+  delete[] newdata;
+  return 1;
 }
