@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>522</height>
+    <width>438</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,13 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="deviceComboBox"/>
+        <widget class="QComboBox" name="deviceComboBox">
+         <property name="font">
+          <font>
+           <family>Comic Sans MS</family>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -57,6 +63,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <family>Comic Sans MS</family>
+          </font>
+         </property>
          <property name="text">
           <string>44100</string>
          </property>
@@ -73,7 +84,7 @@
         </font>
        </property>
        <property name="text">
-        <string>(note: this currently should probably match your sample file's input rate as no conversion is run on them - yet)</string>
+        <string>note: this currently should probably match your sample file's input rate as no conversion is run on them - yet</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -98,6 +109,11 @@
      </item>
      <item>
       <widget class="QComboBox" name="buffersizeComboBox">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
        <property name="currentIndex">
         <number>5</number>
        </property>
@@ -181,6 +197,112 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label_9">
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>restart needed for the ports below to update</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>gui osc port</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="guiOSCLineEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>process osc port</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="processOSCLineEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
+       <property name="text">
+        <string>audio osc port</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="audioOSCLineEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QPushButton" name="applyPushButton">
      <property name="font">
       <font>
@@ -218,8 +340,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>358</y>
+     <x>244</x>
+     <y>642</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -234,8 +356,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>299</x>
-     <y>364</y>
+     <x>312</x>
+     <y>642</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -266,8 +388,8 @@
    <slot>apply()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>112</x>
-     <y>321</y>
+     <x>125</x>
+     <y>592</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -298,12 +420,60 @@
    <slot>buffersize(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>326</x>
-     <y>131</y>
+     <x>390</x>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
      <x>395</x>
      <y>208</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>guiOSCLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>gui_port(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>346</x>
+     <y>432</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>419</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>processOSCLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>process_port(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>482</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>479</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>audioOSCLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>SettingsDialog</receiver>
+   <slot>audio_port(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>374</x>
+     <y>511</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>517</y>
     </hint>
    </hints>
   </connection>
@@ -313,5 +483,8 @@
   <slot>samplerate(QString)</slot>
   <slot>buffersize(QString)</slot>
   <slot>apply()</slot>
+  <slot>gui_port(QString)</slot>
+  <slot>audio_port(QString)</slot>
+  <slot>process_port(QString)</slot>
  </slots>
 </ui>

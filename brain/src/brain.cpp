@@ -69,6 +69,8 @@ void brain::load_sound(std::string filename, stereo_mode mode) {
     delete[] temp;
     m_samples.push_back(sound(filename,s));
     status::update("loaded %s",filename.c_str());
+  } else {
+    status::update("problem loading %s",filename.c_str());
   }
 }
 

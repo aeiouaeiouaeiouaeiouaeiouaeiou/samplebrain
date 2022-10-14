@@ -25,9 +25,9 @@
 
 namespace spiralcore {
 
-class process_thread {
-public:
-    process_thread();
+  class process_thread {
+  public:
+    process_thread(const string &port);
     ~process_thread();
 
     pthread_mutex_t* m_brain_mutex;
@@ -47,10 +47,13 @@ public:
     void load_session(const std::string &filename);
     void save_session(const std::string &filename);
 
+
+    bool ok() { return m_osc.ok(); }
+
     // only for use in mutex
     brain m_source, m_left_target, m_right_target;
 
-private:
+  private:
 	OSC_server m_osc;
     u32 m_source_block_size;
     float m_source_overlap;
@@ -64,6 +67,6 @@ private:
     renderer *m_left_renderer;
     renderer *m_right_renderer;
     block_stream *m_block_stream;
-};
+  };
 
 }

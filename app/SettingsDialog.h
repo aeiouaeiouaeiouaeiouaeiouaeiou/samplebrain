@@ -20,7 +20,8 @@
 #include <QtGui>
 #include <QDialog>
 #include <QLineEdit>
-#include "../gui/ui_settings.h"
+#include <QSettings>
+#include "ui_settings.h"
 
 #include <iostream>
 #include <lo/lo.h>
@@ -36,7 +37,7 @@ class SettingsDialog : public QDialog
 {
   Q_OBJECT
  public:
-  SettingsDialog(MainWindow *parent);
+  SettingsDialog(MainWindow *parent, QSettings *settings);
 
   Ui_SettingsDialog m_Ui;
   string m_device;
@@ -61,15 +62,28 @@ class SettingsDialog : public QDialog
    void accept() { connect(); hide(); }
    void reject() { hide(); }
    void apply() { connect(); }
-  
+
+  void gui_port(QString str) {
+    m_settings->setValue("gui_port",str);
+  }
+
+  void process_port(QString str) {
+    m_settings->setValue("process_port",str);
+  }
+
+  void audio_port(QString str) {
+    m_settings->setValue("audio_port",str);
+  }
+
  private:
 
-   void connect();
-   MainWindow *m_parent;
+  void connect();
+  MainWindow *m_parent;
 
-   unsigned int m_buffersize;
-   unsigned int m_samplerate;
+  unsigned int m_buffersize;
+  unsigned int m_samplerate;
   
+  QSettings *m_settings;
 };
 
 #endif
