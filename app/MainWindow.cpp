@@ -32,7 +32,7 @@ MainWindow::MainWindow(const string &port, const string &audio_port, const strin
     m_feedback(port),
     m_audio_port(audio_port),
     m_process_port(process_port),
-    m_format_string("Microsoft WAV (*.wav);;SGI/Apple AIFF (*.aiff);;SGI/Apple AIFC (*.aifc);;Sun/DEC/NeXT AU (*.au);;Sun/DEC/NeXT SND (*.snd);;Fasttracker 2 XI (*.xi);;All files (*.*)")
+    m_format_string("Microsoft WAV (*.wav);;SGI/Apple AIFF (*.aiff);;SGI/Apple AIFC (*.aifc);;Sun/DEC/NeXT AU (*.au);;Sun/DEC/NeXT SND (*.snd);;Fasttracker 2 XI (*.xi);;Free Lossless Audio Codec FLAC (*.flac);;All files (*.*)")
 {
   m_sound_item_enable_mapper = new QSignalMapper(this);
   m_sound_item_delete_mapper = new QSignalMapper(this);
