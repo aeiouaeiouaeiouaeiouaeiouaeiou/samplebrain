@@ -1,0 +1,10 @@
+build-job:
+  stage: build
+  image: ubuntu:22.04
+  script:
+    - apt-get update
+    - apt-get install -y git cmake g++ freeglut3-dev qt6-base-dev
+    - mkdir -p build
+    - cd build
+    - cmake ..
+    - cmake --build .
