@@ -33,13 +33,15 @@
 using namespace std;
 using namespace spiralcore;
 
+class QSettings;
+
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
 public:
-  MainWindow(const string &port, const string &audio_port, const string &process_port);
-
+  MainWindow(const string &port, const string &audio_port, const string &process_port, QSettings *settings);
+  
   void message(const string &msg) {
     QMessageBox::information(this,"problem",msg.c_str(), QMessageBox::Ok);    
   }
@@ -453,4 +455,5 @@ private:
   
   string m_audio_port;
   string m_process_port;
+
 };

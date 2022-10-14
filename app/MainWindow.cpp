@@ -27,7 +27,7 @@
 
 using namespace std;
 
-MainWindow::MainWindow(const string &port, const string &audio_port, const string &process_port) :
+MainWindow::MainWindow(const string &port, const string &audio_port, const string &process_port, QSettings *settings) :
     m_last_file("."),
     m_feedback(port),
     m_audio_port(audio_port),
@@ -51,7 +51,7 @@ MainWindow::MainWindow(const string &port, const string &audio_port, const strin
   m_Ui.brain_contents->setSpacing(0);
   m_Ui.brain_contents->setContentsMargins(0,0,0,0);
 
-  m_settings_dialog = new SettingsDialog(this);
+  m_settings_dialog = new SettingsDialog(this,settings);
 
     // add default local dest
     // turn on first one

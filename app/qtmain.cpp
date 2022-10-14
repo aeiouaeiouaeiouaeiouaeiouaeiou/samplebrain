@@ -50,7 +50,7 @@ int main( int argc , char *argv[] ){
 
   status::set_port(gui_port);
   
-  MainWindow mainWin(gui_port,audio_port,process_port);
+  MainWindow mainWin(gui_port,audio_port,process_port,&settings);
   mainWin.show();
   process_thread pt(process_port);
   audio_thread at(audio_port,pt);

@@ -34,11 +34,12 @@ OSC_server::OSC_server(const string &port) :
   m_port(port),
   m_exit(false),
   m_command_ring_buffer(262144) {
-  //cerr<<"using port: ["<<port<<"]"<<endl;
+  cerr<<"OSC using port: ["<<port<<"]"<<endl;
   m_server = lo_server_thread_new(port.c_str(), error_handler);
-  if (m_server) {
-    cerr<<m_server<<endl;
+  if (m_server) {    
     lo_server_thread_add_method(m_server, NULL, NULL, default_handler, this);
+  } else {
+    cerr<<"error opening OSC port"<<endl;
   }
 }
 
