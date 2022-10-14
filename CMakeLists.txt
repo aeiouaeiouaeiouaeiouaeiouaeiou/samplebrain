@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
 
-qt_add_executable(samplebrain WIN32 MACOSX_BUNDLE
+add_executable(samplebrain WIN32 MACOSX_BUNDLE
     app/MainWindow.cpp app/MainWindow.h
     app/SettingsDialog.cpp app/SettingsDialog.h
     app/audio_thread.cpp
@@ -46,8 +46,8 @@ qt_add_executable(samplebrain WIN32 MACOSX_BUNDLE
     brain/src/spiralcore/stream.cpp
     brain/src/status.cpp
     brain/src/window.cpp
-    gui/samplebrain.ui
-    gui/settings.ui
+    app/gui/samplebrain.ui
+    app/gui/settings.ui
 )
 target_include_directories(samplebrain PRIVATE
     .
@@ -55,9 +55,9 @@ target_include_directories(samplebrain PRIVATE
 )
 
 target_link_libraries(samplebrain PRIVATE
-    Qt::Core
-    Qt::Gui
-    Qt::Widgets
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
     fftw3
     lo_shared
     portaudio
@@ -74,14 +74,14 @@ set(samplebrain_resource_files
     "app/images/stop.png"
 )
 
-qt_add_resources(samplebrain "samplebrain"
-    PREFIX
-        "/images"
-    BASE
-        "app"
-    FILES
-        ${samplebrain_resource_files}
-)
+#qt5_add_resources(samplebrain "samplebrain"
+#    PREFIX
+#        "/images"
+#    BASE
+#        "app"
+#    FILES
+#        ${samplebrain_resource_files}
+#)
 
 install(TARGETS samplebrain
     BUNDLE DESTINATION .

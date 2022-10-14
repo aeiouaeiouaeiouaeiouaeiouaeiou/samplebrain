@@ -19,7 +19,7 @@
 #include <QFileDialog>
 #include <QLineEdit>
 #include <QMessageBox>
-#include "ui_samplebrain.h"
+#include "gui/ui_samplebrain.h"
 #include "SettingsDialog.h"
 
 #include <iostream>
