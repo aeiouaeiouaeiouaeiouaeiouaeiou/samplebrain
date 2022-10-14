@@ -15,7 +15,8 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(QT NAMES Qt5 REQUIRED COMPONENTS Core)
+find_package(Qt5 REQUIRED COMPONENTS Gui Widgets)
 
 add_executable(samplebrain WIN32 MACOSX_BUNDLE
     app/MainWindow.cpp app/MainWindow.h
