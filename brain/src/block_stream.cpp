@@ -79,6 +79,7 @@ void block_stream::init(u32 block_size, u32 overlap, window::type t, bool ditchp
   m_window.set_current_type(t);
 
   m_blocks.clear();
+  m_blocks.reserve(MAX_BLOCKS);
   sample dummy(block_size);
   for (u32 i=0; i<MAX_BLOCKS; i++) {
     m_blocks.push_back(block(0,"dummy",dummy,44100,m_window));
