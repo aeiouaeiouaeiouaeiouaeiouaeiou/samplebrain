@@ -74,14 +74,14 @@ set(samplebrain_resource_files
     "app/images/stop.png"
 )
 
-#qt5_add_resources(samplebrain "samplebrain"
-#    PREFIX
-#        "/images"
+qt5_add_resources(samplebrain "samplebrain"
+    PREFIX
+        "/images"
 #    BASE
 #        "app"
-#    FILES
-#        ${samplebrain_resource_files}
-#)
+    FILES
+        ${samplebrain_resource_files}
+)
 
 install(TARGETS samplebrain
     BUNDLE DESTINATION .

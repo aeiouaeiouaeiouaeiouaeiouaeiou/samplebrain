@@ -1466,7 +1466,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
         </property>
         <property name="iconSize">
@@ -1493,7 +1493,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/pause.png</normaloff>:/images/images/pause.png</iconset>
         </property>
         <property name="iconSize">
@@ -1513,7 +1513,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/record.png</normaloff>:/images/images/record.png</iconset>
         </property>
         <property name="iconSize">
@@ -1533,7 +1533,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/stop.png</normaloff>:/images/images/stop.png</iconset>
         </property>
         <property name="iconSize">
@@ -1599,7 +1599,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/settings.png</normaloff>:/images/images/settings.png</iconset>
         </property>
         <property name="iconSize">
@@ -1632,7 +1632,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../app/samplebrain.qrc">:/images/images/at.png</pixmap>
+         <pixmap resource="../samplebrain.qrc">:/images/images/at.png</pixmap>
         </property>
        </widget>
       </item>
@@ -1643,6 +1643,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
+  <include location="../samplebrain.qrc"/>
   <include location="../app/samplebrain.qrc"/>
  </resources>
  <connections>
