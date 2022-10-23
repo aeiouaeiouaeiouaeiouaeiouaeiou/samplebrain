@@ -28,7 +28,11 @@
 using namespace std;
 
 MainWindow::MainWindow(const string &port, const string &audio_port, const string &process_port, QSettings *settings) :
-    m_last_file("."),
+    m_last_sound_file("."),
+    m_last_target_file("."),
+    m_last_brain_file("."),
+    m_last_session_file("."),
+    m_last_recording_file("."),
     m_feedback(port),
     m_audio_port(audio_port),
     m_process_port(process_port),

@@ -67,7 +67,7 @@ public:
       }
     }
   }
-
+  
   void send_process_osc(const char *name, const char *types) {
     for (auto dest:m_destinations) {
       if (dest.m_enabled) {
@@ -206,12 +206,14 @@ private slots:
 
   void run_slot() {}
   void load_target() {
-    m_last_file=QFileDialog::getOpenFileName(this,
-                                             QString("Select an audio file"),
-                                             m_last_file,
-                                             m_format_string);
-
-    send_process_osc("/load_target","s",m_last_file.toStdString().c_str());
+    QString path=QFileDialog::getOpenFileName(this,
+                                              QString("Select an audio file"),
+                                              m_last_target_file,
+                                              m_format_string);
+    if (m_last_target_file!="") {
+      m_last_target_file=path;
+      send_process_osc("/load_target","s",m_last_target_file.toStdString().c_str());
+    }
   }
   void target_block_size(int s) { send_process_osc("/target_block_size","i",s); }
   void target_block_overlap(double s) { send_process_osc("/target_overlap","f",s); }
@@ -221,14 +223,15 @@ private slots:
   void fft_spectrum_size(int) {}
   void generate() { send_process_osc("/generate_brain",""); }
   void load_sound() {
-    m_last_file=QFileDialog::getOpenFileName(this,
-                                             QString("Select a wav file"),
-                                             m_last_file,
-                                             m_format_string);
+    QString path=QFileDialog::getOpenFileName(this,
+                                              QString("Select a wav file"),
+                                              m_last_sound_file,
+                                              m_format_string);
 
-    if (m_last_file!="") {
-      send_process_osc("/load_sample","s",m_last_file.toStdString().c_str());
-      sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents, m_last_file.toStdString(),true);
+    if (path!="") {
+      m_last_sound_file=path;
+      send_process_osc("/load_sample","s",m_last_sound_file.toStdString().c_str());
+      sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents, m_last_sound_file.toStdString(),true);
       QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
       m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
       QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
@@ -238,25 +241,27 @@ private slots:
 
 
   void load_sounds() {
-    m_last_file=QFileDialog::getExistingDirectory(this,
-                                                  QString("Select a directory of wav files"),
-                                                  m_last_file);
+    QString path=QFileDialog::getExistingDirectory(this,
+                                                   QString("Select a directory of wav files"),
+                                                   m_last_directory_file);
 
+    if (path!="") {
+      m_last_directory_file=path;
+      QDirIterator dirIt(m_last_directory_file,QDirIterator::Subdirectories);
+      while (dirIt.hasNext()) {
+        dirIt.next();
+        if (QFileInfo(dirIt.filePath()).isFile() &&
+            QFileInfo(dirIt.filePath()).suffix() == "wav") {
+          send_process_osc("/load_sample","s",dirIt.filePath().toStdString().c_str());
 
-    QDirIterator dirIt(m_last_file,QDirIterator::Subdirectories);
-    while (dirIt.hasNext()) {
-      dirIt.next();
-      if (QFileInfo(dirIt.filePath()).isFile() &&
-          QFileInfo(dirIt.filePath()).suffix() == "wav") {
-        send_process_osc("/load_sample","s",dirIt.filePath().toStdString().c_str());
+          sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents, dirIt.filePath().toStdString(),true);
 
-        sound_items::sound_item &si = m_sound_items.add(m_Ui.brain_contents, dirIt.filePath().toStdString(),true);
+          QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
+          m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
+          QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
+          m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
 
-        QObject::connect(si.m_enable, SIGNAL(clicked()), m_sound_item_enable_mapper, SLOT(map()));
-        m_sound_item_enable_mapper->setMapping(si.m_enable, si.m_id);
-        QObject::connect(si.m_del, SIGNAL(clicked()), m_sound_item_delete_mapper, SLOT(map()));
-        m_sound_item_delete_mapper->setMapping(si.m_del, si.m_id);
-
+        }
       }
     }
   }
@@ -313,12 +318,11 @@ private slots:
 
   void record() {
     if (m_save_wav=="") {
-      m_last_file=QFileDialog::getSaveFileName(
-                                               this,
-                                               QString("Select a wav file"),
-                                               m_last_file,
-                                               QString("Sounds (*.wav);;All files (*.*)"));
-      m_save_wav = m_last_file.toStdString();
+      m_last_recording_file=QFileDialog::getSaveFileName(this,
+                                                         QString("Select a wav file"),
+                                                         m_last_recording_file,
+                                                         QString("Sounds (*.wav);;All files (*.*)"));
+      m_save_wav = m_last_recording_file.toStdString();
       // chop off .wav
       size_t pos = m_save_wav.find_last_of(".");
       if (pos!=string::npos) {
@@ -339,43 +343,48 @@ private slots:
   }
 
   void load_brain() {
-    m_last_file=QFileDialog::getOpenFileName(
-                                             this,
-                                             QString("Select a brain file"),
-                                             m_last_file,
-                                             QString("Brains (*.brain);;All files (*.*)"));
+    QString path=QFileDialog::getOpenFileName(this,
+                                              QString("Select a brain file"),
+                                              m_last_brain_file,
+                                              QString("Brains (*.brain);;All files (*.*)"));
 
-    send_process_osc("/load_brain","s",m_last_file.toStdString().c_str());
+    if (path!="") {
+      m_last_brain_file=path;
+      send_process_osc("/load_brain","s",m_last_brain_file.toStdString().c_str());
+    }
   }
   void save_brain() {
-    m_last_file=QFileDialog::getSaveFileName(
-                                             this,
-                                             QString("Select a brain file"),
-                                             m_last_file,
-                                             QString("Brains (*.brain);;All files (*.*)"));
-
-    send_process_osc("/save_brain","s",m_last_file.toStdString().c_str());
+    QString path=QFileDialog::getSaveFileName(this,
+                                              QString("Select a brain file"),
+                                              m_last_brain_file,
+                                              QString("Brains (*.brain);;All files (*.*)"));
+    if (path!="") {
+      m_last_brain_file=path;
+      send_process_osc("/save_brain","s",m_last_brain_file.toStdString().c_str());
+    }
   }
 
   void load_session() {
-    m_last_file=QFileDialog::getOpenFileName(
-                                             this,
-                                             QString("Select a session file"),
-                                             m_last_file,
-                                             QString("Sessions *.samplebrain (*.samplebrain);;All files (*.*)"));
-
-    send_process_osc("/load_session","s",m_last_file.toStdString().c_str());
-    init_from_session(m_last_file.toStdString());
+    QString path=QFileDialog::getOpenFileName(this,
+                                              QString("Select a session file"),
+                                              m_last_session_file,
+                                              QString("Sessions *.samplebrain (*.samplebrain);;All files (*.*)"));
+    if (path!="") {
+      m_last_session_file=path;    
+      send_process_osc("/load_session","s",m_last_session_file.toStdString().c_str());
+      init_from_session(m_last_session_file.toStdString());
+    }
   }
 
   void save_session() {
-    m_last_file=QFileDialog::getSaveFileName(
-                                             this,
-                                             QString("Select a session file"),
-                                             m_last_file,
-                                             QString("Sessions *.samplebrain (*.samplebrain)"));
-
-    send_process_osc("/save_session","s",m_last_file.toStdString().c_str());
+    QString path=QFileDialog::getSaveFileName(this,
+                                              QString("Select a session file"),
+                                              m_last_session_file,
+                                              QString("Sessions *.samplebrain (*.samplebrain)"));
+    if (path!="") {
+      m_last_session_file=path;
+      send_process_osc("/save_session","s",m_last_session_file.toStdString().c_str());
+    }
   }
 
   void update_status() {
@@ -440,7 +449,12 @@ private:
                        QSignalMapper* enable_mapper);
 
   string m_save_wav;
-  QString m_last_file;
+  QString m_last_sound_file;
+  QString m_last_target_file;
+  QString m_last_directory_file;
+  QString m_last_brain_file;
+  QString m_last_session_file;
+  QString m_last_recording_file;
   unsigned int m_record_id;
   Ui_MainWindow m_Ui;
   feedback m_feedback;
