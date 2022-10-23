@@ -161,6 +161,12 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.spinBoxSlideError->setValue(r.get_slide_error());
 
   // target
+  if (t.get_samples().size()>0) {
+    // extract target filename from brain sample
+    string fn = t.get_samples().begin()->m_filename;    
+    m_Ui.labelTargetSound->setText("loaded: "+QFileInfo(QString::fromStdString(fn)).fileName());
+  }
+  
   m_Ui.spinBoxBlockSizeTarget->setValue(t.get_block_size());
   m_Ui.doubleSpinBoxBlockOverlapTarget->setValue(t.get_overlap()/(float)t.get_block_size());
 

@@ -212,6 +212,7 @@ private slots:
                                               m_format_string);
     if (m_last_target_file!="") {
       m_last_target_file=path;
+      m_Ui.labelTargetSound->setText("loaded: "+QFileInfo(path).fileName());      
       send_process_osc("/load_target","s",m_last_target_file.toStdString().c_str());
     }
   }
