@@ -46,11 +46,11 @@ might currently be problems running it on 64bit Windows.
 
 Changes in 0.18.5 (relased 28/10/22):
     
-* target sound filename shown (and tells you if you don't have one)
-* more soundfile formats supported (aiff,aifc,au,snd,fasttracker xi,flac)
-* new configurable OSC ports in settings
-* warning boxes if the OSC network connection fails
-* file path memory per-dialog rather than global
+* Target sound filename shown (and tells you if you don't have one)
+* More soundfile formats supported (aiff,aifc,au,snd,fasttracker xi,flac)
+* New configurable OSC ports in settings
+* Warning boxes if the OSC network connection fails
+* File path memory per-dialog rather than global
 
 For old versions see the [changelog](changelog.md)
     

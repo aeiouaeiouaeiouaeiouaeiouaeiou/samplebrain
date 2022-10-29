@@ -1,6 +1,11 @@
-samplebrain (0.18rc2-1ubuntu0~bionic4) bionic; urgency=medium
+samplebrain (0.18.5rc1-1ubuntu0~bionic1) bionic; urgency=medium
 
-  * Initial release
+* Target sound filename shown (and tells you if you don't have one)
+* More soundfile formats supported (aiff,aifc,au,snd,fasttracker xi,flac)
+* New configurable OSC ports in settings
+* Warning boxes if the OSC network connection fails
+* File path memory per-dialog rather than global
 
- -- Dave Griffiths <dave@thentrythis.org>  Thu, 08 Sep 2022 13:08:26 +0100
+ -- Dave Griffiths <dave@thentrythis.org>  Thu, 29 Oct 2022 08:47:10 +0100
+
 
