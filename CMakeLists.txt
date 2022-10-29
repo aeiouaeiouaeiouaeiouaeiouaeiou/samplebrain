@@ -17,6 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt5 REQUIRED COMPONENTS Gui Widgets)
+find_package(OpenMP)
 
 add_executable(samplebrain WIN32 MACOSX_BUNDLE
     app/MainWindow.cpp app/MainWindow.h
@@ -63,6 +64,11 @@ target_link_libraries(samplebrain PRIVATE
     portaudio
     sndfile
 )
+
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(samplebrain PUBLIC OpenMP::OpenMP_CXX)
+endif()
+
 
 # Resources:
 set(samplebrain_resource_files
