@@ -27,7 +27,7 @@ namespace spiralcore {
   class FFT
   {
   public:
-    FFT(u32 length, u32 num_bins);
+    FFT(u32 length, u32 rate, u32 num_bins);
     ~FFT();
 	void impulse2freq(const float *imp);
     void calculate_bins();
@@ -35,6 +35,7 @@ namespace spiralcore {
 
 	fftw_plan m_plan;
 	u32 m_length;
+    u32 m_rate;
     u32 m_num_bins;
 	double *m_in;
 	fftw_complex *m_spectrum;

@@ -22,31 +22,40 @@ using namespace std;
 using namespace spiralcore;
 
 audio_device::audio_device(const string &clientname, u32 samplerate, u32 buffer_size) :
-    left_out(buffer_size),
-    right_out(buffer_size),
-    left_in(buffer_size),
-    right_in(buffer_size),
     m_recording(false),
-    m_record_filename("")
-{
-    portaudio_client::device_options opt;
-    opt.buffer_size = buffer_size;
-    opt.num_buffers = 2;
-    opt.samplerate = samplerate;
-    opt.in_channels = 2;
-    opt.out_channels = 2;
+    m_record_filename(""),
+    m_samplerate(samplerate) {
+  // connect to default device
+  m_client.init();
+  connect("", clientname, samplerate, buffer_size);
+}
 
-    m_client.set_outputs(left_out.get_buffer(), right_out.get_buffer());
-    m_client.set_inputs(left_in.get_non_const_buffer(), right_in.get_non_const_buffer());
-    m_client.attach(clientname,opt);
+void audio_device::connect(const string &output_device_name, const string &clientname, u32 samplerate, u32 buffer_size) {
+  m_client.detach();
+  
+  left_out.allocate(buffer_size);
+  right_out.allocate(buffer_size);
+  left_in.allocate(buffer_size);
+  right_in.allocate(buffer_size);
+  m_samplerate = samplerate;
 
+  portaudio_client::device_options opt;
+  opt.buffer_size = buffer_size;
+  opt.num_buffers = 2;
+  opt.samplerate = samplerate;
+  opt.in_channels = 2;
+  opt.out_channels = 2;
+
+  m_client.set_outputs(left_out.get_buffer(), right_out.get_buffer());
+  m_client.set_inputs(left_in.get_non_const_buffer(), right_in.get_non_const_buffer());
+  m_client.attach(output_device_name,clientname,opt);
 }
 
 void audio_device::save_sample(const string &filename, const sample s) {
     SF_INFO sfinfo;
     sfinfo.format=SF_FORMAT_WAV | SF_FORMAT_FLOAT;
     sfinfo.frames=s.get_length();
-    sfinfo.samplerate=44100;
+    sfinfo.samplerate=m_samplerate;
     sfinfo.channels=1;
     sfinfo.sections=1;
     sfinfo.seekable=0;
@@ -82,5 +91,4 @@ void audio_device::maybe_record() {
     }
 }
 
-void audio_device::start_graph(graph *graph) {
-}
+

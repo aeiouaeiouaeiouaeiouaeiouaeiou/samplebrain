@@ -19,15 +19,16 @@
 
 #include "portaudio_client.h"
 
-bool              portaudio_client::m_attached   = false;
 long unsigned int portaudio_client::m_buffer_size = 0;
-long unsigned int portaudio_client::m_sample_rate = 44100;
+bool              portaudio_client::m_initialised = false;
+int               portaudio_client::m_attached_device = -1;
 void            (*portaudio_client::run_callback)(void*, unsigned int buf_size)=NULL;
 void             *portaudio_client::run_context   = NULL;
 const float *portaudio_client::m_right_data=NULL;
 const float *portaudio_client::m_left_data=NULL;
 float *portaudio_client::m_right_in_data=NULL;
 float *portaudio_client::m_left_in_data=NULL;
+PaStream *portaudio_client::m_stream=NULL;
 
 ///////////////////////////////////////////////////////
 
@@ -37,58 +38,106 @@ portaudio_client::portaudio_client() {
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 portaudio_client::~portaudio_client() {
-  detach();
+  detach();  
+}
+
+bool portaudio_client::init() {
+  m_initialised=false;
+  if (!m_initialised) {
+    PaError err;
+    err = Pa_Initialize();
+    if( err != paNoError ) {      
+      Pa_Terminate();
+      m_status="error initialising portaudio: "+string(Pa_GetErrorText(err))+"\n";
+      return false;
+    }
+
+    // load all the devices we have
+    PaDeviceIndex default_output_num = Pa_GetDefaultOutputDevice(); 
+    PaDeviceIndex default_input_num = Pa_GetDefaultInputDevice(); 
+
+    m_devices.clear();
+    // get all devices we have available
+    int numDevices = Pa_GetDeviceCount();
+    if(numDevices <= 0) {
+      m_status="portaudio error: no audio devices found";
+      return false;
+    } 
+
+    const PaDeviceInfo *deviceInfo;
+
+    for(int i=0; i<numDevices; i++) {
+      deviceInfo = Pa_GetDeviceInfo(i);
+      if (deviceInfo->maxOutputChannels>=2) {
+        device_desc desc;
+        desc.name = deviceInfo->name;
+        desc.id = i;
+        desc.default_input = i==default_input_num; 
+        desc.default_output = i==default_output_num; 
+        m_devices.push_back(desc);
+      }
+    }
+    
+    m_initialised=true;
+    return true;
+  }
+  return true;
+}
+
+int portaudio_client::device_name_to_id(const string &name) {
+  for (auto &d:m_devices) {
+    if (d.name==name) return d.id;
+  }
+  return -1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-bool portaudio_client::attach(const string &client_name, const device_options &dopt) {
-  if (m_attached) return true;
+bool portaudio_client::attach(const string &requested_output_device, const string &client_name, const device_options &dopt) {
+  if (!init()) return false;  
+  detach();
 
-  PaError err;
-  err = Pa_Initialize();
-  if( err != paNoError ) {
-    cerr<<"could not init portaudio_client"<<endl;
-    Pa_Terminate();
-    fprintf( stderr, "an error occured while using the portaudio stream\n" );
-    fprintf( stderr, "error number: %d\n", err );
-    fprintf( stderr, "error message: %s\n", Pa_GetErrorText( err ) );
-  }
-
-  PaDeviceIndex output_device_num = Pa_GetDefaultOutputDevice(); 
-  PaDeviceIndex input_device_num = Pa_GetDefaultInputDevice(); 
-
-  PaStreamParameters output_parameters;
-  output_parameters.device = output_device_num;
-  if (output_parameters.device == paNoDevice) {
-    cerr<<"error: no default output device."<<endl;
-  } else {
-    output_parameters.channelCount = 2;       /* stereo output */
-    output_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
-    output_parameters.suggestedLatency = Pa_GetDeviceInfo( output_parameters.device )->defaultLowOutputLatency;
-    output_parameters.hostApiSpecificStreamInfo = NULL;
-    cerr<<"Connecting to "<<Pa_GetDeviceInfo( output_parameters.device )->name<<" for output"<<endl;
-  }
-
+  int requested_output_id = device_name_to_id(requested_output_device);
   
-  PaStreamParameters input_parameters;
+  PaStreamParameters output_parameters;
+  if (requested_output_device=="" || requested_output_id==-1) {
+    // start up by connecting to the default one
+    PaDeviceIndex default_output_num = Pa_GetDefaultOutputDevice(); 
+    if (default_output_num == paNoDevice) {
+      m_status="error: no default output device.";
+      return false;
+    } else {
+      output_parameters.device = default_output_num;
+    }
+  } else {
+      output_parameters.device = requested_output_id;
+  }
+
+  output_parameters.channelCount = 2;       /* stereo output */
+  output_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+  output_parameters.suggestedLatency = Pa_GetDeviceInfo( output_parameters.device )->defaultLowOutputLatency;
+  output_parameters.hostApiSpecificStreamInfo = NULL;
+  m_status="connecting to "+string(Pa_GetDeviceInfo(output_parameters.device)->name)+" for output\n";
+
+  // turn off input for the moment, it's causing
+  // too many cross platform security issues
+
+  /*PaStreamParameters input_parameters;
   PaStreamParameters *input_p=&input_parameters;
   input_parameters.device = input_device_num;
   if (true || input_parameters.device == paNoDevice) {
     cerr<<"error: no default input device."<<endl;
     input_p=0;
   } else {
-     input_parameters.channelCount = 2;       /* stereo output */
-     input_parameters.sampleFormat = paFloat32; /* 32 bit floating point output */
+     input_parameters.channelCount = 2;    
+     input_parameters.sampleFormat = paFloat32;
      input_parameters.suggestedLatency = Pa_GetDeviceInfo( input_parameters.device )->defaultLowInputLatency;
      input_parameters.hostApiSpecificStreamInfo = NULL;
      cerr<<"Connecting to "<<Pa_GetDeviceInfo( input_parameters.device )->name<<" for input"<<endl;
-  }		  
+  }	*/	  
 
-  PaStream *stream;
-
-  err = Pa_OpenStream(&stream,
-		      input_p,
+  PaError err = Pa_OpenStream(&m_stream,
+		      NULL,
 		      &output_parameters,
 		      dopt.samplerate,
 		      dopt.buffer_size,
@@ -96,31 +145,38 @@ bool portaudio_client::attach(const string &client_name, const device_options &d
 		      process,
 		      NULL);
 
+  m_attached_device=output_parameters.device;
+
   if(err != paNoError) {
-    cerr<<"could not attach portaudio_client: "<<Pa_GetErrorText( err )<<endl;
-    Pa_Terminate();
+    m_status+="could not attach: "+string(Pa_GetErrorText(err))+"\n";
+    detach();
     return false;
   }
 
-  err = Pa_StartStream(stream);
+  err = Pa_StartStream(m_stream);
 
   if(err != paNoError) {
-    cerr<<"could not start stream: "<<Pa_GetErrorText( err )<<endl;
-    Pa_Terminate();
+    m_status+="could not start stream: "+string(Pa_GetErrorText(err))+"\n";
+    detach();
     return false;
   }
 
-  m_attached=true;
-  cerr<<"connected to portaudio..."<<endl;
+  m_status+="we are connected to portaudio!\n";
   return true;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 void portaudio_client::detach() {
-  cerr<<"detaching from portaudio"<<endl;
-  Pa_Terminate();
-  m_attached=false;
+  if (m_attached_device!=-1) {
+    if (m_stream!=NULL) {
+      Pa_CloseStream(m_stream);
+    }
+    m_stream=NULL;    
+    m_status+="detaching from portaudio\n";
+    Pa_Terminate();
+    m_attached_device=-1;
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////

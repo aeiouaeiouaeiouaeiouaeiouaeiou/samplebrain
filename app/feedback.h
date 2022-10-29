@@ -17,6 +17,7 @@
 #include <string>
 #include <QtGui>
 #include <QStatusBar>
+#include "SettingsDialog.h"
 #include "spiralcore/OSC_server.h"
 
 #pragma once
@@ -26,12 +27,13 @@ class sound_items;
 
 class feedback {
 public:
-    feedback(std::string address);
-    void poll(QStatusBar *s, sound_items *sound_items);
-
+  feedback(std::string address);
+  void poll(QStatusBar *s, sound_items *sound_items, SettingsDialog *settings);
+  bool ok() { return m_osc.ok(); }
+  
 private:
 
-	OSC_server m_osc;
+  OSC_server m_osc;
 };
 
 }

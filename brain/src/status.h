@@ -24,11 +24,14 @@ namespace spiralcore {
 
 class status {
 public:
-    static void _update(const std::string &msg);
-    static void update(const char *msg, ...);
-    static void sound_item(const std::string &name, const std::string &colour);
-    static void sound_item_refresh();
-    static lo_address m_address;
+  static void set_port(const std::string &port);
+  static void _update(const std::string &msg);
+  static void update(const char *msg, ...);
+  static void sound_item(const std::string &name, const std::string &colour);
+  static void sound_item_refresh();
+  static void add_audio_device(int id, const std::string &name, bool default_output);
+  static void audio_device_status(const std::string &status);
+  static lo_address m_address;
 };
 
 }

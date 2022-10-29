@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/settings.png</file>
     <file>images/at.png</file>
     <file>images/pause.png</file>
     <file>images/play.png</file>

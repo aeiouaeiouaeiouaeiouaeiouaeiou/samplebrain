@@ -1,0 +1,71 @@
+# Building from source
+## Linux (Ubuntu)
+Install cmake:
+
+    $ sudo apt install cmake
+
+Install dependencies for the interface:
+
+    $ sudo apt install build-essential qtcreator qt5-default
+
+On ubuntu 22.04 it's:
+
+    $ apt install build-essential qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
+    
+Build & run it:
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ cmake --build .
+    $ ./samplebrain
+
+## Mac
+Install cmake:
+
+    $ brew install cmake
+
+Install dependencies for the interface:
+
+    $ brew install qt
+    $ brew link qt
+
+Build & run it:
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ cmake --build .
+
+`samplebrain.app` should then be in the build folder for you to run.
+
+# Mac build additions
+
+To make a mac app bundle:
+
+Run `macdeployqt` which copies all dependencies inside the app.
+
+    $ cd build
+    $ macdeployqt
+
+If the icon is not visible, you might need to copy desktop/samplebrain.icns (the icon) to the Resources directory in the app bundle.
+
+    $ cp ../desktop/samplebrain.icns samplebrain.app/Contents/Resources
+
+Then edit Info.plist to add samplebrain.icns to CFBundleIconFile. Key `CFBundleIconFile` should match:
+
+	<key>CFBundleIconFile</key>
+	<string>samplebrain.icns</string>
+
+You might also need to resign the app bundle after making any changes
+
+    $ codesign --force --deep --sign - samplebrain.app
+
+# Windows (Work in progress)
+
+* Install [MSYS2](https://www.msys2.org/)
+* Install dependances via pacman
+* Build with qmake as usual
+* Run `windeployqt` and copy missing .dll files into release directory
+
+ 

@@ -24,8 +24,9 @@ using namespace std;
 
 static const int MAX_FFT_LENGTH = 4096;
 
-FFT::FFT(u32 length, u32 bins) :
+FFT::FFT(u32 length, u32 rate, u32 bins) :
   m_length(length),
+  m_rate(rate),
   m_num_bins(bins),
   m_in(new double[length]),
   m_spectrum(new fftw_complex[length]),
@@ -35,25 +36,18 @@ FFT::FFT(u32 length, u32 bins) :
   m_plan = fftw_plan_dft_r2c_1d(m_length, m_in, m_spectrum, FFTW_ESTIMATE);
 }
 
-FFT::~FFT()
-{
+FFT::~FFT() {
   delete[] m_in;
   fftw_destroy_plan(m_plan);
 }
 
-void FFT::impulse2freq(const float *imp)
-{
+void FFT::impulse2freq(const float *imp) {
   unsigned int i;
-
-  for (i=0; i<m_length; i++)
-    {
-      m_in[i] = imp[i];
-    }
-
+  for (i=0; i<m_length; i++) {
+    m_in[i] = imp[i];
+  }
   fftw_execute(m_plan);
 }
-
-static const float SRATE = 44100;
 
 float FFT::calculate_dominant_freq() {
   double highest = 0;
@@ -65,7 +59,7 @@ float FFT::calculate_dominant_freq() {
       highest=t;
     }
   }
-  float freq = index * (SRATE/(float)m_length);
+  float freq = index * (m_rate/(float)m_length);
   if (freq<0.01) freq=0.01;
   return freq;
 }
