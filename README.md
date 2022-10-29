@@ -41,12 +41,16 @@ written to run on a couple of computers!) you will have to bear with
 us as we gradually stabilise things based on your feedback. There
 might currently be problems running it on 64bit Windows.
             
-* **Windows**: [samplebrain_0.18.4_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.4_win.zip)
-* **Mac (intel/m1)**: [samplebrain_0.18.4_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.4_macintel.app.zip)
+* **Windows**: [samplebrain_0.18.5_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.5_win.zip)
+* **Mac (intel/m1)**: [samplebrain_0.18.5_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.5_macintel.app.zip)
 
-Changes in 0.18.4: New audio device settings window and updated
-windows build. Better default block size, tool tip tweaks and fixes
-for dark themes by [Claude Heiland-Allen](https://mathr.co.uk/).
+Changes in 0.18.5 (relased 28/10/22):
+    
+* target sound filename shown (and tells you if you don't have one)
+* more soundfile formats supported (aiff,aifc,au,snd,fasttracker xi,flac)
+* new configurable OSC ports in settings
+* warning boxes if the OSC network connection fails
+* file path memory per-dialog rather than global
 
 For old versions see the [changelog](changelog.md)
     

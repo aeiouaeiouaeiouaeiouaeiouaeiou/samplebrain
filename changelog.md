@@ -1,5 +1,14 @@
 # Changlog
 
+0.18.4
+
+* **Windows**: [samplebrain_0.18.4_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.4_win.zip)
+* **Mac (intel/m1)**: [samplebrain_0.18.4_macintel.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.4_macintel.app.zip)
+
+Changes in 0.18.4: New audio device settings window and updated
+windows build. Better default block size, tool tip tweaks and fixes
+for dark themes by [Claude Heiland-Allen](https://mathr.co.uk/).
+
 0.18.3
 
 * **Windows**: [samplebrain_0.18.3_win.zip](https://static.thentrythis.org/samplebrain/samplebrain_0.18.3_win.zip)
