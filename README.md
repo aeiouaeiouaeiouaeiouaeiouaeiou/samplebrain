@@ -34,6 +34,10 @@ both the target and brain samples). The original samples used to
 create the demo session [can be found here for
 testing](https://static.thentrythis.org/samplebrain/samples/).
 
+# Community
+
+* https://www.reddit.com/r/samplebrain/
+    
 # Download
 
 As this is experimental non-commercial software (only originally
