@@ -28,7 +28,11 @@
 using namespace std;
 
 MainWindow::MainWindow(const string &port, const string &audio_port, const string &process_port, QSettings *settings) :
-    m_last_file("."),
+    m_last_sound_file("."),
+    m_last_target_file("."),
+    m_last_brain_file("."),
+    m_last_session_file("."),
+    m_last_recording_file("."),
     m_feedback(port),
     m_audio_port(audio_port),
     m_process_port(process_port),
@@ -157,6 +161,12 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.spinBoxSlideError->setValue(r.get_slide_error());
 
   // target
+  if (t.get_samples().size()>0) {
+    // extract target filename from brain sample
+    string fn = t.get_samples().begin()->m_filename;    
+    m_Ui.labelTargetSound->setText("loaded: "+QFileInfo(QString::fromStdString(fn)).fileName());
+  }
+  
   m_Ui.spinBoxBlockSizeTarget->setValue(t.get_block_size());
   m_Ui.doubleSpinBoxBlockOverlapTarget->setValue(t.get_overlap()/(float)t.get_block_size());
 

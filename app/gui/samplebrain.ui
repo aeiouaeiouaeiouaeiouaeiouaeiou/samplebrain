@@ -729,6 +729,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="labelTargetSound">
+            <property name="text">
+             <string>no target sound loaded</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButtonLoadTarget">
             <property name="font">
              <font>
@@ -1112,8 +1119,8 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>17</width>
+              <height>13</height>
              </size>
             </property>
            </spacer>

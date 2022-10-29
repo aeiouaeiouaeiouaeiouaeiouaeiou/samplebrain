@@ -228,6 +228,7 @@ u32 brain::rev_search(const block &target, const search_params &params) {
   return furthest_index;
 }
 
+/*
 // really slow - every to every comparison of blocks calculating average distance
 double brain::calc_average_diff(search_params &params) {
   double diff=0;
@@ -261,6 +262,7 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
     ++outer_index;
   }  
 }
+*/
 
 void brain::build_synapses_fixed(search_params &params) {
   //m_average_error = calc_average_diff(params)*thresh;
