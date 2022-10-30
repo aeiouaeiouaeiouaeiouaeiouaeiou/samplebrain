@@ -13,7 +13,7 @@ build-win64:
   tags:
     - "windows"
   before_script:
-    - choco install -y cmake
+    - choco install -y cmake python
     - $env:Path += ';C:\Program Files\CMake\bin'
   stage: build
   script:
