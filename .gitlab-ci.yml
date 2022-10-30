@@ -1,23 +1,23 @@
-build-job:
+build-ubuntu:
   stage: build
   image: ubuntu:22.04
   script:
     - apt-get update
-    - apt-get install -y git cmake g++ freeglut3-dev qt6-base-dev 
+    - apt-get install -y git cmake g++ freeglut3-dev qtbase5-dev qt5-qmake qtbase5-dev-tools
     - mkdir -p build
     - cd build
     - cmake ..
-    - cmake --build .
+    - cmake --build . --target samplebrain
 
 build-win64:
   tags:
     - "windows"
   before_script:
-    - choco install -y cmake python
+    - choco install -y cmake python qt5-default
     - $env:Path += ';C:\Program Files\CMake\bin'
   stage: build
   script:
     - mkdir build 
     - cd build
     - cmake ..
-    - cmake --build .
+    - cmake --build . --target samplebrain

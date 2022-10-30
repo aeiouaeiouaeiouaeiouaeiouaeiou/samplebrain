@@ -15,7 +15,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core)
+find_package(QT NAMES Qt5 REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Gui Widgets)
 find_package(OpenMP)
 
@@ -56,9 +56,9 @@ target_include_directories(samplebrain PRIVATE
 )
 
 target_link_libraries(samplebrain PRIVATE
-    Qt::Core
-    Qt::Gui
-    Qt::Widgets
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
     fftw3
     lo_shared
     portaudio
@@ -80,11 +80,11 @@ set(samplebrain_resource_files
     "app/images/stop.png"
 )
 
-qt_add_resources(samplebrain "samplebrain"
+qt5_add_resources(samplebrain "samplebrain"
     PREFIX
         "/images"
-    BASE
-        "app"
+    #BASE
+    #    "app"
     FILES
         ${samplebrain_resource_files}
 )
