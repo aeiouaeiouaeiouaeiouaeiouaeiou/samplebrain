@@ -11,7 +11,7 @@ build-job:
 
 build-win64:
   tags:
-    - "win64"
+    - "windows"
   stage: build
   script:
     - mkdir build 
