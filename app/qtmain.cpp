@@ -33,7 +33,7 @@ int main( int argc , char *argv[] ){
 
   
   QApplication app(argc, argv);
-  
+  cerr<<"Qt version: "<<qVersion()<<endl;
   QSettings settings("thentrythis", "samplebrain");
 
   // slight over-use of OSC servers here, but the are packaged nicely for

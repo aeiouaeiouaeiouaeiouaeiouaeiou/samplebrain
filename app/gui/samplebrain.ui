@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1188</width>
-    <height>898</height>
+    <height>939</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1651,7 +1651,7 @@
  </widget>
  <resources>
   <include location="../samplebrain.qrc"/>
-  <include location="../app/samplebrain.qrc"/>
+  <include location="../samplebrain.qrc"/>
  </resources>
  <connections>
   <connection>
