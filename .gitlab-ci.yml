@@ -8,3 +8,13 @@ build-job:
     - cd build
     - cmake ..
     - cmake --build .
+
+build-win64:
+  tags:
+    - "win64"
+  stage: build
+  script:
+    - mkdir build 
+    - cd build
+    - cmake ..
+    - cmake --build .
