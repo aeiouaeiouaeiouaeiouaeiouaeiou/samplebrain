@@ -12,6 +12,9 @@ build-job:
 build-win64:
   tags:
     - "windows"
+  before_script:
+    - choco install -y cmake
+    - $env:Path += ';C:\Program Files\CMake\bin'
   stage: build
   script:
     - mkdir build 
