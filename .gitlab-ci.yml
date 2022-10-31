@@ -15,7 +15,7 @@ build-win64:
   before_script:
     - choco install -y cmake python qt5-default
     - $env:Path += ';C:\Program Files\CMake\bin'
-    - set CMAKE_PREFIX_PATH = C:\Qt\5.15.2\mingw81_64
+    - set CMAKE_PREFIX_PATH=C:\Qt\5.15.2\mingw81_64
   stage: build
   script:
     - mkdir build 
