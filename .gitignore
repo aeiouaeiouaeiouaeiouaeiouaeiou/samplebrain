@@ -1,1 +1,7 @@
+*.rej
+*.orig
+.DS_Store
+*.ini
 build
+*.*~
+*.o

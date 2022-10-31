@@ -11,6 +11,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 include(GNUInstallDirs)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -26,6 +27,7 @@ add_executable(samplebrain WIN32 MACOSX_BUNDLE
     app/feedback.cpp
     app/process_thread.cpp
     app/qtmain.cpp
+    app/samplebrain.qrc
     app/sound_items.cpp
     brain/src/aquila/filter/MelFilter.cpp
     brain/src/aquila/filter/MelFilterBank.cpp
@@ -68,26 +70,6 @@ target_link_libraries(samplebrain PRIVATE
 if(OpenMP_CXX_FOUND)
     target_link_libraries(samplebrain PUBLIC OpenMP::OpenMP_CXX)
 endif()
-
-
-# Resources:
-set(samplebrain_resource_files
-    "app/images/at.png"
-    "app/images/pause.png"
-    "app/images/play.png"
-    "app/images/record.png"
-    "app/images/settings.png"
-    "app/images/stop.png"
-)
-
-qt5_add_resources(samplebrain "samplebrain"
-    PREFIX
-        "/images"
-    #BASE
-    #    "app"
-    FILES
-        ${samplebrain_resource_files}
-)
 
 install(TARGETS samplebrain
     BUNDLE DESTINATION .
