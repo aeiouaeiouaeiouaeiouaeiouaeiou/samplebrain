@@ -1,8 +1,1 @@
-*.rej
-*.orig
-.DS_Store
-*.ini
-/build/*.cpp
-/build/*.app/
-*.*~
-*.o
+build

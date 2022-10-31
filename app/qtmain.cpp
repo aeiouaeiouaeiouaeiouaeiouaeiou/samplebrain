@@ -19,22 +19,54 @@
 #include <iostream>
 #include <unistd.h>
 #include <QtGui>
+#include <QSettings>
+
 #include "MainWindow.h"
 
 #include "process_thread.h"
 #include "audio_thread.h"
+#include "status.h"
 
 using namespace std;
 
 int main( int argc , char *argv[] ){
-    QApplication app(argc, argv);
-    MainWindow mainWin;
-    mainWin.show();
-    process_thread pt;
-    audio_thread at(pt);
-    pt.register_renderer(at.m_left_renderer, at.m_right_renderer, at.m_block_stream);
 
-    mainWin.set_audio_thread(&at);
+  
+  QApplication app(argc, argv);
+  cerr<<"Qt version: "<<qVersion()<<endl;
+  QSettings settings("thentrythis", "samplebrain");
 
-    return app.exec();
+  // slight over-use of OSC servers here, but the are packaged nicely for
+  // threadsafe (nonblocking) communication, and it's useful to expose all
+  // moving parts for external control (i.e. the processing and the audio)
+  
+  if (!settings.contains("gui_port")) settings.setValue("gui_port", "62345");
+  if (!settings.contains("audio_port")) settings.setValue("audio_port", "62346");
+  if (!settings.contains("process_port")) settings.setValue("process_port", "62347");  
+
+  string gui_port = settings.value("gui_port").toByteArray().constData();  
+  string audio_port = settings.value("audio_port").toByteArray().constData();
+  string process_port = settings.value("process_port").toByteArray().constData();
+
+  status::set_port(gui_port);
+  
+  MainWindow mainWin(gui_port,audio_port,process_port,&settings);
+  mainWin.show();
+  process_thread pt(process_port);
+  audio_thread at(audio_port,pt);
+  
+  pt.register_renderer(at.m_left_renderer, at.m_right_renderer, at.m_block_stream);
+  mainWin.set_audio_thread(&at);
+
+  if (!at.ok()) {
+    mainWin.message("problem starting audio thread on port "+audio_port);
+  }
+  if (!pt.ok()) {
+    mainWin.message("problem starting process thread on port "+process_port);
+  }
+  if (!mainWin.ok()) {
+    mainWin.message("problem starting gui thread on port "+gui_port);
+  }
+
+  return app.exec();
 }

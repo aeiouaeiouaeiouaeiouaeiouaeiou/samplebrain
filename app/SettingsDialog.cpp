@@ -24,12 +24,16 @@
 
 using namespace std;
 
-SettingsDialog::SettingsDialog(MainWindow *parent):
+SettingsDialog::SettingsDialog(MainWindow *parent, QSettings *settings):
   m_device(""),
   m_parent(parent),
   m_buffersize(2048),
-  m_samplerate(44100) {
+  m_samplerate(44100),
+  m_settings(settings) {
   m_Ui.setupUi(this);
+  m_Ui.guiOSCLineEdit->setText(settings->value("gui_port").toByteArray().constData());
+  m_Ui.processOSCLineEdit->setText(settings->value("process_port").toByteArray().constData());
+  m_Ui.audioOSCLineEdit->setText(settings->value("audio_port").toByteArray().constData());
 }
 
 void SettingsDialog::connect() {

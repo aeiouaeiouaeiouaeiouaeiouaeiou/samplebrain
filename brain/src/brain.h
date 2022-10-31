@@ -62,8 +62,8 @@ public:
     u32 rev_search(const block &target, const search_params &params);
 
     // synaptic search
-    double calc_average_diff(search_params &params);
-    void build_synapses_thresh(search_params &params, double threshold);
+    // double calc_average_diff(search_params &params);
+    // void build_synapses_thresh(search_params &params, double threshold);
     void build_synapses_fixed(search_params &params);
     u32 search_synapses(const block &target, search_params &params);
     double get_current_error() { return m_current_error; }

@@ -22,6 +22,10 @@ using namespace std;
 
 lo_address status::m_address = lo_address_new_from_url("osc.udp://localhost:8890");
 
+void status::set_port(const std::string &port) {
+  status::m_address = lo_address_new_from_url(string("osc.udp://localhost:"+port).c_str());
+}
+
 void status::_update(const std::string &msg) {
     lo_send(m_address,"/report","s",msg.c_str());
 }

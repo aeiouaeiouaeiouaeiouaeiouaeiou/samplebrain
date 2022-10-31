@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <atomic>
 #include <sndfile.h>
 #include <float.h>
 #include <spiralcore/audio.h>
@@ -69,6 +70,8 @@ void brain::load_sound(std::string filename, stereo_mode mode) {
     delete[] temp;
     m_samples.push_back(sound(filename,s));
     status::update("loaded %s",filename.c_str());
+  } else {
+    status::update("problem loading %s",filename.c_str());
   }
 }
 
@@ -226,6 +229,7 @@ u32 brain::rev_search(const block &target, const search_params &params) {
   return furthest_index;
 }
 
+/*
 // really slow - every to every comparison of blocks calculating average distance
 double brain::calc_average_diff(search_params &params) {
   double diff=0;
@@ -242,10 +246,12 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
   m_average_error = calc_average_diff(params)*thresh;
   double err = m_average_error*thresh;
   u32 brain_size = m_blocks.size();
-  u32 outer_index = 0;
-  for (auto &i : m_blocks) {
+  std::atomic<u32> progress{0};
+  #pragma omp parallel for
+  for (u32 outer_index = 0; outer_index < brain_size; ++outer_index) {
+    auto &i = m_blocks[outer_index];
     u32 index = 0;
-    status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));
+    status::update("building synapses %d%%",(int)(progress/(float)brain_size*100));
     for (auto &j : m_blocks) {
       if (index!=outer_index) {
         // collect connections that are under threshold in closeness
@@ -256,30 +262,33 @@ void brain::build_synapses_thresh(search_params &params, double thresh) {
       }
       ++index;
     }
-    ++outer_index;
+    ++progress;
   }  
 }
+*/
 
 void brain::build_synapses_fixed(search_params &params) {
   //m_average_error = calc_average_diff(params)*thresh;
   u32 brain_size = m_blocks.size();
-  u32 outer_index = 0;
   u32 num_synapses = NUM_FIXED_SYNAPSES;
   if (num_synapses>=m_blocks.size()) num_synapses=m_blocks.size()-1;
 
   // need to stop the progress updates flooding osc
   u32 update_period = 100;
-  u32 update_tick = 0;
-
-  for (auto &i:m_blocks) {
+  std::atomic<u32> update_tick{0};
+  std::atomic<u32> progress{0};
+  #pragma omp parallel for
+  for (u32 outer_index = 0; outer_index < brain_size; ++outer_index) {
+    auto &i = m_blocks[outer_index];
     if (update_tick>update_period) {
-      status::update("building synapses %d%%",(int)(outer_index/(float)brain_size*100));     
+      status::update("building synapses %d%%",(int)(progress/(float)brain_size*100));
       update_tick=0;
     }
     update_tick++;
  
     u32 index = 0;
     vector<pair<u32,double>> collect;
+    collect.reserve(brain_size);
 
     // collect comparisons to all other blocks
     for (auto &j:m_blocks) {
@@ -304,7 +313,7 @@ void brain::build_synapses_fixed(search_params &params) {
       i.get_synapse().push_back(collect[n].first);
     }
 
-    ++outer_index;
+    ++progress;
   }
   status::update("Done: %d synapses grown for %d blocks",num_synapses*brain_size,brain_size);
 }

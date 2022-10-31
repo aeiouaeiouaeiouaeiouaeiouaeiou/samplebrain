@@ -27,9 +27,16 @@
 
 using namespace std;
 
-MainWindow::MainWindow() :
-    m_last_file("."),
-    m_feedback("8890")
+MainWindow::MainWindow(const string &port, const string &audio_port, const string &process_port, QSettings *settings) :
+    m_last_sound_file("."),
+    m_last_target_file("."),
+    m_last_brain_file("."),
+    m_last_session_file("."),
+    m_last_recording_file("."),
+    m_feedback(port),
+    m_audio_port(audio_port),
+    m_process_port(process_port),
+    m_format_string("Microsoft WAV (*.wav);;SGI/Apple AIFF (*.aiff);;SGI/Apple AIFC (*.aifc);;Sun/DEC/NeXT AU (*.au);;Sun/DEC/NeXT SND (*.snd);;Fasttracker 2 XI (*.xi);;Free Lossless Audio Codec FLAC (*.flac);;All files (*.*)")
 {
   m_sound_item_enable_mapper = new QSignalMapper(this);
   m_sound_item_delete_mapper = new QSignalMapper(this);
@@ -49,7 +56,7 @@ MainWindow::MainWindow() :
   m_Ui.brain_contents->setSpacing(0);
   m_Ui.brain_contents->setContentsMargins(0,0,0,0);
 
-  m_settings_dialog = new SettingsDialog(this);
+  m_settings_dialog = new SettingsDialog(this,settings);
 
     // add default local dest
     // turn on first one
@@ -59,8 +66,8 @@ MainWindow::MainWindow() :
     for (int i=0; i<10; i++) {
       osc_destination d;
       d.m_id=i;
-      d.m_audio_address = lo_address_new_from_url("osc.udp://localhost:8888");
-      d.m_process_address = lo_address_new_from_url("osc.udp://localhost:8889");
+      d.m_audio_address = lo_address_new_from_url(string("osc.udp://localhost:"+m_audio_port).c_str());
+      d.m_process_address = lo_address_new_from_url(string("osc.udp://localhost:"+m_process_port).c_str());
       if (i==0) d.m_enabled=true;
       else d.m_enabled=false;
       add_gui_address(d,enable_mapper);
@@ -154,6 +161,12 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.spinBoxSlideError->setValue(r.get_slide_error());
 
   // target
+  if (t.get_samples().size()>0) {
+    // extract target filename from brain sample
+    string fn = t.get_samples().begin()->m_filename;    
+    m_Ui.labelTargetSound->setText("loaded: "+QFileInfo(QString::fromStdString(fn)).fileName());
+  }
+  
   m_Ui.spinBoxBlockSizeTarget->setValue(t.get_block_size());
   m_Ui.doubleSpinBoxBlockOverlapTarget->setValue(t.get_overlap()/(float)t.get_block_size());
 

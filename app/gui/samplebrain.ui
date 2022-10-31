@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>920</width>
-    <height>680</height>
+    <width>1188</width>
+    <height>939</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>samplebrain 0.18.4</string>
+   <string>samplebrain 0.18.5</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -19,7 +19,7 @@
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
-        <family>Helvetica Neue</family>
+        <family>Comic Sans MS</family>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -38,7 +38,7 @@
            <widget class="QLabel" name="label_19">
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <pointsize>20</pointsize>
               <weight>75</weight>
               <bold>true</bold>
@@ -55,7 +55,7 @@
              <widget class="QLabel" name="label_6">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -118,7 +118,7 @@
              <widget class="QLabel" name="label_20">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -181,7 +181,7 @@
              <widget class="QLabel" name="label_7">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -205,7 +205,7 @@
               </property>
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -232,7 +232,7 @@
               </property>
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -260,7 +260,7 @@
              <widget class="QLabel" name="label_24">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -326,7 +326,7 @@
              <widget class="QLabel" name="label_25">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -392,7 +392,7 @@
              <widget class="QLabel" name="label_30">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -458,7 +458,7 @@
              <widget class="QLabel" name="label_28">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -527,7 +527,7 @@
              <widget class="QLabel" name="label_32">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -570,7 +570,7 @@
              <widget class="QLabel" name="label_26">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -633,7 +633,7 @@
              <widget class="QLabel" name="label_29">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -717,7 +717,7 @@
            <widget class="QLabel" name="label_16">
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <pointsize>20</pointsize>
               <weight>75</weight>
               <bold>true</bold>
@@ -729,10 +729,17 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="labelTargetSound">
+            <property name="text">
+             <string>no target sound loaded</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButtonLoadTarget">
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -748,7 +755,7 @@
              <widget class="QLabel" name="label_17">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -779,7 +786,7 @@
              <widget class="QLabel" name="label_18">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -810,7 +817,7 @@
              <widget class="QLabel" name="label_14">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -870,7 +877,7 @@
            <widget class="QPushButton" name="pushButtonGenerateTarget">
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -887,7 +894,7 @@
             </property>
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -904,7 +911,7 @@
            <widget class="QLabel" name="label_23">
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <pointsize>20</pointsize>
               <weight>75</weight>
               <bold>true</bold>
@@ -921,7 +928,7 @@
              <widget class="QLabel" name="label_31">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -981,7 +988,7 @@
              <widget class="QLabel" name="label_21">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -1041,7 +1048,7 @@
              <widget class="QLabel" name="label_22">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>9</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -1100,13 +1107,6 @@
           </item>
           <item>
            <widget class="QCheckBox" name="checkBoxStereo">
-            <property name="font">
-             <font>
-              <family>Helvetica Neue</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
             <property name="text">
              <string>stereo mode</string>
             </property>
@@ -1119,8 +1119,8 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>17</width>
+              <height>13</height>
              </size>
             </property>
            </spacer>
@@ -1135,7 +1135,7 @@
              <widget class="QLabel" name="label_3">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <pointsize>20</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
@@ -1148,11 +1148,6 @@
             </item>
             <item>
              <widget class="QToolButton" name="toolButtonAll">
-              <property name="font">
-               <font>
-                <family>Helvetica Neue</family>
-               </font>
-              </property>
               <property name="text">
                <string>all</string>
               </property>
@@ -1160,11 +1155,6 @@
             </item>
             <item>
              <widget class="QToolButton" name="toolButtonNone">
-              <property name="font">
-               <font>
-                <family>Helvetica Neue</family>
-               </font>
-              </property>
               <property name="text">
                <string>none</string>
               </property>
@@ -1194,7 +1184,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>320</width>
+               <width>424</width>
                <height>198</height>
               </rect>
              </property>
@@ -1212,7 +1202,7 @@
              <widget class="QPushButton" name="pushButtonLoadSound">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1226,7 +1216,7 @@
              <widget class="QPushButton" name="pushButtonLoadSounds">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1240,7 +1230,7 @@
              <widget class="QPushButton" name="pushButtonClearBrain">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1258,7 +1248,7 @@
              <widget class="QLabel" name="label">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1289,7 +1279,7 @@
              <widget class="QLabel" name="label_2">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1320,7 +1310,7 @@
              <widget class="QLabel" name="label_15">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1380,7 +1370,7 @@
            <widget class="QPushButton" name="pushButtonGenerate">
             <property name="font">
              <font>
-              <family>Helvetica Neue</family>
+              <family>Comic Sans MS</family>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -1396,7 +1386,7 @@
              <widget class="QPushButton" name="pushButtonLoadBrain">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1410,7 +1400,7 @@
              <widget class="QPushButton" name="pushButtonSaveBrain">
               <property name="font">
                <font>
-                <family>Helvetica Neue</family>
+                <family>Comic Sans MS</family>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1472,11 +1462,18 @@
      <layout class="QHBoxLayout" name="horizontalLayout_12">
       <item>
        <widget class="QPushButton" name="pushButtonPlay">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
         </property>
         <property name="iconSize">
@@ -1492,11 +1489,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonStop">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/pause.png</normaloff>:/images/images/pause.png</iconset>
         </property>
         <property name="iconSize">
@@ -1516,7 +1520,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/record.png</normaloff>:/images/images/record.png</iconset>
         </property>
         <property name="iconSize">
@@ -1536,7 +1540,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/stop.png</normaloff>:/images/images/stop.png</iconset>
         </property>
         <property name="iconSize">
@@ -1563,7 +1567,7 @@
          <widget class="QPushButton" name="pushButtonLoadSession">
           <property name="font">
            <font>
-            <family>Helvetica Neue</family>
+            <family>Comic Sans MS</family>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -1577,7 +1581,7 @@
          <widget class="QPushButton" name="pushButtonSaveSession">
           <property name="font">
            <font>
-            <family>Helvetica Neue</family>
+            <family>Comic Sans MS</family>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -1591,11 +1595,18 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../app/samplebrain.qrc">
+         <iconset resource="../samplebrain.qrc">
           <normaloff>:/images/images/settings.png</normaloff>:/images/images/settings.png</iconset>
         </property>
         <property name="iconSize">
@@ -1628,7 +1639,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../app/samplebrain.qrc">:/images/images/at.png</pixmap>
+         <pixmap resource="../samplebrain.qrc">:/images/images/at.png</pixmap>
         </property>
        </widget>
       </item>
@@ -1639,7 +1650,8 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="../app/samplebrain.qrc"/>
+  <include location="../samplebrain.qrc"/>
+  <include location="../samplebrain.qrc"/>
  </resources>
  <connections>
   <connection>
