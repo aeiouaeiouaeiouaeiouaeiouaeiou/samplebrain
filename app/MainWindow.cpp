@@ -113,8 +113,8 @@ void MainWindow::init_from_session(const string &filename) {
   ifstream ifs(filename.c_str(),ios::binary);
   if (!ifs) return;
   
-  brain s,t;
-  u32 version=0;
+  brain s,t,lt;
+  u32 version=1;
   ifs||version;
   renderer r(s,t);
   ifs||r;
@@ -133,7 +133,14 @@ void MainWindow::init_from_session(const string &filename) {
   ifs||source_window||target_window;
   // todo: probably don't need to load all the sample data too :/
   ifs||s;
-  ifs||t;
+  ifs||t;  // left
+  ifs||lt; // right
+
+  if (version>0) {
+    ifs||m_stereo;
+    m_Ui.checkBoxStereo->setChecked(m_stereo);
+  }
+
 
   // brain tweaks
   search_params * p = r.get_params();
@@ -159,7 +166,7 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.spinBoxSynapses->setValue(p->m_num_synapses);
   m_Ui.sliderSlideError->setValue(r.get_slide_error());
   m_Ui.spinBoxSlideError->setValue(r.get_slide_error());
-
+  
   // target
   if (t.get_samples().size()>0) {
     // extract target filename from brain sample
@@ -197,8 +204,6 @@ void MainWindow::init_from_session(const string &filename) {
   m_Ui.doubleSpinBoxNMix->setValue(r.get_n_mix());
   m_Ui.sliderAutotune->setValue(r.get_autotune()*100);
   m_Ui.doubleSpinBoxAutotune->setValue(r.get_autotune());
-
-
 
 }
 

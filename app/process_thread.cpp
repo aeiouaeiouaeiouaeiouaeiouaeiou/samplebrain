@@ -140,6 +140,10 @@ void process_thread::process() {
       if (name=="/save_session") {
         save_session(cmd.get_string(0));
       }
+      if (name=="/stereo") {
+        // only for session file save
+        m_stereo=cmd.get_int(0);
+      }
     }
 #ifdef WIN32 
     Sleep(1);
@@ -174,16 +178,7 @@ void process_thread::load_session(const std::string &filename) {
   m_left_target.clear();
   m_right_target.clear();
   ifstream ifs(filename.c_str(),ios::binary);
-  u32 version=0;
-  ifs||version;
-  ifs||(*m_left_renderer);
-  ifs||(*m_right_renderer);
-  ifs||m_source_block_size||m_source_overlap;
-  ifs||m_target_block_size||m_target_overlap;
-  ifs||m_window_type||m_target_window_type;
-  ifs||m_source;
-  ifs||m_left_target;
-  ifs||m_right_target;
+  stream_session(ifs);
   ifs.close();
   pthread_mutex_unlock(m_brain_mutex);
 }
@@ -191,16 +186,23 @@ void process_thread::load_session(const std::string &filename) {
 void process_thread::save_session(const std::string &filename) {
   pthread_mutex_lock(m_brain_mutex);
   ofstream ofs(filename.c_str(),ios::binary);
-  u32 version=0;
-  ofs||version;
-  ofs||(*m_left_renderer);
-  ofs||(*m_right_renderer);
-  ofs||m_source_block_size||m_source_overlap;
-  ofs||m_target_block_size||m_target_overlap;
-  ofs||m_window_type||m_target_window_type;
-  ofs||m_source;
-  ofs||m_left_target;
-  ofs||m_right_target;
+  stream_session(ofs);
   ofs.close();
   pthread_mutex_unlock(m_brain_mutex);
+}
+
+void process_thread::stream_session(std::ios &fs) {
+  u32 version=1;
+  fs||version;
+  fs||(*m_left_renderer);
+  fs||(*m_right_renderer);
+  fs||m_source_block_size||m_source_overlap;
+  fs||m_target_block_size||m_target_overlap;
+  fs||m_window_type||m_target_window_type;
+  fs||m_source;
+  fs||m_left_target;
+  fs||m_right_target;
+  if (version>0) {
+    fs||m_stereo;
+  }
 }

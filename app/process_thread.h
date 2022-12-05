@@ -54,13 +54,16 @@ namespace spiralcore {
     brain m_source, m_left_target, m_right_target;
 
   private:
-	OSC_server m_osc;
+    void stream_session(std::ios &fs);
+      
+    OSC_server m_osc;
     u32 m_source_block_size;
     float m_source_overlap;
     u32 m_target_block_size;
     float m_target_overlap;
     window::type m_window_type;
     window::type m_target_window_type;
+    bool m_stereo;
     pthread_t *m_thread;
 
     // only use in mutex obvs...

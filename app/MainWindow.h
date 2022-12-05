@@ -393,7 +393,11 @@ private slots:
   }
 
   void stereo_mode(bool s) {
+    m_stereo=s;
     send_audio_osc("/stereo","i",s);
+    // irritating but need to tell process thread about stereo state
+    // just to it can save it to the session file
+    send_process_osc("/stereo","i",s);
   }
 
   void net_enable(int id) {
@@ -467,6 +471,7 @@ private:
   audio_thread *m_audio_thread;
   
   string m_audio_port;
-  string m_process_port;
+  string m_process_port; 
   QString m_format_string;
+  bool m_stereo;
 };
