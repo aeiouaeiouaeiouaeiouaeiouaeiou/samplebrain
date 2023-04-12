@@ -42,13 +42,12 @@ namespace spiralcore {
     
     portaudio_client m_client;
 
-    void save_sample(const std::string &filename, const sample s);
+    void save_sample(const std::string &filename, unsigned int channels, const sample s);
 
   private:
     bool m_recording;
     std::string m_record_filename;
-    sample m_record_buffer_left;
-    sample m_record_buffer_right;
+    sample m_record_buffer;
     u32 m_record_counter;
     u32 m_samplerate;
   };

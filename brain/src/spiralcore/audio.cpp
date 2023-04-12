@@ -51,12 +51,12 @@ void audio_device::connect(const string &output_device_name, const string &clien
   m_client.attach(output_device_name,clientname,opt);
 }
 
-void audio_device::save_sample(const string &filename, const sample s) {
+void audio_device::save_sample(const string &filename, unsigned int channels, const sample s) {
     SF_INFO sfinfo;
     sfinfo.format=SF_FORMAT_WAV | SF_FORMAT_FLOAT;
     sfinfo.frames=s.get_length();
     sfinfo.samplerate=m_samplerate;
-    sfinfo.channels=1;
+    sfinfo.channels=channels;
     sfinfo.sections=1;
     sfinfo.seekable=0;
     SNDFILE* f=sf_open(filename.c_str(), SFM_WRITE, &sfinfo);
@@ -69,8 +69,7 @@ void audio_device::save_sample(const string &filename, const sample s) {
 void audio_device::start_recording(std::string filename) {
     m_record_filename=filename;
     m_recording=true;
-    m_record_buffer_left.clear();
-    m_record_buffer_right.clear();
+    m_record_buffer.clear();
     m_record_counter=0;
 }
 
@@ -81,13 +80,19 @@ void audio_device::stop_recording() {
 
 void audio_device::maybe_record() {
     if (m_recording) {
-        m_record_buffer_left.add(left_out);
-        m_record_buffer_right.add(right_out);
-        m_record_counter++;
-        if (m_record_counter%10==0) {
-            save_sample(m_record_filename+"-left.wav", m_record_buffer_left);
-            save_sample(m_record_filename+"-right.wav", m_record_buffer_right);
-        }
+      sample news(left_out.get_length()*2);
+      for (unsigned int i=0; i<left_out.get_length(); i++) {
+        news[i*2]=left_out[i];
+        news[i*2+1]=right_out[i];
+      }
+      
+      m_record_buffer.add(news);
+      m_record_counter++;
+
+      // save "every now and again"
+      if (m_record_counter%10==0) {
+        save_sample(m_record_filename+".wav",2,m_record_buffer);
+      }
     }
 }
 
