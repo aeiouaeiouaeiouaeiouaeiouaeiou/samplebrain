@@ -1,5 +1,7 @@
 # Samplebrain
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/73ba50f5d7294d82ad6fe97f7c0f49fc)](https://app.codacy.com/gh/aeiouaeiouaeiouaeiouaeiouaeiou/samplebrain?utm_source=github.com&utm_medium=referral&utm_content=aeiouaeiouaeiouaeiouaeiouaeiou/samplebrain&utm_campaign=Badge_Grade)
+
 A custom sample mashing app designed by Aphex Twin.
 
 Samplebrain chops samples up into a 'brain' of interconnected small
