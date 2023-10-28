@@ -7,9 +7,16 @@ jobs:
   repo-sync:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         persist-credentials: false
+    - name: sync development branch
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: "https://gitlab.com/then-try-this/samplebrain.git"
+        source_branch: "development"
+        destination_branch: "development"
+        github_token: ${{ secrets.PAT }}
     - name: sync main branch
       uses: repo-sync/github-sync@v2
       with:
@@ -17,10 +24,10 @@ jobs:
         source_branch: "main"
         destination_branch: "main"
         github_token: ${{ secrets.PAT }}
-    - name: sync development branch
+    - name: sync production branch
       uses: repo-sync/github-sync@v2
       with:
         source_repo: "https://gitlab.com/then-try-this/samplebrain.git"
-        source_branch: "development"
-        destination_branch: "development"
+        source_branch: "production"
+        destination_branch: "production"
         github_token: ${{ secrets.PAT }}
