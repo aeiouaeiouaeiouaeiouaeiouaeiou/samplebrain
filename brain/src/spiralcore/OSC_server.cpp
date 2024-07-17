@@ -60,7 +60,7 @@ void OSC_server::error_handler(int num, const char *msg, const char *path) {
 }
 
 int OSC_server::default_handler(const char *path, const char *types, lo_arg **argv,
-                                int argc, void *data, void *user_data) {
+                                int argc, lo_message data, void *user_data) {
   OSC_server *server = (OSC_server*)user_data;
   if (!server) return -1;
 
