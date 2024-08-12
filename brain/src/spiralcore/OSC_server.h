@@ -32,7 +32,7 @@ public:
   bool ok() { return m_server!=NULL; }
   
 private:
-  static int default_handler(const char *path, const char *types, lo_arg **argv, int argc, void *data, void *user_data);
+  static int default_handler(const char *path, const char *types, lo_arg **argv, int argc, lo_message data, void *user_data);
   static void error_handler(int num, const char *m, const char *path);
 
   lo_server_thread m_server;
